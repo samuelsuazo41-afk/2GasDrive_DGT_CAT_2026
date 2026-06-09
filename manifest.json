@@ -1,0 +1,26 @@
+{
+  "name": "GasDrive DGT Catalunya V8.2",
+  "short_name": "GasDrive CAT",
+  "description": "380 Preguntes DGT 2026. Mode offline. 100% Gratis.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#00D9FF",
+  "background_color": "#0a0a0a",
+  "lang": "ca",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
