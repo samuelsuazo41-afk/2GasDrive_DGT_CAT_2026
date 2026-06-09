@@ -628,11 +628,11 @@ function actualitzarCoins() {
   if(el) el.textContent = `💰 ${estat.coins}`;
 }
 
-function canviarTab(tab) {
+function canviarTab(e, tab) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.closest('.tab-btn').classList.add('active');
+  e.target.closest('.tab-btn').classList.add('active');
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
@@ -640,11 +640,11 @@ function canviarTab(tab) {
   if(tab === 'situacions') carregarSituacio('clima');
 }
 
-function canviarSubTab(tab, subtab) {
+function canviarSubTab(e, tab, subtab) {
   const contenidor = document.getElementById('tab-' + tab);
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-  event.target.classList.add('active');
+  e.target.classList.add('active');
   document.getElementById(`${tab === 'test'? 'test' : 'sit'}-${subtab}`).classList.add('active');
   if(tab === 'test') carregarPregunta(subtab);
   if(tab === 'sit') carregarSituacio(subtab);
@@ -690,11 +690,10 @@ function respondreTest(cat, idx, el) {
   const preguntes = PREGUNTES[cat];
   const p = preguntes[s.idx % preguntes.length];
 
-  // Anti-farm: si ja hi ha resposta pintada, fora
   const cont = document.getElementById(`test-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
 
-  document.querySelectorAll(`#test-${cat}-opciones.opcio`).forEach(o => o.classList.add('bloquejada'));
+  cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
 
   const correcte = idx === p.ok;
   if(correcte) {
@@ -708,7 +707,7 @@ function respondreTest(cat, idx, el) {
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
-    document.querySelectorAll(`#test-${cat}-opciones.opcio`)[p.ok].classList.add('correcta');
+    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
     document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo';
     document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO';
     mostrarEmoji(false, el);
@@ -719,7 +718,7 @@ function respondreTest(cat, idx, el) {
   guardar();
 }
 
-function seguentTest(cat) {
+function seguentTest(e, cat) {
   estat.test[cat].idx++;
   carregarPregunta(cat);
 }
@@ -773,18 +772,18 @@ function respondreSituacio(cat, idx, el) {
   guardar();
 }
 
-function seguentSituacio(cat) {
+function seguentSituacio(e, cat) {
   estat.sit[cat].idx++;
   carregarSituacio(cat);
 }
 
-function iniciarExamen() {
+function iniciarExamen(e) {
   const totes = [
-  ...PREGUNTES.general,
-  ...PREGUNTES.senyals,
-  ...PREGUNTES.normes,
-  ...PREGUNTES.mecanica,
-  ...SITUACIONS.clima
+ ...PREGUNTES.general,
+ ...PREGUNTES.senyals,
+ ...PREGUNTES.normes,
+ ...PREGUNTES.mecanica,
+ ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -855,7 +854,7 @@ function respondreExamen(idx, el) {
   guardar();
 }
 
-function seguentPreguntaExamen() {
+function seguentPreguntaExamen(e) {
   estat.examen.index++;
   if(estat.examen.index >= 30) {
     finalitzarExamen();
@@ -983,8 +982,7 @@ function comprarAccessoris(id) {
   guardar();
   actualitzarCoins();
   carregarBotiga();
-  
-  // Missatge PLUS: barra de progrés del supercotxe
+
   const totalAcc = estat.accessoris.length;
   const msg = document.createElement('div');
   msg.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff8c00,#ff2d55);color:#fff;padding:12px 24px;border-radius:12px;font-weight:bold;z-index:999;animation:slideUp 0.3s';
@@ -1023,12 +1021,12 @@ function mostrarTip() {
   document.getElementById('tip-counter').textContent = `${currentTip + 1} / ${tipsData.length}`;
 }
 
-function nextTip() {
+function nextTip(e) {
   currentTip = (currentTip + 1) % tipsData.length;
   mostrarTip();
 }
 
-function prevTip() {
+function prevTip(e) {
   currentTip = (currentTip - 1 + tipsData.length) % tipsData.length;
   mostrarTip();
 }
@@ -1050,7 +1048,7 @@ function actualitzarMissatgeMotivacional() {
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
-    .then(reg => console.log('SW registrat'))
-    .catch(err => console.log('SW error:', err));
+   .then(reg => console.log('SW registrat'))
+   .catch(err => console.log('SW error:', err));
   });
-  }
+}
