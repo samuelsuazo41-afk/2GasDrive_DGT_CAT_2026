@@ -62,6 +62,10 @@
     .btn{background:#00D9FF;color:#000;border:none;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px}
     .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:13px;margin-top:8px;cursor:pointer}
     .btn-buy:active{transform:scale(0.95)}
+
+    /* Grid biblioteca senyalització */
+    #senyalitzacio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+    #senyalitzacio-grid .emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:12px;padding:16px;text-align:center}
   </style>
 </head>
 <body>
@@ -212,6 +216,15 @@
     </div>
   </div>
 
+  <!-- NUEVO TAB SENYALITZACIÓ -->
+  <div id="tab-senyalitzacio" class="tab-content">
+    <div class="card">
+      <h2>🚸 BIBLIOTECA DE SENYALS</h2>
+      <p style="margin-bottom:12px;font-size:13px;color:#999">Consulta ràpida de senyals de trànsit</p>
+      <div id="senyalitzacio-grid"></div>
+    </div>
+  </div>
+
   <div class="tabs">
     <button class="tab-btn active" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
     <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
@@ -219,6 +232,7 @@
     <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
     <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
     <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
+    <button class="tab-btn" onclick="canviarTab(event,'senyalitzacio')"><span class="emoji">🚸</span>SENYALS</button>
   </div>
 
 <script src="./app.js?v=8.5.1"></script>
