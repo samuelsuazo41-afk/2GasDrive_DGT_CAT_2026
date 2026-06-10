@@ -214,8 +214,9 @@ const PREGUNTES = {
     {q:"Zona 30:",a:["Només cotxes","Vianants poden anar per calçada","No vianants"],ok:1},
     {q:"Fletxa verda semàfor:",a:["Espera","Tens preferència","Cedeix"],ok:1},
     {q:"Policía regulant:",a:["Segueix semàfor","Obeeix gestos policia","Ignora"],ok:1},
-    {q:"Repassar errors:",a:["Mai","Cada dia 10 min","Només abans examen"],ok:1}
-     {q:"En via urbana de doble sentit sense vorera, on camina el vianant?",a:["Per la calçada","Per la vorera esquerra","Per la vorera dreta"],ok:0},
+    {q:"Repassar errors:",a:["Mai","Cada dia 10 min","Només abans examen"],ok:1},
+    // +24 NOVES
+    {q:"En via urbana de doble sentit sense vorera, on camina el vianant?",a:["Per la calçada","Per la vorera esquerra","Per la vorera dreta"],ok:0},
     {q:"Velocitat màxima en via urbana de plataforma única?",a:["20 km/h","30 km/h","50 km/h"],ok:0},
     {q:"Distància mínima per obrir porta i baixar del vehicle?",a:["0,5 m","1 m","1,5 m"],ok:1},
     {q:"En cas d’accident amb ferits, què és prioritat?",a:["Moure els ferits","Avisar 112 i protegir","Apartar vehicles"],ok:1},
@@ -281,32 +282,8 @@ const PREGUNTES = {
     {q:"Senyal fi zona escolar:",a:["Inici","Fi","Continua"],ok:1},
     {q:"Senyal zona 30:",a:["Informació","Límit 30km/h","Prohibició 30"],ok:1},
     {q:"Senyal fi zona 30:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal zona vianants:",a:["Prohibit vianants","Zona vianants","Només cotxes"],ok:1},
-    {q:"Senyal fi zona vianants:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal carrer residencial:",a:["Autopista","Carrer residencial","Zona industrial"],ok:1},
-    {q:"Fi carrer residencial:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal túnel:",a:["Perill","Informació túnel","Prohibició"],ok:1},
-    {q:"Senyal pont mòbil:",a:["Informació","Perill pont mòbil","Prohibició"],ok:1},
-    {q:"Senyal sortida d’emergència:",a:["Informació","Prohibició","Perill"],ok:0},
-    {q:"Senyal pas a nivell:",a:["Informació","Perill pas a nivell","Prohibició"],ok:1},
-    {q:"Senyal vent lateral:",a:["Informació","Perill vent lateral","Prohibició"],ok:1},
-    {q:"Senyal animals salvatges:",a:["Informació","Perill animals","Prohibició"],ok:1},
-    {q:"Senyal encreuament:",a:["Informació","Perill encreuament","Prohibició"],ok:1},
-    {q:"Senyal semàfors:",a:["Informació","Perill semàfors","Prohibició"],ok:1},
-    {q:"Senyal obres:",a:["Informació","Perill obres","Prohibició"],ok:1},
-    {q:"Senyal fi obres:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal velocitat mínima:",a:["Prohibició","Obligació velocitat mínima","Informació"],ok:1},
-    {q:"Senyal fi velocitat mínima:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal prohibició gir esquerra:",a:["Permès","Prohibit gir esquerra","Obligació gir"],ok:1},
-    {q:"Senyal prohibició gir dreta:",a:["Permès","Prohibit gir dreta","Obligació gir"],ok:1},
-    {q:"Senyal prohibició canvi sentit:",a:["Permès","Prohibit canvi sentit","Obligació"],ok:1},
-    {q:"Senyal prohibició avançar:",a:["Permès","Prohibit avançar","Obligació avançar"],ok:1},
-    {q:"Senyal fi prohibició avançar:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal zona escolar:",a:["Informació","Perill zona escolar","Prohibició"],ok:1},
-    {q:"Senyal fi zona escolar:",a:["Inici","Fi","Continua"],ok:1},
-    {q:"Senyal zona 30:",a:["Informació","Límit 30km/h","Prohibició 30"],ok:1},
-    {q:"Senyal fi zona 30:",a:["Inici","Fi","Continua"],ok:1}
-     {q:"Senyal triangular fons groc amb paleta?",a:["Perill obres","Perill policia","Perill semàfors"],ok:0},
+    // +23 NOVES
+    {q:"Senyal triangular fons groc amb paleta?",a:["Perill obres","Perill policia","Perill semàfors"],ok:0},
     {q:"Senyal circular fons blau amb número 30?",a:["Velocitat mínima","Velocitat màxima","Velocitat recomanada"],ok:2},
     {q:"Senyal rectangular blau amb autobús?",a:["Carril bus","Parada bus","Prohibició bus"],ok:0},
     {q:"Senyal triangular amb bicicleta i nen?",a:["Perill escola","Perill ciclistes","Perill zona escolar"],ok:2},
@@ -325,10 +302,10 @@ const PREGUNTES = {
     {q:"Senyal circular vermell amb bicicleta?",a:["Prohibició bicis","Fi prohibició bicis","Obligació bicis"],ok:0},
     {q:"Senyal rectangular blau amb gasolinera?",a:["Estació servei","Prohibició repostar","Àrea descans"],ok:0},
     {q:"Senyal triangular amb pont estret?",a:["Perill pont estret","Perill pont mòbil","Prohibició pont"],ok:0},
-    {q:"Senyal circular blau amb raig?",a:["Obligació llums","Prohibició llums"ió casco"],ok:0},
-    {q:"Senyal circular vermell amb clàxon?",a:["Prohibició clàxon","Obligació clàxon","Fi prohibició clàxon"],ok:,"Recomanació llums"],ok:0},
+    {q:"Senyal circular blau amb raig?",a:["Obligació llums","Prohibició llums","Recomanació llums"],ok:0},
     {q:"Senyal rectangular verd amb informació?",a:["Preavís sortida","Confirmació itinerari","Inici autovia"],ok:1},
-    {q:"Senyal triangular amb despreniments?",a:["Perill zona despreniments","Prohibició parar","Obligac0}
+    {q:"Senyal triangular amb despreniments?",a:["Perill zona despreniments","Prohibició parar","Obligació casco"],ok:0},
+    {q:"Senyal circular vermell amb clàxon?",a:["Prohibició clàxon","Obligació clàxon","Fi prohibició clàxon"],ok:0}
   ],
   normes: [
     {q:"Taxa d'alcohol novells:",a:["0.5 g/l","0.3 g/l","0.0 g/l"],ok:2},
@@ -380,8 +357,9 @@ const PREGUNTES = {
     {q:"Prioritat conductor professional:",a:["Mai","Sempre","Només amb taxi"],ok:0},
     {q:"Prioritat conductor estranger:",a:["Mai","Sempre","Només amb passaport"],ok:0},
     {q:"Prioritat conductor local:",a:["Mai","Sempre","Només amb DNI"],ok:0},
-    {q:"Prioritat conductor turista:",a:["Mai","Sempre","Només amb mapa"],ok:0}
-     {q:"Quants punts es perden per no dur casco moto?",a:["2 punts","3 punts","4 punts"],ok:1},
+    {q:"Prioritat conductor turista:",a:["Mai","Sempre","Només amb mapa"],ok:0},
+    // +23 NOVES
+    {q:"Quants punts es perden per no dur casco moto?",a:["2 punts","3 punts","4 punts"],ok:1},
     {q:"Quina és la caducitat del permís B fins als 65 anys?",a:["5 anys","10 anys","15 anys"],ok:1},
     {q:"Multa per circular sense ITV en vigor?",a:["100€","200€ + immobilització","Només avís"],ok:1},
     {q:"Quants punts per saltar-se un STOP?",a:["2 punts","3 punts","4 punts"],ok:2},
@@ -404,7 +382,7 @@ const PREGUNTES = {
     {q:"Quants punts per saltar-se ceda el pas?",a:["2 punts","3 punts","4 punts"],ok:2},
     {q:"Quina és la taxa alcohol per ciclomotor?",a:["0,5 g/l","0,3 g/l","0,15 g/l"],ok:1},
     {q:"Multa per no senyalitzar avaria en autovia?",a:["80€","200€","Només avís"],ok:0}
-    ],
+  ],
   mecanica: [
     {q:"Pressió baixa causa:",a:["Major consum","Menor adherència","Totes dues"],ok:2},
     {q:"Líquid de frens baix:",a:["Desgast pastilles","Fuga","Totes dues poden ser"],ok:2},
