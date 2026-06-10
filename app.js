@@ -749,8 +749,13 @@ function respondreSituacio(cat, idx, el) {
   const s = estat.sit[cat];
   const casos = SITUACIONS[cat];
   const p = casos[s.idx % casos.length];
-  if(el.classList.contains('bloquejada')) return;
-  document.querySelectorAll(`#sit-${cat}-opciones.opcio`).forEach(o => o.classList.add('bloquejada'));
+
+  const cont = document.getElementById(`sit-${cat}-opciones`);
+  // Anti-farm: si ja hi ha resposta pintada, fora
+  if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+
+  cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
+
   const correcte = idx === p.ok;
   if(correcte) {
     el.classList.add('correcta');
@@ -762,7 +767,7 @@ function respondreSituacio(cat, idx, el) {
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
-    document.querySelectorAll(`#sit-${cat}-opciones.opcio`)[p.ok].classList.add('correcta');
+    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
     document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo';
     document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO';
     mostrarEmoji(false, el);
@@ -833,9 +838,14 @@ function carregarPreguntaExamen() {
 }
 
 function respondreExamen(idx, el) {
-  if(el.classList.contains('bloquejada')) return;
   const p = estat.examen.preguntes[estat.examen.index];
-  document.querySelectorAll('#examen-opciones.opcio').forEach(o => o.classList.add('bloquejada'));
+
+  const cont = document.getElementById('examen-opciones');
+  // Anti-farm: si ja hi ha resposta pintada, fora
+  if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+
+  cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
+
   const correcte = idx === p.ok;
   if(correcte) {
     el.classList.add('correcta');
@@ -844,7 +854,7 @@ function respondreExamen(idx, el) {
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
-    document.querySelectorAll('#examen-opciones.opcio')[p.ok].classList.add('correcta');
+    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
     estat.examen.fallos++;
     mostrarEmoji(false, el);
   }
