@@ -1,4 +1,4 @@
-const CACHE = 'gasdrive-v8.3.1';
+const CACHE = 'gasdrive-v8.3.2';
 const FILES = [
   './',
   './index.html',
