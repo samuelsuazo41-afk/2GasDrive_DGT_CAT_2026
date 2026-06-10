@@ -735,6 +735,9 @@ function carregarPregunta(cat) {
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
 
+  // Guardem la pregunta barrejada per usar-la a respondre
+  s.current = p;
+
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
@@ -755,8 +758,7 @@ function carregarPregunta(cat) {
 
 function respondreTest(cat, idx, el) {
   const s = estat.test[cat];
-  const preguntes = PREGUNTES[cat];
-  const p = preguntes[s.idx % preguntes.length];
+  const p = s.current; // usem la pregunta barrejada
 
   const cont = document.getElementById(`test-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
@@ -803,6 +805,9 @@ function carregarSituacio(cat) {
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
 
+  // Guardem la pregunta barrejada per usar-la a respondre
+  s.current = p;
+
   document.getElementById(`sit-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio;
@@ -822,8 +827,7 @@ function carregarSituacio(cat) {
 
 function respondreSituacio(cat, idx, el) {
   const s = estat.sit[cat];
-  const casos = SITUACIONS[cat];
-  const p = casos[s.idx % casos.length];
+  const p = s.current; // usem la pregunta barrejada
 
   const cont = document.getElementById(`sit-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
@@ -858,11 +862,11 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   const totes = [
-...PREGUNTES.general,
-...PREGUNTES.senyals,
-...PREGUNTES.normes,
-...PREGUNTES.mecanica,
-...SITUACIONS.clima
+   ...PREGUNTES.general,
+   ...PREGUNTES.senyals,
+   ...PREGUNTES.normes,
+   ...PREGUNTES.mecanica,
+   ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
