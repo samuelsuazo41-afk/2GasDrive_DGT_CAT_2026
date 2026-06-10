@@ -1,4 +1,4 @@
-// GASDRIVE DGT V8.2 CAT - 380 PREGUNTES DGT 2026
+// GASDRIVE DGT V8.2 CAT - 450 PREGUNTES DGT 2026
 const VERSION = "8.2";
 
 // COMBO DOPAMINA
@@ -132,7 +132,7 @@ const TIPS = [
   {emoji:'🏆', txt:'Tu pots treure’t el carnet!'}
 ];
 
-// 300 PREGUNTES TEST DGT OFICIALS CAT 2026
+// 370 PREGUNTES TEST DGT OFICIALS CAT 2026
 const PREGUNTES = {
   general: [
     {q:"Quina és la velocitat màxima en zona urbana?",a:["30 km/h","50 km/h","60 km/h"],ok:1},
@@ -215,6 +215,30 @@ const PREGUNTES = {
     {q:"Fletxa verda semàfor:",a:["Espera","Tens preferència","Cedeix"],ok:1},
     {q:"Policía regulant:",a:["Segueix semàfor","Obeeix gestos policia","Ignora"],ok:1},
     {q:"Repassar errors:",a:["Mai","Cada dia 10 min","Només abans examen"],ok:1}
+     {q:"En via urbana de doble sentit sense vorera, on camina el vianant?",a:["Per la calçada","Per la vorera esquerra","Per la vorera dreta"],ok:0},
+    {q:"Velocitat màxima en via urbana de plataforma única?",a:["20 km/h","30 km/h","50 km/h"],ok:0},
+    {q:"Distància mínima per obrir porta i baixar del vehicle?",a:["0,5 m","1 m","1,5 m"],ok:1},
+    {q:"En cas d’accident amb ferits, què és prioritat?",a:["Moure els ferits","Avisar 112 i protegir","Apartar vehicles"],ok:1},
+    {q:"Quin pneumàtic s’ha de gastar primer?",a:["Davant esquerre","Darrere dret","Tots igual"],ok:0},
+    {q:"En via interurbana, quin és el límit per ciclomotors?",a:["45 km/h","60 km/h","80 km/h"],ok:0},
+    {q:"Què indica una línia blanca en ziga-zaga al voral?",a:["Aparcament prohibit","Aturada prohibida","Zona de càrrega"],ok:1},
+    {q:"En cas de boira espessa, quina llum està prohibida?",a:["Antiboira davantera","Antiboira posterior","Llums de cruïlla"],ok:2},
+    {q:"Quina és la càrrega màxima que sobresurt per darrere sense senyalitzar?",a:["1 m","2 m","3 m"],ok:0},
+    {q:"En rotonda de dos carrils, per sortir a la segona sortida?",a:["Carril dret","Carril esquerre","Qualsevol"],ok:1},
+    {q:"Què vol dir el senyal V-23 al vehicle?",a:["Conductor novell","Vehicle lent","Transport escolar"],ok:2},
+    {q:"Amb pluja intensa, quin és el risc principal?",a:["Sobreviratge","Aqüaplaning","Subviratge"],ok:1},
+    {q:"En baixar una pendent llarga amb vehicle pesat?",a:["Punt mort","Frenar contínuament","Reduir marxa i frenar motor"],ok:2},
+    {q:"Quina distància de seguretat amb moto en pluja?",a:["Igual","Doble","Triple"],ok:1},
+    {q:"En cas d’incendi al vehicle, primer?",a:["Obrir capó","Tallat contacte i extintor","Trucar assegurança"],ok:1},
+    {q:"Què indica el panell blau amb bicicleta?",a:["Prohibició","Obligació carril bici","Recomanació"],ok:1},
+    {q:"En túnel, quin llum és obligatori?",a:["Posició","Cruïlla","Llargues"],ok:1},
+    {q:"Quina és la velocitat en carrer residencial?",a:["20 km/h","30 km/h","50 km/h"],ok:0},
+    {q:"En avançar tramvia, per on passes?",a:["Per l’esquerra","Per la dreta si hi ha espai","Mai avances"],ok:1},
+    {q:"Què fas si el motor es cala en pujada?",a:["Fre de mà + arrencar","Punt mort + frenar","Accelera fort"],ok:0},
+    {q:"En via amb tres carrils, on circula el vehicle lent?",a:["Carril esquerre","Carril central","Carril dret"],ok:2},
+    {q:"Què indica el senyal de fi de població?",a:["Inici límit 50","Fi límit 50","Inici autovia"],ok:1},
+    {q:"Amb vent fort lateral en pont, què fas?",a:["Accelera","Subjecta ferm el volant","Canvia carril"],ok:1},
+    {q:"En cas de vessament d’oli a la calçada?",a:["Accelera per passar ràpid","Avisa i circula amb precaució","Frena fort"],ok:1}
   ],
   senyals: [
     {q:"Senyal de STOP octogonal:",a:["Cedeix el pas","Aturada obligatòria","Precaució"],ok:1},
@@ -282,6 +306,29 @@ const PREGUNTES = {
     {q:"Senyal fi zona escolar:",a:["Inici","Fi","Continua"],ok:1},
     {q:"Senyal zona 30:",a:["Informació","Límit 30km/h","Prohibició 30"],ok:1},
     {q:"Senyal fi zona 30:",a:["Inici","Fi","Continua"],ok:1}
+     {q:"Senyal triangular fons groc amb paleta?",a:["Perill obres","Perill policia","Perill semàfors"],ok:0},
+    {q:"Senyal circular fons blau amb número 30?",a:["Velocitat mínima","Velocitat màxima","Velocitat recomanada"],ok:2},
+    {q:"Senyal rectangular blau amb autobús?",a:["Carril bus","Parada bus","Prohibició bus"],ok:0},
+    {q:"Senyal triangular amb bicicleta i nen?",a:["Perill escola","Perill ciclistes","Perill zona escolar"],ok:2},
+    {q:"Senyal circular vermell amb camió?",a:["Prohibició camions","Fi prohibició camions","Obligació camions"],ok:0},
+    {q:"Senyal rectangular verd amb avió?",a:["Aeroport","Helipòrt","Zona vol baix"],ok:0},
+    {q:"Senyal triangular amb vaixell?",a:["Perill port","Perill pont mòbil","Perill embarcador"],ok:1},
+    {q:"Senyal circular blau amb cadena?",a:["Obligació cadenes","Prohibició cadenes","Recomanació cadenes"],ok:0},
+    {q:"Senyal rectangular blau amb P?",a:["Prohibició parar","Aparcament","Parada bus"],ok:1},
+    {q:"Senyal triangular amb corba tancada?",a:["Perill corba perillosa","Perill revolt","Perill gir brusc"],ok:0},
+    {q:"Senyal circular vermell amb 3,5t?",a:["Pes màxim 3,5t","Pes mínim 3,5t","Fi pes màxim"],ok:0},
+    {q:"Senyal rectangular blau amb H?",a:["Hotel","Hospital","Helipòrt"],ok:1},
+    {q:"Senyal triangular amb semàfor?",a:["Perill semàfor","Obligació semàfor","Fi semàfor"],ok:0},
+    {q:"Senyal circular blau amb fletxa corba?",a:["Prohibició gir","Obligació gir","Recomanació gir"],ok:1},
+    {q:"Senyal rectangular verd amb sortida?",a:["Sortida autovia","Entrada autovia","Àrea servei"],ok:0},
+    {q:"Senyal triangular amb animals domèstics?",a:["Perill animals salvatges","Perill animals domèstics","Perill ramats"],ok:2},
+    {q:"Senyal circular vermell amb bicicleta?",a:["Prohibició bicis","Fi prohibició bicis","Obligació bicis"],ok:0},
+    {q:"Senyal rectangular blau amb gasolinera?",a:["Estació servei","Prohibició repostar","Àrea descans"],ok:0},
+    {q:"Senyal triangular amb pont estret?",a:["Perill pont estret","Perill pont mòbil","Prohibició pont"],ok:0},
+    {q:"Senyal circular blau amb raig?",a:["Obligació llums","Prohibició llums"ió casco"],ok:0},
+    {q:"Senyal circular vermell amb clàxon?",a:["Prohibició clàxon","Obligació clàxon","Fi prohibició clàxon"],ok:,"Recomanació llums"],ok:0},
+    {q:"Senyal rectangular verd amb informació?",a:["Preavís sortida","Confirmació itinerari","Inici autovia"],ok:1},
+    {q:"Senyal triangular amb despreniments?",a:["Perill zona despreniments","Prohibició parar","Obligac0}
   ],
   normes: [
     {q:"Taxa d'alcohol novells:",a:["0.5 g/l","0.3 g/l","0.0 g/l"],ok:2},
@@ -334,7 +381,30 @@ const PREGUNTES = {
     {q:"Prioritat conductor estranger:",a:["Mai","Sempre","Només amb passaport"],ok:0},
     {q:"Prioritat conductor local:",a:["Mai","Sempre","Només amb DNI"],ok:0},
     {q:"Prioritat conductor turista:",a:["Mai","Sempre","Només amb mapa"],ok:0}
-  ],
+     {q:"Quants punts es perden per no dur casco moto?",a:["2 punts","3 punts","4 punts"],ok:1},
+    {q:"Quina és la caducitat del permís B fins als 65 anys?",a:["5 anys","10 anys","15 anys"],ok:1},
+    {q:"Multa per circular sense ITV en vigor?",a:["100€","200€ + immobilització","Només avís"],ok:1},
+    {q:"Quants punts per saltar-se un STOP?",a:["2 punts","3 punts","4 punts"],ok:2},
+    {q:"Quina és la taxa alcohol professional?",a:["0,5 g/l","0,3 g/l","0,15 g/l"],ok:1},
+    {q:"Quants punts per avançar en línia contínua?",a:["3 punts","4 punts","6 punts"],ok:1},
+    {q:"Quina documentació cal portar sempre?",a:["DNI","Permís + ITV + Assegurança","Només permís"],ok:1},
+    {q:"Quants punts per no respectar semàfor vermell?",a:["3 punts","4 punts","6 punts"],ok:1},
+    {q:"Multa per no dur armilla reflectant?",a:["80€","200€","Només avís"],ok:0},
+    {q:"Quants anys sense cometre infraccions per recuperar 2 punts?",a:["1 any","2 anys","3 anys"],ok:1},
+    {q:"Quina és la multa per conduir amb mòbil a la mà?",a:["100€","200€ + 6 punts","Només 80€"],ok:1},
+    {q:"Quants punts per circular per voral sense causa?",a:["2 punts","3 punts","4 punts"],ok:2},
+    {q:"Quina és la ITV d’un cotxe de 8 anys?",a:["Anual","Cada 2 anys","Cada 6 mesos"],ok:0},
+    {q:"Multa per no dur triangles en avaria?",a:["80€","200€","Només avís"],ok:0},
+    {q:"Quants punts per no cedir pas a vianant en zebra?",a:["2 punts","3 punts","4 punts"],ok:2},
+    {q:"Quina és la velocitat que comporta delicte penal?",a:["+40 km/h","Excedir +60 km/h límit","Qualsevol excés"],ok:1},
+    {q:"Multa per aparcar en carril bus?",a:["80€","200€ + retirada vehicle","Només avís"],ok:0},
+    {q:"Quants punts per no dur cinturó darrere?",a:["2 punts","3 punts","4 punts"],ok:1},
+    {q:"Quina és la caducitat del permís a partir dels 65 anys?",a:["2 anys","3 anys","5 anys"],ok:2},
+    {q:"Multa per circular sense assegurança?",a:["500€ a 3000€","100€","Només avís"],ok:0},
+    {q:"Quants punts per saltar-se ceda el pas?",a:["2 punts","3 punts","4 punts"],ok:2},
+    {q:"Quina és la taxa alcohol per ciclomotor?",a:["0,5 g/l","0,3 g/l","0,15 g/l"],ok:1},
+    {q:"Multa per no senyalitzar avaria en autovia?",a:["80€","200€","Només avís"],ok:0}
+    ],
   mecanica: [
     {q:"Pressió baixa causa:",a:["Major consum","Menor adherència","Totes dues"],ok:2},
     {q:"Líquid de frens baix:",a:["Desgast pastilles","Fuga","Totes dues poden ser"],ok:2},
