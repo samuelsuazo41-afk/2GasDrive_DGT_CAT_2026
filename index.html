@@ -35,8 +35,16 @@
     .sub-content{display:none}
     .sub-content.active{display:block;animation:fadeIn 0.3s}
 
-    /* Cards */
-    .card{background:#1a1a1a;border:1px solid #333;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+    /* Cards centradas y compactas */
+    .card{
+      background:#1a1a1a;
+      border:1px solid #333;
+      border-radius:14px;
+      padding:16px 12px;
+      margin:0 auto 12px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.5);
+      max-width:420px;
+    }
     .card h2{color:#00D9FF;font-size:17px;margin-bottom:10px;text-align:center}
 
     /* Test */
@@ -83,12 +91,13 @@
     .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
     .btn-buy:active{transform:scale(0.95)}
 
-    /* Grid biblioteca senyalització - 2 columnas compactas cuadradas */
+    /* Grid biblioteca senyalització - 2 columnas centradas y cuadradas */
     #senyalitzacio-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:10px;
-      margin-top:14px;
+      margin:14px auto 0;
+      max-width:360px;
     }
     #senyalitzacio-grid .emoji-item{
       background:#1a1a1a;
@@ -117,7 +126,7 @@
       line-height:1.25;
       font-weight:600;
     }
-  </style> 
+  </style>
 </head>
 <body>
   <div class="header">
