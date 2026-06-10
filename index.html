@@ -127,6 +127,48 @@
       line-height:1.25;
       font-weight:600;
     }
+
+    /* Fix scroll menú lateral - bloquea body y deja scroll solo en menú */
+    body.menu-open{
+      overflow:hidden;
+      position:fixed;
+      width:100%;
+      height:100%;
+    }
+    .side-menu{
+      position:fixed;
+      top:0;
+      right:0;
+      width:85%;
+      max-width:320px;
+      height:100vh;
+      background:#0a0a0a;
+      z-index:200;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      transform:translateX(100%);
+      transition:transform 0.3s ease;
+    }
+    .side-menu.active{
+      transform:translateX(0);
+    }
+    .menu-overlay{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.7);
+      z-index:199;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.3s ease;
+    }
+    .menu-overlay.active{
+      opacity:1;
+      pointer-events:all;
+    }
   </style>
 </head>
 <body>
