@@ -485,24 +485,24 @@ const SITUACIONS = {
 
 // GARATGE - 17 COTXES AMB 6 SUPERCOTXES NOUS
 const COTXES = [
-  {id:'c1',nom:'SEAT Ibiza',emoji:'🚗',preu:200,cv:90},
-  {id:'c2',nom:'VW Golf GTI',emoji:'🚘',preu:800,cv:220},
-  {id:'c3',nom:'BMW M3',emoji:'🚙',preu:1500,cv:420},
-  {id:'c4',nom:'Tesla Model S',emoji:'⚡',preu:2000,cv:670},
-  {id:'c5',nom:'Porsche 911',emoji:'🔴🏎️',preu:2500,cv:450},
-  {id:'c6',nom:'Bugatti Chiron',emoji:'🔵🏎️',preu:5000,cv:1500},
-  {id:'c7',nom:'Yamaha R1',emoji:'🔴🏍️',preu:2200,cv:200},
-  {id:'c8',nom:'Ducati Panigale',emoji:'🔴🏍️',preu:2800,cv:220},
-  {id:'c9',nom:'Audi RS6',emoji:'⚫🏎️',preu:3200,cv:600},
-  {id:'c10',nom:'Nissan GTR',emoji:'⚫🏎️',preu:3500,cv:565},
-  {id:'c11',nom:'McLaren 720S',emoji:'🟠🏎️',preu:4200,cv:720},
+  {id:'c1',nom:'SEAT Ibiza',emoji:'🚗',preu:200,cv:90,color:'hue-rotate(200deg) saturate(2) brightness(1.2)'},           // blau cel
+  {id:'c2',nom:'VW Golf GTI',emoji:'🚘',preu:800,cv:220,color:'hue-rotate(0deg) saturate(2) brightness(1.2)'},          // vermell
+  {id:'c3',nom:'BMW M3',emoji:'🚙',preu:1500,cv:420,color:'hue-rotate(25deg) saturate(2) brightness(1.2)'},             // taronja
+  {id:'c4',nom:'Tesla Model S',emoji:'⚡',preu:2000,cv:670,color:'hue-rotate(300deg) saturate(2) brightness(1.2)'},     // magenta
+  {id:'c5',nom:'Porsche 911',emoji:'🏎️',preu:2500,cv:450,color:'hue-rotate(120deg) saturate(2) brightness(1.2)'},      // verd neó
+  {id:'c6',nom:'Bugatti Chiron',emoji:'🏎️',preu:5000,cv:1500,color:'hue-rotate(210deg) saturate(2) brightness(1.2)'},  // blau elèctric
+  {id:'c7',nom:'Yamaha R1',emoji:'🏍️',preu:2200,cv:200,color:'hue-rotate(60deg) saturate(2) brightness(1.2)'},          // groc neó
+  {id:'c8',nom:'Ducati Panigale',emoji:'🏍️',preu:2800,cv:220,color:'hue-rotate(340deg) saturate(2) brightness(1.2)'},  // rosa magenta
+  {id:'c9',nom:'Audi RS6',emoji:'🏎️',preu:3200,cv:600,color:'hue-rotate(180deg) saturate(2) brightness(1.2)'},          // cian
+  {id:'c10',nom:'Nissan GTR',emoji:'🏎️',preu:3500,cv:565,color:'hue-rotate(90deg) saturate(2) brightness(1.2)'},        // verd llima
+  {id:'c11',nom:'McLaren 720S',emoji:'🏎️',preu:4200,cv:720,color:'hue-rotate(15deg) saturate(2) brightness(1.2)'},      // taronja viu
   // 6 SUPERCOTXES PREMIO MAJOR
-  {id:'c12',nom:'Ferrari SF90 Stradale',emoji:'🔴🏎️',preu:8500,cv:1000},
-  {id:'c13',nom:'Lamborghini Aventador SVJ',emoji:'🟡🏎️',preu:8000,cv:770},
-  {id:'c14',nom:'Koenigsegg Jesko Absolut',emoji:'⚪🏎️',preu:14000,cv:1600},
-  {id:'c15',nom:'Porsche 918 Spyder',emoji:'🟢🏎️',preu:9500,cv:887},
-  {id:'c16',nom:'McLaren P1 GTR',emoji:'🟠🏎️',preu:9000,cv:916},
-  {id:'c17',nom:'Bugatti Bolide',emoji:'🔵🏎️',preu:16000,cv:1825}
+  {id:'c12',nom:'Ferrari SF90 Stradale',emoji:'🏎️',preu:8500,cv:1000,color:'hue-rotate(0deg) saturate(2.5) brightness(1.3)'},      // vermell neó
+  {id:'c13',nom:'Lamborghini Aventador SVJ',emoji:'🏎️',preu:8000,cv:770,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3)'},  // groc neó
+  {id:'c14',nom:'Koenigsegg Jesko Absolut',emoji:'🏎️',preu:14000,cv:1600,color:'hue-rotate(270deg) saturate(2.5) brightness(1.3)'},// violeta neó
+  {id:'c15',nom:'Porsche 918 Spyder',emoji:'🏎️',preu:9500,cv:887,color:'hue-rotate(130deg) saturate(2.5) brightness(1.3)'},        // verd esmeralda
+  {id:'c16',nom:'McLaren P1 GTR',emoji:'🏎️',preu:9000,cv:916,color:'hue-rotate(35deg) saturate(2.5) brightness(1.3)'},              // taronja neó
+  {id:'c17',nom:'Bugatti Bolide',emoji:'🏎️',preu:16000,cv:1825,color:'hue-rotate(200deg) saturate(2.5) brightness(1.3)'}           // blau neó
 ];
 
 const ACCESSORIS = [
@@ -958,7 +958,7 @@ function carregarGaratge() {
     const div = document.createElement('div');
     div.className = 'garage-car' + (desbloquejat? '' : ' locked');
     div.innerHTML = `
-      <div style="font-size:40px">${cotxe.emoji}</div>
+      <div style="font-size:40px; filter:${cotxe.color}">${cotxe.emoji}</div>
       <div>${cotxe.nom}</div>
       <div style="color:#667eea">${cotxe.cv} CV</div>
       ${!desbloquejat? `<button class="btn-buy" onclick="comprarCotxe('${cotxe.id}')">Comprar ${cotxe.preu}💰</button>` : '<div style="color:#2ecc71">✓ Propietari</div>'}
