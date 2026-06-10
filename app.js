@@ -628,6 +628,16 @@ function actualitzarCoins() {
   if(el) el.textContent = `💰 ${estat.coins}`;
 }
 
+// Barrejador Fisher-Yates per randomitzar opcions
+function barrejarArray(arr) {
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function canviarTab(e, tab) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -666,7 +676,14 @@ function carregarPregunta(cat) {
   const s = estat.test[cat];
   const preguntes = PREGUNTES[cat];
   if(!preguntes || preguntes.length === 0) return;
-  const p = preguntes[s.idx % preguntes.length];
+  const pOriginal = preguntes[s.idx % preguntes.length];
+
+  // Barregem opcions
+  const opcionsBarrejades = barrejarArray(pOriginal.a);
+  const textCorrecte = pOriginal.a[pOriginal.ok];
+  const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
+
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
@@ -727,7 +744,14 @@ function carregarSituacio(cat) {
   const s = estat.sit[cat];
   const casos = SITUACIONS[cat];
   if(!casos || casos.length === 0) return;
-  const p = casos[s.idx % casos.length];
+  const pOriginal = casos[s.idx % casos.length];
+
+  // Barregem opcions
+  const opcionsBarrejades = barrejarArray(pOriginal.a);
+  const textCorrecte = pOriginal.a[pOriginal.ok];
+  const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
+
   document.getElementById(`sit-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio;
@@ -751,7 +775,6 @@ function respondreSituacio(cat, idx, el) {
   const p = casos[s.idx % casos.length];
 
   const cont = document.getElementById(`sit-${cat}-opciones`);
-  // Anti-farm: si ja hi ha resposta pintada, fora
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
 
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
@@ -780,15 +803,15 @@ function respondreSituacio(cat, idx, el) {
 function seguentSituacio(e, cat) {
   estat.sit[cat].idx++;
   carregarSituacio(cat);
-} 
+}
 
 function iniciarExamen(e) {
   const totes = [
- ...PREGUNTES.general,
- ...PREGUNTES.senyals,
- ...PREGUNTES.normes,
- ...PREGUNTES.mecanica,
- ...SITUACIONS.clima
+...PREGUNTES.general,
+...PREGUNTES.senyals,
+...PREGUNTES.normes,
+...PREGUNTES.mecanica,
+...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -820,7 +843,15 @@ function iniciarTimerExamen() {
 
 function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
-  const p = estat.examen.preguntes[estat.examen.index];
+  const pOriginal = estat.examen.preguntes[estat.examen.index];
+
+  // Barregem opcions
+  const opcionsBarrejades = barrejarArray(pOriginal.a);
+  const textCorrecte = pOriginal.a[pOriginal.ok];
+  const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
+  estat.examen.preguntes[estat.examen.index] = p;
+
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
   document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
   document.getElementById('examen-progress').style.width = `${(estat.examen.index/30)*100}%`;
@@ -841,7 +872,6 @@ function respondreExamen(idx, el) {
   const p = estat.examen.preguntes[estat.examen.index];
 
   const cont = document.getElementById('examen-opciones');
-  // Anti-farm: si ja hi ha resposta pintada, fora
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
 
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
@@ -1058,7 +1088,7 @@ function actualitzarMissatgeMotivacional() {
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
-   .then(reg => console.log('SW registrat'))
-   .catch(err => console.log('SW error:', err));
+  .then(reg => console.log('SW registrat'))
+  .catch(err => console.log('SW error:', err));
   });
 }
