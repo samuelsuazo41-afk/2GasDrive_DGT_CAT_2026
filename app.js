@@ -775,7 +775,7 @@ function respondreSituacio(cat, idx, el) {
 function seguentSituacio(e, cat) {
   estat.sit[cat].idx++;
   carregarSituacio(cat);
-}
+} 
 
 function iniciarExamen(e) {
   const totes = [
