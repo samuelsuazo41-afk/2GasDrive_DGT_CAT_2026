@@ -5,9 +5,8 @@ const VERSION = "8.2";
 const EMOJIS_ENCERT = ['🚀','💎','👑','🔥','💯','⚡','🏆','🦄','🤑','✅','💪','😎','🎯','💥','🌟','🎉'];
 const EMOJIS_FALLO = ['❌','💀','😭','⛔','💔','😵','🤦','🚫','💩','🤡','💥','😤'];
 
-// INTRO SCREEN - Apareix 1 cop
+// INTRO SCREEN - Apareix SEMPRE al obrir
 function mostrarIntro(){
-  if(localStorage.getItem('gd_intro_v8_2')) return;
   document.body.insertAdjacentHTML('afterbegin', `
     <div id="intro-screen" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#1a1a2e,#16213e);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px">
       <div style="font-size:64px;margin-bottom:20px">🚗</div>
@@ -22,8 +21,8 @@ function mostrarIntro(){
     </div>
   `);
 }
+
 function tancarIntro(){
-  localStorage.setItem('gd_intro_v8_2', '1');
   document.getElementById('intro-screen').remove();
 }
 
