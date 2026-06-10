@@ -707,11 +707,15 @@ function canviarTab(e, tab) {
 }
 
 function canviarSubTab(e, tab, subtab) {
-  const contenidor = document.getElementById('tab-' + tab);
+  // Mapeo: el tab 'sit' en realidad está en el div con id 'tab-situaciones'
+  const tabId = tab === 'sit' ? 'situaciones' : tab;
+  const contenidor = document.getElementById('tab-' + tabId);
+  
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
   e.target.classList.add('active');
   document.getElementById(`${tab === 'test'? 'test' : 'sit'}-${subtab}`).classList.add('active');
+  
   if(tab === 'test') carregarPregunta(subtab);
   if(tab === 'sit') carregarSituacio(subtab);
 }
