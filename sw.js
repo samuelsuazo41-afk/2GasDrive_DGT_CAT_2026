@@ -1,4 +1,4 @@
-const CACHE = 'gasdrive-v8.5.3';
+const CACHE = 'gasdrive-v8.6.1';
 const FILES = [
   './',
   './index.html',
@@ -13,7 +13,7 @@ self.addEventListener('install', e => {
     caches.open(CACHE).then(cache => cache.addAll(FILES))
   );
   self.skipWaiting();
-});
+}); 
 
 self.addEventListener('activate', e => {
   e.waitUntil(
