@@ -537,23 +537,23 @@ const COTXES = [
   {id:'c1',nom:'SEAT Ibiza',emoji:'🚗',preu:200,cv:90,color:''},
   {id:'c2',nom:'VW Golf GTI',emoji:'🚘',preu:800,cv:220,color:''},
   {id:'c3',nom:'BMW M3',emoji:'🚙',preu:1500,cv:420,color:''},
-  
+
   // Resta amb efecte TRON i colors cars
-  {id:'c4',nom:'Tesla Model S',emoji:'⚡',preu:2000,cv:670,color:'hue-rotate(210deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00d4ff)'},     // blau elèctric
-  {id:'c5',nom:'Porsche 911',emoji:'🏎️',preu:2500,cv:450,color:'hue-rotate(130deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ff88)'},      // verd esmeralda
-  {id:'c6',nom:'Bugatti Chiron',emoji:'🏎️',preu:5000,cv:1500,color:'hue-rotate(200deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00c8ff)'},  // blau gel
-  {id:'c7',nom:'Yamaha R1',emoji:'🏍️',preu:2200,cv:200,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 8px #ffdd00)'},        // groc or
-  {id:'c8',nom:'Ducati Panigale',emoji:'🏍️',preu:2800,cv:220,color:'hue-rotate(25deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff8800)'},    // taronja intens
-  {id:'c9',nom:'Audi RS6',emoji:'🏎️',preu:3200,cv:600,color:'hue-rotate(180deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ffff)'},          // cian
-  {id:'c10',nom:'Nissan GTR',emoji:'🏎️',preu:3500,cv:565,color:'hue-rotate(90deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #88ff00)'},        // verd llima
-  {id:'c11',nom:'McLaren 720S',emoji:'🏎️',preu:4200,cv:720,color:'hue-rotate(15deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff6600)'},      // taronja foc
+  {id:'c4',nom:'Tesla Model S',emoji:'⚡',preu:2000,cv:670,color:'hue-rotate(210deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00d4ff)'}, // blau elèctric
+  {id:'c5',nom:'Porsche 911',emoji:'🏎️',preu:2500,cv:450,color:'hue-rotate(130deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ff88)'}, // verd esmeralda
+  {id:'c6',nom:'Bugatti Chiron',emoji:'🏎️',preu:5000,cv:1500,color:'hue-rotate(200deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00c8ff)'}, // blau gel
+  {id:'c7',nom:'Yamaha R1',emoji:'🏍️',preu:2200,cv:200,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 8px #ffdd00)'}, // groc or
+  {id:'c8',nom:'Ducati Panigale',emoji:'🏍️',preu:2800,cv:220,color:'hue-rotate(25deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff8800)'}, // taronja intens
+  {id:'c9',nom:'Audi RS6',emoji:'🏎️',preu:3200,cv:600,color:'hue-rotate(180deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ffff)'}, // cian
+  {id:'c10',nom:'Nissan GTR',emoji:'🏎️',preu:3500,cv:565,color:'hue-rotate(90deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #88ff00)'}, // verd llima
+  {id:'c11',nom:'McLaren 720S',emoji:'🏎️',preu:4200,cv:720,color:'hue-rotate(15deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff6600)'}, // taronja foc
   // SUPERCOTXES PREMIO MAJOR amb glow més potent
-  {id:'c12',nom:'Ferrari SF90 Stradale',emoji:'🏎️',preu:8500,cv:1000,color:'hue-rotate(0deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff0000)'},      // vermell neó
-  {id:'c13',nom:'Lamborghini Aventador SVJ',emoji:'🏎️',preu:8000,cv:770,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ffdd00)'},  // groc or
+  {id:'c12',nom:'Ferrari SF90 Stradale',emoji:'🏎️',preu:8500,cv:1000,color:'hue-rotate(0deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff0000)'}, // vermell neó
+  {id:'c13',nom:'Lamborghini Aventador SVJ',emoji:'🏎️',preu:8000,cv:770,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ffdd00)'}, // groc or
   {id:'c14',nom:'Koenigsegg Jesko Absolut',emoji:'🏎️',preu:14000,cv:1600,color:'hue-rotate(270deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #aa00ff)'},// violeta royal
-  {id:'c15',nom:'Porsche 918 Spyder',emoji:'🏎️',preu:9500,cv:887,color:'hue-rotate(130deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00ff88)'},        // verd esmeralda
-  {id:'c16',nom:'McLaren P1 GTR',emoji:'🏎️',preu:9000,cv:916,color:'hue-rotate(35deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff8800)'},              // taronja neó
-  {id:'c17',nom:'Bugatti Bolide',emoji:'🏎️',preu:16000,cv:1825,color:'hue-rotate(200deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00d4ff)'}           // blau elèctric
+  {id:'c15',nom:'Porsche 918 Spyder',emoji:'🏎️',preu:9500,cv:887,color:'hue-rotate(130deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00ff88)'}, // verd esmeralda
+  {id:'c16',nom:'McLaren P1 GTR',emoji:'🏎️',preu:9000,cv:916,color:'hue-rotate(35deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff8800)'}, // taronja neó
+  {id:'c17',nom:'Bugatti Bolide',emoji:'🏎️',preu:16000,cv:1825,color:'hue-rotate(200deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00d4ff)'} // blau elèctric
 ];
 
 const ACCESSORIS = [
@@ -645,7 +645,10 @@ let estat = {
     temps: 1800
   },
   sit: {
-    clima: {idx:0,encerts:0,puntuacio:0}
+    clima: {idx:0,encerts:0,puntuacio:0,current:null},
+    urbà: {idx:0,encerts:0,puntuacio:0,current:null},
+    carretera: {idx:0,encerts:0,puntuacio:0,current:null},
+    emergència: {idx:0,encerts:0,puntuacio:0,current:null}
   }
 };
 
@@ -655,8 +658,10 @@ if (document.readyState === 'loading') {
   init();
 }
 
+let sitCategoriaActiva = 'clima';
+
 function init() {
-  console.log("GasDrive V8.2 CAT carregat");
+  console.log("GasDrive V8.5 CAT carregat");
   mostrarIntro();
   actualitzarCoins();
   carregarPregunta('general');
@@ -698,7 +703,7 @@ function canviarTab(e, tab) {
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
   if(tab === 'test') carregarPregunta('general');
-  if(tab === 'situacions') carregarSituacio('clima');
+  if(tab === 'situacions') carregarSituacio(sitCategoriaActiva);
 }
 
 function canviarSubTab(e, tab, subtab) {
@@ -709,6 +714,23 @@ function canviarSubTab(e, tab, subtab) {
   document.getElementById(`${tab === 'test'? 'test' : 'sit'}-${subtab}`).classList.add('active');
   if(tab === 'test') carregarPregunta(subtab);
   if(tab === 'sit') carregarSituacio(subtab);
+}
+
+function canviarCategoriaSit(cat) {
+  sitCategoriaActiva = cat;
+  document.querySelectorAll('#tab-situacions.category-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const titols = {
+    clima: '🌧️ CASOS REALS - CLIMA ADVERS',
+    urbà: '🏙️ CASOS REALS - URBÀ',
+    carretera: '🛣️ CASOS REALS - CARRETERA',
+    emergència: '🚨 CASOS REALS - EMERGÈNCIA'
+  };
+  document.getElementById('sit-titol').textContent = titols[cat];
+
+  estat.sit[cat].idx = 0;
+  carregarSituacio(cat);
 }
 
 function mostrarEmoji(encert, element) {
@@ -729,13 +751,11 @@ function carregarPregunta(cat) {
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
 
-  // Barregem opcions
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
 
-  // Guardem la pregunta barrejada per usar-la a respondre
   s.current = p;
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
@@ -758,7 +778,7 @@ function carregarPregunta(cat) {
 
 function respondreTest(cat, idx, el) {
   const s = estat.test[cat];
-  const p = s.current; // usem la pregunta barrejada
+  const p = s.current;
 
   const cont = document.getElementById(`test-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
@@ -794,18 +814,17 @@ function seguentTest(e, cat) {
 }
 
 function carregarSituacio(cat) {
+  if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
   const casos = SITUACIONS[cat];
   if(!casos || casos.length === 0) return;
   const pOriginal = casos[s.idx % casos.length];
 
-  // Barregem opcions
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
 
-  // Guardem la pregunta barrejada per usar-la a respondre
   s.current = p;
 
   document.getElementById(`sit-${cat}-pregunta`).textContent = p.q;
@@ -827,7 +846,7 @@ function carregarSituacio(cat) {
 
 function respondreSituacio(cat, idx, el) {
   const s = estat.sit[cat];
-  const p = s.current; // usem la pregunta barrejada
+  const p = s.current;
 
   const cont = document.getElementById(`sit-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
@@ -862,11 +881,11 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   const totes = [
-   ...PREGUNTES.general,
-   ...PREGUNTES.senyals,
-   ...PREGUNTES.normes,
-   ...PREGUNTES.mecanica,
-   ...SITUACIONS.clima
+  ...PREGUNTES.general,
+  ...PREGUNTES.senyals,
+  ...PREGUNTES.normes,
+  ...PREGUNTES.mecanica,
+  ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -900,7 +919,6 @@ function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
   const pOriginal = estat.examen.preguntes[estat.examen.index];
 
-  // Barregem opcions
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
@@ -1125,6 +1143,7 @@ function prevTip(e) {
   currentTip = (currentTip - 1 + tipsData.length) % tipsData.length;
   mostrarTip();
 }
+
 
 function actualitzarMissatgeMotivacional() {
   const missatges = [
