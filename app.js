@@ -620,6 +620,113 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
+// ===== DATOS BIBLIOTECA SENYALITZACIÓ =====
+const SENYALS = [
+  {"titol": "Stop obligatori", "emoji": "🛑🚗"},
+  {"titol": "Ceda el pas", "emoji": "🔻🚗"},
+  {"titol": "Prohibit girar esquerra", "emoji": "⛔⬅️🚗"},
+  {"titol": "Prohibit girar dreta", "emoji": "⛔➡️🚗"},
+  {"titol": "Prohibit canviar de sentit", "emoji": "⛔🔄🚗"},
+  {"titol": "Prohibit avançar", "emoji": "⛔🚫🚗"},
+  {"titol": "Velocitat màxima 50", "emoji": "🔢5️⃣0️⃣🚗"},
+  {"titol": "Velocitat màxima 80", "emoji": "🔢8️⃣0️⃣🚗"},
+  {"titol": "Velocitat màxima 120", "emoji": "🔢1️⃣2️⃣0️⃣🚗"},
+  {"titol": "Fi limitació velocitat", "emoji": "🔚🔢🚗"},
+  {"titol": "Entrada prohibida", "emoji": "⛔🚗"},
+  {"titol": "Sentit únic", "emoji": "➡️🛣️"},
+  {"titol": "Prioritat en cruïlla", "emoji": "🛣️🔼🚗"},
+  {"titol": "Cedir pas en cruïlla", "emoji": "🔻🛣️🚗"},
+  {"titol": "Rotonda", "emoji": "🔄🛣️🚗"},
+  {"titol": "Carretera amb prioritat", "emoji": "🛣️🟨🚗"},
+  {"titol": "Fi carretera prioritària", "emoji": "🛣️⬜🚗"},
+  {"titol": "Pas de vianants", "emoji": "🚶🚸"},
+  {"titol": "Pas de vianants elevat", "emoji": "🚶⬆️🚸"},
+  {"titol": "Nens", "emoji": "🧒⚠️"},
+  {"titol": "Ciclistes", "emoji": "🚴⚠️"},
+  {"titol": "Animals a la via", "emoji": "🦌⚠️🛣️"},
+  {"titol": "Vaques", "emoji": "🐄⚠️🛣️"},
+  {"titol": "Corba perillosa dreta", "emoji": "↗️⚠️🛣️"},
+  {"titol": "Corba perillosa esquerra", "emoji": "↖️⚠️🛣️"},
+  {"titol": "Doble corba", "emoji": "↗️↖️⚠️🛣️"},
+  {"titol": "Descens perillós", "emoji": "⬇️⚠️🛣️"},
+  {"titol": "Pujada pronunciada", "emoji": "⬆️⚠️🛣️"},
+  {"titol": "Estretament", "emoji": "↔️⚠️🛣️"},
+  {"titol": "Obres", "emoji": "🚧🛣️⚠️"},
+  {"titol": "Carril tancat", "emoji": "❌🛣️🚗"},
+  {"titol": "Desviament", "emoji": "↗️🚧🛣️"},
+  {"titol": "Paviment relliscós", "emoji": "🌧️🛣️⚠️"},
+  {"titol": "Grava solta", "emoji": "🪨🛣️⚠️"},
+  {"titol": "Pont mòbil", "emoji": "🌉⚠️🛣️"},
+  {"titol": "Túnel", "emoji": "🕳️🛣️🚗"},
+  {"titol": "Semàfor", "emoji": "🚦⚠️"},
+  {"titol": "Pas a nivell", "emoji": "🚂🛤️⚠️"},
+  {"titol": "Barrera", "emoji": "🚧⚠️🛤️"},
+  {"titol": "Aeronaus", "emoji": "✈️⚠️🛣️"},
+  {"titol": "Vent lateral", "emoji": "🌬️⚠️🛣️"},
+  {"titol": "Caiguda de pedres", "emoji": "🪨⬇️⚠️🛣️"},
+  {"titol": "Neus o gel", "emoji": "❄️🛣️⚠️"},
+  {"titol": "Boira", "emoji": "🌫️🛣️⚠️"},
+  {"titol": "Accident", "emoji": "⚠️🚧❌🚗"},
+  {"titol": "Vehicles lents", "emoji": "🐌🚜🛣️"},
+  {"titol": "Sortida obligatòria dreta", "emoji": "➡️🚗🛣️"},
+  {"titol": "Sortida obligatòria esquerra", "emoji": "⬅️🚗🛣️"},
+  {"titol": "Direcció obligatòria recte", "emoji": "⬆️🚗🛣️"},
+  {"titol": "Carril bus", "emoji": "🚌🛣️"},
+  {"titol": "Carril bici", "emoji": "🚴🛣️"},
+  {"titol": "Final carril bici", "emoji": "🚴❌🛣️"},
+  {"titol": "Zona escolar", "emoji": "🏫🧒⚠️"},
+  {"titol": "Zona residencial", "emoji": "🏘️⚠️"},
+  {"titol": "Zona 30", "emoji": "🔢3️⃣0️⃣🏘️"},
+  {"titol": "Fi zona 30", "emoji": "🔚🔢3️⃣0️⃣"},
+  {"titol": "Aparcament", "emoji": "🅿️🚗"},
+  {"titol": "Aparcament minusvàlids", "emoji": "🅿️♿🚗"},
+  {"titol": "Parada bus", "emoji": "🚌🚏"},
+  {"titol": "Taxi", "emoji": "🚕🅿️"},
+  {"titol": "Càrrega i descàrrega", "emoji": "📦🚚🅿️"},
+  {"titol": "Prohibit aparcar", "emoji": "⛔🅿️🚗"},
+  {"titol": "Prohibit estacionar", "emoji": "🚫🅿️🚗"},
+  {"titol": "Zona verda", "emoji": "🟢🅿️"},
+  {"titol": "Zona blava", "emoji": "🔵🅿️"},
+  {"titol": "Zona perill", "emoji": "⚠️‼️🛣️"},
+  {"titol": "Perill elèctric", "emoji": "⚡⚠️🛣️"},
+  {"titol": "Incendi", "emoji": "🔥⚠️🛣️"},
+  {"titol": "SOS", "emoji": "🆘⚠️🛣️"},
+  {"titol": "Hospital pròxim", "emoji": "🏥⚠️🛣️"},
+  {"titol": "Farmàcia", "emoji": "💊🏥"},
+  {"titol": "Gasolinera", "emoji": "⛽🛣️"},
+  {"titol": "Àrea de servei", "emoji": "🅿️⛽🍔"},
+  {"titol": "WC públic", "emoji": "🚻🅿️"},
+  {"titol": "Punt informació", "emoji": "ℹ️🅿️"},
+  {"titol": "Telèfon emergència", "emoji": "📞🆘🛣️"},
+  {"titol": "Radio trànsit", "emoji": "📻🚗"},
+  {"titol": "Càmera velocitat", "emoji": "📷🔢🚗"},
+  {"titol": "Control policia", "emoji": "👮🚓⚠️"},
+  {"titol": "Aduana", "emoji": "🛂⚠️🛣️"},
+  {"titol": "Peatge", "emoji": "💰🛣️🚗"},
+  {"titol": "Autopista", "emoji": "🛣️🚗💨"},
+  {"titol": "Fi autopista", "emoji": "🛣️🔚🚗"},
+  {"titol": "Carretera convencional", "emoji": "🛣️🚗"},
+  {"titol": "Via ràpida", "emoji": "🛣️⚡🚗"},
+  {"titol": "Enllaç", "emoji": "🔗🛣️"},
+  {"titol": "Sortida", "emoji": "🚪🛣️"},
+  {"titol": "Incorporació", "emoji": "↗️🛣️🚗"},
+  {"titol": "Carril lent", "emoji": "🐌🛣️🚚"},
+  {"titol": "Carril ràpid", "emoji": "💨🛣️🚗"},
+  {"titol": "Fi carril", "emoji": "🛣️🔚🚗"},
+  {"titol": "Zona inundable", "emoji": "🌊⚠️🛣️"},
+  {"titol": "Pont estret", "emoji": "🌉↔️⚠️"},
+  {"titol": "Gual", "emoji": "💧🛣️🚗"},
+  {"titol": "Badén", "emoji": "〰️🛣️🚗"},
+  {"titol": "Ressalt", "emoji": "⬆️⬇️🛣️🚗"},
+  {"titol": "Zona esport", "emoji": "⚽🏃⚠️"},
+  {"titol": "Zona animals", "emoji": "🐕🐄⚠️🛣️"},
+  {"titol": "Zona forestal", "emoji": "🌲⚠️🛣️"},
+  {"titol": "Zona muntanya", "emoji": "⛰️⚠️🛣️"},
+  {"titol": "Mirador", "emoji": "👀🏞️🅿️"},
+  {"titol": "Picnic", "emoji": "🧺🌳🅿️"}
+];
+
+// ===== TU CÓDIGO EXISTENTE =====
 let tipsData = [];
 let currentTip = 0;
 
@@ -701,20 +808,18 @@ function canviarTab(e, tab) {
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
+  if(tab === 'senyalitzacio') carregarSenyalitzacio(); // NUEVO
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situacions') carregarSituacio(sitCategoriaActiva);
 }
 
 function canviarSubTab(e, tab, subtab) {
-  // Mapeo: el tab 'sit' en realidad está en el div con id 'tab-situaciones'
-  const tabId = tab === 'sit' ? 'situaciones' : tab;
+  const tabId = tab === 'sit'? 'situaciones' : tab;
   const contenidor = document.getElementById('tab-' + tabId);
-  
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
   e.target.classList.add('active');
   document.getElementById(`${tab === 'test'? 'test' : 'sit'}-${subtab}`).classList.add('active');
-  
   if(tab === 'test') carregarPregunta(subtab);
   if(tab === 'sit') carregarSituacio(subtab);
 }
@@ -723,7 +828,6 @@ function canviarCategoriaSit(cat) {
   sitCategoriaActiva = cat;
   document.querySelectorAll('#tab-situacions.category-btn').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
-
   const titols = {
     clima: '🌧️ CASOS REALS - CLIMA ADVERS',
     urbà: '🏙️ CASOS REALS - URBÀ',
@@ -731,7 +835,6 @@ function canviarCategoriaSit(cat) {
     emergència: '🚨 CASOS REALS - EMERGÈNCIA'
   };
   document.getElementById('sit-titol').textContent = titols[cat];
-
   estat.sit[cat].idx = 0;
   carregarSituacio(cat);
 }
@@ -753,14 +856,11 @@ function carregarPregunta(cat) {
   const preguntes = PREGUNTES[cat];
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
-
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
-
   s.current = p;
-
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
@@ -782,12 +882,9 @@ function carregarPregunta(cat) {
 function respondreTest(cat, idx, el) {
   const s = estat.test[cat];
   const p = s.current;
-
   const cont = document.getElementById(`test-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
-
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
-
   const correcte = idx === p.ok;
   if(correcte) {
     el.classList.add('correcta');
@@ -822,14 +919,11 @@ function carregarSituacio(cat) {
   const casos = SITUACIONS[cat];
   if(!casos || casos.length === 0) return;
   const pOriginal = casos[s.idx % casos.length];
-
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
-
   s.current = p;
-
   document.getElementById(`sit-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio;
@@ -850,12 +944,9 @@ function carregarSituacio(cat) {
 function respondreSituacio(cat, idx, el) {
   const s = estat.sit[cat];
   const p = s.current;
-
   const cont = document.getElementById(`sit-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
-
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
-
   const correcte = idx === p.ok;
   if(correcte) {
     el.classList.add('correcta');
@@ -884,11 +975,11 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   const totes = [
-  ...PREGUNTES.general,
-  ...PREGUNTES.senyals,
-  ...PREGUNTES.normes,
-  ...PREGUNTES.mecanica,
-  ...SITUACIONS.clima
+ ...PREGUNTES.general,
+ ...PREGUNTES.senyals,
+ ...PREGUNTES.normes,
+ ...PREGUNTES.mecanica,
+ ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -921,13 +1012,11 @@ function iniciarTimerExamen() {
 function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
   const pOriginal = estat.examen.preguntes[estat.examen.index];
-
   const opcionsBarrejades = barrejarArray(pOriginal.a);
   const textCorrecte = pOriginal.a[pOriginal.ok];
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   estat.examen.preguntes[estat.examen.index] = p;
-
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
   document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
   document.getElementById('examen-progress').style.width = `${(estat.examen.index/30)*100}%`;
@@ -946,12 +1035,9 @@ function carregarPreguntaExamen() {
 
 function respondreExamen(idx, el) {
   const p = estat.examen.preguntes[estat.examen.index];
-
   const cont = document.getElementById('examen-opciones');
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
-
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
-
   const correcte = idx === p.ok;
   if(correcte) {
     el.classList.add('correcta');
@@ -1098,7 +1184,6 @@ function comprarAccessoris(id) {
   guardar();
   actualitzarCoins();
   carregarBotiga();
-
   const totalAcc = estat.accessoris.length;
   const msg = document.createElement('div');
   msg.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff8c00,#ff2d55);color:#fff;padding:12px 24px;border-radius:12px;font-weight:bold;z-index:999;animation:slideUp 0.3s';
@@ -1147,6 +1232,21 @@ function prevTip(e) {
   mostrarTip();
 }
 
+// ===== NUEVA FUNCIÓN BIBLIOTECA =====
+function carregarSenyalitzacio() {
+  const cont = document.getElementById('senyalitzacio-grid');
+  if(!cont) return;
+  cont.innerHTML = '';
+  SENYALS.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'emoji-item';
+    div.innerHTML = `
+      <div style="font-size:48px">${s.emoji}</div>
+      <div style="font-size:13px;color:#666;margin-top:6px">${s.titol}</div>
+    `;
+    cont.appendChild(div);
+  });
+}
 
 function actualitzarMissatgeMotivacional() {
   const missatges = [
