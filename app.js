@@ -1265,6 +1265,21 @@ function carregarTemari() {
       <div>Normes Circulació</div>
       <div style="font-size:11px;color:#999">Edició 2024</div>
     </div>
+    <div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')">
+      <div style="font-size:40px">🚑</div>
+      <div>Primers Auxilis</div>
+      <div style="font-size:11px;color:#999">Manual IX 2025</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2025.pdf')">
+      <div style="font-size:40px">⚙️</div>
+      <div>Mecànica</div>
+      <div style="font-size:11px;color:#999">Manual VIII 2025</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')">
+      <div style="font-size:40px">♻️</div>
+      <div>Medi Ambient</div>
+      <div style="font-size:11px;color:#999">Distintius DGT 2025</div>
+    </div>
   `;
 }
 
