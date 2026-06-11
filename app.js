@@ -1251,20 +1251,21 @@ function carregarSenyalitzacio() {
   });
 }
 
-// ===== NUEVA FUNCIÓN TEMARI =====
 function carregarTemari() {
-  const cont = document.getElementById('temari-lista');
-  if(!cont) return;
-  cont.innerHTML = `
-    <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
-      <div style="font-size:40px">📖</div>
-      <div>1. Senyals de trànsit</div>
-      <div style="font-size:12px;color:#667eea">RD 465/2025</div>
-    </div>
-    <div class="temari-item locked">
-      <div style="font-size:40px">🔒</div>
-      <div>2. Normes de circulació</div>
-      <div style="font-size:12px;color:#999">Pròximament</div>
+  const container = document.getElementById('content');
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-title">📖 Temari DGT - Regalo</div>
+      <div class="grid">
+        <div class="grid-item" onclick="obrirPDF('/pdfs/01_Senyals_Tomo_I_RD_465_2025.pdf')">
+          <div class="grid-icon">🚦</div>
+          <div class="grid-text">Senyals</div>
+        </div>
+        <div class="grid-item" onclick="obrirPDF('/pdfs/02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')">
+          <div class="grid-icon">📋</div>
+          <div class="grid-text">Normes Circulació</div>
+        </div>
+      </div>
     </div>
   `;
 }
