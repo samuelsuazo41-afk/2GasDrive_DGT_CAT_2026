@@ -1,11 +1,13 @@
-const CACHE = 'gasdrive-v8.7.4';
+const CACHE = 'gasdrive-v8.8.1'; // sube versión para que se actualice
 const FILES = [
   './',
   './index.html',
   './app.js',
+  './temario.js', // por si lo separaste
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './01_Senyals_Tomo_I_RD_465_2025.pdf' // NUEVO: tu PDF
 ];
 
 self.addEventListener('install', e => {
