@@ -11,11 +11,13 @@ function mostrarIntro(){
     <div id="intro-screen" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#1a1a2e,#16213e);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px">
       <div style="font-size:64px;margin-bottom:20px">🚗</div>
       <h1 style="font-size:32px;margin:0 0 10px">GasDrive DGT CAT 2026</h1>
-      <p style="font-size:18px;opacity:0.8;margin:0 0 30px">Aprèn el carnet en 15 min al dia</p>
+      <p style="font-size:18px;opacity:0.8;margin:0 0 10px">Aprèn el carnet en 15 min al dia</p>
+      <p style="font-size:16px;opacity:0.9;margin:0 0 30px">📚 Temaris oficials DGT per estudiar quan vulguis</p>
       <div style="text-align:left;font-size:16px;margin-bottom:40px;line-height:2">
         <div>💰 Guanya coins responent bé</div>
         <div>🏎️ Compra supercotxes al Garatge</div>
         <div>📚 450 preguntes DGT reals</div>
+        <div>📖 Temaris complets per repassar</div>
       </div>
       <button onclick="tancarIntro()" style="background:linear-gradient(135deg,#ff8c00,#ff2d55);border:none;color:#fff;padding:16px 48px;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer">COMENÇAR</button>
     </div>
@@ -675,7 +677,7 @@ const SENYALS = [
   {"titol": "Carril bici", "emoji": "🚴🛣️"},
   {"titol": "Final carril bici", "emoji": "🚴❌🛣️"},
   {"titol": "Zona escolar", "emoji": "🏫🧒⚠️"},
-  {"titol": "Zona residencial", "emoji": "🏘️⚠️"},
+  {"titol": "Zona residencial", "enkmkmmmnmñvvbmoji": "🏘️⚠️"},
   {"titol": "Zona 30", "emoji": "🔢3️⃣0️⃣🏘️"},
   {"titol": "Fi zona 30", "emoji": "🔚🔢3️⃣0️⃣"},
   {"titol": "Aparcament", "emoji": "🅿️🚗"},
@@ -808,7 +810,8 @@ function canviarTab(e, tab) {
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
-  if(tab === 'senyalitzacio') carregarSenyalitzacio(); // NUEVO
+  if(tab === 'senyalitzacio') carregarSenyalitzacio();
+  if(tab === 'temari') carregarTemari(); // NUEVO
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situacions') carregarSituacio(sitCategoriaActiva);
 }
@@ -975,11 +978,11 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   const totes = [
- ...PREGUNTES.general,
- ...PREGUNTES.senyals,
- ...PREGUNTES.normes,
- ...PREGUNTES.mecanica,
- ...SITUACIONS.clima
+...PREGUNTES.general,
+...PREGUNTES.senyals,
+...PREGUNTES.normes,
+...PREGUNTES.mecanica,
+...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -1248,6 +1251,29 @@ function carregarSenyalitzacio() {
   });
 }
 
+// ===== NUEVA FUNCIÓN TEMARI =====
+function carregarTemari() {
+  const cont = document.getElementById('temari-lista');
+  if(!cont) return;
+  cont.innerHTML = `
+    <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
+      <div style="font-size:40px">📖</div>
+      <div>1. Senyals de trànsit</div>
+      <div style="font-size:12px;color:#667eea">RD 465/2025</div>
+    </div>
+    <div class="temari-item locked">
+      <div style="font-size:40px">🔒</div>
+      <div>2. Normes de circulació</div>
+      <div style="font-size:12px;color:#999">Pròximament</div>
+    </div>
+  `;
+}
+
+// NUEVA FUNCIÓN PARA ABRIR PDF
+function obrirPDF(ruta) {
+  window.open(ruta, '_blank');
+}
+
 function actualitzarMissatgeMotivacional() {
   const missatges = [
     "Vas per bon camí 💪",
@@ -1265,7 +1291,7 @@ function actualitzarMissatgeMotivacional() {
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
-  .then(reg => console.log('SW registrat'))
-  .catch(err => console.log('SW error:', err));
+ .then(reg => console.log('SW registrat'))
+ .catch(err => console.log('SW error:', err));
   });
 }
