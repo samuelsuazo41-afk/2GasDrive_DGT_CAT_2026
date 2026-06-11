@@ -1269,7 +1269,8 @@ function carregarTemari() {
   `;
 }
 
-async function obrirPDF(ruta) {
+// NUEVA FUNCIÓN PARA ABRIR PDF - sin mostrar URL de GitHub
+function obrirPDF(ruta) {
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
   modal.style.cssText = `
@@ -1283,15 +1284,9 @@ async function obrirPDF(ruta) {
       <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
       <div style="width:60px"></div>
     </div>
-    <iframe id="pdf-frame" style="flex:1;border:none;width:100%"></iframe>
+    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
   `;
   document.body.appendChild(modal);
-
-  // carga el PDF como blob para ocultar la URL
-  const res = await fetch(ruta);
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  document.getElementById('pdf-frame').src = url;
 }
 
 function tancarPDF() {
