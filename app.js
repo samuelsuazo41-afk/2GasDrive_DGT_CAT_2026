@@ -1269,7 +1269,7 @@ function carregarTemari() {
   `;
 }
 
-function obrirPDF(ruta) {
+async function obrirPDF(ruta) {
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
   modal.style.cssText = `
@@ -1283,13 +1283,20 @@ function obrirPDF(ruta) {
       <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
       <div style="width:60px"></div>
     </div>
-    <embed src="${ruta}" type="application/pdf" style="flex:1;width:100%;height:100%" />
+    <iframe id="pdf-frame" style="flex:1;border:none;width:100%"></iframe>
   `;
   document.body.appendChild(modal);
+
+  // carga el PDF como blob para ocultar la URL
+  const res = await fetch(ruta);
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  document.getElementById('pdf-frame').src = url;
 }
 
 function tancarPDF() {
-  document.getElementById('pdf-modal').remove();
+  const modal = document.getElementById('pdf-modal');
+  if(modal) modal.remove();
 }
 
 // NUEVA FUNCIÓN PARA CERRAR PDF
