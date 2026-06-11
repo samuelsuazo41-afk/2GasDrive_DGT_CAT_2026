@@ -11,7 +11,7 @@ const TEMARIO = [
   { 
     id: 2, 
     titulo: "2. Normes de circulació", 
-    pdf: null  // aún no subiste este PDF
+    pdf: require('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf') // desbloqueado
   },
   { 
     id: 3, 
@@ -52,29 +52,4 @@ export default function Temario() {
     <View style={styles.container}>
       <FlatList
         data={TEMARIO}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.item}
-            onPress={() => {
-              if (item.pdf) {
-                navigation.navigate('PDFViewer', { pdfSource: item.pdf, title: item.titulo });
-              }
-            }}
-            disabled={!item.pdf}
-          >
-            <Text style={[styles.title, !item.pdf && { color: '#aaa' }]}>
-              {item.titulo}
-            </Text>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-  item: { padding: 16, borderBottomWidth: 1, borderBottomColor: '#ddd' },
-  title: { fontSize: 16, fontWeight: 'bold' }
-});
+        keyExtractor={(
