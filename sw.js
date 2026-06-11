@@ -1,4 +1,4 @@
-const CACHE = 'gasdrive-v8.8.6'; // sube versión para que se actualice
+const CACHE = 'gasdrive-v8.8.7'; // sube versión para que se actualice
 const FILES = [
   './',
   './index.html',
@@ -7,7 +7,8 @@ const FILES = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
-  './01_Senyals_Tomo_I_RD_465_2025.pdf' // NUEVO: tu PDF
+  './01_Senyals_Tomo_I_RD_465_2025.pdf', // PDF 1: Senyals
+  './02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf' // PDF 2: Normes Circulació
 ];
 
 self.addEventListener('install', e => {
@@ -15,7 +16,7 @@ self.addEventListener('install', e => {
     caches.open(CACHE).then(cache => cache.addAll(FILES))
   );
   self.skipWaiting();
-}); 
+});
 
 self.addEventListener('activate', e => {
   e.waitUntil(
