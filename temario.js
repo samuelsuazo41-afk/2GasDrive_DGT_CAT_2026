@@ -1,55 +1,71 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const TEMARIO = [
   { 
     id: 1, 
     titulo: "1. Senyals de trànsit", 
-    pdf: require('./01_Senyals_Tomo_I_RD_465_2025.pdf') 
+    pdf: require('./01_Senyals_Tomo_I_RD_465_2025.pdf'),
+    bloqueado: true
   },
   { 
     id: 2, 
     titulo: "2. Normes de circulació", 
-    pdf: require('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf') // desbloqueado
+    pdf: require('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf'),
+    bloqueado: true
   },
   { 
     id: 3, 
-    titulo: "3. Prioritat de pas i interseccions", 
-    pdf: null
+    titulo: "3. Primeros Auxilios", 
+    pdf: require('./03_Manual_IX_Primers_Auxilis_2025.pdf'),
+    bloqueado: true
   },
   { 
     id: 4, 
-    titulo: "4. Velocitat i distàncies", 
-    pdf: null
+    titulo: "4. Mecánica del vehículo", 
+    pdf: require('./04_Manual_VIII_Mecanica_2024.pdf'),
+    bloqueado: true
   },
   { 
     id: 5, 
-    titulo: "5. Canvis de direcció i carril", 
-    pdf: null
-  },
-  { 
-    id: 6, 
-    titulo: "6. Parada i estacionament", 
-    pdf: null
-  },
-  { 
-    id: 7, 
-    titulo: "7. Llums i senyals acústics", 
-    pdf: null
-  },
-  { 
-    id: 8, 
-    titulo: "8. Conducció en situacions especials", 
-    pdf: null
+    titulo: "5. Medio Ambiente + Distintius DGT", 
+    pdf: require('./05_Medi_Ambient_Distintius_DGT_2025.pdf'),
+    bloqueado: true
   }
 ];
 
 export default function Temario() {
   const navigation = useNavigation();
+  const isPremium = false; // déjalo en false para probar
+
+  const handlePress = (item) => {
+    if (item.bloqueado && !isPremium) {
+      navigation.navigate('Paywall');
+    } else {
+      navigation.navigate('PDFViewer', { pdf: item.pdf, titulo: item.titulo });
+    }
+  };
 
   return (
     <View style={styles.container}>
       <FlatList
         data={TEMARIO}
-        keyExtractor={(
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.card} onPress={() => handlePress(item)}>
+            <Text style={styles.titulo}>{item.titulo}</Text>
+            <Ionicons name="lock-closed" size={20} color="#999" />
+          </TouchableOpacity>
+        )}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, backgroundColor: '#f5f5f5' },
+  card: {
+    flexDirection: 'row',
+    justifyContent: '
