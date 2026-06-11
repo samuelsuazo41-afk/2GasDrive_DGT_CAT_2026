@@ -1269,7 +1269,6 @@ function carregarTemari() {
   `;
 }
 
-// NUEVA FUNCIÓN PARA ABRIR PDF - sin mostrar URL
 function obrirPDF(ruta) {
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
@@ -1284,9 +1283,13 @@ function obrirPDF(ruta) {
       <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
       <div style="width:60px"></div>
     </div>
-    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
+    <embed src="${ruta}" type="application/pdf" style="flex:1;width:100%;height:100%" />
   `;
   document.body.appendChild(modal);
+}
+
+function tancarPDF() {
+  document.getElementById('pdf-modal').remove();
 }
 
 // NUEVA FUNCIÓN PARA CERRAR PDF
