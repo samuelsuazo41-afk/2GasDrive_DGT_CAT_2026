@@ -1,22 +1,44 @@
-# 2GasDrive_DGT_CAT_2026
+GASDRIVE DGT CAT - ENTREGA 2026-06-11
 
-App móvil para practicar el test de la DGT en catalán. Modalidad Nitro, Turbo y Flash con sistema de puntos y tienda.
+PROYECTO:
+GasDrive DGT CAT
+Paquete: com.gasdrive.dgtcat
+Version: 1.0.0
 
-## Cómo usar
+ESTRUCTURA DE CARPETAS:
+1. CodigoFuente/GasDrive_CodigoFuente.zip - Código fuente completo
+2. Configuracion_Publicacion/ - Assets para Google Play Console
+3. README.txt - Este archivo
 
-1. Clonar repo
-2. `npm install`
-3. `npm start`
+CUENTAS DE TERCEROS - GASDRIVE
 
-## Añadir preguntas DGT
+1. GOOGLE PLAY CONSOLE
+Email: samuelsuazo41@gmail.com
+Tipo: Cuenta de desarrollador Android
+Acción: Transferir app a cuenta de la empresa
 
-Editar `app.js` -> buscar `const dgtBank = [`
+2. FIREBASE / GOOGLE CLOUD  
+Email: samuelsuazo41@gmail.com
+Tipo: Proyecto Firebase con base de datos
+Acción: Añadir a la empresa como Owner
 
-Formato:
-```js
-{
-  question: "Texto de la pregunta",
-  options: ["A", "B", "C"],
-  correct: 0,
-  explanation: "Explicación"
-}
+3. GOOGLE ANALYTICS
+Email: samuelsuazo41@gmail.com
+Tipo: Seguimiento de usuarios
+Acción: Dar acceso de administrador
+
+4. ADMOB [si usas anuncios]
+Email: samuelsuazo41@gmail.com
+Tipo: Monetización
+Acción: Transferir aplicación
+
+INSTRUCCIONES DE EJECUCION:
+1. Descomprimir GasDrive_CodigoFuente.zip
+2. Abrir en Android Studio
+3. Sync Gradle
+4. Ejecutar en dispositivo Android
+
+CONTACTO:
+samuelsuazo41@gmail.com
+
+FECHA DE ENTREGA: 2026-06-11
