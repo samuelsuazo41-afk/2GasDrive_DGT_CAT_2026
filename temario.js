@@ -6,42 +6,42 @@ const TEMARIO = [
   { 
     id: 1, 
     titulo: "1. Senyals de trànsit", 
-    pdf: require('../assets/pdfs/01_Senyals_Tomo_I_RD_465_2025.pdf') 
+    pdf: require('./01_Senyals_Tomo_I_RD_465_2025.pdf') 
   },
   { 
     id: 2, 
     titulo: "2. Normes de circulació", 
-    pdf: require('../assets/pdfs/02_Normes_Circulacio.pdf') 
+    pdf: null  // aún no subiste este PDF
   },
   { 
     id: 3, 
     titulo: "3. Prioritat de pas i interseccions", 
-    pdf: require('../assets/pdfs/03_Prioritat_Pas.pdf') 
+    pdf: null
   },
   { 
     id: 4, 
     titulo: "4. Velocitat i distàncies", 
-    pdf: require('../assets/pdfs/04_Velocitat_Distancies.pdf') 
+    pdf: null
   },
   { 
     id: 5, 
     titulo: "5. Canvis de direcció i carril", 
-    pdf: require('../assets/pdfs/05_Canvis_Direccio.pdf') 
+    pdf: null
   },
   { 
     id: 6, 
     titulo: "6. Parada i estacionament", 
-    pdf: require('../assets/pdfs/06_Parada_Estacionament.pdf') 
+    pdf: null
   },
   { 
     id: 7, 
     titulo: "7. Llums i senyals acústics", 
-    pdf: require('../assets/pdfs/07_Llums_Senyals_Acustics.pdf') 
+    pdf: null
   },
   { 
     id: 8, 
     titulo: "8. Conducció en situacions especials", 
-    pdf: require('../assets/pdfs/08_Conduccio_Especials.pdf') 
+    pdf: null
   }
 ];
 
@@ -56,9 +56,16 @@ export default function Temario() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.item}
-            onPress={() => navigation.navigate('PDFViewer', { pdfSource: item.pdf, title: item.titulo })}
+            onPress={() => {
+              if (item.pdf) {
+                navigation.navigate('PDFViewer', { pdfSource: item.pdf, title: item.titulo });
+              }
+            }}
+            disabled={!item.pdf}
           >
-            <Text style={styles.title}>{item.titulo}</Text>
+            <Text style={[styles.title, !item.pdf && { color: '#aaa' }]}>
+              {item.titulo}
+            </Text>
           </TouchableOpacity>
         )}
       />
