@@ -1269,9 +1269,30 @@ function carregarTemari() {
   `;
 }
 
-// NUEVA FUNCIÓN PARA ABRIR PDF
+// NUEVA FUNCIÓN PARA ABRIR PDF - sin mostrar URL
 function obrirPDF(ruta) {
-  window.open(ruta, '_blank');
+  const modal = document.createElement('div');
+  modal.id = 'pdf-modal';
+  modal.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:#0a0a0a;z-index:9999;
+    display:flex;flex-direction:column;
+  `;
+  modal.innerHTML = `
+    <div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333">
+      <button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button>
+      <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
+      <div style="width:60px"></div>
+    </div>
+    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
+  `;
+  document.body.appendChild(modal);
+}
+
+// NUEVA FUNCIÓN PARA CERRAR PDF
+function tancarPDF() {
+  const modal = document.getElementById('pdf-modal');
+  if(modal) modal.remove();
 }
 
 function actualitzarMissatgeMotivacional() {
