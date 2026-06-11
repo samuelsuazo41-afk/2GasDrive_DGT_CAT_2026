@@ -1270,7 +1270,7 @@ function carregarTemari() {
       <div>Primers Auxilis</div>
       <div style="font-size:11px;color:#999">Manual IX 2025</div>
     </div>
-    <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2025.pdf')">
+    <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')">
       <div style="font-size:40px">⚙️</div>
       <div>Mecànica</div>
       <div style="font-size:11px;color:#999">Manual VIII 2025</div>
