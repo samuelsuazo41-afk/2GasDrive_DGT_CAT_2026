@@ -64,12 +64,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
 .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
 .btn-buy:active{transform:scale(0.95)}
-/* Grid biblioteca senyalització - 2 columnas centradas y cuadradas */
-#senyalitzacio-grid{ display:grid; grid-template-columns:repeat(2,160px); gap:10px; justify-content:center; margin:14px auto 0; }
-#senyalitzacio-grid .emoji-item{ background:#1a1a1a; border:1.5px solid #333; border-radius:12px; padding:12px 8px; text-align:center; min-height:98px; width:160px; display:flex; flex-direction:column; justify-content:center; transition:0.15s; }
-#senyalitzacio-grid .emoji-item:active{ transform:scale(0.96); border-color:#00D9FF; }
-#senyalitzacio-grid .emoji-item div:first-child{ font-size:44px; line-height:1; margin-bottom:6px; }
-#senyalitzacio-grid .emoji-item div:last-child{ font-size:11.5px; color:#bbb; line-height:1.25; font-weight:600; }
 /* NUEVO: Grid Temari */
 #temari-lista{ display:grid; grid-template-columns:repeat(2,160px); gap:12px; justify-content:center; margin:14px auto 0; }
 .temari-item{ background:#1a1a1a; border:2px solid #00D9FF; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:0.2s; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
@@ -149,7 +143,6 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     </div>
   </div>
 
-  <!-- NOU: PRIMERS AUXILIS -->
   <div id="test-auxilis" class="sub-content">
     <div class="card">
       <h2>🚑 PRIMERS AUXILIS</h2>
@@ -162,7 +155,6 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     </div>
   </div>
 
-  <!-- NOU: MEDI AMBIENT -->
   <div id="test-mediambient" class="sub-content">
     <div class="card">
       <h2>♻️ MEDI AMBIENT</h2>
@@ -246,49 +238,37 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   <div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div>
 </div>
 
+<div id="tab-tienda" class="tab-content">
+  <div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div>
+</div>
 
-  <div id="tab-tienda" class="tab-content">
-    <div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div>
-  </div>
-
-  <div id="tab-tips" class="tab-content">
-    <div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div>
-      <div style="display:flex;gap:10px;margin-top:15px">
-        <button class="btn" style="flex:1" onclick="prevTip(event)">ANTERIOR</button>
-        <span id="tip-counter" style="align-self:center">1/100</span>
-        <button class="btn" style="flex:1" onclick="nextTip(event)">SEGÜENT</button>
-      </div>
+<div id="tab-tips" class="tab-content">
+  <div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div>
+    <div style="display:flex;gap:10px;margin-top:15px">
+      <button class="btn" style="flex:1" onclick="prevTip(event)">ANTERIOR</button>
+      <span id="tip-counter" style="align-self:center">1/100</span>
+      <button class="btn" style="flex:1" onclick="nextTip(event)">SEGÜENT</button>
     </div>
   </div>
+</div>
 
-  <!-- NUEVO TAB SENYALITZACIÓ -->
-  <div id="tab-senyalitzacio" class="tab-content">
-    <div class="card">
-      <h2>🚸 BIBLIOTECA DE SENYALS</h2>
-      <p style="margin-bottom:12px;font-size:13px;color:#999">Consulta ràpida de senyals de trànsit</p>
-      <div id="senyalitzacio-grid"></div>
-    </div>
+<div id="tab-temari" class="tab-content">
+  <div class="card">
+    <h2>📖 TEMARIS OFICIALS</h2>
+    <p style="margin-bottom:12px;font-size:13px;color:#999">Estudia els temaris complets DGT</p>
+    <div id="temari-lista"></div>
   </div>
+</div>
 
-  <!-- NUEVO TAB TEMARI -->
-  <div id="tab-temari" class="tab-content">
-    <div class="card">
-      <h2>📖 TEMARIS OFICIALS</h2>
-      <p style="margin-bottom:12px;font-size:13px;color:#999">Estudia els temaris complets DGT</p>
-      <div id="temari-lista"></div>
-    </div>
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn active" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
-    <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
-    <button class="tab-btn" onclick="canviarTab(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
-    <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
-    <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
-    <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
-    <button class="tab-btn" onclick="canviarTab(event,'senyalitzacio')"><span class="emoji">🚸</span>SENYALS</button>
-    <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
-  </div>
+<div class="tabs">
+  <button class="tab-btn active" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
+  <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
+  <button class="tab-btn" onclick="canviarTab(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
+  <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
+  <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
+  <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
+  <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
+</div>
 
 <script src="./app.js?v=8.5.1"></script>
 </body>
