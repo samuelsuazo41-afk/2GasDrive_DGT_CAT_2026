@@ -1,4 +1,4 @@
-// GASDRIVE DGT V8.2 CAT - 530 PREGUNTES DGT 2026
+// GASDRIVE DGT V8.2 CAT - 630 PREGUNTES DGT 2026
 const VERSION = "8.2";
 
 // COMBO DOPAMINA
@@ -436,6 +436,102 @@ const PREGUNTES = {
     {q:"Cotxe olor a gasolina:",a:["Normal","Fuita combustible","No passa res"],ok:1},
     {q:"Cotxe olor a oli:",a:["Normal","Fuita oli","No passa res"],ok:1},
     {q:"Cotxe olor a refrigerant:",a:["Normal","Fuita refrigerant","No passa res"],ok:1}
+],
+ 
+  auxilis: [
+    {q:"Què fas primer davant un accident?",a:["Trucar al 112","Moure el ferit","Donar aigua"],ok:0},
+    {q:"En una hemorràgia arterial, què fas?",a:["Comprimir directe","Elevar extremitat","Donar aspirina"],ok:0},
+    {q:"Posició lateral de seguretat serveix per:",a:["Evitar asfíxia","Accelerar recuperació","Reduir dolor"],ok:0},
+    {q:"Davant una fractura oberta:",a:["Reduir os","Cobrir amb gasa estèril","Moure extremitat"],ok:1},
+    {q:"RCP en adult: compressió/ventilació:",a:["15/2","30/2","20/3"],ok:1},
+    {q:"Quan NO has de treure el casc a un motoritzat?",a:["Si respira malament","Si està conscient","Si no hi ha risc cervical"],ok:0},
+    {q:"Símptoma d’infart:",a:["Dolor toràcic","Dolor de genoll","Visió borrosa"],ok:0},
+    {q:"Davant cremades de 2n grau:",a:["Aigua freda 10 min","Glaç directe","Pomada grassa"],ok:0},
+    {q:"Què fas si algú s’ennuega?",a:["Donar aigua","Cop esquena","Respiració boca-boca"],ok:1},
+    {q:"Convulsió: què NO fas?",a:["Protegir cap","Posar objecte boca","Cronometrar temps"],ok:1},
+    {q:"Xoc hipovolèmic: posició:",a:["Assegut","Tombat amb cames elevades","Boca avall"],ok:1},
+    {q:"Mordedura de serp:",a:["Tallar ferida","Immobilitzar extremitat","Succionar verí"],ok:1},
+    {q:"Hipotèrmia greu: què fas?",a:["Friccionar pell","Aïllar del fred","Donar alcohol"],ok:1},
+    {q:"Golp de calor: símptoma:",a:["Pell freda","Pell calenta i seca","Tremolors"],ok:1},
+    {q:"Fractura de clavícula: immobilització:",a:["Amb fèrula","Cabestrell","Estirant braç"],ok:1},
+    {q:"Davant pèrdua de coneixement breu:",a:["Sentar immediat","PLS si respira","Donar sucre"],ok:1},
+    {q:"Hemorràgia nasal: què fas?",a:["Inclinar cap enrere","Pessigar nas","Sonar-se"],ok:1},
+    {q:"Crema química a l’ull:",a:["Fregar","Rentat abundant aigua","Tapar amb gasa seca"],ok:1},
+    {q:"Atac d’asma greu:",a:["Aigua freda","Posició assegut","Estirar a terra"],ok:1},
+    {q:"Quan uses DEA?",a:["Si no respira","Si no hi ha pols","Si està adormit"],ok:1},
+    {q:"Ferida amb objecte clavat:",a:["Treure objecte","Immobilitzar objecte","Pressionar al voltant"],ok:1},
+    {q:"Símptoma d’ictus:",a:["Dolor estómac","Caiguda cara","Calfreds"],ok:1},
+    {q:"Esguinç turmell:",a:["Calor immediata","Fred + compressió","Massatge fort"],ok:1},
+    {q:"Davant vòmit amb inconsciència:",a:["PLS","Boca amunt","Assegut"],ok:0},
+    {q:"Intoxicació: què NO fas?",a:["Trucar 112","Provocar vòmit sense indicació","Observar pacient"],ok:1},
+    {q:"Hipoglucèmia conscient:",a:["Insulina","Sucre per boca","Aigua sola"],ok:1},
+    {q:"Trauma cranial amb vòmit:",a:["Normal","Signa d’alarma","No importa"],ok:1},
+    {q:"Parada respiratòria: freqüència ventilació:",a:["6-8/min","12/min","20/min"],ok:0},
+    {q:"Davant amputació:",a:["Posar part en gel directe","Cobrir ferida","Guardar part sec"],ok:1},
+    ["Dificultat per respirar","Dolor estómac","Picor de nas"],ok:0},
+    {q:"Deshidratació greu: símptoma:",a:["Orina abundant","Set intensa","Sudoració excessiva"],ok:1},
+    {q:"Trauma toràcic amb dificultat respiratòria:",a:["Normal","Perillós","No importa"],ok:1},
+    {q:"Fractura oberta sagnant molt:",a:["Treure os","Compressió directa","Elevar extremitat"],ok:1},
+    {q:"Davant intoxicació per gas:",a:["Encendre llum","Ventilar + sortir","Donar aigua"],ok:1},
+    {q:"Convulsió acabada, pacient adormit:",a:["Despertar","PLS","Assegut"],ok:1},
+    {q:"Ferida que no para de sagnar:",a:["Posar torniquet","Compressió + 112","Aigua oxigenada"],ok:1},
+    {q:"Símptoma d’angina de pit:",a:["Dolor genoll","Opressió pit","Dolor cap"],ok:1},
+    {q:"Davant caiguda de més de 3m:",a:["No moure + 112","Aixecar ràpid","Moure suaument"],ok:0},
+    {q:"Crema elèctrica:",a:["Tocar pacient","Tallat corrent abans","Aigua immediata"],ok:1},
+    {q:"Nen inconscient que no respira:",a:["5 ventilacions inicials","30 compressions","Respirar-li a cara"],ok:0},
+    {q:"Hemoràgia externa greu:",a:["Esperar que pari","Compressió + elevar","Posar alcohol"],ok:1}
+  ],
+  mediambient: [
+    {q:"Què és l’etiqueta ambiental B?",a:["Elèctric","Gasolina Euro 4+","Híbrid"],ok:1},
+    {q:"Cotxe amb etiqueta 0 emet:",a:["CO2 baix","Zero emissions tub","Només CO"],ok:1},
+    {q:"Conducció eficient redueix:",a:["Només soroll","Consum + CO2","Velocitat"],ok:1},
+    {q:"Quan has d’apagar motor?",a:["Mai","Aturat >30s","Només al semàfor"],ok:1},
+    {q:"Etiqueta C: cotxe gasolina de:",a:["Euro 3","Euro 4 a Euro 6","Elèctric"],ok:1},
+    {q:"Pneumàtics desinflats provoquen:",a:["Menys consum","Més consum CO2","Menys soroll"],ok:1},
+    {q:"Accelerar bruscament:",a:["Estalvia","Augmenta contaminació","No afecta"],ok:1},
+    {q:"Etiqueta ECO: inclou:",a:["Només elèctric","Híbrid + gas","Diesel Euro 6"],ok:1},
+    {q:"Velocitat constant estalvia:",a:["Res","Combustible + emissions","Només temps"],ok:1},
+    {q:"Què és ZBE?",a:["Zona blau","Zona baixes emissions","Zona bus"],ok:1},
+    {q:"Canviar marxa abans 2500 rpm:",a:["Gasta més","Estalvia + contamina menys","No canvia"],ok:1},
+    {q:"Etiqueta A no existeix perquè:",a:["Tots contaminen","Ja és 0 i ECO","No hi ha cotxes"],ok:1},
+    {q:"Usar aire condicionat:",a:["Redueix consum","Augmenta consum","No afecta"],ok:1},
+    {q:"Circular a 120 vs 100 km/h:",a:["Mateix consum","Gasta +30%","Gasta -10%"],ok:1},
+    {q:"Etiqueta 0: exemples:",a:["Diesel Euro 6","Elèctric, H2, PHEV 40km","Gasolina Euro 5"],ok:1},
+    {q:"Portar pes innecessari:",a:["No afecta","Augmenta consum","Redueix consum"],ok:1},
+    {q:"Canvi d’oli tardà:",a:["Millora","Contamina més","No afecta"],ok:1},
+    {q:"Etiqueta B: diesel de:",a:["Euro 3","Euro 4,5,6","Euro 2"],ok:1},
+    {q:"Frenar amb motor:",a:["Gasta més","Estalvia combustible","No canvia"],ok:1},
+    {q:"Què prohibeix ZBE sense etiqueta?",a:["Res","Accés segons ciutat","Aparcar"],ok:1},
+    {q:"Marxa llarga amb rpm baixes:",a:["Força motor","Conducció eficient","Trenquen cotxe"],ok:1},
+    {q:"Etiqueta C: diesel de:",a:["Euro 3","Euro 4,5,6","Euro 2"],ok:1},
+    {q:"Deixar ralenti calentant:",a:["Necessari","Contamina i gasta","Obligatori hivern"],ok:1},
+    {q:"Pneumàtics en bon estat:",a:["No importa","Redueixen consum","Augmenten soroll"],ok:1},
+    {q:"Etiqueta 0: avantatge ZBE:",a:["Cap","Accés lliure","Ha de pagar"],ok:1},
+    {q:"Conducció brusca:",a:["Estalvia","Augmenta CO2 fins 40%","No afecta"],ok:1},
+    {q:"Etiqueta ECO: gas natural:",a:["No","Sí","Només biogàs"],ok:1},
+    {q:"Tancar finestres autopista:",a:["Augmenta soroll","Redueix resistència","No canvia"],ok:1},
+    {q:"Etiqueta B: avantatge:",a:["Gratis ZBE","Accés limitat","Res"],ok:1},
+    {q:"Anticipar trànsit:",a:["No serveix","Redueix frenades","Augmenta velocitat"],ok:1},
+    {q:"Etiqueta C: avantatge:",a:["Res","Accés ZBE","Gratis aparcament"],ok:1},
+    {q:"Motor fred consumeix:",a:["Menys","Més","Igual"],ok:1},
+    {q:"Etiqueta 0: recarrega PHEV:",a:["No cal","Cal per etiqueta","Només gas"],ok:1},
+    {q:"Revisió ITVE al dia:",a:["No afecta","Redueix emissions","Augmenta consum"],ok:1},
+    {q:"Etiqueta B: color:",a:["Verd","Groc","Blau"],ok:1},
+    {q:"Apagar motor baixant:",a:["Correcte","Perillós","Obligatori"],ok:1},
+    {q:"Etiqueta ECO: color:",a:["Blau","Verd-blau","Groc"],ok:1},
+    {q:"Càrrega al sostre:",a:["Redueix consum","Augmenta resistència","No afecta"],ok:1},
+    {q:"Etiqueta 0: exempt impost circulació?",a:["Mai","Depèn ajuntament","Sempre"],ok:1},
+    {q:"Canviar filtre aire brut:",a:["No serveix","Redueix consum","Augmenta potència"],ok:1},
+    {q:"Etiqueta C: color:",a:["Verd","Groc","Gris"],ok:1},
+    {q:"Usar marxa adequada:",a:["No importa","Redueix emissions","Augmenta velocitat"],ok:1},
+    {q:"Etiqueta B: exempta ZBE?",a:["Sempre","Depèn ciutat","Mai"],ok:1},
+    {q:"Arrencar i marxar sense esperar:",a:["Malament","Correcte","Només fred"],ok:1},
+    {q:"Etiqueta 0: aparcament?",a:["Mai gratis","Pot ser gratis","Sempre paga"],ok:1},
+    {q:"Revisar pressió pneumàtics:",a:["Cada any","Cada mes","Només ITVE"],ok:1},
+    {q:"Etiqueta ECO: híbrids endollables:",a:["No","Sí, >40km","Sí, tots"],ok:1},
+    {q:"Conduir a revolucions altes:",a:["Estalvia","Contamina + gasta","No afecta"],ok:1},
+    {q:"Etiqueta C: pot entrar ZBE?",a:["Mai","Depèn ciutat/hora","Sempre"],ok:1},
+    {q:"Manteniment cotxe:",a:["No afecta medi","Clau per contaminar menys","Només per ITV"],ok:1}
   ]
 };
 
@@ -716,7 +812,9 @@ let estat = {
     general: {idx:0,encerts:0,ratxa:0,puntuacio:0},
     senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0},
     normes: {idx:0,encerts:0,ratxa:0,puntuacio:0},
-    mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}
+    mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0},
+    auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0},
+    mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0}
   },
   examen: {
     activa: false,
@@ -752,6 +850,8 @@ function init() {
   carregarPregunta('senyals');
   carregarPregunta('normes');
   carregarPregunta('mecanica');
+  carregarPregunta('auxilis');
+  carregarPregunta('mediambient');
   carregarSituacio('clima');
   actualitzarMissatgeMotivacional();
 }
@@ -957,11 +1057,11 @@ function seguentSituacio(e, cat) {
 // Examen amb etiqueta de tipus
 function iniciarExamen(e) {
   const totes = [
-  ...PREGUNTES.general,
-  ...PREGUNTES.senyals,
-  ...PREGUNTES.normes,
-  ...PREGUNTES.mecanica,
-  ...SITUACIONS.clima
+ ...PREGUNTES.general,
+ ...PREGUNTES.senyals,
+ ...PREGUNTES.normes,
+ ...PREGUNTES.mecanica,
+ ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
