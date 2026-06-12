@@ -437,7 +437,6 @@ const PREGUNTES = {
     {q:"Cotxe olor a oli:",a:["Normal","Fuita oli","No passa res"],ok:1},
     {q:"Cotxe olor a refrigerant:",a:["Normal","Fuita refrigerant","No passa res"],ok:1}
 ],
- 
   auxilis: [
     {q:"Què fas primer davant un accident?",a:["Trucar al 112","Moure el ferit","Donar aigua"],ok:0},
     {q:"En una hemorràgia arterial, què fas?",a:["Comprimir directe","Elevar extremitat","Donar aspirina"],ok:0},
