@@ -436,7 +436,7 @@ const PREGUNTES = {
     {q:"Cotxe olor a gasolina:",a:["Normal","Fuita combustible","No passa res"],ok:1},
     {q:"Cotxe olor a oli:",a:["Normal","Fuita oli","No passa res"],ok:1},
     {q:"Cotxe olor a refrigerant:",a:["Normal","Fuita refrigerant","No passa res"],ok:1}
-],
+  ],
   auxilis: [
     {q:"Què fas primer davant un accident?",a:["Trucar al 112","Moure el ferit","Donar aigua"],ok:0},
     {q:"En una hemorràgia arterial, què fas?",a:["Comprimir directe","Elevar extremitat","Donar aspirina"],ok:0},
@@ -467,7 +467,7 @@ const PREGUNTES = {
     {q:"Trauma cranial amb vòmit:",a:["Normal","Signa d’alarma","No importa"],ok:1},
     {q:"Parada respiratòria: freqüència ventilació:",a:["6-8/min","12/min","20/min"],ok:0},
     {q:"Davant amputació:",a:["Posar part en gel directe","Cobrir ferida","Guardar part sec"],ok:1},
-    ["Dificultat per respirar","Dolor estómac","Picor de nas"],ok:0},
+    {q:"Símptoma d’al·lèrgia greu:",a:["Dificultat per respirar","Dolor estómac","Picor de nas"],ok:0},
     {q:"Deshidratació greu: símptoma:",a:["Orina abundant","Set intensa","Sudoració excessiva"],ok:1},
     {q:"Trauma toràcic amb dificultat respiratòria:",a:["Normal","Perillós","No importa"],ok:1},
     {q:"Fractura oberta sagnant molt:",a:["Treure os","Compressió directa","Elevar extremitat"],ok:1},
