@@ -133,7 +133,7 @@ const TIPS = [
   {emoji:'🏆', txt:'Tu pots treure’t el carnet!'}
 ];
 
-// 370 PREGUNTES TEST DGT OFICIALS CAT 2026
+// 470 PREGUNTES TEST DGT OFICIALS CAT 2026
 const PREGUNTES = {
   general: [
     {q:"Quina és la velocitat màxima en zona urbana?",a:["30 km/h","50 km/h","60 km/h"],ok:1},
