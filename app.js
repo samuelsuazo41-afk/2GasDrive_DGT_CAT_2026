@@ -808,7 +808,7 @@ const SENYALS = [
   {"titol": "Picnic", "emoji": "🧺🌳🅿️"}
 ];
 
-// ===== TU CÓDIGO EXISTENTE =====
+// ===== TU CÓDIGO EXISTENTE + MILLLORES =====
 let tipsData = [];
 let currentTip = 0;
 
@@ -830,7 +830,8 @@ let estat = {
     encerts: 0,
     fallos: 0,
     timer: null,
-    temps: 1800
+    temps: 1800,
+    categoria: 'general' // NUEVO: per mostrar tipus examen
   },
   sit: {
     clima: {idx:0,encerts:0,puntuacio:0,current:null},
@@ -872,7 +873,7 @@ function actualitzarCoins() {
   if(el) el.textContent = `💰 ${estat.coins}`;
 }
 
-// Barrejador Fisher-Yates per randomitzar opcions
+// Barrejador Fisher-Yates per randomitzar opcions i preguntes
 function barrejarArray(arr) {
   const a = arr.slice();
   for(let i = a.length - 1; i > 0; i--) {
@@ -887,12 +888,12 @@ function canviarTab(e, tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   e.target.closest('.tab-btn').classList.add('active');
-  
+
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
   if(tab === 'senyalitzacio') carregarSenyalitzacio();
-  if(tab === 'temari') carregarTemari(); // NUEVO
+  if(tab === 'temari') carregarTemari();
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situacions') carregarSituacio(sitCategoriaActiva);
 }
@@ -935,9 +936,10 @@ function mostrarEmoji(encert, element) {
   if(navigator.vibrate) navigator.vibrate(encert? [30,20,30] : 100);
 }
 
+// MILLORA 1: TEST amb preguntes aleatòries cada cop
 function carregarPregunta(cat) {
   const s = estat.test[cat];
-  const preguntes = PREGUNTES[cat];
+  const preguntes = barrejarArray(PREGUNTES[cat]); // NUEVO: barreja
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
   const opcionsBarrejades = barrejarArray(pOriginal.a);
@@ -997,10 +999,11 @@ function seguentTest(e, cat) {
   carregarPregunta(cat);
 }
 
+// MILLORA 1: CASOS amb preguntes aleatòries cada cop
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
-  const casos = SITUACIONS[cat];
+  const casos = barrejarArray(SITUACIONS[cat]); // NUEVO: barreja
   if(!casos || casos.length === 0) return;
   const pOriginal = casos[s.idx % casos.length];
   const opcionsBarrejades = barrejarArray(pOriginal.a);
@@ -1057,23 +1060,36 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
+// MILLORA 3: Examen amb etiqueta de tipus
 function iniciarExamen(e) {
   const totes = [
-...PREGUNTES.general,
-...PREGUNTES.senyals,
-...PREGUNTES.normes,
-...PREGUNTES.mecanica,
-...SITUACIONS.clima
+   ...PREGUNTES.general,
+   ...PREGUNTES.senyals,
+   ...PREGUNTES.normes,
+   ...PREGUNTES.mecanica,
+   ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
     return;
   }
-  estat.examen.preguntes = totes.sort(() => 0.5 - Math.random()).slice(0, 30);
+  estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
   estat.examen.index = 0;
   estat.examen.encerts = 0;
   estat.examen.fallos = 0;
+  estat.examen.categoria = 'general'; // Pots canviar segons botó premut
+
+  // MILLORA 3: Mostrar tipus d'examen
+  const tipusExamen = {
+    general: "EXAMEN OFICIAL 30 PREGUNTES - General",
+    mecanic: "EXAMEN OFICIAL 30 PREGUNTES - Mecànica",
+    ambiental: "EXAMEN OFICIAL 30 PREGUNTES - Medi Ambient",
+    senyals: "EXAMEN OFICIAL 30 PREGUNTES - Senyals"
+  };
+  const titolEl = document.querySelector('#tab-examen h2,.examen-titol');
+  if(titolEl) titolEl.textContent = tipusExamen[estat.examen.categoria];
+
   document.getElementById('btn-iniciar-examen').style.display = 'none';
   document.getElementById('btn-sig-examen').style.display = 'block';
   iniciarTimerExamen();
@@ -1316,7 +1332,6 @@ function prevTip(e) {
   mostrarTip();
 }
 
-// ===== NUEVA FUNCIÓN BIBLIOTECA =====
 function carregarSenyalitzacio() {
   const cont = document.getElementById('senyalitzacio-grid');
   if(!cont) return;
@@ -1337,38 +1352,35 @@ function carregarTemari() {
   container.innerHTML = `
     <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
       <div style="font-size:40px">🚦</div>
-      <div>Senyals</div>
+      <div>Senyals ${localStorage.getItem('marcador_./01_Senyals_Tomo_I_RD_465_2025.pdf')? '🔖' : ''}</div>
       <div style="font-size:11px;color:#999">RD 465/2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')">
       <div style="font-size:40px">📋</div>
-      <div>Normes Circulació</div>
+      <div>Normes Circulació ${localStorage.getItem('marcador_./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')? '🔖' : ''}</div>
       <div style="font-size:11px;color:#999">Edició 2024</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')">
       <div style="font-size:40px">🚑</div>
-      <div>Primers Auxilis</div>
+      <div>Primers Auxilis ${localStorage.getItem('marcador_./03_Manual_IX_Primers_Auxilis_2025.pdf')? '🔖' : ''}</div>
       <div style="font-size:11px;color:#999">Manual IX 2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')">
       <div style="font-size:40px">⚙️</div>
-      <div>Mecànica</div>
+      <div>Mecànica ${localStorage.getItem('marcador_./04_Manual_VIII_Mecanica_2024.pdf')? '🔖' : ''}</div>
       <div style="font-size:11px;color:#999">Manual VIII 2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')">
       <div style="font-size:40px">♻️</div>
-      <div>Medi Ambient</div>
+      <div>Medi Ambient ${localStorage.getItem('marcador_./05_Medi_Ambient_Distintius_DGT_2025.pdf')? '🔖' : ''}</div>
       <div style="font-size:11px;color:#999">Distintius DGT 2025</div>
     </div>
   `;
 }
 
+// MILLORA 2: PDF amb marcador de pàgina
 function obrirPDF(ruta) {
-  window.open(ruta, '_blank');
-}
-
-// NUEVA FUNCIÓN PARA ABRIR PDF - sin mostrar URL de GitHub
-function obrirPDF(ruta) {
+  const paginaGuardada = localStorage.getItem('marcador_' + ruta) || 1;
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
   modal.style.cssText = `
@@ -1380,9 +1392,9 @@ function obrirPDF(ruta) {
     <div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333">
       <button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button>
       <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
-      <div style="width:60px"></div>
+      <button onclick="guardarPaginaActual('${ruta}')" style="background:#00D9FF;border:none;color:#000;padding:6px 12px;border-radius:6px;font-weight:700;font-size:13px">🔖 Guardar</button>
     </div>
-    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
+    <iframe id="pdf-iframe" src="${ruta}#page=${paginaGuardada}" style="flex:1;border:none;width:100%"></iframe>
   `;
   document.body.appendChild(modal);
 }
@@ -1392,10 +1404,19 @@ function tancarPDF() {
   if(modal) modal.remove();
 }
 
-// NUEVA FUNCIÓN PARA CERRAR PDF
-function tancarPDF() {
-  const modal = document.getElementById('pdf-modal');
-  if(modal) modal.remove();
+// MILLORA 2: Guardar pàgina actual del PDF
+function guardarPaginaActual(ruta) {
+  const iframe = document.getElementById('pdf-iframe');
+  try {
+    const hash = iframe.contentWindow.location.hash;
+    const match = hash.match(/page=(\d+)/);
+    const pagina = match? match[1] : 1;
+    localStorage.setItem('marcador_' + ruta, pagina);
+    alert('🔖 Pàgina ' + pagina + ' guardada');
+    carregarTemari(); // actualitza el 🔖 a la llista
+  } catch(e) {
+    alert('Per guardar la pàgina, desplaça’t al PDF i torna a prémer Guardar');
+  }
 }
 
 function actualitzarMissatgeMotivacional() {
@@ -1415,7 +1436,7 @@ function actualitzarMissatgeMotivacional() {
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
- .then(reg => console.log('SW registrat'))
- .catch(err => console.log('SW error:', err));
+.then(reg => console.log('SW registrat'))
+.catch(err => console.log('SW error:', err));
   });
 }
