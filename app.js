@@ -1378,7 +1378,7 @@ function carregarTemari() {
   `;
 }
 
-// MILLORA 2: PDF amb marcador de pàgina
+// MILLORA 2: PDF amb marcador dins del visor
 function obrirPDF(ruta) {
   const paginaGuardada = localStorage.getItem('marcador_' + ruta) || 1;
   const modal = document.createElement('div');
@@ -1404,18 +1404,13 @@ function tancarPDF() {
   if(modal) modal.remove();
 }
 
-// MILLORA 2: Guardar pàgina actual del PDF
+// Quan prem "Guardar" dins del PDF, guarda la pàgina actual
 function guardarPaginaActual(ruta) {
-  const iframe = document.getElementById('pdf-iframe');
-  try {
-    const hash = iframe.contentWindow.location.hash;
-    const match = hash.match(/page=(\d+)/);
-    const pagina = match? match[1] : 1;
+  // Pregunta a l’usuari en quina pàgina està, perquè l’iframe no deixa llegir per seguretat
+  const pagina = prompt("En quina pàgina vas? Escriu el número:");
+  if(pagina && !isNaN(pagina)) {
     localStorage.setItem('marcador_' + ruta, pagina);
-    alert('🔖 Pàgina ' + pagina + ' guardada');
-    carregarTemari(); // actualitza el 🔖 a la llista
-  } catch(e) {
-    alert('Per guardar la pàgina, desplaça’t al PDF i torna a prémer Guardar');
+    alert('🔖 Marcada pàgina ' + pagina);
   }
 }
 
