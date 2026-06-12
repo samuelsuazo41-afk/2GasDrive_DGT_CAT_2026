@@ -702,111 +702,6 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== DATOS BIBLIOTECA SENYALITZACIÓ =====
-const SENYALS = [
-  {"titol": "Stop obligatori", "emoji": "🛑🚗"},
-  {"titol": "Ceda el pas", "emoji": "🔻🚗"},
-  {"titol": "Prohibit girar esquerra", "emoji": "⛔⬅️🚗"},
-  {"titol": "Prohibit girar dreta", "emoji": "⛔➡️🚗"},
-  {"titol": "Prohibit canviar de sentit", "emoji": "⛔🔄🚗"},
-  {"titol": "Prohibit avançar", "emoji": "⛔🚫🚗"},
-  {"titol": "Velocitat màxima 50", "emoji": "🔢5️⃣0️⃣🚗"},
-  {"titol": "Velocitat màxima 80", "emoji": "🔢8️⃣0️⃣🚗"},
-  {"titol": "Velocitat màxima 120", "emoji": "🔢1️⃣2️⃣0️⃣🚗"},
-  {"titol": "Fi limitació velocitat", "emoji": "🔚🔢🚗"},
-  {"titol": "Entrada prohibida", "emoji": "⛔🚗"},
-  {"titol": "Sentit únic", "emoji": "➡️🛣️"},
-  {"titol": "Prioritat en cruïlla", "emoji": "🛣️🔼🚗"},
-  {"titol": "Cedir pas en cruïlla", "emoji": "🔻🛣️🚗"},
-  {"titol": "Rotonda", "emoji": "🔄🛣️🚗"},
-  {"titol": "Carretera amb prioritat", "emoji": "🛣️🟨🚗"},
-  {"titol": "Fi carretera prioritària", "emoji": "🛣️⬜🚗"},
-  {"titol": "Pas de vianants", "emoji": "🚶🚸"},
-  {"titol": "Pas de vianants elevat", "emoji": "🚶⬆️🚸"},
-  {"titol": "Nens", "emoji": "🧒⚠️"},
-  {"titol": "Ciclistes", "emoji": "🚴⚠️"},
-  {"titol": "Animals a la via", "emoji": "🦌⚠️🛣️"},
-  {"titol": "Vaques", "emoji": "🐄⚠️🛣️"},
-  {"titol": "Corba perillosa dreta", "emoji": "↗️⚠️🛣️"},
-  {"titol": "Corba perillosa esquerra", "emoji": "↖️⚠️🛣️"},
-  {"titol": "Doble corba", "emoji": "↗️↖️⚠️🛣️"},
-  {"titol": "Descens perillós", "emoji": "⬇️⚠️🛣️"},
-  {"titol": "Pujada pronunciada", "emoji": "⬆️⚠️🛣️"},
-  {"titol": "Estretament", "emoji": "↔️⚠️🛣️"},
-  {"titol": "Obres", "emoji": "🚧🛣️⚠️"},
-  {"titol": "Carril tancat", "emoji": "❌🛣️🚗"},
-  {"titol": "Desviament", "emoji": "↗️🚧🛣️"},
-  {"titol": "Paviment relliscós", "emoji": "🌧️🛣️⚠️"},
-  {"titol": "Grava solta", "emoji": "🪨🛣️⚠️"},
-  {"titol": "Pont mòbil", "emoji": "🌉⚠️🛣️"},
-  {"titol": "Túnel", "emoji": "🕳️🛣️🚗"},
-  {"titol": "Semàfor", "emoji": "🚦⚠️"},
-  {"titol": "Pas a nivell", "emoji": "🚂🛤️⚠️"},
-  {"titol": "Barrera", "emoji": "🚧⚠️🛤️"},
-  {"titol": "Aeronaus", "emoji": "✈️⚠️🛣️"},
-  {"titol": "Vent lateral", "emoji": "🌬️⚠️🛣️"},
-  {"titol": "Caiguda de pedres", "emoji": "🪨⬇️⚠️🛣️"},
-  {"titol": "Neus o gel", "emoji": "❄️🛣️⚠️"},
-  {"titol": "Boira", "emoji": "🌫️🛣️⚠️"},
-  {"titol": "Accident", "emoji": "⚠️🚧❌🚗"},
-  {"titol": "Vehicles lents", "emoji": "🐌🚜🛣️"},
-  {"titol": "Sortida obligatòria dreta", "emoji": "➡️🚗🛣️"},
-  {"titol": "Sortida obligatòria esquerra", "emoji": "⬅️🚗🛣️"},
-  {"titol": "Direcció obligatòria recte", "emoji": "⬆️🚗🛣️"},
-  {"titol": "Carril bus", "emoji": "🚌🛣️"},
-  {"titol": "Carril bici", "emoji": "🚴🛣️"},
-  {"titol": "Final carril bici", "emoji": "🚴❌🛣️"},
-  {"titol": "Zona escolar", "emoji": "🏫🧒⚠️"},
-  {"titol": "Zona residencial", "enkmkmmmnmñvvbmoji": "🏘️⚠️"},
-  {"titol": "Zona 30", "emoji": "🔢3️⃣0️⃣🏘️"},
-  {"titol": "Fi zona 30", "emoji": "🔚🔢3️⃣0️⃣"},
-  {"titol": "Aparcament", "emoji": "🅿️🚗"},
-  {"titol": "Aparcament minusvàlids", "emoji": "🅿️♿🚗"},
-  {"titol": "Parada bus", "emoji": "🚌🚏"},
-  {"titol": "Taxi", "emoji": "🚕🅿️"},
-  {"titol": "Càrrega i descàrrega", "emoji": "📦🚚🅿️"},
-  {"titol": "Prohibit aparcar", "emoji": "⛔🅿️🚗"},
-  {"titol": "Prohibit estacionar", "emoji": "🚫🅿️🚗"},
-  {"titol": "Zona verda", "emoji": "🟢🅿️"},
-  {"titol": "Zona blava", "emoji": "🔵🅿️"},
-  {"titol": "Zona perill", "emoji": "⚠️‼️🛣️"},
-  {"titol": "Perill elèctric", "emoji": "⚡⚠️🛣️"},
-  {"titol": "Incendi", "emoji": "🔥⚠️🛣️"},
-  {"titol": "SOS", "emoji": "🆘⚠️🛣️"},
-  {"titol": "Hospital pròxim", "emoji": "🏥⚠️🛣️"},
-  {"titol": "Farmàcia", "emoji": "💊🏥"},
-  {"titol": "Gasolinera", "emoji": "⛽🛣️"},
-  {"titol": "Àrea de servei", "emoji": "🅿️⛽🍔"},
-  {"titol": "WC públic", "emoji": "🚻🅿️"},
-  {"titol": "Punt informació", "emoji": "ℹ️🅿️"},
-  {"titol": "Telèfon emergència", "emoji": "📞🆘🛣️"},
-  {"titol": "Radio trànsit", "emoji": "📻🚗"},
-  {"titol": "Càmera velocitat", "emoji": "📷🔢🚗"},
-  {"titol": "Control policia", "emoji": "👮🚓⚠️"},
-  {"titol": "Aduana", "emoji": "🛂⚠️🛣️"},
-  {"titol": "Peatge", "emoji": "💰🛣️🚗"},
-  {"titol": "Autopista", "emoji": "🛣️🚗💨"},
-  {"titol": "Fi autopista", "emoji": "🛣️🔚🚗"},
-  {"titol": "Carretera convencional", "emoji": "🛣️🚗"},
-  {"titol": "Via ràpida", "emoji": "🛣️⚡🚗"},
-  {"titol": "Enllaç", "emoji": "🔗🛣️"},
-  {"titol": "Sortida", "emoji": "🚪🛣️"},
-  {"titol": "Incorporació", "emoji": "↗️🛣️🚗"},
-  {"titol": "Carril lent", "emoji": "🐌🛣️🚚"},
-  {"titol": "Carril ràpid", "emoji": "💨🛣️🚗"},
-  {"titol": "Fi carril", "emoji": "🛣️🔚🚗"},
-  {"titol": "Zona inundable", "emoji": "🌊⚠️🛣️"},
-  {"titol": "Pont estret", "emoji": "🌉↔️⚠️"},
-  {"titol": "Gual", "emoji": "💧🛣️🚗"},
-  {"titol": "Badén", "emoji": "〰️🛣️🚗"},
-  {"titol": "Ressalt", "emoji": "⬆️⬇️🛣️🚗"},
-  {"titol": "Zona esport", "emoji": "⚽🏃⚠️"},
-  {"titol": "Zona animals", "emoji": "🐕🐄⚠️🛣️"},
-  {"titol": "Zona forestal", "emoji": "🌲⚠️🛣️"},
-  {"titol": "Zona muntanya", "emoji": "⛰️⚠️🛣️"},
-  {"titol": "Mirador", "emoji": "👀🏞️🅿️"},
-  {"titol": "Picnic", "emoji": "🧺🌳🅿️"}
-];
 
 // ===== TU CÓDIGO EXISTENTE + MILLLORES =====
 let tipsData = [];
@@ -831,7 +726,7 @@ let estat = {
     fallos: 0,
     timer: null,
     temps: 1800,
-    categoria: 'general' // NUEVO: per mostrar tipus examen
+    categoria: 'general'
   },
   sit: {
     clima: {idx:0,encerts:0,puntuacio:0,current:null},
@@ -892,7 +787,6 @@ function canviarTab(e, tab) {
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
-  if(tab === 'senyalitzacio') carregarSenyalitzacio();
   if(tab === 'temari') carregarTemari();
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situacions') carregarSituacio(sitCategoriaActiva);
@@ -936,10 +830,10 @@ function mostrarEmoji(encert, element) {
   if(navigator.vibrate) navigator.vibrate(encert? [30,20,30] : 100);
 }
 
-// MILLORA 1: TEST amb preguntes aleatòries cada cop
+// TEST amb preguntes aleatòries cada cop
 function carregarPregunta(cat) {
   const s = estat.test[cat];
-  const preguntes = barrejarArray(PREGUNTES[cat]); // NUEVO: barreja
+  const preguntes = barrejarArray(PREGUNTES[cat]);
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
   const opcionsBarrejades = barrejarArray(pOriginal.a);
@@ -999,11 +893,11 @@ function seguentTest(e, cat) {
   carregarPregunta(cat);
 }
 
-// MILLORA 1: CASOS amb preguntes aleatòries cada cop
+// CASOS amb preguntes aleatòries cada cop
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
-  const casos = barrejarArray(SITUACIONS[cat]); // NUEVO: barreja
+  const casos = barrejarArray(SITUACIONS[cat]);
   if(!casos || casos.length === 0) return;
   const pOriginal = casos[s.idx % casos.length];
   const opcionsBarrejades = barrejarArray(pOriginal.a);
@@ -1060,14 +954,14 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
-// MILLORA 3: Examen amb etiqueta de tipus
+// Examen amb etiqueta de tipus
 function iniciarExamen(e) {
   const totes = [
-   ...PREGUNTES.general,
-   ...PREGUNTES.senyals,
-   ...PREGUNTES.normes,
-   ...PREGUNTES.mecanica,
-   ...SITUACIONS.clima
+  ...PREGUNTES.general,
+  ...PREGUNTES.senyals,
+  ...PREGUNTES.normes,
+  ...PREGUNTES.mecanica,
+  ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -1078,9 +972,8 @@ function iniciarExamen(e) {
   estat.examen.index = 0;
   estat.examen.encerts = 0;
   estat.examen.fallos = 0;
-  estat.examen.categoria = 'general'; // Pots canviar segons botó premut
+  estat.examen.categoria = 'general';
 
-  // MILLORA 3: Mostrar tipus d'examen
   const tipusExamen = {
     general: "EXAMEN OFICIAL 30 PREGUNTES - General",
     mecanic: "EXAMEN OFICIAL 30 PREGUNTES - Mecànica",
@@ -1330,21 +1223,6 @@ function nextTip(e) {
 function prevTip(e) {
   currentTip = (currentTip - 1 + tipsData.length) % tipsData.length;
   mostrarTip();
-}
-
-function carregarSenyalitzacio() {
-  const cont = document.getElementById('senyalitzacio-grid');
-  if(!cont) return;
-  cont.innerHTML = '';
-  SENYALS.forEach(s => {
-    const div = document.createElement('div');
-    div.className = 'emoji-item';
-    div.innerHTML = `
-      <div style="font-size:48px">${s.emoji}</div>
-      <div style="font-size:13px;color:#666;margin-top:6px">${s.titol}</div>
-    `;
-    cont.appendChild(div);
-  });
 }
 
 function carregarTemari() {
