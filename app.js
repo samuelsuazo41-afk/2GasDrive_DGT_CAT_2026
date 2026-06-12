@@ -1352,35 +1352,34 @@ function carregarTemari() {
   container.innerHTML = `
     <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
       <div style="font-size:40px">🚦</div>
-      <div>Senyals ${localStorage.getItem('marcador_./01_Senyals_Tomo_I_RD_465_2025.pdf')? '🔖' : ''}</div>
+      <div>Senyals</div>
       <div style="font-size:11px;color:#999">RD 465/2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')">
       <div style="font-size:40px">📋</div>
-      <div>Normes Circulació ${localStorage.getItem('marcador_./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')? '🔖' : ''}</div>
+      <div>Normes Circulació</div>
       <div style="font-size:11px;color:#999">Edició 2024</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')">
       <div style="font-size:40px">🚑</div>
-      <div>Primers Auxilis ${localStorage.getItem('marcador_./03_Manual_IX_Primers_Auxilis_2025.pdf')? '🔖' : ''}</div>
+      <div>Primers Auxilis</div>
       <div style="font-size:11px;color:#999">Manual IX 2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')">
       <div style="font-size:40px">⚙️</div>
-      <div>Mecànica ${localStorage.getItem('marcador_./04_Manual_VIII_Mecanica_2024.pdf')? '🔖' : ''}</div>
+      <div>Mecànica</div>
       <div style="font-size:11px;color:#999">Manual VIII 2025</div>
     </div>
     <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')">
       <div style="font-size:40px">♻️</div>
-      <div>Medi Ambient ${localStorage.getItem('marcador_./05_Medi_Ambient_Distintius_DGT_2025.pdf')? '🔖' : ''}</div>
+      <div>Medi Ambient</div>
       <div style="font-size:11px;color:#999">Distintius DGT 2025</div>
     </div>
   `;
 }
 
-// MILLORA 2: PDF amb marcador dins del visor
+// PDF normal, sense marcador
 function obrirPDF(ruta) {
-  const paginaGuardada = localStorage.getItem('marcador_' + ruta) || 1;
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
   modal.style.cssText = `
@@ -1392,9 +1391,9 @@ function obrirPDF(ruta) {
     <div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333">
       <button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button>
       <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
-      <button onclick="guardarPaginaActual('${ruta}')" style="background:#00D9FF;border:none;color:#000;padding:6px 12px;border-radius:6px;font-weight:700;font-size:13px">🔖 Guardar</button>
+      <div style="width:60px"></div>
     </div>
-    <iframe id="pdf-iframe" src="${ruta}#page=${paginaGuardada}" style="flex:1;border:none;width:100%"></iframe>
+    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
   `;
   document.body.appendChild(modal);
 }
@@ -1402,16 +1401,6 @@ function obrirPDF(ruta) {
 function tancarPDF() {
   const modal = document.getElementById('pdf-modal');
   if(modal) modal.remove();
-}
-
-// Quan prem "Guardar" dins del PDF, guarda la pàgina actual
-function guardarPaginaActual(ruta) {
-  // Pregunta a l’usuari en quina pàgina està, perquè l’iframe no deixa llegir per seguretat
-  const pagina = prompt("En quina pàgina vas? Escriu el número:");
-  if(pagina && !isNaN(pagina)) {
-    localStorage.setItem('marcador_' + ruta, pagina);
-    alert('🔖 Marcada pàgina ' + pagina);
-  }
 }
 
 function actualitzarMissatgeMotivacional() {
