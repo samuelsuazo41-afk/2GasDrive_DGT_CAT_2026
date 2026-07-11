@@ -860,7 +860,7 @@ function guardar() {
   localStorage.setItem('gd_cotxes', JSON.stringify(estat.cotxes));
   localStorage.setItem('gd_accessoris', JSON.stringify(estat.accessoris));
   localStorage.setItem('gd_emojis', JSON.stringify(estat.emojis));
-}
+} 
 
 function actualitzarCoins() {
   const el = document.getElementById('coins');
