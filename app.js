@@ -989,6 +989,20 @@ function respondreTest(cat, idx, el) {
 
 function seguentTest(e, cat) {
   estat.test[cat].idx++;
+
+  // TOTAL DE PREGUNTAS DEL TEST
+  const totalPreguntes = 10;
+
+  // CUANDO ACABA EL TEST: GUARDAR PARA ESTADISTIQUES
+  if(estat.test[cat].idx >= totalPreguntes){
+    guardarResultatTest(cat, estat.test[cat].encerts, totalPreguntes);
+
+    // RESETEAR PARA PODER REPETIR EL TEST
+    estat.test[cat].idx = 0;
+    estat.test[cat].encerts = 0;
+    estat.test[cat].ratxa = 0;
+  }
+
   carregarPregunta(cat);
 }
 
