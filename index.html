@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V8.6</title>
+<title>GasDrive DGT CAT V8.5</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; }
@@ -46,7 +46,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-/* BORRADO: .garage-car, .emoji-shop */
 /* Tips */
 .tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:9px 0;border-radius:6px;display:flex;align-items:center}
 .tip-emoji{font-size:22px;margin-right:10px}
@@ -55,13 +54,15 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .progress-fill{background:linear-gradient(90deg,#00D9FF,#0f5);height:100%;transition:width 0.3s}
 /* Buttons */
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
+.btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
+.btn-buy:active{transform:scale(0.95)}
 /* NUEVO: Grid Temari */
 #temari-lista{ display:grid; grid-template-columns:repeat(2,160px); gap:12px; justify-content:center; margin:14px auto 0; }
 .temari-item{ background:#1a1a1a; border:2px solid #00D9FF; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:0.2s; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
 .temari-item:active{ transform:scale(0.96); background:#222; }
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
-/* Fix scroll menú lateral */
+/* Fix scroll menú lateral - bloquea body y deja scroll solo en menú */
 body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
 .side-menu{ position:fixed; top:0; right:0; width:85%; max-width:320px; height:100vh; background:#0a0a0a; z-index:200; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; transform:translateX(100%); transition:transform 0.3s ease; }
 .side-menu.active{ transform:translateX(0); }
@@ -98,11 +99,65 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     </div>
   </div>
 
-  <div id="test-senyals" class="sub-content"> ... </div>
-  <div id="test-normes" class="sub-content"> ... </div>
-  <div id="test-mecanica" class="sub-content"> ... </div>
-  <div id="test-auxilis" class="sub-content"> ... </div>
-  <div id="test-mediambient" class="sub-content"> ... </div>
+  <div id="test-senyals" class="sub-content">
+    <div class="card">
+      <h2>🚸 SENYALS DE TRÀNSIT</h2>
+      <div class="stats"><div>Aciertos: <span id="test-senyals-aciertos">0</span>/5</div><div>Racha: <span id="test-senyals-racha">0</span>🔥</div><div>Score: <span id="test-senyals-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="test-senyals-progress"></div></div>
+      <div class="pregunta" id="test-senyals-pregunta"></div>
+      <div id="test-senyals-opciones"></div>
+      <div class="feedback" id="test-senyals-feedback"></div>
+      <button class="btn-sig" id="btn-sig-test-senyals" onclick="seguentTest(event,'senyals')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+
+  <div id="test-normes" class="sub-content">
+    <div class="card">
+      <h2>📋 NORMES I VELOCITATS</h2>
+      <div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span>/5</div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div>
+      <div class="pregunta" id="test-normes-pregunta"></div>
+      <div id="test-normes-opciones"></div>
+      <div class="feedback" id="test-normes-feedback"></div>
+      <button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+
+  <div id="test-mecanica" class="sub-content">
+    <div class="card">
+      <h2>🔧 MECÀNICA BÀSICA</h2>
+      <div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span>/5</div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div>
+      <div class="pregunta" id="test-mecanica-pregunta"></div>
+      <div id="test-mecanica-opciones"></div>
+      <div class="feedback" id="test-mecanica-feedback"></div>
+      <button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+
+  <div id="test-auxilis" class="sub-content">
+    <div class="card">
+      <h2>🚑 PRIMERS AUXILIS</h2>
+      <div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span>/5</div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div>
+      <div class="pregunta" id="test-auxilis-pregunta"></div>
+      <div id="test-auxilis-opciones"></div>
+      <div class="feedback" id="test-auxilis-feedback"></div>
+      <button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+
+  <div id="test-mediambient" class="sub-content">
+    <div class="card">
+      <h2>♻️ MEDI AMBIENT</h2>
+      <div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span>/5</div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div>
+      <div class="pregunta" id="test-mediambient-pregunta"></div>
+      <div id="test-mediambient-opciones"></div>
+      <div class="feedback" id="test-mediambient-feedback"></div>
+      <button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button>
+    </div>
+  </div>
 </div>
 
 <div id="tab-situaciones" class="tab-content">
@@ -112,10 +167,50 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button>
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button>
   </div>
-  <div id="sit-clima" class="sub-content active"> ... </div>
-  <div id="sit-urbà" class="sub-content"> ... </div>
-  <div id="sit-carretera" class="sub-content"> ... </div>
-  <div id="sit-emergència" class="sub-content"> ... </div>
+  <div id="sit-clima" class="sub-content active">
+    <div class="card">
+      <h2 id="sit-titol">🌧️ CASOS REALS - CLIMA ADVERS</h2>
+      <div class="stats"><div>Resoltes: <span id="sit-clima-aciertos">0</span>/20</div><div>Score: <span id="sit-clima-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div>
+      <div class="pregunta" id="sit-clima-pregunta"></div>
+      <div id="sit-clima-opciones"></div>
+      <div class="feedback" id="sit-clima-feedback"></div>
+      <button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+  <div id="sit-urbà" class="sub-content">
+    <div class="card">
+      <h2>🏙️ CASOS REALS - URBÀ</h2>
+      <div class="stats"><div>Resoltes: <span id="sit-urbà-aciertos">0</span>/20</div><div>Score: <span id="sit-urbà-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div>
+      <div class="pregunta" id="sit-urbà-pregunta"></div>
+      <div id="sit-urbà-opciones"></div>
+      <div class="feedback" id="sit-urbà-feedback"></div>
+      <button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+  <div id="sit-carretera" class="sub-content">
+    <div class="card">
+      <h2>🛣️ CASOS REALS - CARRETERA</h2>
+      <div class="stats"><div>Resoltes: <span id="sit-carretera-aciertos">0</span>/20</div><div>Score: <span id="sit-carretera-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div>
+      <div class="pregunta" id="sit-carretera-pregunta"></div>
+      <div id="sit-carretera-opciones"></div>
+      <div class="feedback" id="sit-carretera-feedback"></div>
+      <button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button>
+    </div>
+  </div>
+  <div id="sit-emergència" class="sub-content">
+    <div class="card">
+      <h2>🚨 CASOS REALS - EMERGÈNCIA</h2>
+      <div class="stats"><div>Resoltes: <span id="sit-emergència-aciertos">0</span>/20</div><div>Score: <span id="sit-emergència-score">0</span></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div>
+      <div class="pregunta" id="sit-emergència-pregunta"></div>
+      <div id="sit-emergència-opciones"></div>
+      <div class="feedback" id="sit-emergència-feedback"></div>
+      <button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button>
+    </div>
+  </div>
 </div>
 
 <div id="tab-examen" class="tab-content">
@@ -131,8 +226,6 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   </div>
 </div>
 
-<!-- BORRADO: tab-garage -->
-<!-- BORRADO: tab-tienda -->
 
 <div id="tab-tips" class="tab-content">
   <div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div>
@@ -156,12 +249,13 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   <button class="tab-btn active" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
   <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
   <button class="tab-btn" onclick="canviarTab(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
-  <!-- BORRADO: GARATGE -->
-  <!-- BORRADO: BOTIGA -->
+  <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
+  <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
   <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
   <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=8.6"></script>
+<script src="./app.js?"></script>
 </body>
 </html>
+ 
