@@ -15,7 +15,6 @@ function mostrarIntro(){
       <p style="font-size:16px;opacity:0.9;margin:0 0 30px">📚 Temaris oficials DGT per estudiar quan vulguis</p>
       <div style="text-align:left;font-size:16px;margin-bottom:40px;line-height:2">
         <div>💰 Guanya coins responent bé</div>
-        <div>🏎️ Compra supercotxes al Garatge</div>
         <div>📚 630 preguntes DGT reals</div>
         <div>📖 Temaris complets per repassar</div>
       </div>
@@ -707,95 +706,7 @@ const SITUACIONS = {
  ]
 };
 
-// GARATGE - 17 COTXES AMB 6 SUPERCOTXES NOUS
-const COTXES = [
-  // 3 primers normals, sense filter
-  {id:'c1',nom:'SEAT Ibiza',emoji:'🚗',preu:200,cv:90,color:''},
-  {id:'c2',nom:'VW Golf GTI',emoji:'🚘',preu:800,cv:220,color:''},
-  {id:'c3',nom:'BMW M3',emoji:'🚙',preu:1500,cv:420,color:''},
 
-  // Resta amb efecte TRON i colors cars
-  {id:'c4',nom:'Tesla Model S',emoji:'⚡',preu:2000,cv:670,color:'hue-rotate(210deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00d4ff)'}, // blau elèctric
-  {id:'c5',nom:'Porsche 911',emoji:'🏎️',preu:2500,cv:450,color:'hue-rotate(130deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ff88)'}, // verd esmeralda
-  {id:'c6',nom:'Bugatti Chiron',emoji:'🏎️',preu:5000,cv:1500,color:'hue-rotate(200deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00c8ff)'}, // blau gel
-  {id:'c7',nom:'Yamaha R1',emoji:'🏍️',preu:2200,cv:200,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 8px #ffdd00)'}, // groc or
-  {id:'c8',nom:'Ducati Panigale',emoji:'🏍️',preu:2800,cv:220,color:'hue-rotate(25deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff8800)'}, // taronja intens
-  {id:'c9',nom:'Audi RS6',emoji:'🏎️',preu:3200,cv:600,color:'hue-rotate(180deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #00ffff)'}, // cian
-  {id:'c10',nom:'Nissan GTR',emoji:'🏎️',preu:3500,cv:565,color:'hue-rotate(90deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #88ff00)'}, // verd llima
-  {id:'c11',nom:'McLaren 720S',emoji:'🏎️',preu:4200,cv:720,color:'hue-rotate(15deg) saturate(2) brightness(1.2) drop-shadow(0 0 6px #ff6600)'}, // taronja foc
-  // SUPERCOTXES PREMIO MAJOR amb glow més potent
-  {id:'c12',nom:'Ferrari SF90 Stradale',emoji:'🏎️',preu:8500,cv:1000,color:'hue-rotate(0deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff0000)'}, // vermell neó
-  {id:'c13',nom:'Lamborghini Aventador SVJ',emoji:'🏎️',preu:8000,cv:770,color:'hue-rotate(55deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ffdd00)'}, // groc or
-  {id:'c14',nom:'Koenigsegg Jesko Absolut',emoji:'🏎️',preu:14000,cv:1600,color:'hue-rotate(270deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #aa00ff)'},// violeta royal
-  {id:'c15',nom:'Porsche 918 Spyder',emoji:'🏎️',preu:9500,cv:887,color:'hue-rotate(130deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00ff88)'}, // verd esmeralda
-  {id:'c16',nom:'McLaren P1 GTR',emoji:'🏎️',preu:9000,cv:916,color:'hue-rotate(35deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #ff8800)'}, // taronja neó
-  {id:'c17',nom:'Bugatti Bolide',emoji:'🏎️',preu:16000,cv:1825,color:'hue-rotate(200deg) saturate(2.5) brightness(1.3) drop-shadow(0 0 10px #00d4ff)'} // blau elèctric
-];
-
-const ACCESSORIS = [
-  // Mecànica / Potència
-  {id:'a1',nom:'Turbo',emoji:'💨',preu:300,hp:50},
-  {id:'a2',nom:'Nitro',emoji:'🔥',preu:600,hp:80},
-  {id:'a3',nom:'Motor Elèctric',emoji:'⚡',preu:800,hp:100},
-  {id:'a4',nom:'Kit Mecànic',emoji:'🛠️',preu:400,hp:40},
-  {id:'a5',nom:'Eines Racing',emoji:'🔧',preu:250,hp:20},
-  {id:'a6',nom:'Cadena Reforçada',emoji:'⛓️',preu:350,hp:30},
-  {id:'a7',nom:'Engranatges Sport',emoji:'⚙️',preu:300,hp:25},
-  {id:'a8',nom:'Cargols Racing',emoji:'🔩',preu:200,hp:15},
-
-  // Rodes / Adherència
-  {id:'a9',nom:'Pneumàtics Slick',emoji:'🛞',preu:400,hp:35},
-  {id:'a10',nom:'Pneumàtics Pluja',emoji:'🛞',preu:350,hp:30},
-  {id:'a11',nom:'Cadenes Neu',emoji:'❄️',preu:300,hp:25},
-  {id:'a12',nom:'Llandes Racing',emoji:'🔲',preu:500,hp:40},
-  {id:'a13',nom:'Eix Equilibrat',emoji:'🎯',preu:250,hp:20},
-
-  // Aerodinàmica / Exterior
-  {id:'a14',nom:'Aleró GT',emoji:'🔰',preu:400,hp:40},
-  {id:'a15',nom:'Aleró F1',emoji:'🏁',preu:700,hp:70},
-  {id:'a16',nom:'Vidres Tintats',emoji:'🪟',preu:200,hp:10},
-  {id:'a17',nom:'Llums LED',emoji:'💡',preu:250,hp:15},
-  {id:'a18',nom:'Fars Làser',emoji:'🔦',preu:600,hp:50},
-  {id:'a19',nom:'Retrovisor Racing',emoji:'🪞',preu:200,hp:10},
-  {id:'a20',nom:'Defensa Reforçada',emoji:'🛡️',preu:450,hp:35},
-
-  // Interior / Pilot
-  {id:'a21',nom:'Seient Bucket',emoji:'🪑',preu:400,hp:25},
-  {id:'a22',nom:'Volant Racing',emoji:'🎛️',preu:350,hp:20},
-  {id:'a23',nom:'Quadre Digital',emoji:'📊',preu:500,hp:30},
-  {id:'a24',nom:'Guants Pilot',emoji:'🧤',preu:150,hp:10},
-  {id:'a25',nom:'Casco Racing',emoji:'🪖',preu:300,hp:15},
-  {id:'a26',nom:'Intercom',emoji:'🎧',preu:250,hp:10},
-
-  // Estètica / Detalls Luxe
-  {id:'a27',nom:'Vinil Flames',emoji:'🎨',preu:300,hp:10},
-  {id:'a28',nom:'Vinil Crom',emoji:'🌈',preu:500,hp:15},
-  {id:'a29',nom:'Pintura Metal·litzada',emoji:'✨',preu:600,hp:20},
-  {id:'a30',nom:'Cristalls Swarovski',emoji:'💎',preu:1000,hp:5},
-  {id:'a31',nom:'Corona Royal',emoji:'👑',preu:800,hp:10},
-  {id:'a32',nom:'Unicorn',emoji:'🦄',preu:1200,hp:5},
-  {id:'a33',nom:'Coet',emoji:'🚀',preu:600,hp:15},
-  {id:'a34',nom:'Diamant',emoji:'💎',preu:1200,hp:5},
-  {id:'a35',nom:'Llamp',emoji:'⚡',preu:700,hp:20},
-  {id:'a36',nom:'Foc',emoji:'🔥',preu:500,hp:15},
-
-  // Útils / Safety
-  {id:'a37',nom:'Extintor',emoji:'🧯',preu:200,hp:5},
-  {id:'a38',nom:'Triangle Emergència',emoji:'🔺',preu:150,hp:5},
-  {id:'a39',nom:'Armilla Reflectant',emoji:'🦺',preu:150,hp:5},
-  {id:'a40',nom:'Powerbank Cotxe',emoji:'🔋',preu:200,hp:5},
-  {id:'a41',nom:'Suport Mòbil',emoji:'📱',preu:180,hp:5},
-  {id:'a42',nom:'Dashcam',emoji:'🎥',preu:400,hp:10}
-];
-
-const EMOJI_BOTIGA = [
-  {id:'e1',emoji:'🦄',nom:'Unicorn',preu:1000},
-  {id:'e2',emoji:'👑',nom:'Corona',preu:800},
-  {id:'e3',emoji:'💎',nom:'Diamant',preu:1200},
-  {id:'e4',emoji:'🚀',nom:'Coet',preu:600},
-  {id:'e5',emoji:'🔥',nom:'Foc',preu:500},
-  {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
-];
 
 
 // ===== TU CÓDIGO EXISTENTE + MILLLORES =====
@@ -804,9 +715,7 @@ let currentTip = 0;
 
 let estat = {
   coins: parseInt(localStorage.getItem('gd_coins')) || 0,
-  cotxes: JSON.parse(localStorage.getItem('gd_cotxes')) || ['c1'],
-  accessoris: JSON.parse(localStorage.getItem('gd_accessoris')) || [],
-  emojis: JSON.parse(localStorage.getItem('gd_emojis')) || [],
+ 
   test: {
     general: {idx:0,encerts:0,ratxa:0,puntuacio:0},
     senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0},
@@ -857,10 +766,7 @@ function init() {
 
 function guardar() {
   localStorage.setItem('gd_coins', estat.coins);
-  localStorage.setItem('gd_cotxes', JSON.stringify(estat.cotxes));
-  localStorage.setItem('gd_accessoris', JSON.stringify(estat.accessoris));
-  localStorage.setItem('gd_emojis', JSON.stringify(estat.emojis));
-} 
+
 
 function actualitzarCoins() {
   const el = document.getElementById('coins');
@@ -883,8 +789,7 @@ function canviarTab(e, tab) {
   document.getElementById('tab-' + tab).classList.add('active');
   e.target.closest('.tab-btn').classList.add('active');
 
-  if(tab === 'garage') carregarGaratge();
-  if(tab === 'tienda') carregarBotiga();
+  
   if(tab === 'tips') carregarTips();
   if(tab === 'temari') carregarTemari();
   if(tab === 'test') carregarPregunta('general');
@@ -989,20 +894,6 @@ function respondreTest(cat, idx, el) {
 
 function seguentTest(e, cat) {
   estat.test[cat].idx++;
-
-  // TOTAL DE PREGUNTAS DEL TEST
-  const totalPreguntes = 10;
-
-  // CUANDO ACABA EL TEST: GUARDAR PARA ESTADISTIQUES
-  if(estat.test[cat].idx >= totalPreguntes){
-    guardarResultatTest(cat, estat.test[cat].encerts, totalPreguntes);
-
-    // RESETEAR PARA PODER REPETIR EL TEST
-    estat.test[cat].idx = 0;
-    estat.test[cat].encerts = 0;
-    estat.test[cat].ratxa = 0;
-  }
-
   carregarPregunta(cat);
 }
 
@@ -1212,106 +1103,6 @@ function reiniciarExamen() {
   document.getElementById('examen-timer').textContent = '30:00';
 }
 
-function carregarGaratge() {
-  const cont = document.getElementById('garage-lista');
-  cont.innerHTML = '';
-  let hpTotal = 90;
-  estat.accessoris.forEach(id => {
-    const acc = ACCESSORIS.find(a => a.id === id);
-    if(acc) hpTotal += acc.hp;
-  });
-  document.getElementById('garage-score').textContent = `🏎️ ${hpTotal} CV`;
-  COTXES.forEach(cotxe => {
-    const desbloquejat = estat.cotxes.includes(cotxe.id);
-    const div = document.createElement('div');
-    div.className = 'garage-car' + (desbloquejat? '' : ' locked');
-    div.innerHTML = `
-      <div style="font-size:40px; filter:${cotxe.color}">${cotxe.emoji}</div>
-      <div>${cotxe.nom}</div>
-      <div style="color:#667eea">${cotxe.cv} CV</div>
-      ${!desbloquejat? `<button class="btn-buy" onclick="comprarCotxe('${cotxe.id}')">Comprar ${cotxe.preu}💰</button>` : '<div style="color:#2ecc71">✓ Propietari</div>'}
-    `;
-    cont.appendChild(div);
-  });
-}
-
-function comprarCotxe(id) {
-  const cotxe = COTXES.find(c => c.id === id);
-  if(!cotxe) return;
-  if(estat.coins < cotxe.preu) {
-    alert('No tens prous coins');
-    return;
-  }
-  estat.coins -= cotxe.preu;
-  estat.cotxes.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarGaratge();
-}
-
-function carregarBotiga() {
-  const cont = document.getElementById('emoji-tienda');
-  cont.innerHTML = '';
-  ACCESSORIS.forEach(acc => {
-    const comprat = estat.accessoris.includes(acc.id);
-    const div = document.createElement('div');
-    div.className = 'emoji-item' + (comprat? ' locked' : '');
-    div.innerHTML = `
-      <div style="font-size:40px">${acc.emoji}</div>
-      <div>${acc.nom}</div>
-      <div style="color:#667eea">+${acc.hp} CV</div>
-      ${!comprat? `<button class="btn-buy" onclick="comprarAccessoris('${acc.id}')">Comprar ${acc.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}
-    `;
-    cont.appendChild(div);
-  });
-  EMOJI_BOTIGA.forEach(emoji => {
-    const comprat = estat.emojis.includes(emoji.id);
-    const div = document.createElement('div');
-    div.className = 'emoji-item' + (comprat? ' locked' : '');
-    div.innerHTML = `
-      <div style="font-size:40px">${emoji.emoji}</div>
-      <div>${emoji.nom}</div>
-      <div style="color:#667eea">Cosmètic</div>
-      ${!comprat? `<button class="btn-buy" onclick="comprarEmoji('${emoji.id}')">Comprar ${emoji.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}
-    `;
-    cont.appendChild(div);
-  });
-}
-
-function comprarAccessoris(id) {
-  const acc = ACCESSORIS.find(a => a.id === id);
-  if(!acc) return;
-  if(estat.coins < acc.preu) {
-    alert('No tens prous coins');
-    return;
-  }
-  estat.coins -= acc.preu;
-  estat.accessoris.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarBotiga();
-  const totalAcc = estat.accessoris.length;
-  const msg = document.createElement('div');
-  msg.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff8c00,#ff2d55);color:#fff;padding:12px 24px;border-radius:12px;font-weight:bold;z-index:999;animation:slideUp 0.3s';
-  msg.innerHTML = `🏎️ Ja vas creant el teu supercotxe! ${totalAcc}/42 accessoris`;
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 2000);
-}
-
-function comprarEmoji(id) {
-  const emoji = EMOJI_BOTIGA.find(e => e.id === id);
-  if(!emoji) return;
-  if(estat.coins < emoji.preu) {
-    alert('No tens prous coins');
-    return;
-  }
-  estat.coins -= emoji.preu;
-  estat.emojis.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarBotiga();
-}
-
 function carregarTips() {
   tipsData = TIPS;
   currentTip = 0;
@@ -1415,3 +1206,4 @@ if('serviceWorker' in navigator) {
 .catch(err => console.log('SW error:', err));
   });
 }
+    
