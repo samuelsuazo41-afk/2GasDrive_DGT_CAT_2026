@@ -20,7 +20,7 @@ function mostrarIntro(){
       <button onclick="tancarIntro()" style="background:linear-gradient(135deg,#ff8c00,#ff2d55);border:none;color:#fff;padding:16px 48px;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer">COMENÇAR</button>
     </div>
   `);
-}
+} 
 
 function tancarIntro(){
   document.getElementById('intro-screen').remove();
