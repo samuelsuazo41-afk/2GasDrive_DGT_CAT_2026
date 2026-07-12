@@ -839,7 +839,7 @@ function guardar() {
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-// ===== 1. TIEMPO SOLO PARA DESBLOQUEO =====
+
 // ===== 1. TIEMPO SOLO PARA DESBLOQUEO V8.13.1 FIX =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
@@ -888,6 +888,24 @@ function comprovarNouDia() {
     tempsIniciTemari = null;
     guardar();
     actualitzarPaseUI(); // Resetear UI al cambiar de dia
+  }
+}
+
+// NUEVA FUNCION - PEGALA DEBAJO DE ESTAS 2
+function actualitzarPaseUI() {
+  const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
+  const el = document.getElementById('pase-temps');
+  if(el) el.textContent = `${minuts} min`;
+  
+  // Actualizar también el mensaje del RESUM
+  const msg = document.getElementById('stats-motivacio');
+  if(msg) {
+    if(estat.stats.paseCompletado) {
+      msg.textContent = "Pase Activo. A practicar 💪";
+    } else {
+      const falten = Math.max(0, 20 - minuts);
+      msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`;
+    }
   }
 }
 
