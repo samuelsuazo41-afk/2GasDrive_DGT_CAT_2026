@@ -46,6 +46,14 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+/* Garatge y tienda */
+.garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0}
+.garage-car.locked{opacity:0.4}
+.garage-car h3{color:#00D9FF;margin:7px 0}
+.score-big{text-align:center;font-size:44px;font-weight:900;color:#00D9FF;margin:18px 0;text-shadow:0 0 20px rgba(0,217,255,0.5)}
+.emoji-shop{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px}
+.emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:13px;text-align:center;cursor:pointer}
+.emoji-item.locked{opacity:0.4}
 /* Tips */
 .tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:9px 0;border-radius:6px;display:flex;align-items:center}
 .tip-emoji{font-size:22px;margin-right:10px}
@@ -226,6 +234,13 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   </div>
 </div>
 
+<div id="tab-garage" class="tab-content">
+  <div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div>
+</div>
+
+<div id="tab-tienda" class="tab-content">
+  <div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div>
+</div>
 
 <div id="tab-tips" class="tab-content">
   <div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div>
@@ -255,7 +270,6 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?"></script>
+<script src="./app.js?v=8.5.1"></script>
 </body>
 </html>
- 
