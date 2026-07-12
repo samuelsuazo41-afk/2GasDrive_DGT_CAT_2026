@@ -840,24 +840,44 @@ function guardar() {
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
 // ===== 1. TIEMPO SOLO PARA DESBLOQUEO =====
+// ===== 1. TIEMPO SOLO PARA DESBLOQUEO V8.13.1 FIX =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
+  
+  actualitzarPaseUI(); // Mostrar tiempo al entrar
+
   contadorTemari = setInterval(() => {
     const tabTemari = document.getElementById('tab-temari');
     if(tabTemari && tabTemari.classList.contains('active')) {
       if(tempsIniciTemari === null) tempsIniciTemari = Date.now();
-      const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
+      
+      const ara = Date.now();
+      const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+      
       estat.stats.tempsEstudiatAvui += minutsPassats;
-      tempsIniciTemari = Date.now();
+      tempsIniciTemari = ara;
       guardar();
+      
+      actualitzarPaseUI(); // ACTUALIZAR UI CADA 2 SEG
+
       if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
         estat.stats.paseCompletado = true;
         estat.coins += 50;
         guardar();
         alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
-        actualitzarEstadistiques(); // actualiza al desbloquear
+        actualitzarEstadistiques();
       }
-    } else { tempsIniciTemari = null; }
+    } else { 
+      // FIX: Guardar tiempo antes de resetear al salir del temari
+      if(tempsIniciTemari!== null) {
+        const ara = Date.now();
+        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        estat.stats.tempsEstudiatAvui += minutsPassats;
+        tempsIniciTemari = null;
+        guardar();
+        actualitzarPaseUI();
+      }
+    }
   }, 2000);
 }
 
@@ -867,6 +887,25 @@ function comprovarNouDia() {
     estat.stats = { tempsEstudiatAvui: 0, diaActual: avui, paseCompletado: false };
     tempsIniciTemari = null;
     guardar();
+    actualitzarPaseUI(); // Resetear UI al cambiar de dia
+  }
+}
+
+// NUEVA FUNCION - PEGALA DEBAJO DE ESTAS 2
+function actualitzarPaseUI() {
+  const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
+  const el = document.getElementById('pase-temps');
+  if(el) el.textContent = `${minuts} min`;
+  
+  // Actualizar también el mensaje del RESUM
+  const msg = document.getElementById('stats-motivacio');
+  if(msg) {
+    if(estat.stats.paseCompletado) {
+      msg.textContent = "Pase Activo. A practicar 💪";
+    } else {
+      const falten = Math.max(0, 20 - minuts);
+      msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`;
+    }
   }
 }
 
