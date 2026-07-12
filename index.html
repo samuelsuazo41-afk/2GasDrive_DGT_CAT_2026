@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V8.6 ESTADISTIQUES</title>
+<title>GasDrive DGT CAT V8.6</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; }
@@ -46,14 +46,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-/* Garatge y tienda */
-.garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0}
-.garage-car.locked{opacity:0.4}
-.garage-car h3{color:#00D9FF;margin:7px 0}
-.score-big{text-align:center;font-size:44px;font-weight:900;color:#00D9FF;margin:18px 0;text-shadow:0 0 20px rgba(0,217,255,0.5)}
-.emoji-shop{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px}
-.emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:13px;text-align:center;cursor:pointer}
-.emoji-item.locked{opacity:0.4}
+/* BORRADO: .garage-car, .emoji-shop */
 /* Tips */
 .tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:9px 0;border-radius:6px;display:flex;align-items:center}
 .tip-emoji{font-size:22px;margin-right:10px}
@@ -62,27 +55,13 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .progress-fill{background:linear-gradient(90deg,#00D9FF,#0f5);height:100%;transition:width 0.3s}
 /* Buttons */
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
-.btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
-.btn-buy:active{transform:scale(0.95)}
 /* NUEVO: Grid Temari */
 #temari-lista{ display:grid; grid-template-columns:repeat(2,160px); gap:12px; justify-content:center; margin:14px auto 0; }
 .temari-item{ background:#1a1a1a; border:2px solid #00D9FF; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:0.2s; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
 .temari-item:active{ transform:scale(0.96); background:#222; }
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
-
-/* NUEVO: ESTADISTIQUES */
-.stats-cat{display:flex;justify-content:space-between;align-items:center;background:#222;padding:10px;border-radius:8px;margin:8px 0}
-.stats-cat-nom{font-weight:700;font-size:14px}
-.stats-cat-pct{font-weight:900;font-size:16px;color:#00D9FF}
-.badge{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:900}
-.badge.ok{background:#0a4;color:#fff}
-.badge.warn{background:#ffcc00;color:#000}
-.badge.bad{background:#a00;color:#fff}
-.trial-banner{background:linear-gradient(90deg,#ff6b6b,#ffa500);color:#000;padding:10px;border-radius:10px;text-align:center;font-weight:900;margin-bottom:12px}
-.lock-overlay{background:#000cc;position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;border-radius:14px}
-
-/* Fix scroll menú lateral - bloquea body y deja scroll solo en menú */
+/* Fix scroll menú lateral */
 body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
 .side-menu{ position:fixed; top:0; right:0; width:85%; max-width:320px; height:100vh; background:#0a0a0a; z-index:200; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; transform:translateX(100%); transition:transform 0.3s ease; }
 .side-menu.active{ transform:translateX(0); }
@@ -95,23 +74,6 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   <h1>🚘 GasDrive DGT CAT</h1>
   <div class="subtitle">630 Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
   <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700"></div>
-</div>
-
-<!-- NUEVO TAB ESTADISTIQUES -->
-<div id="tab-estadistiques" class="tab-content">
-  <div class="sub-tabs">
-    <button class="sub-tab-btn active" onclick="canviarSubTab(event,'estadistiques','resum')">📊 RESUM</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'estadistiques','evolucio')">📈 EVOLUCIÓ</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'estadistiques','debiles')">🎯 P. DÈBILS</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'estadistiques','pase')">⏰ PASE DIARI</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'estadistiques','oficial')">🏆 EXAMEN</button>
-  </div>
-
-  <div id="estadistiques-resum" class="sub-content active"></div>
-  <div id="estadistiques-evolucio" class="sub-content"></div>
-  <div id="estadistiques-debiles" class="sub-content"></div>
-  <div id="estadistiques-pase" class="sub-content"></div>
-  <div id="estadistiques-oficial" class="sub-content"></div>
 </div>
 
 <div id="tab-test" class="tab-content active">
@@ -136,65 +98,11 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     </div>
   </div>
 
-  <div id="test-senyals" class="sub-content">
-    <div class="card">
-      <h2>🚸 SENYALS DE TRÀNSIT</h2>
-      <div class="stats"><div>Aciertos: <span id="test-senyals-aciertos">0</span>/5</div><div>Racha: <span id="test-senyals-racha">0</span>🔥</div><div>Score: <span id="test-senyals-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-senyals-progress"></div></div>
-      <div class="pregunta" id="test-senyals-pregunta"></div>
-      <div id="test-senyals-opciones"></div>
-      <div class="feedback" id="test-senyals-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-senyals" onclick="seguentTest(event,'senyals')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-normes" class="sub-content">
-    <div class="card">
-      <h2>📋 NORMES I VELOCITATS</h2>
-      <div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span>/5</div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div>
-      <div class="pregunta" id="test-normes-pregunta"></div>
-      <div id="test-normes-opciones"></div>
-      <div class="feedback" id="test-normes-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-mecanica" class="sub-content">
-    <div class="card">
-      <h2>🔧 MECÀNICA BÀSICA</h2>
-      <div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span>/5</div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div>
-      <div class="pregunta" id="test-mecanica-pregunta"></div>
-      <div id="test-mecanica-opciones"></div>
-      <div class="feedback" id="test-mecanica-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-auxilis" class="sub-content">
-    <div class="card">
-      <h2>🚑 PRIMERS AUXILIS</h2>
-      <div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span>/5</div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div>
-      <div class="pregunta" id="test-auxilis-pregunta"></div>
-      <div id="test-auxilis-opciones"></div>
-      <div class="feedback" id="test-auxilis-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-mediambient" class="sub-content">
-    <div class="card">
-      <h2>♻️ MEDI AMBIENT</h2>
-      <div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span>/5</div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div>
-      <div class="pregunta" id="test-mediambient-pregunta"></div>
-      <div id="test-mediambient-opciones"></div>
-      <div class="feedback" id="test-mediambient-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button>
-    </div>
-  </div>
+  <div id="test-senyals" class="sub-content"> ... </div>
+  <div id="test-normes" class="sub-content"> ... </div>
+  <div id="test-mecanica" class="sub-content"> ... </div>
+  <div id="test-auxilis" class="sub-content"> ... </div>
+  <div id="test-mediambient" class="sub-content"> ... </div>
 </div>
 
 <div id="tab-situaciones" class="tab-content">
@@ -204,50 +112,10 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button>
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button>
   </div>
-  <div id="sit-clima" class="sub-content active">
-    <div class="card">
-      <h2 id="sit-titol">🌧️ CASOS REALS - CLIMA ADVERS</h2>
-      <div class="stats"><div>Resoltes: <span id="sit-clima-aciertos">0</span>/20</div><div>Score: <span id="sit-clima-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div>
-      <div class="pregunta" id="sit-clima-pregunta"></div>
-      <div id="sit-clima-opciones"></div>
-      <div class="feedback" id="sit-clima-feedback"></div>
-      <button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-  <div id="sit-urbà" class="sub-content">
-    <div class="card">
-      <h2>🏙️ CASOS REALS - URBÀ</h2>
-      <div class="stats"><div>Resoltes: <span id="sit-urbà-aciertos">0</span>/20</div><div>Score: <span id="sit-urbà-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div>
-      <div class="pregunta" id="sit-urbà-pregunta"></div>
-      <div id="sit-urbà-opciones"></div>
-      <div class="feedback" id="sit-urbà-feedback"></div>
-      <button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-  <div id="sit-carretera" class="sub-content">
-    <div class="card">
-      <h2>🛣️ CASOS REALS - CARRETERA</h2>
-      <div class="stats"><div>Resoltes: <span id="sit-carretera-aciertos">0</span>/20</div><div>Score: <span id="sit-carretera-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div>
-      <div class="pregunta" id="sit-carretera-pregunta"></div>
-      <div id="sit-carretera-opciones"></div>
-      <div class="feedback" id="sit-carretera-feedback"></div>
-      <button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-  <div id="sit-emergència" class="sub-content">
-    <div class="card">
-      <h2>🚨 CASOS REALS - EMERGÈNCIA</h2>
-      <div class="stats"><div>Resoltes: <span id="sit-emergència-aciertos">0</span>/20</div><div>Score: <span id="sit-emergència-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div>
-      <div class="pregunta" id="sit-emergència-pregunta"></div>
-      <div id="sit-emergència-opciones"></div>
-      <div class="feedback" id="sit-emergència-feedback"></div>
-      <button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button>
-    </div>
-  </div>
+  <div id="sit-clima" class="sub-content active"> ... </div>
+  <div id="sit-urbà" class="sub-content"> ... </div>
+  <div id="sit-carretera" class="sub-content"> ... </div>
+  <div id="sit-emergència" class="sub-content"> ... </div>
 </div>
 
 <div id="tab-examen" class="tab-content">
@@ -263,13 +131,8 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   </div>
 </div>
 
-<div id="tab-garage" class="tab-content">
-  <div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div>
-</div>
-
-<div id="tab-tienda" class="tab-content">
-  <div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div>
-</div>
+<!-- BORRADO: tab-garage -->
+<!-- BORRADO: tab-tienda -->
 
 <div id="tab-tips" class="tab-content">
   <div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div>
@@ -289,171 +152,16 @@ body.menu-open{ overflow:hidden; position:fixed; width:100%; height:100%; }
   </div>
 </div>
 
-<!-- MENU INFERIOR - ESTADISTIQUES PRIMER -->
 <div class="tabs">
-  <button class="tab-btn" onclick="canviarTab(event,'estadistiques')"><span class="emoji">📊</span>ESTADÍSTIQUES</button>
   <button class="tab-btn active" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
   <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
   <button class="tab-btn" onclick="canviarTab(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
-  <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
-  <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
+  <!-- BORRADO: GARATGE -->
+  <!-- BORRADO: BOTIGA -->
   <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
   <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=8.5.1"></script>
-
-<script>
-// ========== SISTEMA ESTADISTIQUES V8.6 ==========
-
-// 1. FUNCIONES BASE
-function canviarTab(evt, tabName) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  evt.currentTarget.classList.add('active');
-  document.getElementById('tab-'+tabName).classList.add('active');
-  if(tabName==='estadistiques') cargarResumen();
-}
-
-function canviarSubTab(evt, tab, sub) {
-  document.querySelectorAll(`#tab-${tab} .sub-tab-btn`).forEach(b => b.classList.remove('active'));
-  document.querySelectorAll(`#tab-${tab} .sub-content`).forEach(c => c.classList.remove('active'));
-  evt.currentTarget.classList.add('active');
-  document.getElementById(`${tab}-${sub}`).classList.add('active');
-  if(sub==='resum') cargarResumen();
-  if(sub==='debiles') cargarDebiles();
-  if(sub==='pase') cargarPase();
-  if(sub==='oficial') cargarOficial();
-}
-
-// 2. SISTEMA PASE DIARI 20MIN
-function getPaseDiario() {
-  let hoy = new Date().toLocaleDateString();
-  let pase = JSON.parse(localStorage.getItem('paseDiario') || '{"fecha":"", "minutos":0}');
-  if(pase.fecha !== hoy) pase = {fecha: hoy, minutos: 0};
-  localStorage.setItem('paseDiario', JSON.stringify(pase));
-  return pase;
-}
-setInterval(()=>{ 
-  if(document.getElementById('tab-temari').classList.contains('active')){
-    let p = getPaseDiario(); 
-    if(p.minutos < 20){ p.minutos++; localStorage.setItem('paseDiario', JSON.stringify(p)); }
-  }
-}, 60000);
-
-// 3. SISTEMA 30 DIES TRIAL
-function getTrial() {
-  let t = JSON.parse(localStorage.getItem('trial30') || '{}');
-  if(!t.inici) { t.inici = new Date().toISOString(); localStorage.setItem('trial30', JSON.stringify(t)); }
-  let dies = Math.floor((new Date() - new Date(t.inici)) / 86400000);
-  return {diesRestants: 30 - dies, actiu: dies < 30};
-}
-
-function estaDesbloquejat() { return getPaseDiario().minutos >= 20; }
-function bloquejatPerPagament() { return !getTrial().actiu; }
-
-// 4. CARGAR RESUM
-function cargarResumen() {
-  let trial = getTrial();
-  let pase = getPaseDiario();
-  let cats = ['senyals','normes','mecanica','auxilis','mediambient'];
-  
-  let html = `<div class="card">`;
-  if(trial.actiu) html += `<div class="trial-banner">🎁 30 DIES GRATIS: Te queden ${trial.diesRestants} dies</div>`;
-  
-  html += `<h2>📊 RESUM GLOBAL</h2>
-    <p style="text-align:center">Meta DGT: 90%</p>
-    <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
-    <p style="text-align:center;font-size:12px">20.4h / 30h estudiades</p>`;
-  
-  cats.forEach(cat=>{
-    let tests = Math.floor(Math.random()*20); // Demo. Luego leer de localStorage
-    let ex = Math.floor(Math.random()*35);
-    let pct = tests>0? Math.floor(tests/20*100) : 0;
-    let estat = pct>75?'ok':pct>50?'warn':'bad';
-    let txt = pct>75?'FIABLE':pct>50?'REGULAR':'FEBLE';
-    if(tests<5) txt="DADES INSUFICIENTS";
-    
-    html += `<div class="stats-cat">
-      <div><div class="stats-cat-nom">${cat.toUpperCase()}</div>
-      <div style="font-size:11px">${tests}/20 tests | ${ex}/35 exàmens</div></div>
-      <div><span class="stats-cat-pct">${pct}%</span> <span class="badge ${estat}">${txt}</span></div>
-    </div>`;
-  });
-  
-  html += `</div>`;
-  document.getElementById('estadistiques-resum').innerHTML = html;
-}
-
-// 5. CARGAR P. DEBILS
-function cargarDebiles() {
-  let html = `<div class="card"><h2>🎯 PUNTS DÈBILS</h2>
-    <div class="tip"><div class="tip-emoji">📋</div><div><b>NORMES: 45% DÈBIL</b><br>Falles: VELOCITAT<br>Repassa: 02_Normes.pdf Pàg 12-18</div></div>
-    <div class="tip"><div class="tip-emoji">🌱</div><div><b>MEDI AMBIENT: 35% DÈBIL</b><br>Falles: CONTAMINACIÓ<br>Repassa: 05_PDF Pàg 1-4</div></div>
-  </div>`;
-  document.getElementById('estadistiques-debiles').innerHTML = html;
-}
-
-// 6. CARGAR PASE
-function cargarPase() {
-  let pase = getPaseDiario();
-  let trial = getTrial();
-  let pct = (pase.minutos/20)*100;
-  let html = `<div class="card" style="position:relative">
-    ${!estaDesbloquejat()?'':''}
-    <h2>⏰ PASE DIARI</h2>
-    <p style="text-align:center">Estudia 20min al TEMARI per desbloquejar TESTS</p>
-    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <p style="text-align:center;font-size:20px;font-weight:900">${pase.minutos}/20 minuts avui</p>
-    <button class="btn" style="width:100%" onclick="canviarTab(event,'temari')">ANAR A ESTUDIAR</button>
-    <p style="text-align:center;margin-top:10px;font-size:12px">Trial: Dia ${30-trial.diesRestants}/30</p>
-  </div>`;
-  document.getElementById('estadistiques-pase').innerHTML = html;
-}
-
-// 7. CARGAR OFICIAL
-function cargarOficial() {
-  let html = `<div class="card">
-    <h2>🏆 EXAMEN OFICIAL DGT</h2>
-    <button class="btn" style="width:100%;margin-bottom:12px" onclick="alert('Aquí va tu iniciarExamen()')">FER SIMULACRO 30/30</button>
-    <p><b>Últim resultat:</b> 27/30 APTE ✅</p>
-    <h3 style="margin-top:15px">📋 Requisits DGT</h3>
-    <p style="font-size:13px">1. DNI/NIE vigent<br>2. Taxa 4.63€<br>3. 18 anys<br>4. Certificat mèdic</p>
-    <a href="https://share.google/8lf7y0j1sOQdPjvK5" target="_blank" class="btn" style="width:100%;background:#00ff88;display:block;text-align:center;text-decoration:none">WEB OFICIAL DGT</a>
-  </div>`;
-  document.getElementById('estadistiques-oficial').innerHTML = html;
-}
-
- // 8. BLOQUEO DE TESTS
-function checkAccesTest() {
-  if(bloquejatPerPagament()) { 
-    alert("🔒 30 dies acabats. 9.99€/any per seguir"); 
-    return false; 
-  }
-  if(!estaDesbloquejat()) { 
-    let p = getPaseDiario();
-    let falten = 20 - p.minutos;
-    alert(`🔒 Estudia ${falten} min més al TEMARI per desbloquejar tests avui`); 
-    canviarTab(event,'temari'); 
-    return false; 
-  }
-  return true;
-}
-
-// 9. GUARDAR RESULTATS PER ESTADISTIQUES
-// Añade esta línea al final de tu funcion finalizarTest() en app.js
-// localStorage.setItem('ultimTest', JSON.stringify({categoria: cat, encerts: encerts, total: total, tipus: 'test'}));
-
-// 10. INICIAR AL CARGAR
-document.addEventListener('DOMContentLoaded', () => {
-  getTrial(); // Inicia trial si no existe
-  getPaseDiario(); // Inicia pase diario
-  
-  // Mensaje motivacional
-  let dies = getTrial().diesRestants;
-  document.getElementById('motivacio').innerText = `Te queden ${dies} dies gratis. 20min avui!`;
-});
-
-</script>
+<script src="./app.js?v=8.6"></script>
 </body>
 </html>
