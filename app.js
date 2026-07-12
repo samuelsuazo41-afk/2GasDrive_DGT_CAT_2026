@@ -887,11 +887,11 @@ function guardarResultat(categoria, encerts, total, tipus='test') {
   });
   if(estat.historial.length > 200) estat.historial.shift();
   guardar();
-  actualitzarEstadistiques();
 }
 
 function actualitzarEstadistiques() {
-  if(document.getElementById('tab-estadistiques').classList.contains('active')) {
+  const tab = document.getElementById('tab-estadistiques');
+  if(tab && tab.classList.contains('active')) {
     actualitzarResum();
     actualitzarPuntsDebils();
     actualitzarEvolucio();
@@ -911,13 +911,14 @@ function potFerTests() {
   comprovarNouDia();
   if(estat.stats.paseCompletado) return true;
   mostrarPopupPase();
-  canviarTab({target:{closest:()=>document.querySelector('.tab-btn')}}, 'temari');
+  const btnTemari = document.querySelector('.tab-btn[onclick*="temari"]');
+  canviarTab({target:{closest:()=>btnTemari}}, 'temari');
   return false;
 }
 
 function mostrarPopupPase() {
-  const minutsQueFalten = 20 - Math.floor(estat.stats.tempsEstudiatAvui);
-  alert(`⛔ PASE BLOQUEJAT\n\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.\n\nAixí aprens abans de practicar 💪`);
+  const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui));
+  alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.\n\nAixí aprens abans de practicar 💪`);
 }
 
 function iniciarComptadorTemari() {
@@ -934,7 +935,7 @@ function iniciarComptadorTemari() {
         alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
       }
     }
-  }, 6000);
+  }, 6000); // cada 6 seg = 0.1 min
 }
 
 function comprovarNouDia() {
@@ -975,7 +976,7 @@ function canviarTab(e, tab) {
 }
 
 function canviarSubTab(e, tab, subtab) {
-  const tabId = tab === 'sit'? 'situaciones' : tab;
+  const tabId = tab === 'sit'? 'situaciones' : tab === 'stats'? 'estadistiques' : tab;
   const contenidor = document.getElementById('tab-' + tabId);
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
@@ -1067,8 +1068,7 @@ function seguentTest(e, cat) {
   carregarPregunta(cat);
 }
 
-//... tu código de CASOS igual...
-
+// CASOS amb preguntes aleatòries cada cop
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
@@ -1136,11 +1136,11 @@ function seguentSituacio(e, cat) {
 // Examen amb etiqueta de tipus
 function iniciarExamen(e) {
   const totes = [
-   ...PREGUNTES.general,
-   ...PREGUNTES.senyals,
-   ...PREGUNTES.normes,
-   ...PREGUNTES.mecanica,
-   ...SITUACIONS.clima
+  ...PREGUNTES.general,
+  ...PREGUNTES.senyals,
+  ...PREGUNTES.normes,
+  ...PREGUNTES.mecanica,
+  ...SITUACIONS.clima
   ];
   if(totes.length < 30) {
     alert('Falten preguntes. Necessites 30 mínim.');
@@ -1282,9 +1282,189 @@ function reiniciarExamen() {
   document.getElementById('examen-timer').textContent = '30:00';
 }
 
-//... tu código de GARATGE, BOTIGA, TIPS, TEMARI igual...
+function carregarGaratge() {
+  const cont = document.getElementById('garage-lista');
+  cont.innerHTML = '';
+  let hpTotal = 90;
+  estat.accessoris.forEach(id => {
+    const acc = ACCESSORIS.find(a => a.id === id);
+    if(acc) hpTotal += acc.hp;
+  });
+  document.getElementById('garage-score').textContent = `🏎️ ${hpTotal} CV`;
+  COTXES.forEach(cotxe => {
+    const desbloquejat = estat.cotxes.includes(cotxe.id);
+    const div = document.createElement('div');
+    div.className = 'garage-car' + (desbloquejat? '' : ' locked');
+    div.innerHTML = `
+      <div style="font-size:40px; filter:${cotxe.color}">${cotxe.emoji}</div>
+      <div>${cotxe.nom}</div>
+      <div style="color:#667eea">${cotxe.cv} CV</div>
+      ${!desbloquejat? `<button class="btn-buy" onclick="comprarCotxe('${cotxe.id}')">Comprar ${cotxe.preu}💰</button>` : '<div style="color:#2ecc71">✓ Propietari</div>'}
+    `;
+    cont.appendChild(div);
+  });
+}
 
-// ===== NUEVO: FUNCIONES PARA RELLENAR ESTADISTICAS =====
+function comprarCotxe(id) {
+  const cotxe = COTXES.find(c => c.id === id);
+  if(!cotxe) return;
+  if(estat.coins < cotxe.preu) {
+    alert('No tens prous coins');
+    return;
+  }
+  estat.coins -= cotxe.preu;
+  estat.cotxes.push(id);
+  guardar();
+  actualitzarCoins();
+  carregarGaratge();
+}
+
+function carregarBotiga() {
+  const cont = document.getElementById('emoji-tienda');
+  cont.innerHTML = '';
+  ACCESSORIS.forEach(acc => {
+    const comprat = estat.accessoris.includes(acc.id);
+    const div = document.createElement('div');
+    div.className = 'emoji-item' + (comprat? ' locked' : '');
+    div.innerHTML = `
+      <div style="font-size:40px">${acc.emoji}</div>
+      <div>${acc.nom}</div>
+      <div style="color:#667eea">+${acc.hp} CV</div>
+      ${!comprat? `<button class="btn-buy" onclick="comprarAccessoris('${acc.id}')">Comprar ${acc.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}
+    `;
+    cont.appendChild(div);
+  });
+  EMOJI_BOTIGA.forEach(emoji => {
+    const comprat = estat.emojis.includes(emoji.id);
+    const div = document.createElement('div');
+    div.className = 'emoji-item' + (comprat? ' locked' : '');
+    div.innerHTML = `
+      <div style="font-size:40px">${emoji.emoji}</div>
+      <div>${emoji.nom}</div>
+      <div style="color:#667eea">Cosmètic</div>
+      ${!comprat? `<button class="btn-buy" onclick="comprarEmoji('${emoji.id}')">Comprar ${emoji.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}
+    `;
+    cont.appendChild(div);
+  });
+}
+
+function comprarAccessoris(id) {
+  const acc = ACCESSORIS.find(a => a.id === id);
+  if(!acc) return;
+  if(estat.coins < acc.preu) {
+    alert('No tens prous coins');
+    return;
+  }
+  estat.coins -= acc.preu;
+  estat.accessoris.push(id);
+  guardar();
+  actualitzarCoins();
+  carregarBotiga();
+  const totalAcc = estat.accessoris.length;
+  const msg = document.createElement('div');
+  msg.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff8c00,#ff2d55);color:#fff;padding:12px 24px;border-radius:12px;font-weight:bold;z-index:999;animation:slideUp 0.3s';
+  msg.innerHTML = `🏎️ Ja vas creant el teu supercotxe! ${totalAcc}/42 accessoris`;
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2000);
+}
+
+function comprarEmoji(id) {
+  const emoji = EMOJI_BOTIGA.find(e => e.id === id);
+  if(!emoji) return;
+  if(estat.coins < emoji.preu) {
+    alert('No tens prous coins');
+    return;
+  }
+  estat.coins -= emoji.preu;
+  estat.emojis.push(id);
+  guardar();
+  actualitzarCoins();
+  carregarBotiga();
+}
+
+function carregarTips() {
+  tipsData = TIPS;
+  currentTip = 0;
+  mostrarTip();
+}
+
+function mostrarTip() {
+  if (tipsData.length === 0) return;
+  const tip = tipsData[currentTip];
+  document.getElementById('tip-content').innerHTML = `
+    <div class="tip-emoji">${tip.emoji}</div>
+    <div class="tip-text">${tip.txt}</div>
+  `;
+  document.getElementById('tip-counter').textContent = `${currentTip + 1} / ${tipsData.length}`;
+}
+
+function nextTip(e) {
+  currentTip = (currentTip + 1) % tipsData.length;
+  mostrarTip();
+}
+
+function prevTip(e) {
+  currentTip = (currentTip - 1 + tipsData.length) % tipsData.length;
+  mostrarTip();
+}
+
+function carregarTemari() {
+  const container = document.getElementById('temari-lista');
+  container.innerHTML = `
+    <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
+      <div style="font-size:40px">🚦</div>
+      <div>Senyals</div>
+      <div style="font-size:11px;color:#999">RD 465/2025</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')">
+      <div style="font-size:40px">📋</div>
+      <div>Normes Circulació</div>
+      <div style="font-size:11px;color:#999">Edició 2024</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')">
+      <div style="font-size:40px">🚑</div>
+      <div>Primers Auxilis</div>
+      <div style="font-size:11px;color:#999">Manual IX 2025</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')">
+      <div style="font-size:40px">⚙️</div>
+      <div>Mecànica</div>
+      <div style="font-size:11px;color:#999">Manual VIII 2025</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')">
+      <div style="font-size:40px">♻️</div>
+      <div>Medi Ambient</div>
+      <div style="font-size:11px;color:#999">Distintius DGT 2025</div>
+    </div>
+  `;
+}
+
+// PDF normal, sense marcador
+function obrirPDF(ruta) {
+  const modal = document.createElement('div');
+  modal.id = 'pdf-modal';
+  modal.style.cssText = `
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:#0a0a0a;z-index:9999;
+    display:flex;flex-direction:column;
+  `;
+  modal.innerHTML = `
+    <div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333">
+      <button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button>
+      <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
+      <div style="width:60px"></div>
+    </div>
+    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
+  `;
+  document.body.appendChild(modal);
+}
+
+function tancarPDF() {
+  const modal = document.getElementById('pdf-modal');
+  if(modal) modal.remove();
+}
+
+// ===== NUEVO: FUNCIONES PARA PINTAR ESTADISTICAS =====
 function actualitzarResum() {
   const cont = document.getElementById('stats-resum');
   const global = calcularPercentatgeGlobal();
@@ -1305,7 +1485,7 @@ function actualitzarPuntsDebils() {
     const dades = estat.historial.filter(r => r.categoria === cat);
     const percent = dades.length > 0? Math.round(dades.reduce((a,r)=>a+r.percentatge,0)/dades.length) : 0;
     const estatCat = percent < 60? 'debil' : percent >= 80? 'fiable' : '';
-    html += `<div class="debil-item ${estatCat}">${cat}: ${percent}% ${dades.length<3?'SENSE DADES':''}</div>`;
+    html += `<div class="debil-item ${estatCat}">${cat}: <span>${percent}% ${dades.length<3?'SENSE DADES':''}</span></div>`;
   });
   html += `</div>`;
   cont.innerHTML = html;
@@ -1318,17 +1498,54 @@ function actualitzarEvolucio() {
 function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
   const percent = (minuts/20)*100;
-  document.getElementById('stats-pase').innerHTML = `<div class="card"><h2>⏰ PASE DIARI</h2><div>${minuts}/20 minuts</div><div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div><div>Estat: ${estat.stats.paseCompletado?'✅ DESBLOQUEJAT':'⛔ BLOQUEJAT'}</div></div>`;
+  document.getElementById('stats-pase').innerHTML = `<div class="card pase-card"><h2>⏰ PASE DIARI</h2><div class="big">${minuts}/20 min</div><div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div><div>Estat: ${estat.stats.paseCompletado?'✅ DESBLOQUEJAT':'⛔ BLOQUEJAT'}</div></div>`;
 }
 
 function actualitzarOrientacio() {
   const global = calcularPercentatgeGlobal();
   const linkDGT = "https://share.google/8lf7y0j1sOQdPjvK5";
   const cont = document.getElementById('stats-orientacio');
+  
   if(global >= 90) {
-    cont.innerHTML = `<div class="card"><h2>🧭 ORIENTACIÓ ✅</h2><p>Ja tens ${global}%</p><button onclick="window.open('${linkDGT}','_blank')">Demanar Cita DGT</button></div>`;
+    // DESBLOQUEADO
+    cont.innerHTML = `
+    <div class="card orientacio-card">
+      <h2>🧭 ORIENTACIÓ PER EXAMEN DGT ✅</h2>
+      <p><b>Felicitats! Ja tens el ${global}%</b></p>
+      
+      <h3>📋 REQUISITS OFICIALS DGT:</h3>
+      <p>1. <b>Informe psicotècnic</b>: Válido 90 días<br>
+      2. <b>Taxa</b>: 93,12€ - 2 convocatòries<br>
+      3. <b>Documentació</b>: DNI + 2 fotos</p>
+
+      <h3>🎯 LA NOSTRA ORIENTACIÓ:</h3>
+      <p>1. <b>0-1 fallos</b>: Si fas 8-10 tests seguits amb 0-1 fallos, ja estàs llest<br>
+      2. <b>ZBE + VMP</b>: Surt sempre al examen 2026. Repassa'ls<br>
+      3. <b>Estratègia</b>: Primer les fàcils, després les difícils<br>
+      4. <b>Últims 3 dies</b>: Només repàs. No aprenguis res nou</p>
+
+      <h3>📌 2 FORMES DE PRESENTAR-SE:</h3>
+      <p><b>A. Amb Autoescola:</b> Ells fan el tràmit<br>
+      <b>B. Per Lliure:</b> Tu demanes cita a la DGT</p>
+
+      <p>⚠️ <b>IMPORTANT:</b> El aprovat dura 2 anys. Si suspens 2 cops pagues de nou</p>
+
+      <button class="btn" onclick="window.open('${linkDGT}','_blank')">
+        🔗 Demanar Cita DGT Oficial
+      </button>
+    </div>`;
   } else {
-    cont.innerHTML = `<div class="card"><h2>🧭 ORIENTACIÓ 🔒</h2><p>Falten ${90-global}% per desbloquejar</p></div>`;
+    // BLOQUEADO
+    const falta = 90 - global;
+    cont.innerHTML = `
+    <div class="card orientacio-card" style="text-align:center">
+      <h2>🧭 ORIENTACIÓ PER EXAMEN DGT 🔒</h2>
+      <div style="font-size:40px">🔒</div>
+      <p>Per desbloquejar has d'arribar al <b>90%</b></p>
+      <p>Actual: ${global}% | Falten: ${falta}%</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:${global}%"></div></div>
+      <p style="font-size:12px;color:#999;margin-top:10px">Consell: Repassa els teus PUNTS DÈBILS</p>
+    </div>`;
   }
 }
 
