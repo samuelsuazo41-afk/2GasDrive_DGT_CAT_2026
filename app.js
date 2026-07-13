@@ -793,16 +793,21 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V8.16.0 - COMPLETO CON SISTEMA PROGRESO =====
+// ===== GASDRIVE DGT CAT V8.16.2 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-const TOTAL_PREGUNTES_BANC = 630;
+// NUEVO: Total dinámico para cuando metas 800+ preguntas
+function getTotalBanco() {
+  let total = 0;
+  for(let cat in PREGUNTES) total += PREGUNTES[cat].length;
+  for(let cat in SITUACIONS) total += SITUACIONS[cat].length;
+  return total;
+}
 
-// MAPEO PARA AUTO-ASIGNAR SUBTEMA Y PAGINA
 const MAPEO_PALABRAS_CLAVE = {
   'velocitat': {subtema: 'Velocitat i Limits', pag: 22}, 'alcohol': {subtema: 'Alcohol i Drogues', pag: 26}, 'drogues': {subtema: 'Alcohol i Drogues', pag: 26},
   'prioritat': {subtema: 'Prioritat i Preferència', pag: 12}, 'rotonda': {subtema: 'Rotondes', pag: 14}, 'cinturó': {subtema: 'Elements Seguretat', pag: 33},
@@ -815,25 +820,36 @@ const MAPEO_PALABRAS_CLAVE = {
   'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
 };
 
-// NUEVO: SISTEMA PROGRESO V8.16
-let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso')) || {
+// SISTEMA PROGRESO V8.16.2 CON SET Y CAP DIARIO
+let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
-    general: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    senyals: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    normes: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    mecanica: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    auxilis: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    mediambient: { total: 0, aciertos: 0, unicas: [], falladas: [] }
+    general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    senyals: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    normes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    mecanica: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    auxilis: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    mediambient: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }
   },
   casos: {
-    clima: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    urbà: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    carretera: { total: 0, aciertos: 0, unicas: [], falladas: [] },
-    emergència: { total: 0, aciertos: 0, unicas: [], falladas: [] }
+    clima: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    urbà: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    carretera: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    emergència: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }
   },
   examen: { realitzats: 0, aprovats: 0, historial: [] },
-  diesEstudi: [] // Para Constancia 30 dias
+  diesEstudi: new Set()
 };
+
+// Convertir datos guardados a Set al iniciar
+for(let c in PROGRESO.tests) {
+  PROGRESO.tests[c].unicas = new Set(PROGRESO.tests[c].unicas || []);
+  PROGRESO.tests[c].dies = PROGRESO.tests[c].dies || {};
+}
+for(let c in PROGRESO.casos) {
+  PROGRESO.casos[c].unicas = new Set(PROGRESO.casos[c].unicas || []);
+  PROGRESO.casos[c].dies = PROGRESO.casos[c].dies || {};
+}
+PROGRESO.diesEstudi = new Set(PROGRESO.diesEstudi || []);
 
 let estat = {
   coins: parseInt(localStorage.getItem('gd_coins')) || 0,
@@ -853,7 +869,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V8.16.0 CAT carregat");
+  console.log("GasDrive V8.16.2 CAT carregat");
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -863,6 +879,7 @@ function init() {
   actualitzarMissatgeMotivacional();
 }
 
+// GUARDAR: Convertir Set a Array
 function guardar() {
   localStorage.setItem('gd_coins', estat.coins);
   localStorage.setItem('gd_cotxes', JSON.stringify(estat.cotxes));
@@ -870,57 +887,83 @@ function guardar() {
   localStorage.setItem('gd_emojis', JSON.stringify(estat.emojis));
   localStorage.setItem('gd_historial', JSON.stringify(estat.historial));
   localStorage.setItem('gd_stats', JSON.stringify(estat.stats));
-  localStorage.setItem('gd_progreso', JSON.stringify(PROGRESO)); // NUEVO
+
+  const progGuardar = JSON.parse(JSON.stringify(PROGRESO));
+  for(let c in progGuardar.tests) progGuardar.tests[c].unicas = [...PROGRESO.tests[c].unicas];
+  for(let c in progGuardar.casos) progGuardar.casos[c].unicas = [...PROGRESO.casos[c].unicas];
+  progGuardar.diesEstudi = [...PROGRESO.diesEstudi];
+  localStorage.setItem('gd_progreso_v2', JSON.stringify(progGuardar));
 }
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-// ===== NUEVO: FUNCIONES PROGRESO =====
+// ===== FUNCIONES PROGRESO REAL =====
 function actualizarMetricasTest(categoria, preguntaId, acierto) {
   if(!PROGRESO.tests[categoria]) return;
   const prog = PROGRESO.tests[categoria];
+  const avui = estat.stats.diaActual;
+
   prog.total++;
   if(acierto) prog.aciertos++;
-  if(!prog.unicas.includes(preguntaId)) prog.unicas.push(preguntaId);
+  prog.unicas.add(preguntaId);
   if(!acierto &&!prog.falladas.includes(preguntaId)) prog.falladas.push(preguntaId);
+
+  // CAPADO: Solo cuenta 1 día por categoría
+  if(!prog.dies) {
+    prog.dies = 1;
+    PROGRESO.diesEstudi.add(avui);
+  }
   guardar();
 }
 
 function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   if(!PROGRESO.casos[subcat]) return;
   const prog = PROGRESO.casos[subcat];
+  const avui = estat.stats.diaActual;
+
   prog.total++;
   if(acierto) prog.aciertos++;
-  if(!prog.unicas.includes(preguntaId)) prog.unicas.push(preguntaId);
+  prog.unicas.add(preguntaId);
   if(!acierto &&!prog.falladas.includes(preguntaId)) prog.falladas.push(preguntaId);
+
+  if(!prog.dies) {
+    prog.dies = 1;
+    PROGRESO.diesEstudi.add(avui);
+  }
   guardar();
 }
 
 function calcularPreparacioDGT() {
-  // 1. DOMINI 50%
+  // 1. DOMINI 40% - CAPADO A 200 PREGUNTAS PARA EVITAR FARM
   let totalTot = 0, encertsTot = 0;
-  Object.values(PROGRESO.tests).forEach(c => { totalTot += c.total; encertsTot += c.aciertos; });
+  Object.values(PROGRESO.tests).forEach(c => {
+    totalTot += Math.min(c.total, 200);
+    encertsTot += c.aciertos;
+  });
   const domini = totalTot > 0? Math.round((encertsTot / totalTot) * 100) : 0;
 
-  // 2. CONSTANCIA 30%
-  const dies = PROGRESO.diesEstudi.length;
-  const constancia = Math.round((dies / 30) * 100);
+  // 2. CONSTANCIA 40% - DIAS UNICOS
+  const dies = PROGRESO.diesEstudi.size;
+  constancia = Math.round((dies / 30) * 100);
 
-  // 3. VARIEDAD 20%
-  const catsAmb50 = Object.values(PROGRESO.tests).filter(c => c.total >= 50).length;
-  const varietat = Math.round((catsAmb50 / 6) * 100);
-
-  // 4. PROGRESO BANCO
+  // 3. COBERTURA 10% - DINAMICA
   let unicasTotales = new Set();
   Object.values(PROGRESO.tests).forEach(c => c.unicas.forEach(id => unicasTotales.add(id)));
-  const progres = Math.round((unicasTotales.size / TOTAL_PREGUNTES_BANC) * 100);
+  Object.values(PROGRESO.casos).forEach(c => c.unicas.forEach(id => unicasTotales.add(id)));
+  const cobertura = Math.round((unicasTotales.size / getTotalBanco()) * 100);
 
-  const preparacio = Math.round((domini * 0.5) + (constancia * 0.3) + (varietat * 0.2));
+  // 4. SIMULACRES 10%
+  const simulacres = Math.min(100, (PROGRESO.examen.realitzats / 15) * 100);
 
-  return {preparacio, domini, constancia, varietat, progres, totalFet: totalTot};
+  const preparacio = Math.round((domini * 0.4) + (constancia * 0.4) + (cobertura * 0.1) + (simulacres * 0.1));
+
+  return {
+    preparacio, domini, constancia, cobertura, simulacres,
+    unicas: unicasTotales.size, total: getTotalBanco(), dies, exRealitzats: PROGRESO.examen.realitzats
+  };
 }
 
-// ===== 1. PASE 20 MIN =====
+// ===== PASE 20 MIN =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
@@ -932,9 +975,6 @@ function iniciarComptadorTemari() {
       estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
       if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
         estat.stats.paseCompletado = true;
-        // NUEVO: Registrar dia de constancia
-        const avui = estat.stats.diaActual;
-        if(!PROGRESO.diesEstudi.includes(avui)) PROGRESO.diesEstudi.push(avui);
         estat.coins += 50; guardar();
         alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
         actualitzarEstadistiques();
@@ -954,7 +994,13 @@ function comprovarNouDia() {
     const stats = calcularPreparacioDGT();
     estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio});
     if(estat.stats.historialEvolucio.length > 7) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
+
+    // Reset cap diario
+    for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
+    for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
+
+    guardar(); actualitzarPaseUI();
   }
 }
 
@@ -965,21 +1011,21 @@ function actualitzarPaseUI() {
   if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
 }
 
-// ===== 2. AUTO-MAPEO =====
+// ===== AUTO-MAPEO CON ID =====
 function autoMapearTotesPreguntes() {
   let idCounter = 1;
   for(let cat in PREGUNTES) {
     PREGUNTES[cat] = PREGUNTES[cat].map(p => {
       let subtema = 'General'; let pag = 1;
       for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
-      return {...p, id: idCounter++, subtema, pag}; // NUEVO: ID
+      return {...p, id: idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANCO MAPEADO CON ID. Copia el JSON de abajo');
+  console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
   console.log(JSON.stringify(PREGUNTES));
 }
 
-// ===== 3. PUNTOS DEBILS =====
+// ===== PUNTOS DEBILS =====
 function registrarFallada(categoria, subtema, pagina) {
   if(!estat.stats.puntsDebils) estat.stats.puntsDebils = {};
   if(!estat.stats.puntsDebils[categoria]) estat.stats.puntsDebils[categoria] = {};
@@ -1002,51 +1048,61 @@ function dibuixarPuntsDebils() {
 
 function anarAPagina(pagina) { canviarTab(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== 4. STATS REALES V8.16 =====
+// ===== STATS REALES V8.16.2 =====
 function actualitzarEstadistiques() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
-  const stats = calcularPreparacioDGT(); // NUEVO
+  const stats = calcularPreparacioDGT();
 
-  // BARRA GRANDE: PREPARACIO DGT
   document.getElementById('stats-global-percent').textContent = stats.preparacio + '%';
   document.getElementById('stats-global-bar').style.width = stats.preparacio + '%';
-  document.getElementById('stats-fetes').textContent = stats.totalFet;
-  document.getElementById('stats-encerts').textContent = PROGRESO.tests.general.aciertos + PROGRESO.tests.senyals.aciertos; // ejemplo
+  document.getElementById('stats-fetes').textContent = stats.totalFet || stats.total;
+  document.getElementById('stats-encerts').textContent = stats.unicas;
 
   let msg = "Estudia 20min al Temari per desbloquejar";
   if(estat.stats.paseCompletado) msg = "Pase Activo. A practicar 💪";
   if(stats.preparacio >= 90) msg = "Ja estàs llest per la DGT 💎";
   document.getElementById('stats-motivacio').textContent = msg;
 
-  // BARRAS POR CATEGORIA USANDO PROGRESO
-  document.getElementById('stats-test-percent').textContent = PROGRESO.tests.general.total > 0? Math.round((PROGRESO.tests.general.aciertos/PROGRESO.tests.general.total)*100) + '%' : '0%';
-  document.getElementById('stats-test-bar').style.width = PROGRESO.tests.general.total > 0? Math.round((PROGRESO.tests.general.aciertos/PROGRESO.tests.general.total)*100) + '%' : '0%';
+  // BARRAS NUEVAS
+  if(document.getElementById('stats-domini-percent')){
+    document.getElementById('stats-domini-percent').textContent = stats.domini + '%';
+    document.getElementById('stats-domini-bar').style.width = stats.domini + '%';
+  }
+  if(document.getElementById('stats-constancia-percent')){
+    document.getElementById('stats-constancia-percent').textContent = stats.constancia + '%';
+    document.getElementById('stats-constancia-bar').style.width = stats.constancia + '%';
+    document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.dies}/30 dies`;
+  }
+  if(document.getElementById('stats-simulacres-percent')){
+    document.getElementById('stats-simulacres-percent').textContent = stats.simulacres + '%';
+    document.getElementById('stats-simulacres-bar').style.width = stats.simulacres + '%';
+  }
 
-  // PROGRESO BANCO
-  document.getElementById('stats-temari-percent').textContent = stats.progres + '%';
-  document.getElementById('stats-temari-bar').style.width = stats.progres + '%';
+  document.getElementById('stats-temari-percent').textContent = stats.cobertura + '%';
+  document.getElementById('stats-temari-bar').style.width = stats.cobertura + '%';
 
   dibujarGraficaEvolucion();
   dibuixarPuntsDebils();
 
   const btnDGT = document.getElementById('btn-dgt-oficial');
-  if(stats.preparacio >= 90) {
-    btnDGT.style.opacity = '1';
-    btnDGT.style.pointerEvents = 'auto';
-  } else {
-    btnDGT.style.opacity = '0.4';
-    btnDGT.style.pointerEvents = 'none';
+  if(btnDGT){
+    if(stats.preparacio >= 90) {
+      btnDGT.style.opacity = '1';
+      btnDGT.style.pointerEvents = 'auto';
+    } else {
+      btnDGT.style.opacity = '0.4';
+      btnDGT.style.pointerEvents = 'none';
+    }
   }
 }
 
 function getDadesEvolucio() { return estat.stats.historialEvolucio.map(h => ({dia: h.dia.split('-')[2], global: h.percent})); }
-
 function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== TEST / CASOS / EXAMEN ARREGLADOS =====
+// ===== TEST / CASOS / EXAMEN =====
 function carregarPregunta(cat) { const s = estat.test[cat]; const preguntes = barrejarArray(PREGUNTES[cat]); if(!preguntes || preguntes.length === 0) return; const pOriginal = preguntes[s.idx % preguntes.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`test-${cat}-pregunta`).textContent = p.q; document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`test-${cat}-racha`).textContent = s.ratxa; document.getElementById(`test-${cat}-score`).textContent = s.puntuacio; document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`; const cont = document.getElementById(`test-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`test-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-test-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreTest(cat, i, this); }; cont.appendChild(div); }); }
 
 function respondreTest(cat, idx, el) {
@@ -1055,19 +1111,16 @@ function respondreTest(cat, idx, el) {
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
-  const preguntaId = p.id || `${cat}-${s.idx}`; // TEMPORAL SI NO TIENE ID
+  const preguntaId = p.id || `${cat}-${s.idx}`;
 
   if(correcte) { el.classList.add('correcta'); s.encerts++; s.ratxa++; s.puntuacio += 10 + (s.ratxa * 2); estat.coins += 5; document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; mostrarEmoji(true, el); }
   else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); s.ratxa = 0; registrarFallada(cat, p.subtema, p.pag); }
 
-  actualizarMetricasTest(cat, preguntaId, correcte); // NUEVO
+  actualizarMetricasTest(cat, preguntaId, correcte);
   document.getElementById(`btn-sig-test-${cat}`).disabled = false; actualitzarCoins(); guardar();
 }
 
-function seguentTest(e, cat) { // ARREGLADO
-  estat.test[cat].idx++;
-  carregarPregunta(cat);
-}
+function seguentTest(e, cat) { estat.test[cat].idx++; carregarPregunta(cat); }
 
 function carregarSituacio(cat) { if(!cat) cat = sitCategoriaActiva; const s = estat.sit[cat]; const casos = barrejarArray(SITUACIONS[cat]); if(!casos || casos.length === 0) return; const pOriginal = casos[s.idx % casos.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`sit-${cat}-pregunta`).textContent = p.q; document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio; document.getElementById(`sit-${cat}-progress`).style.width = `${((s.idx % casos.length)/casos.length)*100}%`; const cont = document.getElementById(`sit-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`sit-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-sit-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreSituacio(cat, i, this); }; cont.appendChild(div); }); }
 
@@ -1082,14 +1135,11 @@ function respondreSituacio(cat, idx, el) {
   if(correcte) { el.classList.add('correcta'); s.encerts++; s.puntuacio += 15; estat.coins += 10; document.getElementById(`sit-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`sit-${cat}-feedback`).textContent = `✅ CORRECTE! +15 pts`; mostrarEmoji(true, el); }
   else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); registrarFallada('examen', p.subtema, p.pag); }
 
-  actualizarMetricasCaso(cat, preguntaId, correcte); // NUEVO
+  actualizarMetricasCaso(cat, preguntaId, correcte);
   document.getElementById(`btn-sig-sit-${cat}`).disabled = false; actualitzarCoins(); guardar();
 }
 
-function seguentSituacio(e, cat) { // ARREGLADO
-  estat.sit[cat].idx++;
-  carregarSituacio(cat);
-}
+function seguentSituacio(e, cat) { estat.sit[cat].idx++; carregarSituacio(cat); }
 
 function iniciarExamen(e) { if(!potFerTests()) return mostrarPopupPase(); const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima]; if(totes.length < 30) { alert('Falten preguntes. Necessites 30 mínim.'); return; } estat.examen.preguntes = barrejarArray(totes).slice(0, 30); estat.examen.activa = true; estat.examen.index = 0; estat.examen.encerts = 0; estat.examen.fallos = 0; estat.examen.categoria = 'general'; document.getElementById('btn-iniciar-examen').style.display = 'none'; document.getElementById('btn-sig-examen').style.display = 'block'; iniciarTimerExamen(); carregarPreguntaExamen(); }
 function iniciarTimerExamen() { clearInterval(estat.examen.timer); estat.examen.temps = 1800; estat.examen.timer = setInterval(() => { estat.examen.temps--; const min = Math.floor(estat.examen.temps / 60); const seg = estat.examen.temps % 60; document.getElementById('examen-timer').textContent = `${min.toString().padStart(2,'0')}:${seg.toString().padStart(2,'0')}`; if(estat.examen.temps <= 0) finalitzarExamen(); }, 1000); }
