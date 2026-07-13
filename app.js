@@ -793,7 +793,7 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V8.16.3 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
+// ===== GASDRIVE DGT CAT V8.16.4 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -820,7 +820,7 @@ const MAPEO_PALABRAS_CLAVE = {
   'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
 };
 
-// SISTEMA PROGRESO V8.16.3 CON SET Y CAP DIARIO
+// SISTEMA PROGRESO V8.16.4 CON SET Y CAP DIARIO
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
     general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
@@ -869,7 +869,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V8.16.3 CAT carregat");
+  console.log("GasDrive V8.16.4 CAT carregat");
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -944,7 +944,7 @@ function calcularPreparacioDGT() {
 
   // 2. CONSTANCIA 40% - DIAS UNICOS
   const dies = PROGRESO.diesEstudi.size;
-  const constancia = Math.round((dies / 30) * 100); // CORREGIDO: tenia const
+  constancia = Math.round((dies / 30) * 100);
 
   // 3. COBERTURA 10% - DINAMICA
   let unicasTotales = new Set();
@@ -994,7 +994,7 @@ function comprovarNouDia() {
     const stats = calcularPreparacioDGT();
     estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio});
     if(estat.stats.historialEvolucio.length > 7) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null; // CORREGIDO
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
 
     // Reset cap diario
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
@@ -1048,7 +1048,7 @@ function dibuixarPuntsDebils() {
 
 function anarAPagina(pagina) { canviarTab(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== STATS REALES V8.16.3 COMPATIBLE CON HTML VIEJO =====
+// ===== STATS REALES V8.16.4 FIX BARRAS =====
 function actualitzarEstadistiques() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
@@ -1056,39 +1056,30 @@ function actualitzarEstadistiques() {
 
   document.getElementById('stats-global-percent').textContent = stats.preparacio + '%';
   document.getElementById('stats-global-bar').style.width = stats.preparacio + '%';
-  document.getElementById('stats-fetes').textContent = stats.total;
-  document.getElementById('stats-encerts').textContent = stats.unicas; // CORREGIDO: antes solo 2 cats
 
   let msg = "Estudia 20min al Temari per desbloquejar";
   if(estat.stats.paseCompletado) msg = "Pase Activo. A practicar 💪";
   if(stats.preparacio >= 90) msg = "Ja estàs llest per la DGT 💎";
   document.getElementById('stats-motivacio').textContent = msg;
 
-  // BARRAS VIEJAS COMPATIBLES
-  let totalTests = 0, encertsTests = 0;
-  Object.values(PROGRESO.tests).forEach(c => { totalTests += c.total; encertsTests += c.aciertos; });
-  const percentTests = totalTests > 0? Math.round((encertsTests/totalTests)*100) : 0;
-  if(document.getElementById('stats-test-percent')){
-    document.getElementById('stats-test-percent').textContent = percentTests + '%';
-    document.getElementById('stats-test-bar').style.width = percentTests + '%';
-  }
+  // BARRAS NUEVAS V8.16 - CON FALLBACK A 0%
+  const domini = stats.domini || 0;
+  document.getElementById('stats-domini-percent').textContent = domini + '%';
+  document.getElementById('stats-domini-bar').style.width = domini + '%';
 
-  let totalCasos = 0, encertsCasos = 0;
-  Object.values(PROGRESO.casos).forEach(c => { totalCasos += c.total; encertsCasos += c.aciertos; });
-  const percentCasos = totalCasos > 0? Math.round((encertsCasos/totalCasos)*100) : 0;
-  if(document.getElementById('stats-casos-percent')){
-    document.getElementById('stats-casos-percent').textContent = percentCasos + '%';
-    document.getElementById('stats-casos-bar').style.width = percentCasos + '%';
-  }
+  const constancia = stats.constancia || 0;
+  document.getElementById('stats-constancia-percent').textContent = constancia + '%';
+  document.getElementById('stats-constancia-bar').style.width = constancia + '%';
+  document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.dies}/30 dies`;
 
-  const percentEx = Math.min(100, (PROGRESO.examen.realitzats / 15) * 100);
-  if(document.getElementById('stats-examen-percent')){
-    document.getElementById('stats-examen-percent').textContent = Math.round(percentEx) + '%';
-    document.getElementById('stats-examen-bar').style.width = Math.round(percentEx) + '%';
-  }
+  const cobertura = stats.cobertura || 0;
+  document.getElementById('stats-temari-percent').textContent = cobertura + '%';
+  document.getElementById('stats-temari-bar').style.width = cobertura + '%';
 
-  document.getElementById('stats-temari-percent').textContent = stats.cobertura > 0? stats.cobertura + '%' : 'DESBLOQUEO';
-  document.getElementById('stats-temari-bar').style.width = stats.cobertura + '%';
+  const simulacres = stats.simulacres || 0;
+  document.getElementById('stats-simulacres-percent').textContent = simulacres + '%';
+  document.getElementById('stats-simulacres-bar').style.width = simulacres + '%';
+  document.getElementById('stats-examen-aprobados').textContent = `Exàmens fets: ${stats.exRealitzats}`;
 
   dibujarGraficaEvolucion();
   dibuixarPuntsDebils();
