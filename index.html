@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V8.13</title>
+<title>GasDrive DGT CAT V8.15</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -73,21 +73,27 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
 
-/* ===== NUEVO CSS V8.13 ESTADISTIQUES ===== */
+/* ===== NUEVO CSS V8.16 ESTADISTIQUES ===== */
 .stats-header{margin-bottom:15px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
 .stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
 .btn-dgt{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:16px;border-radius:12px;font-weight:900;font-size:15px;width:100%;margin-top:15px;cursor:pointer}
+.debil-item{background:#222;border:1px solid #333;border-radius:10px;padding:12px;margin:8px 0}
+.debil-item.debil{border-left:4px solid #f00}
+.big{font-size:50px;text-align:center;margin:10px 0}
+.pase-card{text-align:center}
+.orientacio-card h3{color:#00D9FF;margin-top:12px;font-size:15px}
+.orientacio-card p{color:#999;font-size:13px;margin:5px 0}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>🚘 GasDrive DGT CAT</h1>
-  <div class="subtitle">630 Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
+  <div class="subtitle">630+ Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
   <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700"></div>
 </div>
 
-<!-- ===== TAB ESTADISTIQUES V8.13 NUEVO DISEÑO ===== -->
+<!-- ===== TAB ESTADISTIQUES V8.16.3 NUEVO DISEÑO ===== -->
 <div id="tab-estadistiques" class="tab-content">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'stats','resum')">📊 RESUM</button>
@@ -105,37 +111,46 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div>
     </div>
 
+    <!-- BARRAS NUEVAS V8.16 -->
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>📝</span> <b>Tests Teóricos</b></div>
-        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-test-percent">0%</div>
+        <div><span>💪</span> <b>Domini Teòric 40%</b></div>
+        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-domini-percent">0%</div>
       </div>
-      <div class="progress-bar"><div class="progress-fill" id="stats-test-bar"></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div>
     </div>
 
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>🚦</span> <b>Casos Prácticos</b></div>
-        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-casos-percent">0%</div>
+        <div><span>📅</span> <b id="stats-constancia-label">CONSTÀNCIA: 0/30 dies</b></div>
+        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-constancia-percent">0%</div>
       </div>
-      <div class="progress-bar"><div class="progress-fill" id="stats-casos-bar"></div></div>
+      <div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div>
     </div>
 
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>📋</span> <b>Exámenes Reales</b></div>
-        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-examen-percent">0%</div>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="stats-examen-bar"></div></div>
-      <div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Aprovats: 0</div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-card-header">
-        <div><span>📖</span> <b>Temarios Leídos</b></div>
-        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">DESBLOQUEO</div>
+        <div><span>📖</span> <b>Cobertura Banc 10%</b></div>
+        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-card-header">
+        <div><span>📋</span> <b>Simulacres 10%</b></div>
+        <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-simulacres-percent">0%</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div>
+      <div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Exàmens fets: 0</div>
+    </div>
+
+    <!-- BARRAS VIEJAS COMPATIBLES - OCULTAS PERO PARA QUE NO ROMPA -->
+    <div style="display:none">
+      <div id="stats-test-percent"></div><div id="stats-test-bar"></div>
+      <div id="stats-casos-percent"></div><div id="stats-casos-bar"></div>
+      <div id="stats-examen-percent"></div><div id="stats-examen-bar"></div>
+      <div id="stats-fetes"></div>
     </div>
 
     <button class="btn-dgt" id="btn-dgt-oficial">
@@ -256,6 +271,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=8.14"></script>
+<script src="./app.js?v=8.15"></script>
 </body>
 </html>
