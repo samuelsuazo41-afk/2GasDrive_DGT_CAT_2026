@@ -796,10 +796,27 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V8.13 - MATE POR DIA + EVOLUCION =====
+// ===== GASDRIVE DGT CAT V8.15.2 - COMPLETO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
+let contadorTemari = null;
+let sitCategoriaActiva = 'clima';
+
+const TOTAL_PREGUNTES_BANC = 630;
+
+// MAPEO PARA AUTO-ASIGNAR SUBTEMA Y PAGINA
+const MAPEO_PALABRAS_CLAVE = {
+  'velocitat': {subtema: 'Velocitat i Limits', pag: 22}, 'alcohol': {subtema: 'Alcohol i Drogues', pag: 26}, 'drogues': {subtema: 'Alcohol i Drogues', pag: 26},
+  'prioritat': {subtema: 'Prioritat i Preferència', pag: 12}, 'rotonda': {subtema: 'Rotondes', pag: 14}, 'cinturó': {subtema: 'Elements Seguretat', pag: 33},
+  'mòbil': {subtema: 'Distraccions', pag: 34}, 'distància': {subtema: 'Distància Seguretat', pag: 24}, 'avançar': {subtema: 'Avançaments', pag: 16},
+  'semàfor': {subtema: 'Semàfors', pag: 40}, 'stop': {subtema: 'Senyals STOP i Cedeix', pag: 45}, 'cedeix': {subtema: 'Senyals STOP i Cedeix', pag: 45},
+  'prohibició': {subtema: 'Senyals Prohibició', pag: 46}, 'perill': {subtema: 'Senyals Perill', pag: 53}, 'punts': {subtema: 'Multes i Punts', pag: 30},
+  'multa': {subtema: 'Multes i Punts', pag: 30}, 'itv': {subtema: 'Documentació Vehicle', pag: 38}, 'pneumàtic': {subtema: 'Pneumàtics', pag: 92},
+  'oli': {subtema: 'Nivells i Líquids', pag: 88}, 'fre': {subtema: 'Sistema Frenada', pag: 89}, 'RCP': {subtema: 'PCR i Reanimació', pag: 96},
+  'hemorràgia': {subtema: 'Hemorràgies', pag: 100}, 'CO2': {subtema: 'Contaminació', pag: 103}, 'ZBE': {subtema: 'Zones Baixes Emissions', pag: 105},
+  'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
+};
 
 let estat = {
   coins: parseInt(localStorage.getItem('gd_coins')) || 0,
@@ -807,18 +824,19 @@ let estat = {
   accessoris: JSON.parse(localStorage.getItem('gd_accessoris')) || [],
   emojis: JSON.parse(localStorage.getItem('gd_emojis')) || [],
   historial: JSON.parse(localStorage.getItem('gd_historial')) || [],
-  stats: JSON.parse(localStorage.getItem('gd_stats')) || { tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false },
+  stats: JSON.parse(localStorage.getItem('gd_stats')) || {
+    tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false,
+    puntsDebils: {}, preguntesFetes: 0, encertsTotals: 0, perCategoria: {}, historialEvolucio: []
+  },
   test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} },
   examen: { activa: false, preguntes: [], index: 0, encerts: 0, fallos: 0, timer: null, temps: 1800, categoria: 'general' },
   sit: { clima: {idx:0,encerts:0,puntuacio:0,current:null}, urbà: {idx:0,encerts:0,puntuacio:0,current:null}, carretera: {idx:0,encerts:0,puntuacio:0,current:null}, emergència: {idx:0,encerts:0,puntuacio:0,current:null} }
 };
 
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
-let sitCategoriaActiva = 'clima';
-let contadorTemari = null;
 
 function init() {
-  console.log("GasDrive V8.13 CAT carregat");
+  console.log("GasDrive V8.15.2 CAT carregat");
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -839,43 +857,25 @@ function guardar() {
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-
-// ===== 1. TIEMPO SOLO PARA DESBLOQUEO V8.13.1 FIX =====
+// ===== 1. PASE 20 MIN =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
-  
-  actualitzarPaseUI(); // Mostrar tiempo al entrar
-
+  actualitzarPaseUI();
   contadorTemari = setInterval(() => {
     const tabTemari = document.getElementById('tab-temari');
     if(tabTemari && tabTemari.classList.contains('active')) {
       if(tempsIniciTemari === null) tempsIniciTemari = Date.now();
-      
-      const ara = Date.now();
-      const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-      
-      estat.stats.tempsEstudiatAvui += minutsPassats;
-      tempsIniciTemari = ara;
-      guardar();
-      
-      actualitzarPaseUI(); // ACTUALIZAR UI CADA 2 SEG
-
+      const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+      estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
       if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
-        estat.stats.paseCompletado = true;
-        estat.coins += 50;
-        guardar();
+        estat.stats.paseCompletado = true; estat.coins += 50; guardar();
         alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
         actualitzarEstadistiques();
       }
-    } else { 
-      // FIX: Guardar tiempo antes de resetear al salir del temari
+    } else {
       if(tempsIniciTemari!== null) {
-        const ara = Date.now();
-        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        estat.stats.tempsEstudiatAvui += minutsPassats;
-        tempsIniciTemari = null;
-        guardar();
-        actualitzarPaseUI();
+        const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
       }
     }
   }, 2000);
@@ -884,130 +884,87 @@ function iniciarComptadorTemari() {
 function comprovarNouDia() {
   const avui = new Date().toISOString().split('T')[0];
   if(estat.stats.diaActual!== avui) {
-    estat.stats = { tempsEstudiatAvui: 0, diaActual: avui, paseCompletado: false };
-    tempsIniciTemari = null;
-    guardar();
-    actualitzarPaseUI(); // Resetear UI al cambiar de dia
+    const percentAhir = estat.stats.preguntesFetes > 0? Math.round((estat.stats.encertsTotals / estat.stats.preguntesFetes) * 100) : 0;
+    estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: percentAhir});
+    if(estat.stats.historialEvolucio.length > 7) estat.stats.historialEvolucio.shift();
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
   }
 }
 
-// NUEVA FUNCION - PEGALA DEBAJO DE ESTAS 2
 function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
-  const el = document.getElementById('pase-temps');
-  if(el) el.textContent = `${minuts} min`;
-  
-  // Actualizar también el mensaje del RESUM
+  const el = document.getElementById('pase-temps'); if(el) el.textContent = `${minuts} min`;
   const msg = document.getElementById('stats-motivacio');
-  if(msg) {
-    if(estat.stats.paseCompletado) {
-      msg.textContent = "Pase Activo. A practicar 💪";
-    } else {
-      const falten = Math.max(0, 20 - minuts);
-      msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`;
-    }
-  }
+  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
 }
 
-// NUEVA FUNCION - PEGALA DEBAJO DE ESTAS 2
-function actualitzarPaseUI() {
-  const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
-  const el = document.getElementById('pase-temps');
-  if(el) el.textContent = `${minuts} min`;
-  
-  // Actualizar también el mensaje del RESUM
-  const msg = document.getElementById('stats-motivacio');
-  if(msg) {
-    if(estat.stats.paseCompletado) {
-      msg.textContent = "Pase Activo. A practicar 💪";
-    } else {
-      const falten = Math.max(0, 20 - minuts);
-      msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`;
-    }
+// ===== 2. AUTO-MAPEO =====
+function autoMapearTotesPreguntes() {
+  for(let cat in PREGUNTES) {
+    PREGUNTES[cat] = PREGUNTES[cat].map(p => {
+      let subtema = 'General'; let pag = 1;
+      for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
+      return {...p, subtema, pag};
+    });
   }
+  console.log('✅ BANCO MAPEADO. Copia el JSON de abajo');
+  console.log(JSON.stringify(PREGUNTES));
 }
 
-// ===== 2. MATE NUEVA: SOLO CUENTA EL DIA ACTUAL =====
-function guardarResultat(categoria, encerts, total, tipus='test') {
-  estat.historial.push({ categoria, encerts, total, tipus, percentatge: Math.round(encerts/total*100), data: new Date().toISOString().split('T')[0] });
-  if(estat.historial.length > 500) estat.historial.shift();
-  guardar();
+// ===== 3. PUNTOS DEBILS =====
+function registrarFallada(categoria, subtema, pagina) {
+  if(!estat.stats.puntsDebils) estat.stats.puntsDebils = {};
+  if(!estat.stats.puntsDebils[categoria]) estat.stats.puntsDebils[categoria] = {};
+  if(!estat.stats.puntsDebils[categoria][subtema]) { estat.stats.puntsDebils[categoria][subtema] = {fallos: 0, pag: pagina}; }
+  estat.stats.puntsDebils[categoria][subtema].fallos++; guardar();
+}
+
+function dibuixarPuntsDebils() {
+  const cont = document.getElementById('stats-debils-lista'); if(!cont) return; cont.innerHTML = '';
+  if(!estat.stats.puntsDebils || Object.keys(estat.stats.puntsDebils).length === 0) { cont.innerHTML = '<div style="text-align:center;color:#999">Fes més tests per detectar els teus punts dèbils</div>'; return; }
+  ['general','senyals','normes','mecanica','auxilis','mediambient','examen'].forEach(cat => {
+    if(estat.stats.puntsDebils[cat]) {
+      let maxFallos = 0; let pitjorSubtema = 'General'; let pag = 1;
+      for(let sub in estat.stats.puntsDebils[cat]) { if(estat.stats.puntsDebils[cat][sub].fallos > maxFallos) { maxFallos = estat.stats.puntsDebils[cat][sub].fallos; pitjorSubtema = sub; pag = estat.stats.puntsDebils[cat][sub].pag; } }
+      const percentFallo = Math.min(100, maxFallos * 20);
+      cont.innerHTML += `<div class="debil-item debil"><div style="font-weight:700">${cat === 'examen'? '📋 EXAMEN' : '📋 ' + cat.toUpperCase()}</div><div>Fallas: ${percentFallo}% en "${pitjorSubtema}"</div><div style="margin:8px 0;color:#FFD700">💡 RECOMANACIÓ:</div><div>Estudia TEMARI > Pàg ${pag}</div><button class="btn" style="margin-top:8px;width:100%" onclick="anarAPagina(${pag})">ANAR AL TEMARI</button></div>`;
+    }
+  });
+}
+
+function anarAPagina(pagina) { canviarTab(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
+
+// ===== 4. STATS REALES =====
+function guardarResultatsTest(categoria, encerts, total) {
+  if(!estat.stats.perCategoria) estat.stats.perCategoria = {};
+  if(!estat.stats.perCategoria[categoria]) estat.stats.perCategoria[categoria] = {fetes:0, encerts:0};
+  estat.stats.perCategoria[categoria].fetes += total; estat.stats.perCategoria[categoria].encerts += encerts;
+  estat.stats.preguntesFetes += total; estat.stats.encertsTotals += encerts; guardar();
 }
 
 function calcularPercentatgeGlobal() {
+  const fetes = estat.stats.preguntesFetes || 0; const encerts = estat.stats.encertsTotals || 0;
+  const percentGlobal = fetes > 0? Math.round((encerts / fetes) * 100) : 0; const percentProgres = Math.round((fetes / TOTAL_PREGUNTES_BANC) * 100);
   const avui = estat.stats.diaActual;
-
-  // 1. TESTS DEL DIA
-  const dadesTest = estat.historial.filter(r => r.tipus === 'test' && r.data === avui);
-  const encertsTest = dadesTest.reduce((a,r)=>a+r.encerts,0);
-  const totalTest = dadesTest.reduce((a,r)=>a+r.total,0);
-  const percentTest = totalTest > 0? Math.round(encertsTest/totalTest*100) : 0;
-
-  // 2. CASOS DEL DIA
-  const dadesCasos = estat.historial.filter(r => r.tipus === 'casos' && r.data === avui);
-  const encertsCasos = dadesCasos.reduce((a,r)=>a+r.encerts,0);
-  const totalCasos = dadesCasos.reduce((a,r)=>a+r.total,0);
-  const percentCasos = totalCasos > 0? Math.round(encertsCasos/totalCasos*100) : 0;
-
-  // 3. EXAMEN DEL DIA
-  const dadesExamen = estat.historial.filter(r => r.tipus === 'examen' && r.data === avui);
-  const percentExamen = dadesExamen.length > 0? Math.round(dadesExamen[dadesExamen.length-1].percentatge) : 0;
-
-  // 4. TEMARIOS = 0%. Ya no suma. Solo sirve para desbloquear
-  const percentTemari = 0;
-
-  // GLOBAL = PROMEDIO DE 3. Sin temario
-  const divisor = 3;
-  const global = Math.round((percentTest + percentCasos + percentExamen) / divisor);
-
-  return {global, percentTest, percentCasos, percentExamen, percentTemari};
+  const dadesTest = estat.historial.filter(r => r.tipus === 'test' && r.data === avui); const encertsTest = dadesTest.reduce((a,r)=>a+r.encerts,0); const totalTest = dadesTest.reduce((a,r)=>a+r.total,0); const percentTest = totalTest > 0? Math.round(encertsTest/totalTest*100) : 0;
+  const dadesCasos = estat.historial.filter(r => r.tipus === 'casos' && r.data === avui); const encertsCasos = dadesCasos.reduce((a,r)=>a+r.encerts,0); const totalCasos = dadesCasos.reduce((a,r)=>a+r.total,0); const percentCasos = totalCasos > 0? Math.round(encertsCasos/totalCasos*100) : 0;
+  const dadesExamen = estat.historial.filter(r => r.tipus === 'examen' && r.data === avui); const percentExamen = dadesExamen.length > 0? Math.round(dadesExamen[dadesExamen.length-1].percentatge) : 0;
+  return {global: percentGlobal, progres: percentProgres, percentTest, percentCasos, percentExamen, percentTemari: 0};
 }
 
-// NUEVO: DATOS PARA GRAFICA EVOLUCION 7 DIAS
-function getDadesEvolucio() {
-  const dies = [];
-  for(let i = 6; i >= 0; i--) {
-    const data = new Date();
-    data.setDate(data.getDate() - i);
-    const diaStr = data.toISOString().split('T')[0];
+function getDadesEvolucio() { return estat.stats.historialEvolucio.map(h => ({dia: h.dia.split('-')[2], global: h.percent})); }
 
-    const hDia = estat.historial.filter(r => r.data === diaStr);
-    const t = hDia.filter(r=>r.tipus==='test'); const c = hDia.filter(r=>r.tipus==='casos'); const e = hDia.filter(r=>r.tipus==='examen');
-    const pt = t.length? Math.round(t.reduce((a,r)=>a+r.encerts,0)/t.reduce((a,r)=>a+r.total,0)*100):0;
-    const pc = c.length? Math.round(c.reduce((a,r)=>a+r.encerts,0)/c.reduce((a,r)=>a+r.total,0)*100):0;
-    const pe = e.length? e[e.length-1].percentatge:0;
-    const pg = Math.round((pt+pc+pe)/3);
-    dies.push({dia: diaStr.split('-')[2], global: pg});
-  }
-  return dies;
-}
-
-// ===== 3. BLOQUEO =====
 function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== 4. GUARDAR TIEMPO AL SALIR =====
 function canviarTab(e, tab) {
-  if(document.getElementById('tab-temari').classList.contains('active')) {
-    if(tempsIniciTemari!== null) {
-      const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
-      estat.stats.tempsEstudiatAvui += minutsPassats;
-      tempsIniciTemari = Date.now();
-      guardar();
-    }
-  }
+  if(document.getElementById('tab-temari').classList.contains('active')) { if(tempsIniciTemari!== null) { const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60; estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = Date.now(); guardar(); } }
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  e.target.closest('.tab-btn').classList.add('active');
-  if(tab === 'garage') carregarGaratge();
-  if(tab === 'tienda') carregarBotiga();
-  if(tab === 'tips') carregarTips();
-  if(tab === 'temari') carregarTemari();
-  if(tab === 'test') carregarPregunta('general');
-  if(tab === 'situaciones') carregarSituacio(sitCategoriaActiva);
-  if(tab === 'estadistiques') actualitzarEstadistiques();
+  document.getElementById('tab-' + tab).classList.add('active'); if(e) e.target.closest('.tab-btn').classList.add('active');
+  if(tab === 'garage') carregarGaratge(); if(tab === 'tienda') carregarBotiga(); if(tab === 'tips') carregarTips(); if(tab === 'temari') carregarTemari();
+  if(tab === 'test') carregarPregunta('general'); if(tab === 'situaciones') carregarSituacio(sitCategoriaActiva); if(tab === 'estadistiques') actualitzarEstadistiques();
   if(['test', 'situaciones', 'examen'].includes(tab) &&!potFerTests()) { mostrarPopupPase(); }
 }
 
@@ -1016,51 +973,121 @@ function canviarSubTab(e, tab, subtab) {
   const contenidor = document.getElementById('tab-' + tabId);
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-  e.target.classList.add('active');
-  document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`).classList.add('active');
-  if(tab === 'test') carregarPregunta(subtab);
-  if(tab === 'sit') carregarSituacio(subtab);
-  if(tab === 'stats') actualitzarEstadistiques();
+  e.target.classList.add('active'); document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`).classList.add('active');
+  if(tab === 'test') carregarPregunta(subtab); if(tab === 'sit') carregarSituacio(subtab); if(tab === 'stats') actualitzarEstadistiques();
   if(tab === 'test' &&!potFerTests()) { setTimeout(() => { document.querySelectorAll('.opcio').forEach(o => o.style.pointerEvents = 'none'); }, 100); }
 }
 
 function mostrarEmoji(encert, element) { const llista = encert? EMOJIS_ENCERT : EMOJIS_FALLO; const emoji = llista[Math.floor(Math.random() * llista.length)]; const span = document.createElement('span'); span.textContent = emoji; span.style.cssText = 'position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:32px;animation:bounceIn 0.4s;pointer-events:none;z-index:999;'; element.style.position = 'relative'; element.appendChild(span); setTimeout(() => span.remove(), 600); if(navigator.vibrate) navigator.vibrate(encert? [30,20,30] : 100); }
 
-// TEST / CASOS / EXAMEN / GARAGE / BOTIGA / TIPS / TEMARI - IGUAL QUE V8.12
+// ===== TEST / CASOS / EXAMEN / GARAGE / BOTIGA / TIPS / TEMARI - IGUAL QUE TU V8.13 =====
 function carregarPregunta(cat) { const s = estat.test[cat]; const preguntes = barrejarArray(PREGUNTES[cat]); if(!preguntes || preguntes.length === 0) return; const pOriginal = preguntes[s.idx % preguntes.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`test-${cat}-pregunta`).textContent = p.q; document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`test-${cat}-racha`).textContent = s.ratxa; document.getElementById(`test-${cat}-score`).textContent = s.puntuacio; document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`; const cont = document.getElementById(`test-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`test-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-test-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreTest(cat, i, this); }; cont.appendChild(div); }); }
-function respondreTest(cat, idx, el) { if(!potFerTests()) return mostrarPopupPase(); const s = estat.test[cat]; const p = s.current; const cont = document.getElementById(`test-${cat}-opciones`); if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return; cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada')); const correcte = idx === p.ok; if(correcte) { el.classList.add('correcta'); s.encerts++; s.ratxa++; s.puntuacio += 10 + (s.ratxa * 2); estat.coins += 5; document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; mostrarEmoji(true, el); } else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); s.ratxa = 0; } document.getElementById(`btn-sig-test-${cat}`).disabled = false; actualitzarCoins(); guardar(); }
-function seguentTest(e, cat) { const s = estat.test[cat]; if(s.current) guardarResultat(cat, s.encerts, s.idx + 1); estat.test[cat].idx++; carregarPregunta(cat); }
+
+function respondreTest(cat, idx, el) {
+  if(!potFerTests()) return mostrarPopupPase();
+  const s = estat.test[cat]; const p = s.current; const cont = document.getElementById(`test-${cat}-opciones`);
+  if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+  cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
+  const correcte = idx === p.ok;
+  if(correcte) { el.classList.add('correcta'); s.encerts++; s.ratxa++; s.puntuacio += 10 + (s.ratxa * 2); estat.coins += 5; document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; mostrarEmoji(true, el); }
+  else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); s.ratxa = 0; registrarFallada(cat, p.subtema, p.pag); } // NUEVO
+  document.getElementById(`btn-sig-test-${cat}`).disabled = false; actualitzarCoins(); guardar();
+}
+
+function seguentTest(e, cat) { const s = estat.test[cat]; if(s.current) { guardarResultatsTest(cat, s.encerts, s.idx + 1); guardarResultat(cat, s.encerts, s.idx + 1); } estat.test[cat].idx++; carregarPregunta(cat); }
+
 function carregarSituacio(cat) { if(!cat) cat = sitCategoriaActiva; const s = estat.sit[cat]; const casos = barrejarArray(SITUACIONS[cat]); if(!casos || casos.length === 0) return; const pOriginal = casos[s.idx % casos.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`sit-${cat}-pregunta`).textContent = p.q; document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio; document.getElementById(`sit-${cat}-progress`).style.width = `${((s.idx % casos.length)/casos.length)*100}%`; const cont = document.getElementById(`sit-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`sit-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-sit-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreSituacio(cat, i, this); }; cont.appendChild(div); }); }
-function respondreSituacio(cat, idx, el) { if(!potFerTests()) return mostrarPopupPase(); const s = estat.sit[cat]; const p = s.current; const cont = document.getElementById(`sit-${cat}-opciones`); if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return; cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada')); const correcte = idx === p.ok; if(correcte) { el.classList.add('correcta'); s.encerts++; s.puntuacio += 15; estat.coins += 10; document.getElementById(`sit-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`sit-${cat}-feedback`).textContent = `✅ CORRECTE! +15 pts`; mostrarEmoji(true, el); } else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); } document.getElementById(`btn-sig-sit-${cat}`).disabled = false; actualitzarCoins(); guardar(); }
-function seguentSituacio(e, cat) { const s = estat.sit[cat]; if(s.current) guardarResultat(cat, s.encerts, s.idx + 1, 'casos'); estat.sit[cat].idx++; carregarSituacio(cat); }
+
+function respondreSituacio(cat, idx, el) {
+  if(!potFerTests()) return mostrarPopupPase();
+  const s = estat.sit[cat]; const p = s.current; const cont = document.getElementById(`sit-${cat}-opciones`);
+  if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+  cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
+  const correcte = idx === p.ok;
+  if(correcte) { el.classList.add('correcta'); s.encerts++; s.puntuacio += 15; estat.coins += 10; document.getElementById(`sit-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`sit-${cat}-feedback`).textContent = `✅ CORRECTE! +15 pts`; mostrarEmoji(true, el); }
+  else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); registrarFallada('examen', p.subtema, p.pag); } // NUEVO
+  document.getElementById(`btn-sig-sit-${cat}`).disabled = false; actualitzarCoins(); guardar();
+}
+
+function seguentSituacio(e, cat) { const s = estat.sit[cat]; if(s.current) { guardarResultatsTest('examen', s.encerts, s.idx + 1); guardarResultat(cat, s.encerts, s.idx + 1, 'casos'); } estat.sit[cat].idx++; carregarSituacio(cat); }
+
 function iniciarExamen(e) { if(!potFerTests()) return mostrarPopupPase(); const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima]; if(totes.length < 30) { alert('Falten preguntes. Necessites 30 mínim.'); return; } estat.examen.preguntes = barrejarArray(totes).slice(0, 30); estat.examen.activa = true; estat.examen.index = 0; estat.examen.encerts = 0; estat.examen.fallos = 0; estat.examen.categoria = 'general'; document.getElementById('btn-iniciar-examen').style.display = 'none'; document.getElementById('btn-sig-examen').style.display = 'block'; iniciarTimerExamen(); carregarPreguntaExamen(); }
 function iniciarTimerExamen() { clearInterval(estat.examen.timer); estat.examen.temps = 1800; estat.examen.timer = setInterval(() => { estat.examen.temps--; const min = Math.floor(estat.examen.temps / 60); const seg = estat.examen.temps % 60; document.getElementById('examen-timer').textContent = `${min.toString().padStart(2,'0')}:${seg.toString().padStart(2,'0')}`; if(estat.examen.temps <= 0) finalitzarExamen(); }, 1000); }
 function carregarPreguntaExamen() { if(estat.examen.index >= 30) return finalitzarExamen(); const pOriginal = estat.examen.preguntes[estat.examen.index]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; estat.examen.preguntes[estat.examen.index] = p; document.getElementById('examen-num').textContent = estat.examen.index + 1; document.getElementById('examen-aciertos').textContent = estat.examen.encerts; document.getElementById('examen-progress').style.width = `${(estat.examen.index/30)*100}%`; document.getElementById('examen-pregunta').textContent = p.q; const cont = document.getElementById('examen-opciones'); cont.innerHTML = ''; document.getElementById('btn-sig-examen').disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreExamen(i, this); }; cont.appendChild(div); }); }
-function respondreExamen(idx, el) { const p = estat.examen.preguntes[estat.examen.index]; const cont = document.getElementById('examen-opciones'); if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return; cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada')); const correcte = idx === p.ok; if(correcte) { el.classList.add('correcta'); estat.examen.encerts++; estat.coins += 20; mostrarEmoji(true, el); } else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); estat.examen.fallos++; mostrarEmoji(false, el); } document.getElementById('btn-sig-examen').disabled = false; document.getElementById('examen-aciertos').textContent = estat.examen.encerts; actualitzarCoins(); guardar(); }
-function seguentPreguntaExamen(e) { guardarResultat('examen', estat.examen.encerts, estat.examen.index + 1, 'examen'); estat.examen.index++; if(estat.examen.index >= 30) { finalitzarExamen(); } else { carregarPreguntaExamen(); } }
+function respondreExamen(idx, el) { const p = estat.examen.preguntes[estat.examen.index]; const cont = document.getElementById('examen-opciones'); if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return; cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada')); const correcte = idx === p.ok; if(correcte) { el.classList.add('correcta'); estat.examen.encerts++; estat.coins += 20; mostrarEmoji(true, el); } else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); estat.examen.fallos++; mostrarEmoji(false, el); registrarFallada('examen', p.subtema, p.pag); } // NUEVO
+document.getElementById('btn-sig-examen').disabled = false; document.getElementById('examen-aciertos').textContent = estat.examen.encerts; actualitzarCoins(); guardar(); }
+function seguentPreguntaExamen(e) { guardarResultatsTest('examen', estat.examen.encerts, estat.examen.index + 1); guardarResultat('examen', estat.examen.encerts, estat.examen.index + 1, 'examen'); estat.examen.index++; if(estat.examen.index >= 30) { finalitzarExamen(); } else { carregarPreguntaExamen(); } }
 function finalitzarExamen() { clearInterval(estat.examen.timer); estat.examen.activa = false; const nota = estat.examen.encerts; const aprovat = nota >= 27; const res = document.getElementById('examen-resultat'); res.style.display = 'block'; if(aprovat) { res.innerHTML = `<h2 style="color:#2ecc71">✅ APROVAT!</h2><p style="font-size:24px">${nota}/30</p><p>Encerts: ${nota} | Fallos: ${estat.examen.fallos}</p><p>Has guanyat +${nota*20} coins</p><button class="btn" onclick="reiniciarExamen()">Fer un altre examen</button>`; estat.coins += nota * 20; } else { res.innerHTML = `<h2 style="color:#e74c3c">❌ SUSPÈS</h2><p style="font-size:24px">${nota}/30</p><p>Encerts: ${nota} | Fallos: ${estat.examen.fallos}</p><p>Necessites 27 encerts mínim</p><button class="btn" onclick="reiniciarExamen()">Tornar a provar</button>`; } actualitzarCoins(); guardar(); actualitzarEstadistiques(); }
 function reiniciarExamen() { document.getElementById('examen-resultat').style.display = 'none'; document.getElementById('btn-iniciar-examen').style.display = 'block'; document.getElementById('btn-sig-examen').style.display = 'none'; document.getElementById('examen-pregunta').textContent = "Prem Inicia l'Examen"; document.getElementById('examen-opciones').innerHTML = ''; document.getElementById('examen-num').textContent = '0'; document.getElementById('examen-aciertos').textContent = '0'; document.getElementById('examen-progress').style.width = '0%'; document.getElementById('examen-timer').textContent = '30:00'; }
+
 function carregarGaratge() { const cont = document.getElementById('garage-lista'); cont.innerHTML = ''; let hpTotal = 90; estat.accessoris.forEach(id => { const acc = ACCESSORIS.find(a => a.id === id); if(acc) hpTotal += acc.hp; }); document.getElementById('garage-score').textContent = `🏎️ ${hpTotal} CV`; COTXES.forEach(cotxe => { const desbloquejat = estat.cotxes.includes(cotxe.id); const div = document.createElement('div'); div.className = 'garage-car' + (desbloquejat? '' : ' locked'); div.innerHTML = `<div style="font-size:40px; filter:${cotxe.color}">${cotxe.emoji}</div><div>${cotxe.nom}</div><div style="color:#667eea">${cotxe.cv} CV</div>${!desbloquejat? `<button class="btn-buy" onclick="comprarCotxe('${cotxe.id}')">Comprar ${cotxe.preu}💰</button>` : '<div style="color:#2ecc71">✓ Propietari</div>'}`; cont.appendChild(div); }); }
 function comprarCotxe(id) { const cotxe = COTXES.find(c => c.id === id); if(!cotxe) return; if(estat.coins < cotxe.preu) { alert('No tens prous coins'); return; } estat.coins -= cotxe.preu; estat.cotxes.push(id); guardar(); actualitzarCoins(); carregarGaratge(); }
+
 function carregarBotiga() { const cont = document.getElementById('emoji-tienda'); cont.innerHTML = ''; ACCESSORIS.forEach(acc => { const comprat = estat.accessoris.includes(acc.id); const div = document.createElement('div'); div.className = 'emoji-item' + (comprat? ' locked' : ''); div.innerHTML = `<div style="font-size:40px">${acc.emoji}</div><div>${acc.nom}</div><div style="color:#667eea">+${acc.hp} CV</div>${!comprat? `<button class="btn-buy" onclick="comprarAccessoris('${acc.id}')">Comprar ${acc.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`; cont.appendChild(div); }); EMOJI_BOTIGA.forEach(emoji => { const comprat = estat.emojis.includes(emoji.id); const div = document.createElement('div'); div.className = 'emoji-item' + (comprat? ' locked' : ''); div.innerHTML = `<div style="font-size:40px">${emoji.emoji}</div><div>${emoji.nom}</div><div style="color:#667eea">Cosmètic</div>${!comprat? `<button class="btn-buy" onclick="comprarEmoji('${emoji.id}')">Comprar ${emoji.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`; cont.appendChild(div); }); }
 function comprarAccessoris(id) { const acc = ACCESSORIS.find(a => a.id === id); if(!acc) return; if(estat.coins < acc.preu) { alert('No tens prous coins'); return; } estat.coins -= acc.preu; estat.accessoris.push(id); guardar(); actualitzarCoins(); carregarBotiga(); }
 function comprarEmoji(id) { const emoji = EMOJI_BOTIGA.find(e => e.id === id); if(!emoji) return; if(estat.coins < emoji.preu) { alert('No tens prous coins'); return; } estat.coins -= emoji.preu; estat.emojis.push(id); guardar(); actualitzarCoins(); carregarBotiga(); }
+
 function carregarTips() { tipsData = TIPS; currentTip = 0; mostrarTip(); }
 function mostrarTip() { if (tipsData.length === 0) return; const tip = tipsData[currentTip]; document.getElementById('tip-content').innerHTML = `<div class="tip-emoji">${tip.emoji}</div><div class="tip-text">${tip.txt}</div>`; document.getElementById('tip-counter').textContent = `${currentTip + 1} / ${tipsData.length}`; }
 function nextTip(e) { currentTip = (currentTip + 1) % tipsData.length; mostrarTip(); }
 function prevTip(e) { currentTip = (currentTip - 1 + tipsData.length) % tipsData.length; mostrarTip(); }
-function carregarTemari() { const container = document.getElementById('temari-lista'); container.innerHTML = `<div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')"><div style="font-size:40px">🚦</div><div>Senyals</div></div><div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')"><div style="font-size:40px">📋</div><div>Normes</div></div><div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')"><div style="font-size:40px">🚑</div><div>Auxilis</div></div><div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')"><div style="font-size:40px">⚙️</div><div>Mecanica</div></div><div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')"><div style="font-size:40px">♻️</div><div>Medi Ambient</div></div>`; }
-function obrirPDF(ruta) { const modal = document.createElement('div'); modal.id = 'pdf-modal'; modal.style.cssText = `position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999;display:flex;flex-direction:column;`; modal.innerHTML = `<div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333"><button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button><div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div><div style="width:60px"></div></div><iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>`; document.body.appendChild(modal); }
-function tancarPDF() { const modal = document.getElementById('pdf-modal'); if(modal) modal.remove(); }
 
-// ===== 5. ESTADISTIQUES + EVOLUCION =====
+function carregarTemari() { 
+  const container = document.getElementById('temari-lista'); 
+  container.innerHTML = `
+    <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')">
+      <div style="font-size:40px">🚦</div>
+      <div>Senyals</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')">
+      <div style="font-size:40px">📋</div>
+      <div>Normes</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./03_Manual_IX_Primers_Auxilis_2025.pdf')">
+      <div style="font-size:40px">🚑</div>
+      <div>Auxilis</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./04_Manual_VIII_Mecanica_2024.pdf')">
+      <div style="font-size:40px">⚙️</div>
+      <div>Mecanica</div>
+    </div>
+    <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')">
+      <div style="font-size:40px">♻️</div>
+      <div>Medi Ambient</div>
+    </div>
+  `; 
+}
+
+function obrirPDF(ruta) { 
+  const modal = document.createElement('div'); 
+  modal.id = 'pdf-modal'; 
+  modal.style.cssText = `position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0a;z-index:9999;display:flex;flex-direction:column;`; 
+  modal.innerHTML = `
+    <div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333">
+      <button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button>
+      <div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div>
+      <div style="width:60px"></div>
+    </div>
+    <iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>
+  `; 
+  document.body.appendChild(modal); 
+}
+
+function tancarPDF() { 
+  const modal = document.getElementById('pdf-modal'); 
+  if(modal) modal.remove(); 
+}
+
+// ===== 5. ESTADISTIQUES + EVOLUCION + PUNTOS DEBILS =====
 function actualitzarEstadistiques() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
   const stats = calcularPercentatgeGlobal();
 
   document.getElementById('stats-global-percent').textContent = stats.global + '%';
-  document.getElementById('stats-global-bar').style.width = stats.global + '%';
+  document.getElementById('stats-global-bar').style.width = stats.progres + '%';
+  document.getElementById('stats-fetes').textContent = estat.stats.preguntesFetes;
+  document.getElementById('stats-encerts').textContent = estat.stats.encertsTotals;
 
   let msg = "Estudia 20min al Temari per desbloquejar";
   if(estat.stats.paseCompletado) msg = "Pase Activo. A practicar 💪";
@@ -1083,6 +1110,7 @@ function actualitzarEstadistiques() {
   document.getElementById('stats-temari-bar').style.width = estat.stats.paseCompletado? '100%' : '0%';
 
   dibujarGraficaEvolucion(); // NUEVO
+  dibuixarPuntsDebils(); // NUEVO
 
   const btnDGT = document.getElementById('btn-dgt-oficial');
   if(stats.global >= 90) {
