@@ -793,7 +793,7 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V8.16.2 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
+// ===== GASDRIVE DGT CAT V8.16.3 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -820,7 +820,7 @@ const MAPEO_PALABRAS_CLAVE = {
   'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
 };
 
-// SISTEMA PROGRESO V8.16.2 CON SET Y CAP DIARIO
+// SISTEMA PROGRESO V8.16.3 CON SET Y CAP DIARIO
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
     general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
@@ -869,7 +869,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V8.16.2 CAT carregat");
+  console.log("GasDrive V8.16.3 CAT carregat");
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -908,9 +908,9 @@ function actualizarMetricasTest(categoria, preguntaId, acierto) {
   prog.unicas.add(preguntaId);
   if(!acierto &&!prog.falladas.includes(preguntaId)) prog.falladas.push(preguntaId);
 
-  // CAPADO: Solo cuenta 1 día por categoría
-  if(!prog.dies) {
-    prog.dies = 1;
+  // CORREGIDO: Solo suma 1 día si es la primera cat del día
+  if(Object.keys(prog.dies).length === 0) {
+    prog.dies[avui] = 1;
     PROGRESO.diesEstudi.add(avui);
   }
   guardar();
@@ -926,8 +926,8 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   prog.unicas.add(preguntaId);
   if(!acierto &&!prog.falladas.includes(preguntaId)) prog.falladas.push(preguntaId);
 
-  if(!prog.dies) {
-    prog.dies = 1;
+  if(Object.keys(prog.dies).length === 0) {
+    prog.dies[avui] = 1;
     PROGRESO.diesEstudi.add(avui);
   }
   guardar();
@@ -944,7 +944,7 @@ function calcularPreparacioDGT() {
 
   // 2. CONSTANCIA 40% - DIAS UNICOS
   const dies = PROGRESO.diesEstudi.size;
-  constancia = Math.round((dies / 30) * 100);
+  const constancia = Math.round((dies / 30) * 100); // CORREGIDO: tenia const
 
   // 3. COBERTURA 10% - DINAMICA
   let unicasTotales = new Set();
@@ -994,7 +994,7 @@ function comprovarNouDia() {
     const stats = calcularPreparacioDGT();
     estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio});
     if(estat.stats.historialEvolucio.length > 7) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null; // CORREGIDO
 
     // Reset cap diario
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
@@ -1048,7 +1048,7 @@ function dibuixarPuntsDebils() {
 
 function anarAPagina(pagina) { canviarTab(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== STATS REALES V8.16.2 =====
+// ===== STATS REALES V8.16.3 COMPATIBLE CON HTML VIEJO =====
 function actualitzarEstadistiques() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
@@ -1056,30 +1056,38 @@ function actualitzarEstadistiques() {
 
   document.getElementById('stats-global-percent').textContent = stats.preparacio + '%';
   document.getElementById('stats-global-bar').style.width = stats.preparacio + '%';
-  document.getElementById('stats-fetes').textContent = stats.totalFet || stats.total;
-  document.getElementById('stats-encerts').textContent = stats.unicas;
+  document.getElementById('stats-fetes').textContent = stats.total;
+  document.getElementById('stats-encerts').textContent = stats.unicas; // CORREGIDO: antes solo 2 cats
 
   let msg = "Estudia 20min al Temari per desbloquejar";
   if(estat.stats.paseCompletado) msg = "Pase Activo. A practicar 💪";
   if(stats.preparacio >= 90) msg = "Ja estàs llest per la DGT 💎";
   document.getElementById('stats-motivacio').textContent = msg;
 
-  // BARRAS NUEVAS
-  if(document.getElementById('stats-domini-percent')){
-    document.getElementById('stats-domini-percent').textContent = stats.domini + '%';
-    document.getElementById('stats-domini-bar').style.width = stats.domini + '%';
-  }
-  if(document.getElementById('stats-constancia-percent')){
-    document.getElementById('stats-constancia-percent').textContent = stats.constancia + '%';
-    document.getElementById('stats-constancia-bar').style.width = stats.constancia + '%';
-    document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.dies}/30 dies`;
-  }
-  if(document.getElementById('stats-simulacres-percent')){
-    document.getElementById('stats-simulacres-percent').textContent = stats.simulacres + '%';
-    document.getElementById('stats-simulacres-bar').style.width = stats.simulacres + '%';
+  // BARRAS VIEJAS COMPATIBLES
+  let totalTests = 0, encertsTests = 0;
+  Object.values(PROGRESO.tests).forEach(c => { totalTests += c.total; encertsTests += c.aciertos; });
+  const percentTests = totalTests > 0? Math.round((encertsTests/totalTests)*100) : 0;
+  if(document.getElementById('stats-test-percent')){
+    document.getElementById('stats-test-percent').textContent = percentTests + '%';
+    document.getElementById('stats-test-bar').style.width = percentTests + '%';
   }
 
-  document.getElementById('stats-temari-percent').textContent = stats.cobertura + '%';
+  let totalCasos = 0, encertsCasos = 0;
+  Object.values(PROGRESO.casos).forEach(c => { totalCasos += c.total; encertsCasos += c.aciertos; });
+  const percentCasos = totalCasos > 0? Math.round((encertsCasos/totalCasos)*100) : 0;
+  if(document.getElementById('stats-casos-percent')){
+    document.getElementById('stats-casos-percent').textContent = percentCasos + '%';
+    document.getElementById('stats-casos-bar').style.width = percentCasos + '%';
+  }
+
+  const percentEx = Math.min(100, (PROGRESO.examen.realitzats / 15) * 100);
+  if(document.getElementById('stats-examen-percent')){
+    document.getElementById('stats-examen-percent').textContent = Math.round(percentEx) + '%';
+    document.getElementById('stats-examen-bar').style.width = Math.round(percentEx) + '%';
+  }
+
+  document.getElementById('stats-temari-percent').textContent = stats.cobertura > 0? stats.cobertura + '%' : 'DESBLOQUEO';
   document.getElementById('stats-temari-bar').style.width = stats.cobertura + '%';
 
   dibujarGraficaEvolucion();
@@ -1306,7 +1314,18 @@ function dibujarGraficaEvolucion() {
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
   const dades = getDadesEvolucio();
+  
+  if(canvas.width === 0) canvas.width = canvas.offsetWidth;
+  if(canvas.height === 0) canvas.height = 200;
   ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  if(dades.length === 0){
+    ctx.fillStyle = '#666';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Fes tests 2 dies per veure l\'evolució', canvas.width/2, canvas.height/2);
+    return;
+  }
 
   ctx.strokeStyle = '#333';
   ctx.lineWidth = 1;
@@ -1318,6 +1337,7 @@ function dibujarGraficaEvolucion() {
     ctx.stroke();
     ctx.fillStyle = '#666';
     ctx.font = '10px sans-serif';
+    ctx.textAlign = 'left';
     ctx.fillText((100 - i*25) + '%', 5, y+3);
   }
 
@@ -1325,14 +1345,14 @@ function dibujarGraficaEvolucion() {
   ctx.lineWidth = 3;
   ctx.beginPath();
   dades.forEach((d,i)=>{
-    const x = 30 + (i * (canvas.width-60)/6);
+    const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1));
     const y = canvas.height - 30 - (d.global/100 * (canvas.height-60));
     if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
   });
   ctx.stroke();
 
   dades.forEach((d,i)=>{
-    const x = 30 + (i * (canvas.width-60)/6);
+    const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1));
     const y = canvas.height - 30 - (d.global/100 * (canvas.height-60));
     ctx.fillStyle = '#00D9FF';
     ctx.beginPath();
@@ -1340,8 +1360,9 @@ function dibujarGraficaEvolucion() {
     ctx.fill();
     ctx.fillStyle = '#fff';
     ctx.font = '11px sans-serif';
-    ctx.fillText(d.dia, x-5, canvas.height-10);
-    ctx.fillText(d.global+'%', x-12, y-10);
+    ctx.textAlign = 'center';
+    ctx.fillText(d.dia, x, canvas.height-10);
+    ctx.fillText(d.global+'%', x, y-10);
   });
 }
 
