@@ -1,5 +1,5 @@
-// GASDRIVE DGT V8.13 CAT - 630 PREGUNTES DGT 2026
-const VERSION = "8.13";
+// GASDRIVE DGT V8.14 CAT - 630 PREGUNTES DGT 2026
+const VERSION = "8.14";
 
 // COMBO DOPAMINA
 const EMOJIS_ENCERT = ['🚀','💎','👑','🔥','💯','⚡','🏆','🦄','🤑','✅','💪','😎','🎯','💥','🌟','🎉'];
