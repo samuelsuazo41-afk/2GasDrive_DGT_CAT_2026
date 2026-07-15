@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V8.15</title>
+<title>GasDrive DGT CAT V9.4</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -73,7 +73,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
 
-/* ===== NUEVO CSS V8.16 ESTADISTIQUES ===== */
+/* ===== CSS V9.4 ESTADISTIQUES ===== */
 .stats-header{margin-bottom:15px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
 .stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
@@ -93,7 +93,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700"></div>
 </div>
 
-<!-- ===== TAB ESTADISTIQUES V8.16.3 NUEVO DISEÑO ===== -->
+<!-- ===== TAB ESTADISTIQUES V9.4 ===== -->
 <div id="tab-estadistiques" class="tab-content">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'stats','resum')">📊 RESUM</button>
@@ -111,10 +111,10 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div>
     </div>
 
-    <!-- BARRAS NUEVAS V8.16 -->
+    <!-- BARRAS NUEVAS V9.4 -->
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>💪</span> <b>Domini Teòric 40%</b></div>
+        <div><span>💪</span> <b>Retenció 50%</b></div>
         <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-domini-percent">0%</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div>
@@ -130,7 +130,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>📖</span> <b>Cobertura Banc 10%</b></div>
+        <div><span>📖</span> <b>Cobertura 7 dies 15%</b></div>
         <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div>
@@ -138,14 +138,14 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 
     <div class="stat-card">
       <div class="stat-card-header">
-        <div><span>📋</span> <b>Simulacres 10%</b></div>
+        <div><span>📋</span> <b>Estabilitat Simulacres 10%</b></div>
         <div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-simulacres-percent">0%</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div>
-      <div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Exàmens fets: 0</div>
+      <div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Millor ratxa: 0/6</div>
     </div>
 
-    <!-- BARRAS VIEJAS COMPATIBLES - OCULTAS PERO PARA QUE NO ROMPA -->
+    <!-- BARRAS VIEJAS COMPATIBLES - OCULTAS -->
     <div style="display:none">
       <div id="stats-test-percent"></div><div id="stats-test-bar"></div>
       <div id="stats-casos-percent"></div><div id="stats-casos-bar"></div>
@@ -261,16 +261,16 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 <div id="tab-temari" class="tab-content"><div class="card"><h2>📖 TEMARIS OFICIALS</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Estudia els temaris complets DGT. 20min per desbloquejar</p><div id="temari-lista"></div></div></div>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="canviarTab(event,'estadistiques')"><span class="emoji">📊</span>ESTAD</button>
-  <button class="tab-btn" onclick="canviarTab(event,'test')"><span class="emoji">📝</span>TEST</button>
-  <button class="tab-btn" onclick="canviarTab(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
-  <button class="tab-btn" onclick="canviarTab(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
-  <button class="tab-btn" onclick="canviarTab(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
-  <button class="tab-btn" onclick="canviarTab(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
-  <button class="tab-btn" onclick="canviarTab(event,'tips')"><span class="emoji">💡</span>TIPS</button>
-  <button class="tab-btn" onclick="canviarTab(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
+  <button class="tab-btn active" onclick="canviarTab_V94(event,'estadistiques')"><span class="emoji">📊</span>ESTAD</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'test')"><span class="emoji">📝</span>TEST</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'situaciones')"><span class="emoji">🚦</span>CASOS</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'examen')"><span class="emoji">📋</span>EXAMEN</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'garage')"><span class="emoji">🏁</span>GARATGE</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'tienda')"><span class="emoji">🛒</span>BOTIGA</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'tips')"><span class="emoji">💡</span>TIPS</button>
+  <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=8.15"></script>
+<script src="./app.js?v=9.4"></script>
 </body>
 </html>
