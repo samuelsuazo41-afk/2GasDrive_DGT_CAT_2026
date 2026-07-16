@@ -793,12 +793,36 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.4.2 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
+// ===== GASDRIVE DGT CAT V9.4.3 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
+
+// ===== DATOS FALTANTES QUE HACEN CRASHEAR =====
+const ACCESSORIS = [
+  {id: 'a1', nom: 'Turbo', emoji: '💨', hp: 20, preu: 500},
+  {id: 'a2', nom: 'Nitros', emoji: '⚡', hp: 30, preu: 800},
+  {id: 'a3', nom: 'Motor V8', emoji: '🏁', hp: 50, preu: 1200}
+];
+const EMOJI_BOTIGA = [
+  {id: 'e1', nom: 'Cara Feliç', emoji: '😄', preu: 100},
+  {id: 'e2', nom: 'Cara Cool', emoji: '😎', preu: 150},
+  {id: 'e3', nom: 'Foc', emoji: '🔥', preu: 200}
+];
+const COTXES = [
+  {id: 'c1', nom: 'Inici', emoji: '🚗', cv: 90, preu: 0, color: 'hue-rotate(0deg)'},
+  {id: 'c2', nom: 'Sport', emoji: '🏎️', cv: 150, preu: 1000, color: 'hue-rotate(200deg)'},
+  {id: 'c3', nom: 'GT', emoji: '🚙', cv: 200, preu: 2500, color: 'hue-rotate(350deg)'}
+];
+const TIPS = [
+  {emoji: '💡', txt: 'Repassa 20 minuts diaris al Temari per desbloquejar tests'},
+  {emoji: '🎯', txt: 'Necessites 27/30 per aprovar l\'examen DGT'},
+  {emoji: '⚠️', txt: 'Si falles 3 vegades la mateixa pregunta, et sortirà més'}
+];
+const EMOJIS_ENCERT = ['🎉', '🔥', '💎', '👑', '💯'];
+const EMOJIS_FALLO = ['😅', '💪', '📚', '🤔', '🧠'];
 
 // NUEVO: Total dinámico para cuando metas 800+ preguntas
 function getTotalBanco() {
@@ -869,7 +893,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.4.2 CAT carregat");
+  console.log("GasDrive V9.4.3 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -927,7 +951,7 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.2 FIX: HISTORIAL SOLO CON ID REAL =====
+// ===== V9.4.3 FIX: HISTORIAL SOLO CON ID REAL =====
 function registrarHistorialPregunta(preguntaId, acierto) {
   if(!preguntaId || isNaN(preguntaId)) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
@@ -1030,7 +1054,13 @@ function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
   const el = document.getElementById('pase-temps'); if(el) el.textContent = `${minuts} min`;
   const msg = document.getElementById('stats-motivacio');
-  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; }
+  if(msg) { 
+    if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; 
+    else { 
+      const falten = Math.max(0, 20 - minuts); 
+      msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; 
+    } 
+  }
 }
 
 // ===== AUTO-MAPEO CON ID =====
@@ -1046,7 +1076,7 @@ function autoMapearTotesPreguntes() {
   console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
 }
 
-// ===== PUNTOS DEBILS V9.4.2 =====
+// ===== PUNTOS DEBILS V9.4.3 =====
 function registrarFallada(categoria, subtema, pagina) {
   if(!subtema || subtema === 'undefined') subtema = 'General';
   if(!pagina) pagina = 1;
@@ -1114,8 +1144,8 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== TEST / CASOS / EXAMEN - FIX BOTON =====
-function carregarPregunta(cat) { const s = estat.test[cat]; const preguntes = barrejarArray(PREGUNTES[cat]); if(!preguntes || preguntes.length === 0) return; const pOriginal = preguntes[s.idx % preguntes.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`test-${cat}-pregunta`).textContent = p.q; document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`test-${cat}-racha`).textContent = s.ratxa; document.getElementById(`test-${cat}-score`).textContent = s.puntuacio; document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`; const cont = document.getElementById(`test-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`test-${cat}-feedback`).textContent = ''; const btnSig = document.getElementById(`btn-sig-test-${cat}`); btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreTest_V94(cat, i, this); }; cont.appendChild(div); }); }
+// ===== TEST / CASOS / EXAMEN =====
+function carregarPregunta(cat) { const s = estat.test[cat]; const preguntes = barrejarArray(PREGUNTES[cat]); if(!preguntes || preguntes.length === 0) return; const pOriginal = preguntes[s.idx % preguntes.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`test-${cat}-pregunta`).textContent = p.q; document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`test-${cat}-racha`).textContent = s.ratxa; document.getElementById(`test-${cat}-score`).textContent = s.puntuacio; document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`; const cont = document.getElementById(`test-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`test-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-test-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreTest_V94(cat, i, this); }; cont.appendChild(div); }); }
 
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
@@ -1128,13 +1158,12 @@ function respondreTest_V94(cat, idx, el) {
   else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); s.ratxa = 0; registrarFallada(cat, p.subtema, p.pag); }
   actualizarMetricasTest(cat, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`); btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer';
-  actualitzarCoins(); guardar();
+  document.getElementById(`btn-sig-test-${cat}`).disabled = false; actualitzarCoins(); guardar();
 }
 
-function seguentTest(e, cat) { e.preventDefault(); estat.test[cat].idx++; carregarPregunta(cat); }
+function seguentTest(e, cat) { estat.test[cat].idx++; carregarPregunta(cat); }
 
-function carregarSituacio(cat) { if(!cat) cat = sitCategoriaActiva; const s = estat.sit[cat]; const casos = barrejarArray(SITUACIONS[cat]); if(!casos || casos.length === 0) return; const pOriginal = casos[s.idx % casos.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`sit-${cat}-pregunta`).textContent = p.q; document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio; document.getElementById(`sit-${cat}-progress`).style.width = `${((s.idx % casos.length)/casos.length)*100}%`; const cont = document.getElementById(`sit-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`sit-${cat}-feedback`).textContent = ''; const btnSig = document.getElementById(`btn-sig-sit-${cat}`); btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreSituacio_V94(cat, i, this); }; cont.appendChild(div); }); }
+function carregarSituacio(cat) { if(!cat) cat = sitCategoriaActiva; const s = estat.sit[cat]; const casos = barrejarArray(SITUACIONS[cat]); if(!casos || casos.length === 0) return; const pOriginal = casos[s.idx % casos.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`sit-${cat}-pregunta`).textContent = p.q; document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio; document.getElementById(`sit-${cat}-progress`).style.width = `${((s.idx % casos.length)/casos.length)*100}%`; const cont = document.getElementById(`sit-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`sit-${cat}-feedback`).textContent = ''; document.getElementById(`btn-sig-sit-${cat}`).disabled = true; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreSituacio_V94(cat, i, this); }; cont.appendChild(div); }); }
 
 function respondreSituacio_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
@@ -1147,10 +1176,10 @@ function respondreSituacio_V94(cat, idx, el) {
   else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); registrarFallada('examen', p.subtema, p.pag); }
   actualizarMetricasCaso(cat, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-sit-${cat}`); btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer';
-  actualitzarCoins(); guardar();
+  document.getElementById(`btn-sig-sit-${cat}`).disabled = false; actualitzarCoins(); guardar();
 }
 
+ 
 function seguentSituacio(e, cat) { e.preventDefault(); estat.sit[cat].idx++; carregarSituacio(cat); }
 
 function iniciarExamen(e) {
