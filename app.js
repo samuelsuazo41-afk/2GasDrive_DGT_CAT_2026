@@ -793,7 +793,7 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.4.5 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
+// ===== GASDRIVE DGT CAT V9.4.6 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -869,8 +869,8 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.4.5 CAT carregat");
-  autoMapearTotesPreguntes(); // AÑADIDO DEL OTRO BLOQUE
+  console.log("GasDrive V9.4.6 CAT carregat");
+  autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -898,7 +898,7 @@ function guardar() {
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-// ===== FUNCIONES PROGRESO REAL - ACTUALIZADAS V9.4.3 =====
+// ===== FUNCIONES PROGRESO REAL =====
 function actualizarMetricasTest(categoria, preguntaId, acierto) {
   if(!PROGRESO.tests[categoria]) return;
   const prog = PROGRESO.tests[categoria];
@@ -927,9 +927,9 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.5 FIX: HISTORIAL SOLO CON ID REAL =====
+// ===== V9.4.6 FIX: HISTORIAL SOLO CON ID REAL =====
 function registrarHistorialPregunta(preguntaId, acierto) {
-  if(!preguntaId || isNaN(preguntaId)) return; // PATCH DEL OTRO BLOQUE
+  if(!preguntaId || isNaN(preguntaId)) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
   const avui = new Date().toISOString();
   if(!estat.stats.historialPregunta[preguntaId]) {
@@ -941,10 +941,12 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.5 NUEVA FORMULA ANTI-FARM DEL OTRO BLOQUE =====
+// ===== V9.4.6 NUEVA FORMULA ANTI-FARM DURO - CAP DIARIO + CONSTANCIA 40% =====
 function calcularPreparacioDGT_V94() {
   const avui = new Date();
   const fa7Dies = new Date(avui.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+  // 1. RETENCIÓ 30% - CON CAP DIARIO DE 3%
   let totalPreg = 0, domina = 0, aprenent = 0;
   let historial = estat.stats.historialPregunta || {};
   for(let cat in PREGUNTES) {
@@ -957,7 +959,11 @@ function calcularPreparacioDGT_V94() {
       else if((h.consecutius >= 1 && diesDesdeUltim < 7) || diesDesdeUltim < 3) aprenent++;
     });
   }
-  const retencio = totalPreg > 0? Math.round(((domina * 1.0) + (aprenent * 0.5)) / totalPreg * 100) : 0;
+  let retencioRaw = totalPreg > 0? ((domina * 1.0) + (aprenent * 0.5)) / totalPreg * 100 : 0;
+  const retencioAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].retencio || 0 : 0;
+  const retencio = Math.min(retencioRaw, retencioAyer + 3);
+
+  // 2. CONSTÀNCIA 40% - AHORA PESA MÁS Y PIDE 20 DÍAS
   let diesValids = 0;
   PROGRESO.diesEstudi.forEach(dia => {
     let fetesDia = 0, encertsDia = 0, totalDia = 0;
@@ -969,7 +975,10 @@ function calcularPreparacioDGT_V94() {
     const percentDia = totalDia > 0? (encertsDia / totalDia) : 0;
     if(fetesDia >= 30 && fetesDia <= 60 && percentDia >= 0.85) diesValids++;
   });
-  constancia = Math.round((diesValids / 30) * 100);
+  let constancia = Math.round((diesValids / 20) * 100);
+  if(constancia > 100) constancia = 100;
+
+  // 3. COBERTURA ACTIVA 20% - CON CAP DIARIO DE 5%
   let unicas7Dies = new Set();
   for(let cat in PREGUNTES) {
     PREGUNTES[cat].forEach(p => {
@@ -977,14 +986,19 @@ function calcularPreparacioDGT_V94() {
       if(h && new Date(h.ultima) >= fa7Dies) unicas7Dies.add(p.id);
     });
   }
-  const cobertura = Math.round((unicas7Dies.size / getTotalBanco()) * 100);
+  let coberturaRaw = Math.round((unicas7Dies.size / getTotalBanco()) * 100);
+  const coberturaAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].cobertura || 0 : 0;
+  const cobertura = Math.min(coberturaRaw, coberturaAyer + 5);
+
+  // 4. ESTABILITAT SIMULACRES 10%
   let maxRatxa = 0, ratxa = 0;
   PROGRESO.examen.historial.forEach(e => {
     if(e.nota >= 27) { ratxa++; maxRatxa = Math.max(maxRatxa, ratxa); }
     else ratxa = 0;
   });
   const estabilitat = maxRatxa >= 6? 100 : Math.round((maxRatxa / 6) * 100);
-  const preparacio = Math.round((retencio * 0.5) + (constancia * 0.25) + (cobertura * 0.15) + (estabilitat * 0.1));
+
+  const preparacio = Math.round((retencio * 0.3) + (constancia * 0.4) + (cobertura * 0.2) + (estabilitat * 0.1));
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
@@ -1017,8 +1031,13 @@ function comprovarNouDia() {
   const avui = new Date().toISOString().split('T')[0];
   if(estat.stats.diaActual!== avui) {
     const stats = calcularPreparacioDGT_V94();
-    estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio});
-    if(estat.stats.historialEvolucio.length > 7) estat.stats.historialEvolucio.shift();
+    estat.stats.historialEvolucio.push({
+      dia: estat.stats.diaActual, 
+      percent: stats.preparacio,
+      retencio: stats.retencio,
+      cobertura: stats.cobertura
+    });
+    if(estat.stats.historialEvolucio.length > 30) estat.stats.historialEvolucio.shift();
     estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
     for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
@@ -1033,23 +1052,23 @@ function actualitzarPaseUI() {
   if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
 }
 
-// ===== AUTO-MAPEO CON ID - DEL OTRO BLOQUE =====
+// ===== AUTO-MAPEO CON ID =====
 function autoMapearTotesPreguntes() {
   let idCounter = 1;
   for(let cat in PREGUNTES) {
     PREGUNTES[cat] = PREGUNTES[cat].map(p => {
       let subtema = 'General'; let pag = 1;
-      for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
+      for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; }
       return {...p, id: idCounter++, subtema, pag};
     });
   }
   console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
 }
 
-// ===== PUNTOS DEBILS V9.4.5 - PATCH UNDEFINED =====
+// ===== PUNTOS DEBILS V9.4.6 =====
 function registrarFallada(categoria, subtema, pagina) {
-  if(!subtema || subtema === 'undefined') subtema = 'General'; // PATCH
-  if(!pagina) pagina = 1; // PATCH
+  if(!subtema || subtema === 'undefined') subtema = 'General';
+  if(!pagina) pagina = 1;
   if(!estat.stats.puntsDebils) estat.stats.puntsDebils = {};
   if(!estat.stats.puntsDebils[categoria]) estat.stats.puntsDebils[categoria] = {};
   if(!estat.stats.puntsDebils[categoria][subtema]) { estat.stats.puntsDebils[categoria][subtema] = {fallos: 0, pag: pagina}; }
@@ -1080,7 +1099,7 @@ function dibuixarPuntsDebils_V94() {
 
 function anarAPagina(pagina) { canviarTab_V94(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== STATS REALES V9.4.5 =====
+// ===== STATS REALES V9.4.6 =====
 function actualitzarEstadistiques_V94() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
@@ -1091,7 +1110,7 @@ function actualitzarEstadistiques_V94() {
   document.getElementById('stats-domini-bar').style.width = stats.retencio + '%';
   document.getElementById('stats-constancia-percent').textContent = stats.constancia + '%';
   document.getElementById('stats-constancia-bar').style.width = stats.constancia + '%';
-  document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.diesValids}/30 dies vàlids`;
+  document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.diesValids}/20 dies vàlids`;
   document.getElementById('stats-temari-percent').textContent = stats.cobertura + '%';
   document.getElementById('stats-temari-bar').style.width = stats.cobertura + '%';
   document.getElementById('stats-simulacres-percent').textContent = stats.estabilitat + '%';
@@ -1108,7 +1127,7 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== TEST / CASOS / EXAMEN - FIX BOTON SEGÜENT =====
+// ===== TEST / CASOS / EXAMEN =====
 function carregarPregunta(cat) { const s = estat.test[cat]; const preguntes = barrejarArray(PREGUNTES[cat]); if(!preguntes || preguntes.length === 0) return; const pOriginal = preguntes[s.idx % preguntes.length]; const opcionsBarrejades = barrejarArray(pOriginal.a); const textCorrecte = pOriginal.a[pOriginal.ok]; const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte); const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte}; s.current = p; document.getElementById(`test-${cat}-pregunta`).textContent = p.q; document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts; document.getElementById(`test-${cat}-racha`).textContent = s.ratxa; document.getElementById(`test-${cat}-score`).textContent = s.puntuacio; document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`; const cont = document.getElementById(`test-${cat}-opciones`); cont.innerHTML = ''; document.getElementById(`test-${cat}-feedback`).textContent = ''; const btnSig = document.getElementById(`btn-sig-test-${cat}`); btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; p.a.forEach((txt, i) => { const div = document.createElement('div'); div.className = 'opcio'; div.textContent = txt; div.onclick = function() { respondreTest_V94(cat, i, this); }; cont.appendChild(div); }); }
 
 function respondreTest_V94(cat, idx, el) {
