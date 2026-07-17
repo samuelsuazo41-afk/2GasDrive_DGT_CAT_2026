@@ -792,6 +792,7 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
+
 // ===== GASDRIVE DGT CAT V9.4.6 - SISTEMA PROGRESO REAL ANTI-INFLADO =====
 let tipsData = [];
 let currentTip = 0;
@@ -1031,7 +1032,7 @@ function comprovarNouDia() {
   if(estat.stats.diaActual!== avui) {
     const stats = calcularPreparacioDGT_V94();
     estat.stats.historialEvolucio.push({
-      dia: estat.stats.diaActual, 
+      dia: estat.stats.diaActual,
       percent: stats.preparacio,
       retencio: stats.retencio,
       cobertura: stats.cobertura
@@ -1048,10 +1049,10 @@ function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
   const el = document.getElementById('pase-temps'); if(el) el.textContent = `${minuts} min`;
   const msg = document.getElementById('stats-motivacio');
-  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; }
+  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
 }
 
-// ===== AUTO-MAPEO CON ID - FIX LLAVE =====
+// ===== AUTO-MAPEO CON ID =====
 function autoMapearTotesPreguntes() {
   let idCounter = 1;
   for(let cat in PREGUNTES) {
