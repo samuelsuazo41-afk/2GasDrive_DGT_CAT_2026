@@ -27,7 +27,7 @@ function tancarIntro(){
   document.getElementById('intro-screen').remove();
 }
 
-// 100 TIPS DEL DIA - DOPAMINA DIÀRIA
+// 100 TIPS DEL DIA - DOPAMINA DIÀRIA 
 const TIPS = [
   {emoji:'🚗', txt:'Regla dels 2 segons: manté distància amb el cotxe del davant'},
   {emoji:'👀', txt:'Mira 12 segons endavant, no només el cotxe de davant'},
@@ -912,27 +912,24 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.5.3 - SISTEMA PROGRESO REAL + PICTOGRAMAS =====
+// ===== GASDRIVE DGT CAT V9.5.6 - SISTEMA PROGRESO REAL + 180 SEÑALES =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.5.3 BANCO DE SVGS - AQUI METEREMOS LAS 180 SEÑALES =====
-const SENALES_SVG = {
-  "r-1": `<svg viewBox="0 0 100 100"><polygon points="50,5 95,25 95,75 50,95 5,75 5,25" fill="#c00" stroke="#000" stroke-width="3"/><text x="50" y="65" font-size="55" font-weight="900" text-anchor="middle" fill="white">STOP</text></svg>`,
-  "r-101": `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#c00" stroke="#000" stroke-width="3"/><rect x="20" y="42" width="60" height="16" fill="white"/></svg>`,
-  "p-1": `<svg viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="#ffcc00" stroke="#000" stroke-width="3"/><text x="50" y="80" font-size="50" font-weight="900" text-anchor="middle" fill="#000">!</text></svg>`
-};
 
-// ===== V9.5.3 FUNCIÓN QUE PINTA EL CUADRO =====
+// ===== V9.5.6 BANCO DE SVGS VACIO - YA VIENEN EN CADA PREGUNTA =====
+const SENALES_SVG = {}; // VACIO A PROPOSITO
+
+// ===== V9.5.6 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   if (!imgDiv) return;
 
   if (pregunta.img && pregunta.img.trim()!== '') {
-    imgDiv.innerHTML = pregunta.img; // Pinta el SVG
+    imgDiv.innerHTML = pregunta.img; // Pinta el SVG que ya viene en la pregunta
     imgDiv.style.border = '2px solid #00D9FF';
     imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
   } else {
@@ -1011,9 +1008,8 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.5.3 CAT carregat");
-  autoMapearTotesPreguntes();
-  carregarProvaSenals(); // V9.5.3 Carga 3 señales de prueba
+  console.log("GasDrive V9.5.6 CAT carregat");
+  autoMapearTotesPreguntes(); // V9.5.6 YA NO CARGA PRUEBAS
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
@@ -1021,17 +1017,6 @@ function init() {
   carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
   carregarSituacio('clima');
   actualitzarMissatgeMotivacional();
-}
-
-// ===== V9.5.3 3 SEÑALES DE PRUEBA =====
-function carregarProvaSenals() {
-  if(typeof PREGUNTES!== 'undefined' && PREGUNTES.senyals) {
-    PREGUNTES.senyals = [
-      {id: 1, codigo: "r-1", q: "Què significa el senyal R-1?", a: ["Stop", "Cedeix el pas", "Prohibit entrar"], ok: 0, subtema: "Senyals STOP", pag: 45, img: SENALES_SVG["r-1"]},
-      {id: 2, codigo: "r-101", q: "Què significa el senyal R-101?", a: ["Girar", "Prohibició d'entrada", "Fi prohibició"], ok: 1, subtema: "Senyals Prohibició", pag: 46, img: SENALES_SVG["r-101"]},
-      {id: 3, codigo: "p-1", q: "Què indica el senyal P-1?", a: ["Perill específic", "Perill indefinit", "Fi perill"], ok: 1, subtema: "Senyals Perill", pag: 40, img: SENALES_SVG["p-1"]}
-    ];
-  }
 }
 
 // GUARDAR: Convertir Set a Array
@@ -1293,7 +1278,7 @@ function carregarPregunta(cat) {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   s.current = p;
 
-  // V9.5.3 NUEVO: PINTAR IMAGEN
+  // V9.5.6 NUEVO: PINTAR IMAGEN
   pintarImatgeSiExisteix(cat, p);
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
@@ -1447,7 +1432,7 @@ function carregarPreguntaExamen() {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   estat.examen.preguntes[estat.examen.index] = p;
 
-  // V9.5.3 NUEVO: PINTAR IMAGEN EXAMEN
+  // V9.5.6 NUEVO: PINTAR IMAGEN EXAMEN
   pintarImatgeSiExisteix('examen', p);
 
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
@@ -1726,4 +1711,4 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-}
+} 
