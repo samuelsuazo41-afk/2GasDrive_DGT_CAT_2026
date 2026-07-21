@@ -422,7 +422,7 @@ const PREGUNTES = {
 {id:178,q:"El senyal S-910 Què indica?",a:["Aparcament gratuït","Prohibit gratuït","Fi gratuït"],ok:0,codigo:"s-910",img:`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="180" height="180" fill="#005EB8"/><text x="100" y="100" fill="#fff" font-size="60" font-weight="900" font-family="Arial Black" text-anchor="middle">P</text><text x="100" y="145" fill="#fff" font-size="30" font-weight="900" font-family="Arial Black" text-anchor="middle">GRATUÏT</text></svg>`},
 {id:179,q:"El senyal S-920 Què indica?",a:["Aparcament de pagament","Prohibit pagament","Fi pagament"],ok:0,codigo:"s-920",img:`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="180" height="180" fill="#005EB8"/><text x="100" y="100" fill="#fff" font-size="60" font-weight="900" font-family="Arial Black" text-anchor="middle">P</text><text x="100" y="145" fill="#fff" font-size="30" font-weight="900" font-family="Arial Black" text-anchor="middle">PAGAMENT</text></svg>`},
 {id:180,q:"El senyal R-527 Què indica?",a:["Fi de zona de vianants","Inici zona vianants","Prohibit vianants"],ok:0,codigo:"r-527",img:`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="92" fill="#fff" stroke="#000" stroke-width="7"/><circle cx="100" cy="80" r="11" fill="#000"/><rect x="95" y="95" width="10" height="28" fill="#000"/></svg>`}
-]
+],
 
 
  normes: [
