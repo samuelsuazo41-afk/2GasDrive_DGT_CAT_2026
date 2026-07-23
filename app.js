@@ -914,20 +914,21 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.5.6 - SISTEMA PROGRESO REAL + 180 SEÑALES =====
+ // ===== GASDRIVE DGT CAT V9.5.6 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-
 // ===== V9.5.6 BANCO DE SVGS VACIO - YA VIENEN EN CADA PREGUNTA =====
 const SENALES_SVG = {}; // VACIO A PROPOSITO
 
-// ===== V9.5.6 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN =====
+// ===== V9.5.6 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN + EMOJIS =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
+  const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`); // NUEVO
+
   if (!imgDiv) return;
 
   if (pregunta.img && pregunta.img.trim()!== '') {
@@ -938,6 +939,15 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     imgDiv.innerHTML = `<div class="placeholder">Sense pictograma</div>`; // Placeholder
     imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
+  }
+
+  // NUEVO: Pintar emojis debajo del SBG
+  if(emojisDiv && pregunta.emojis && pregunta.emojis.length > 0){
+    emojisDiv.innerHTML = pregunta.emojis.map(e => `<span class="emoji-pista">${e}</span>`).join('');
+    emojisDiv.style.display = 'flex';
+  } else if(emojisDiv) {
+    emojisDiv.innerHTML = '';
+    emojisDiv.style.display = 'none';
   }
 }
 
@@ -1280,7 +1290,7 @@ function carregarPregunta(cat) {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   s.current = p;
 
-  // V9.5.6 NUEVO: PINTAR IMAGEN
+  // V9.5.6 NUEVO: PINTAR IMAGEN + EMOJIS
   pintarImatgeSiExisteix(cat, p);
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
@@ -1399,7 +1409,7 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
-  const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima];
+  const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.normes,...PREGUNTES.mecanica,...PREGUNTES.auxilis,...PREGUNTES.mediambient,...SITUACIONS.clima,...SITUACIONS.urbà,...SITUACIONS.carretera,...SITUACIONS.emergència];
   if(totes.length < 30) { alert('Falten preguntes. Necessites 30 mínim.'); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -1434,7 +1444,7 @@ function carregarPreguntaExamen() {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   estat.examen.preguntes[estat.examen.index] = p;
 
-  // V9.5.6 NUEVO: PINTAR IMAGEN EXAMEN
+  // V9.5.6 NUEVO: PINTAR IMAGEN + EMOJIS EXAMEN
   pintarImatgeSiExisteix('examen', p);
 
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
