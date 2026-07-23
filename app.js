@@ -871,19 +871,18 @@ let sitCategoriaActiva = 'clima';
 // ===== V9.6.4 BANCO DE SVGS VACIO - AHORA SE GENERA SOLO =====
 const SENALES_SVG = {}; // VACIO A PROPOSITO
 
-// ===== V9.6.4 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN + SBG + EMOJIS =====
+// ===== V9.6.4 FUNCIÓN QUE PINTA SBG + EMOJI =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
-  const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`); // NUEVO
+  const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
 
   if (!imgDiv) return;
 
-  // NUEVO: SI VIENE CON SBG DINAMICO
+  // NUEVO: SI VIENE CON FORMATO SBG NUEVO
   if (pregunta.tipusSBG) {
     let svg = `<svg viewBox="0 0 200 200" style="width:100%; height:auto;">`;
     let overlay = '';
 
-    // 1. DIBUJAMOS EL SBG BASE SEGUN TIPO
     if(pregunta.tipusSBG === 'prohibit'){ // Circulo rojo
       svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>
               <line x1="30" y1="30" x2="170" y2="170" stroke="#E10600" stroke-width="12"/>`;
@@ -905,16 +904,16 @@ function pintarImatgeSiExisteix(cat, pregunta) {
       svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70" fill="white">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'text'){ // Numeros o texto
+    else if(pregunta.tipusSBG === 'text'){ // Numeros
       if(pregunta.sbg_base === 'circulo_rojo_numero'){
         svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>`;
-        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="#E10600">${pregunta.textSBG || ''}</text>`;
+        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="#E10600">${pregunta.emoji || ''}</text>`;
       } else if(pregunta.sbg_base === 'circulo_blau_numero'){
         svg += `<circle cx="100" cy="100" r="90" fill="#00529F" stroke="white" stroke-width="8"/>`;
-        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="white">${pregunta.textSBG || ''}</text>`;
+        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="white">${pregunta.emoji || ''}</text>`;
       } else { // Quadrat amb text
         svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
-        overlay = `<text x="100" y="115" text-anchor="middle" font-size="50" font-weight="bold" fill="white">${pregunta.textSBG || ''}</text>`;
+        overlay = `<text x="100" y="115" text-anchor="middle" font-size="50" font-weight="bold" fill="white">${pregunta.emoji || ''}</text>`;
       }
     }
     else if(pregunta.tipusSBG === 'fi_prohibicio'){ // Circulo blanco tachado
@@ -922,25 +921,19 @@ function pintarImatgeSiExisteix(cat, pregunta) {
               <line x1="30" y1="30" x2="170" y2="170" stroke="black" stroke-width="12"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70">${pregunta.emoji || ''}</text>`;
     }
-
     svg += overlay + `</svg>`;
     imgDiv.innerHTML = svg;
-    imgDiv.style.border = '3px solid #00D9FF';
-    imgDiv.style.borderRadius = '12px';
-    imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
-
-  // COMPATIBILIDAD: SI VIENE CON IMG ANTIGUO
-  } else if (pregunta.img && pregunta.img.trim()!== '') {
-    imgDiv.innerHTML = pregunta.img; // Pinta el SVG que ya viene en la pregunta
     imgDiv.style.border = '2px solid #00D9FF';
     imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
+
+  // COMPATIBLE: SI VIENE FORMATO VIEJO SIN SBG
   } else {
-    imgDiv.innerHTML = `<div class="placeholder">Sense pictograma</div>`; // Placeholder
+    imgDiv.innerHTML = `<div class="placeholder">Sense pictograma</div>`;
     imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
   }
 
-  // NUEVO: Pintar emojis debajo del SBG si existen
+  // PINTAR EMOJIS PISTA SI EXISTEN
   if(emojisDiv && pregunta.emojis && pregunta.emojis.length > 0){
     emojisDiv.innerHTML = pregunta.emojis.map(e => `<span class="emoji-pista">${e}</span>`).join('');
     emojisDiv.style.display = 'flex';
