@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V9.5.3</title>
+<title>GasDrive DGT CAT V9.5.6</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -85,10 +85,10 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .orientacio-card h3{color:#00D9FF;margin-top:12px;font-size:15px}
 .orientacio-card p{color:#999;font-size:13px;margin:5px 0}
 
-/* ===== CSS V9.5.3 CUADRO PICTOGRAMA DGT - NUEVO ===== */
+/* ===== CSS V9.5.3 CUADRO PICTOGRAMA DGT ===== */
 .quadre-pictograma {
   width: 100%;
-  height: 180px; /* ALTURA FIJA = CERO SALTOS */
+  height: 180px;
   background: linear-gradient(145deg, #1a1a2e, #16213e);
   border: 2px dashed rgba(0, 217, 255, 0.3);
   border-radius: 16px;
@@ -106,7 +106,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   max-height: 150px;
   width: auto;
   height: auto;
-  filter: drop-shadow(0 0 8px #00D9FF); /* Glow DGT */
+  filter: drop-shadow(0 0 8px #00D9FF);
 }
 .quadre-pictograma .placeholder {
   color: rgba(0, 217, 255, 0.4);
@@ -118,6 +118,24 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 @media (max-width: 400px) {
   .quadre-pictograma { height: 160px; }
   .quadre-pictograma svg { max-width: 120px; max-height: 120px; }
+}
+
+/* ===== CSS V9.5.6 EMOJIS DE PISTA ===== */
+.test-emojis{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 2.8rem;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  min-height: 40px;
+}
+.emoji-pista{
+  animation: pop 0.3s ease;
+}
+@keyframes pop {
+  0%{transform: scale(0.5);}
+  100%{transform: scale(1);}
 }
 </style>
 </head>
@@ -163,7 +181,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <div id="stats-orientacio" class="sub-content"><div class="card orientacio-card"><h2>🧭 Pla d'Estudi</h2><h3>1. Comença pel TEMARI</h3><p>Estudia 20 min per desbloquejar el dia</p><h3>2. Fes TESTS</h3><p>Practica fins arribar a 90%</p><h3>3. Fes l'EXAMEN</h3><p>Quan tinguis 90% global</p></div></div>
 </div>
 
-<!-- ===== TAB TEST V9.5.3 CON CUADRO ===== -->
+<!-- ===== TAB TEST V9.5.6 CON SVG + EMOJIS ===== -->
 <div id="tab-test" class="tab-content active">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'test','general')">📝 General</button>
@@ -179,7 +197,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>📝 TEST GENERAL</h2>
       <div class="stats"><div>Aciertos: <span id="test-general-aciertos">0</span></div><div>Racha: <span id="test-general-racha">0</span>🔥</div><div>Score: <span id="test-general-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-general-progress"></div></div>
-      <div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+      <div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+      <div id="test-general-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-general-pregunta">Carregant...</div>
       <div id="test-general-opciones"></div>
       <div class="feedback" id="test-general-feedback"></div>
@@ -192,7 +211,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>🚸 TEST SENYALS</h2>
       <div class="stats"><div>Aciertos: <span id="test-senyals-aciertos">0</span></div><div>Racha: <span id="test-senyals-racha">0</span>🔥</div><div>Score: <span id="test-senyals-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-senyals-progress"></div></div>
-      <div id="test-senyals-imagen" class="quadre-pictograma"><div class="placeholder">Carregant...</div></div> <!-- NUEVO -->
+      <div id="test-senyals-imagen" class="quadre-pictograma"><div class="placeholder">Carregant...</div></div>
+      <div id="test-senyals-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-senyals-pregunta">Carregant...</div>
       <div id="test-senyals-opciones"></div>
       <div class="feedback" id="test-senyals-feedback"></div>
@@ -205,7 +225,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>📋 TEST NORMES</h2>
       <div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span></div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div>
-      <div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+      <div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+      <div id="test-normes-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-normes-pregunta">Carregant...</div>
       <div id="test-normes-opciones"></div>
       <div class="feedback" id="test-normes-feedback"></div>
@@ -218,7 +239,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>🔧 TEST MECÀNICA</h2>
       <div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span></div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div>
-      <div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+      <div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+      <div id="test-mecanica-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-mecanica-pregunta">Carregant...</div>
       <div id="test-mecanica-opciones"></div>
       <div class="feedback" id="test-mecanica-feedback"></div>
@@ -231,7 +253,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>🚑 TEST AUXILIS</h2>
       <div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span></div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div>
-      <div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+      <div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+      <div id="test-auxilis-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-auxilis-pregunta">Carregant...</div>
       <div id="test-auxilis-opciones"></div>
       <div class="feedback" id="test-auxilis-feedback"></div>
@@ -244,7 +267,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <h2>🌱 TEST MEDI AMBIENT</h2>
       <div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div>
-      <div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+      <div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+      <div id="test-mediambient-emojis" class="test-emojis"></div> <!-- NUEVO -->
       <div class="pregunta" id="test-mediambient-pregunta">Carregant...</div>
       <div id="test-mediambient-opciones"></div>
       <div class="feedback" id="test-mediambient-feedback"></div>
@@ -273,7 +297,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <h2>📋 EXAMEN OFICIAL DGT</h2>
     <div class="stats"><div>Pregunta: <span id="examen-num">0</span>/30</div><div>Temps: <span id="examen-timer">30:00</span></div><div>Encerts: <span id="examen-aciertos">0</span></div></div>
     <div class="progress-bar"><div class="progress-fill" id="examen-progress"></div></div>
-    <div id="examen-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div> <!-- NUEVO -->
+    <div id="examen-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
+    <div id="examen-emojis" class="test-emojis"></div> <!-- NUEVO -->
     <div class="pregunta" id="examen-pregunta">Prem Inicia l'Examen</div>
     <div id="examen-opciones"></div>
     <div id="examen-resultat" style="display:none"></div>
@@ -299,6 +324,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=9.5.3"></script>
+<script src="./app.js?v=9.5.6"></script>
 </body>
 </html>
