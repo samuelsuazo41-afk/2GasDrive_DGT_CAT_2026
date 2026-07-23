@@ -861,24 +861,76 @@ const EMOJI_BOTIGA = [
 ];
 
 
- // ===== GASDRIVE DGT CAT V9.5.6 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS =====
+ // ===== GASDRIVE DGT CAT V9.6.4 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS + SBG DINAMICO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.5.6 BANCO DE SVGS VACIO - YA VIENEN EN CADA PREGUNTA =====
+// ===== V9.6.4 BANCO DE SVGS VACIO - AHORA SE GENERA SOLO =====
 const SENALES_SVG = {}; // VACIO A PROPOSITO
 
-// ===== V9.5.6 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN + EMOJIS =====
+// ===== V9.6.4 FUNCIÓN QUE PINTA EL CUADRO TEST + EXAMEN + SBG + EMOJIS =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`); // NUEVO
 
   if (!imgDiv) return;
 
-  if (pregunta.img && pregunta.img.trim()!== '') {
+  // NUEVO: SI VIENE CON SBG DINAMICO
+  if (pregunta.tipusSBG) {
+    let svg = `<svg viewBox="0 0 200 200" style="width:100%; height:auto;">`;
+    let overlay = '';
+
+    // 1. DIBUJAMOS EL SBG BASE SEGUN TIPO
+    if(pregunta.tipusSBG === 'prohibit'){ // Circulo rojo
+      svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>
+              <line x1="30" y1="30" x2="170" y2="170" stroke="#E10600" stroke-width="12"/>`;
+      overlay = `<text x="100" y="115" text-anchor="middle" font-size="70">${pregunta.emoji || ''}</text>`;
+    }
+    else if(pregunta.tipusSBG === 'obligatori'){ // Circulo azul
+      svg += `<circle cx="100" cy="100" r="90" fill="#00529F" stroke="white" stroke-width="8"/>`;
+      overlay = `<text x="100" y="115" text-anchor="middle" font-size="70" fill="white">${pregunta.emoji || ''}</text>`;
+    }
+    else if(pregunta.tipusSBG === 'perill'){ // Triangulo rojo
+      svg += `<polygon points="100,10 190,190 10,190" fill="white" stroke="#E10600" stroke-width="10"/>`;
+      overlay = `<text x="100" y="140" text-anchor="middle" font-size="60">${pregunta.emoji || ''}</text>`;
+    }
+    else if(pregunta.tipusSBG === 'obres'){ // Triangulo amarillo
+      svg += `<polygon points="100,10 190,190 10,190" fill="#FFC400" stroke="black" stroke-width="8"/>`;
+      overlay = `<text x="100" y="140" text-anchor="middle" font-size="60">${pregunta.emoji || ''}</text>`;
+    }
+    else if(pregunta.tipusSBG === 'informacio'){ // Quadrat blau
+      svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
+      overlay = `<text x="100" y="115" text-anchor="middle" font-size="70" fill="white">${pregunta.emoji || ''}</text>`;
+    }
+    else if(pregunta.tipusSBG === 'text'){ // Numeros o texto
+      if(pregunta.sbg_base === 'circulo_rojo_numero'){
+        svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>`;
+        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="#E10600">${pregunta.textSBG || ''}</text>`;
+      } else if(pregunta.sbg_base === 'circulo_blau_numero'){
+        svg += `<circle cx="100" cy="100" r="90" fill="#00529F" stroke="white" stroke-width="8"/>`;
+        overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="white">${pregunta.textSBG || ''}</text>`;
+      } else { // Quadrat amb text
+        svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
+        overlay = `<text x="100" y="115" text-anchor="middle" font-size="50" font-weight="bold" fill="white">${pregunta.textSBG || ''}</text>`;
+      }
+    }
+    else if(pregunta.tipusSBG === 'fi_prohibicio'){ // Circulo blanco tachado
+      svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="black" stroke-width="12"/>
+              <line x1="30" y1="30" x2="170" y2="170" stroke="black" stroke-width="12"/>`;
+      overlay = `<text x="100" y="115" text-anchor="middle" font-size="70">${pregunta.emoji || ''}</text>`;
+    }
+
+    svg += overlay + `</svg>`;
+    imgDiv.innerHTML = svg;
+    imgDiv.style.border = '3px solid #00D9FF';
+    imgDiv.style.borderRadius = '12px';
+    imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
+
+  // COMPATIBILIDAD: SI VIENE CON IMG ANTIGUO
+  } else if (pregunta.img && pregunta.img.trim()!== '') {
     imgDiv.innerHTML = pregunta.img; // Pinta el SVG que ya viene en la pregunta
     imgDiv.style.border = '2px solid #00D9FF';
     imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
@@ -888,7 +940,7 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
   }
 
-  // NUEVO: Pintar emojis debajo del SBG
+  // NUEVO: Pintar emojis debajo del SBG si existen
   if(emojisDiv && pregunta.emojis && pregunta.emojis.length > 0){
     emojisDiv.innerHTML = pregunta.emojis.map(e => `<span class="emoji-pista">${e}</span>`).join('');
     emojisDiv.style.display = 'flex';
