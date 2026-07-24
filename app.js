@@ -1270,19 +1270,33 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== TEST / CASOS / EXAMEN =====
+// ===== V9.6.4 TEST / CASOS / EXAMEN CON COMPATIBILIDAD FORMATO VIEJO + NUEVO =====
 function carregarPregunta(cat) {
   const s = estat.test[cat];
   const preguntes = barrejarArray(PREGUNTES[cat]);
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
-  const opcionsBarrejades = barrejarArray(pOriginal.a);
-  const textCorrecte = pOriginal.a[pOriginal.ok];
+
+  // ===== V9.6.4 COMPATIBLE: FORMATO NUEVO Y VIEJO =====
+  const esFormatoNuevo = pOriginal.tipusSBG!== undefined;
+  const textPregunta = esFormatoNuevo? pOriginal.pregunta : pOriginal.q;
+  const opcionsOriginales = esFormatoNuevo? pOriginal.opcions : pOriginal.a;
+  const indexCorrectaOriginal = esFormatoNuevo? pOriginal.correcta : pOriginal.ok;
+  const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
+
+  const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
+
+  const p = {
+   ...pOriginal,
+    a: opcionsBarrejades,
+    ok: nouIndexCorrecte,
+    q: textPregunta, // Para compatibilidad con funciones viejas
+    id: pOriginal.id || (cat + '_' + s.idx) // Si no tiene id, le ponemos uno
+  };
   s.current = p;
 
-  // V9.5.6 NUEVO: PINTAR IMAGEN + EMOJIS
+  // V9.6.4 NUEVO: PINTAR SBG + EMOJIS
   pintarImatgeSiExisteix(cat, p);
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
@@ -1308,17 +1322,44 @@ function carregarPregunta(cat) {
 
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
-  const s = estat.test[cat]; const p = s.current; const cont = document.getElementById(`test-${cat}-opciones`);
+  const s = estat.test[cat];
+  const p = s.current;
+  const cont = document.getElementById(`test-${cat}-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
   const preguntaId = p.id;
-  if(correcte) { el.classList.add('correcta'); s.encerts++; s.ratxa++; s.puntuacio += 10 + (s.ratxa * 2); estat.coins += 5; document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto'; document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; mostrarEmoji(true, el); }
-  else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo'; document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO'; mostrarEmoji(false, el); s.ratxa = 0; registrarFallada(cat, p.subtema, p.pag); }
+
+  if(correcte) {
+    el.classList.add('correcta');
+    s.encerts++;
+    s.ratxa++;
+    s.puntuacio += 10 + (s.ratxa * 2);
+    estat.coins += 5;
+    document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto';
+    document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`;
+    mostrarEmoji(true, el);
+  }
+  else {
+    el.classList.add('incorrecta');
+    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
+    document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo';
+    document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO';
+    mostrarEmoji(false, el);
+    s.ratxa = 0;
+    registrarFallada(cat, p.subtema || 'General', p.pag || 1);
+  }
+
   actualizarMetricasTest(cat, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`); btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer';
-  actualitzarCoins(); guardar();
+
+  const btnSig = document.getElementById(`btn-sig-test-${cat}`);
+  btnSig.disabled = false;
+  btnSig.style.opacity = '1';
+  btnSig.style.cursor = 'pointer';
+  actualitzarCoins();
+  guardar();
 }
 
 function seguentTest(e, cat) {
