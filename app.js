@@ -1149,52 +1149,25 @@ function calcularPreparacioDGT_V94() {
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
-  
-  // V9.6.7 FIX: Si ya estamos en temari al cargar, iniciar timer
-  const tabTemari = document.getElementById('tab-temari');
-  if(tabTemari && tabTemari.classList.contains('active') && tempsIniciTemari === null) {
-    tempsIniciTemari = Date.now();
-  }
-
   contadorTemari = setInterval(() => {
-    try {
-      const ara = Date.now();
-      const tabTemari = document.getElementById('tab-temari');
-      const estaEnTemari = tabTemari && tabTemari.classList.contains('active');
-
-      if(estaEnTemari) {
-        // Si es la primera vez que entra, marcar inicio
-        if(tempsIniciTemari === null) tempsIniciTemari = ara;
-        
-        // Sumar solo lo que pasó desde la última marca
-        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        if(minutsPassats > 0.001) { // Solo si pasó algo > 0.06 segundos
-          estat.stats.tempsEstudiatAvui += minutsPassats; 
-          tempsIniciTemari = ara; 
-          guardar(); 
-          actualitzarPaseUI();
-        }
-        
-        // Desbloquear pase
-        if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
-          estat.stats.paseCompletado = true;
-          estat.coins += 50; 
-          guardar();
-          alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
-          actualitzarEstadistiques_V94();
-        }
-      } else {
-        // Si sale del temari, guardar el tiempo y resetear marca
-        if(tempsIniciTemari!== null) {
-          const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-          estat.stats.tempsEstudiatAvui += minutsPassats; 
-          tempsIniciTemari = null; 
-          guardar(); 
-          actualitzarPaseUI();
-        }
+    const tabTemari = document.getElementById('tab-temari');
+    if(tabTemari && tabTemari.classList.contains('active')) {
+      if(tempsIniciTemari === null) tempsIniciTemari = Date.now();
+      const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+      estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
+      if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
+        estat.stats.paseCompletado = true;
+        estat.coins += 50; guardar();
+        alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
+        actualitzarEstadistiques_V94();
       }
-    } catch(err) { console.error("Error contador:", err); }
-  }, 1000); // Cada 1 segundo para que sea más preciso
+    } else {
+      if(tempsIniciTemari!== null) {
+        const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
+      }
+    }
+  }, 2000);
 }
 
 function comprovarNouDia() {
