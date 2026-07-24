@@ -861,7 +861,7 @@ const EMOJI_BOTIGA = [
 ];
 
 
- // ===== GASDRIVE DGT CAT V9.6.4 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS + SBG DINAMICO =====
+// ===== GASDRIVE DGT CAT V9.6.9 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS + SBG DINAMICO + FIX CONTADOR =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -878,45 +878,44 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // NUEVO: SI VIENE CON FORMATO SBG NUEVO
   if (pregunta.tipusSBG) {
     let svg = `<svg viewBox="0 0 200 200" style="width:100%; height:auto;">`;
     let overlay = '';
 
-    if(pregunta.tipusSBG === 'prohibit'){ // Circulo rojo
+    if(pregunta.tipusSBG === 'prohibit'){
       svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>
               <line x1="30" y1="30" x2="170" y2="170" stroke="#E10600" stroke-width="12"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'obligatori'){ // Circulo azul
+    else if(pregunta.tipusSBG === 'obligatori'){
       svg += `<circle cx="100" cy="100" r="90" fill="#00529F" stroke="white" stroke-width="8"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70" fill="white">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'perill'){ // Triangulo rojo
+    else if(pregunta.tipusSBG === 'perill'){
       svg += `<polygon points="100,10 190,190 10,190" fill="white" stroke="#E10600" stroke-width="10"/>`;
       overlay = `<text x="100" y="140" text-anchor="middle" font-size="60">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'obres'){ // Triangulo amarillo
+    else if(pregunta.tipusSBG === 'obres'){
       svg += `<polygon points="100,10 190,190 10,190" fill="#FFC400" stroke="black" stroke-width="8"/>`;
       overlay = `<text x="100" y="140" text-anchor="middle" font-size="60">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'informacio'){ // Quadrat blau
+    else if(pregunta.tipusSBG === 'informacio'){
       svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70" fill="white">${pregunta.emoji || ''}</text>`;
     }
-    else if(pregunta.tipusSBG === 'text'){ // Numeros
+    else if(pregunta.tipusSBG === 'text'){
       if(pregunta.sbg_base === 'circulo_rojo_numero'){
         svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="#E10600" stroke-width="12"/>`;
         overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="#E10600">${pregunta.emoji || ''}</text>`;
       } else if(pregunta.sbg_base === 'circulo_blau_numero'){
         svg += `<circle cx="100" cy="100" r="90" fill="#00529F" stroke="white" stroke-width="8"/>`;
         overlay = `<text x="100" y="120" text-anchor="middle" font-size="80" font-weight="bold" fill="white">${pregunta.emoji || ''}</text>`;
-      } else { // Quadrat amb text
+      } else {
         svg += `<rect x="10" y="10" width="180" height="180" rx="15" fill="#00529F" stroke="white" stroke-width="8"/>`;
         overlay = `<text x="100" y="115" text-anchor="middle" font-size="50" font-weight="bold" fill="white">${pregunta.emoji || ''}</text>`;
       }
     }
-    else if(pregunta.tipusSBG === 'fi_prohibicio'){ // Circulo blanco tachado
+    else if(pregunta.tipusSBG === 'fi_prohibicio'){
       svg += `<circle cx="100" cy="100" r="90" fill="white" stroke="black" stroke-width="12"/>
               <line x1="30" y1="30" x2="170" y2="170" stroke="black" stroke-width="12"/>`;
       overlay = `<text x="100" y="115" text-anchor="middle" font-size="70">${pregunta.emoji || ''}</text>`;
@@ -925,15 +924,12 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     imgDiv.innerHTML = svg;
     imgDiv.style.border = '2px solid #00D9FF';
     imgDiv.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.3)';
-
-  // COMPATIBLE: SI VIENE FORMATO VIEJO SIN SBG
   } else {
     imgDiv.innerHTML = `<div class="placeholder">Sense pictograma</div>`;
     imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
   }
 
-  // PINTAR EMOJIS PISTA SI EXISTEN
   if(emojisDiv && pregunta.emojis && pregunta.emojis.length > 0){
     emojisDiv.innerHTML = pregunta.emojis.map(e => `<span class="emoji-pista">${e}</span>`).join('');
     emojisDiv.style.display = 'flex';
@@ -943,7 +939,6 @@ function pintarImatgeSiExisteix(cat, pregunta) {
   }
 }
 
-// NUEVO: Total dinámico para cuando metas 800+ preguntas
 function getTotalBanco() {
   let total = 0;
   for(let cat in PREGUNTES) total += PREGUNTES[cat].length;
@@ -963,7 +958,6 @@ const MAPEO_PALABRAS_CLAVE = {
   'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
 };
 
-// SISTEMA PROGRESO V9.4 CON SET Y CAP DIARIO
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
     general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
@@ -983,7 +977,6 @@ let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   diesEstudi: new Set()
 };
 
-// Convertir datos guardados a Set al iniciar
 for(let c in PROGRESO.tests) {
   PROGRESO.tests[c].unicas = new Set(PROGRESO.tests[c].unicas || []);
   PROGRESO.tests[c].dies = PROGRESO.tests[c].dies || {};
@@ -1011,19 +1004,26 @@ let estat = {
 
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
+// ===== V9.6.9 FIX: NO PRECARGAR SI NO HAY PASE =====
 function init() {
-  console.log("GasDrive V9.5.6 CAT carregat");
-  autoMapearTotesPreguntes(); // V9.5.6 YA NO CARGA PRUEBAS
+  console.log("GasDrive V9.6.9 CAT carregat");
+  autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
   actualitzarCoins();
-  carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
-  carregarSituacio('clima');
+
+  if(potFerTests()){
+    carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
+    carregarSituacio('clima');
+  } else {
+    ['general','senyals','normes','mecanica','auxilis','mediambient'].forEach(cat => carregarPregunta(cat));
+    carregarSituacio('clima');
+  }
+
   actualitzarMissatgeMotivacional();
 }
 
-// GUARDAR: Convertir Set a Array
 function guardar() {
   localStorage.setItem('gd_coins', estat.coins);
   localStorage.setItem('gd_cotxes', JSON.stringify(estat.cotxes));
@@ -1041,7 +1041,6 @@ function guardar() {
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-// ===== FUNCIONES PROGRESO REAL =====
 function actualizarMetricasTest(categoria, preguntaId, acierto) {
   if(!PROGRESO.tests[categoria]) return;
   const prog = PROGRESO.tests[categoria];
@@ -1070,7 +1069,6 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.6 FIX: HISTORIAL SOLO CON ID REAL =====
 function registrarHistorialPregunta(preguntaId, acierto) {
   if(!preguntaId || isNaN(preguntaId)) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
@@ -1084,12 +1082,9 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.6 NUEVA FORMULA ANTI-FARM DURO - CAP DIARIO + CONSTANCIA 40% =====
 function calcularPreparacioDGT_V94() {
   const avui = new Date();
   const fa7Dies = new Date(avui.getTime() - 7 * 24 * 60 * 60 * 1000);
-
-  // 1. RETENCIÓ 30% - CON CAP DIARIO DE 3%
   let totalPreg = 0, domina = 0, aprenent = 0;
   let historial = estat.stats.historialPregunta || {};
   for(let cat in PREGUNTES) {
@@ -1105,8 +1100,6 @@ function calcularPreparacioDGT_V94() {
   let retencioRaw = totalPreg > 0? ((domina * 1.0) + (aprenent * 0.5)) / totalPreg * 100 : 0;
   const retencioAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].retencio || 0 : 0;
   const retencio = Math.min(retencioRaw, retencioAyer + 3);
-
-  // 2. CONSTÀNCIA 40% - AHORA PESA MÁS Y PIDE 20 DÍAS
   let diesValids = 0;
   PROGRESO.diesEstudi.forEach(dia => {
     let fetesDia = 0, encertsDia = 0, totalDia = 0;
@@ -1120,8 +1113,6 @@ function calcularPreparacioDGT_V94() {
   });
   let constancia = Math.round((diesValids / 20) * 100);
   if(constancia > 100) constancia = 100;
-
-  // 3. COBERTURA ACTIVA 20% - CON CAP DIARIO DE 5%
   let unicas7Dies = new Set();
   for(let cat in PREGUNTES) {
     PREGUNTES[cat].forEach(p => {
@@ -1132,54 +1123,63 @@ function calcularPreparacioDGT_V94() {
   let coberturaRaw = Math.round((unicas7Dies.size / getTotalBanco()) * 100);
   const coberturaAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].cobertura || 0 : 0;
   const cobertura = Math.min(coberturaRaw, coberturaAyer + 5);
-
-  // 4. ESTABILITAT SIMULACRES 10%
   let maxRatxa = 0, ratxa = 0;
   PROGRESO.examen.historial.forEach(e => {
     if(e.nota >= 27) { ratxa++; maxRatxa = Math.max(maxRatxa, ratxa); }
     else ratxa = 0;
   });
   const estabilitat = maxRatxa >= 6? 100 : Math.round((maxRatxa / 6) * 100);
-
   const preparacio = Math.round((retencio * 0.3) + (constancia * 0.4) + (cobertura * 0.2) + (estabilitat * 0.1));
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== PASE 20 MIN =====
+// ===== V9.6.9 FIX: CONTADOR QUE SI FUNCIONA =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
+  const tabTemari = document.getElementById('tab-temari');
+  if(tabTemari && tabTemari.classList.contains('active')) {
+    tempsIniciTemari = Date.now();
+  }
   contadorTemari = setInterval(() => {
-    const tabTemari = document.getElementById('tab-temari');
-    if(tabTemari && tabTemari.classList.contains('active')) {
-      if(tempsIniciTemari === null) tempsIniciTemari = Date.now();
-      const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-      estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
-      if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
-        estat.stats.paseCompletado = true;
-        estat.coins += 50; guardar();
-        alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
-        actualitzarEstadistiques_V94();
+    try {
+      const ara = Date.now();
+      const tabTemari = document.getElementById('tab-temari');
+      const estaEnTemari = tabTemari && tabTemari.classList.contains('active');
+      if(estaEnTemari) {
+        if(tempsIniciTemari === null) tempsIniciTemari = ara;
+        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        if(minutsPassats > 0.005) {
+          estat.stats.tempsEstudiatAvui += minutsPassats;
+          tempsIniciTemari = ara;
+          guardar();
+          actualitzarPaseUI();
+        }
+        if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
+          estat.stats.paseCompletado = true;
+          estat.coins += 50;
+          guardar();
+          alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
+          actualitzarEstadistiques_V94();
+        }
+      } else {
+        if(tempsIniciTemari!== null) {
+          const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+          estat.stats.tempsEstudiatAvui += minutsPassats;
+          tempsIniciTemari = null;
+          guardar();
+          actualitzarPaseUI();
+        }
       }
-    } else {
-      if(tempsIniciTemari!== null) {
-        const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
-      }
-    }
-  }, 2000);
+    } catch(err) { console.error("Error contador:", err); }
+  }, 1000);
 }
 
 function comprovarNouDia() {
   const avui = new Date().toISOString().split('T')[0];
   if(estat.stats.diaActual!== avui) {
     const stats = calcularPreparacioDGT_V94();
-    estat.stats.historialEvolucio.push({
-      dia: estat.stats.diaActual,
-      percent: stats.preparacio,
-      retencio: stats.retencio,
-      cobertura: stats.cobertura
-    });
+    estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio, retencio: stats.retencio, cobertura: stats.cobertura});
     if(estat.stats.historialEvolucio.length > 30) estat.stats.historialEvolucio.shift();
     estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
@@ -1195,7 +1195,6 @@ function actualitzarPaseUI() {
   if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
 }
 
-// ===== AUTO-MAPEO CON ID =====
 function autoMapearTotesPreguntes() {
   let idCounter = 1;
   for(let cat in PREGUNTES) {
@@ -1208,7 +1207,6 @@ function autoMapearTotesPreguntes() {
   console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
 }
 
-// ===== PUNTOS DEBILS V9.4.6 =====
 function registrarFallada(categoria, subtema, pagina) {
   if(!subtema || subtema === 'undefined') subtema = 'General';
   if(!pagina) pagina = 1;
@@ -1242,7 +1240,6 @@ function dibuixarPuntsDebils_V94() {
 
 function anarAPagina(pagina) { canviarTab_V94(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== STATS REALES V9.4.6 =====
 function actualitzarEstadistiques_V94() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
@@ -1270,35 +1267,35 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== V9.6.4 TEST / CASOS / EXAMEN CON COMPATIBILIDAD FORMATO VIEJO + NUEVO =====
+// ===== V9.6.9 FIX: carregarPregunta CON CANDADO =====
 function carregarPregunta(cat) {
+  if(!potFerTests()) {
+    document.getElementById(`test-${cat}-pregunta`).textContent = "⛔ PASE BLOQUEJAT";
+    document.getElementById(`test-${cat}-opciones`).innerHTML = `<div style="text-align:center; padding:20px; color:#FFD700; font-size:14px">Estudia 20 min al TEMARI per desbloquejar</div>`;
+    document.getElementById(`test-${cat}-imagen`).innerHTML = `<div class="placeholder">🔒</div>`;
+    const emojisDiv = document.getElementById(`test-${cat}-emojis`);
+    if(emojisDiv) { emojisDiv.style.display = 'none'; emojisDiv.innerHTML = ''; }
+    document.getElementById(`test-${cat}-aciertos`).textContent = '0';
+    document.getElementById(`test-${cat}-racha`).textContent = '0';
+    document.getElementById(`test-${cat}-score`).textContent = '0';
+    document.getElementById(`test-${cat}-progress`).style.width = '0%';
+    document.getElementById(`btn-sig-test-${cat}`).disabled = true;
+    return;
+  }
   const s = estat.test[cat];
   const preguntes = barrejarArray(PREGUNTES[cat]);
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
-
-  // ===== V9.6.4 COMPATIBLE: FORMATO NUEVO Y VIEJO =====
   const esFormatoNuevo = pOriginal.tipusSBG!== undefined;
   const textPregunta = esFormatoNuevo? pOriginal.pregunta : pOriginal.q;
   const opcionsOriginales = esFormatoNuevo? pOriginal.opcions : pOriginal.a;
   const indexCorrectaOriginal = esFormatoNuevo? pOriginal.correcta : pOriginal.ok;
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
-
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-
-  const p = {
-   ...pOriginal,
-    a: opcionsBarrejades,
-    ok: nouIndexCorrecte,
-    q: textPregunta, // Para compatibilidad con funciones viejas
-    id: pOriginal.id || (cat + '_' + s.idx) // Si no tiene id, le ponemos uno
-  };
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: textPregunta, id: pOriginal.id || (cat + '_' + s.idx)};
   s.current = p;
-
-  // V9.6.4 NUEVO: PINTAR SBG + EMOJIS
   pintarImatgeSiExisteix(cat, p);
-
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
@@ -1308,9 +1305,7 @@ function carregarPregunta(cat) {
   cont.innerHTML = '';
   document.getElementById(`test-${cat}-feedback`).textContent = '';
   const btnSig = document.getElementById(`btn-sig-test-${cat}`);
-  btnSig.disabled = true;
-  btnSig.style.opacity = '0.4';
-  btnSig.style.cursor = 'not-allowed';
+  btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed';
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
@@ -1477,7 +1472,6 @@ function carregarPreguntaExamen() {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   estat.examen.preguntes[estat.examen.index] = p;
 
-  // V9.5.6 NUEVO: PINTAR IMAGEN + EMOJIS EXAMEN
   pintarImatgeSiExisteix('examen', p);
 
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
@@ -1567,7 +1561,6 @@ function reiniciarExamen() {
   document.getElementById('examen-timer').textContent = '30:00';
 }
 
-// ===== GARAGE, BOTIGA, TIPS, TEMARI =====
 function carregarGaratge() {
   const cont = document.getElementById('garage-lista');
   cont.innerHTML = '';
@@ -1664,7 +1657,6 @@ function obrirPDF(ruta) {
 
 function tancarPDF() { const modal = document.getElementById('pdf-modal'); if(modal) modal.remove(); }
 
-// ===== GRAFICA EVOLUCIO =====
 function dibujarGraficaEvolucion() {
   const canvas = document.getElementById('grafica-evolucion');
   if(!canvas) return;
@@ -1702,14 +1694,16 @@ function dibujarGraficaEvolucion() {
 
 function actualitzarMissatgeMotivacional() { const missatges = ["Vas per bon camí 💪","Cada fallo et fa més fort 🔥","L'examen DGT és teu 🚗","No paris ara 💎","Concentra't i aprovaràs 👑"]; const msg = missatges[Math.floor(Math.random() * missatges.length)]; const el = document.getElementById('motivacio'); if(el) el.textContent = msg; }
 
-// ===== CANVIAR TABS V9.4 =====
+// ===== CANVIAR TABS V9.6.9 FIX =====
 function canviarTab_V94(e, tab) {
-  if(document.getElementById('tab-temari').classList.contains('active')) {
+  const tabActual = document.querySelector('.tab-content.active');
+  if(tabActual && tabActual.id === 'tab-temari') {
     if(tempsIniciTemari!== null) {
       const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
       estat.stats.tempsEstudiatAvui += minutsPassats;
-      tempsIniciTemari = Date.now();
+      tempsIniciTemari = null;
       guardar();
+      actualitzarPaseUI();
     }
   }
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -1756,4 +1750,4 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-} 
+}
