@@ -861,10 +861,10 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.6.9 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS + SBG DINAMICO + FIX CONTADOR =====
+// ===== GASDRIVE DGT CAT V9.6.10 - SISTEMA PROGRESO REAL + 180 SEÑALES + EMOJIS + SBG DINAMICO + FIX CONTADOR GLOBAL =====
 let tipsData = [];
 let currentTip = 0;
-let tempsIniciTemari = null;
+let tempsIniciTemari = Date.now(); // FIX: Solo 1 declaración y ya iniciar
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
@@ -1004,9 +1004,9 @@ let estat = {
 
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
-// ===== V9.6.9 FIX: NO PRECARGAR SI NO HAY PASE =====
+// ===== V9.6.10 FIX: NO PRECARGAR SI NO HAY PASE =====
 function init() {
-  console.log("GasDrive V9.6.9 CAT carregat");
+  console.log("GasDrive V9.6.10 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1015,9 +1015,6 @@ function init() {
 
   if(potFerTests()){
     carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
-    carregarSituacio('clima');
-  } else {
-    ['general','senyals','normes','mecanica','auxilis','mediambient'].forEach(cat => carregarPregunta(cat));
     carregarSituacio('clima');
   }
 
@@ -1134,39 +1131,35 @@ function calcularPreparacioDGT_V94() {
 }
 
 // ===== PASE 20 MIN V9.6.10 - CONTADOR GLOBAL OPTIMIZADO =====
-let tempsIniciTemari = Date.now(); // V9.6.10: Iniciar al cargar la app
-
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
-  
+
   let ultimGuardat = Date.now();
 
   contadorTemari = setInterval(() => {
     try {
       const ara = Date.now();
       const tabActual = document.querySelector('.tab-content.active');
-      const tabId = tabActual ? tabActual.id : '';
-      
-      // NO contar si está en TEST/CASOS/EXAMEN y está bloqueado
-      const noContar = ['tab-test', 'tab-situaciones', 'tab-examen'].includes(tabId) && !potFerTests();
-      
+      const tabId = tabActual? tabActual.id : '';
+
+      const noContar = ['tab-test', 'tab-situaciones', 'tab-examen'].includes(tabId) &&!potFerTests();
+
       if(!noContar) {
         const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        
-        if(minutsPassats > 0.001) { // evitar sumar 0
+
+        if(minutsPassats > 0.001) {
           estat.stats.tempsEstudiatAvui += minutsPassats;
           tempsIniciTemari = ara;
-          
-          actualitzarPaseUI(); // UI cada 2 seg
-          
-          if(ara - ultimGuardat > 10000) { // Guardar cada 10 seg
+
+          actualitzarPaseUI();
+
+          if(ara - ultimGuardat > 10000) {
             guardar();
             ultimGuardat = ara;
           }
         }
-        
-        // Desbloquear PASE
+
         if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
           estat.stats.paseCompletado = true;
           estat.coins += 50;
@@ -1175,11 +1168,11 @@ function iniciarComptadorTemari() {
           actualitzarEstadistiques_V94();
         }
       } else {
-        tempsIniciTemari = ara; // Pausar contador si está bloqueado
+        tempsIniciTemari = ara;
       }
-      
+
     } catch(err) { console.error("Error contador:", err); }
-  }, 2000); // Cada 2 seg para no matar el móvil con 800 preguntas
+  }, 2000);
 }
 
 function comprovarNouDia() {
@@ -1188,7 +1181,7 @@ function comprovarNouDia() {
     const stats = calcularPreparacioDGT_V94();
     estat.stats.historialEvolucio.push({dia: estat.stats.diaActual, percent: stats.preparacio, retencio: stats.retencio, cobertura: stats.cobertura});
     if(estat.stats.historialEvolucio.length > 30) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = Date.now();
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
     for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
     guardar(); actualitzarPaseUI();
@@ -1274,7 +1267,6 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== V9.6.9 FIX: carregarPregunta CON CANDADO =====
 function carregarPregunta(cat) {
   if(!potFerTests()) {
     document.getElementById(`test-${cat}-pregunta`).textContent = "⛔ PASE BLOQUEJAT";
