@@ -1136,29 +1136,51 @@ function calcularPreparacioDGT_V94() {
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== V9.7.1 FIX: PASE 20 MIN - YA NO SE REINICIA =====
+// ===== V9.7.2 FIX: CONTADOR REAL QUE NO SE REINICIA =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
+  
   actualitzarPaseUI();
+
   contadorTemari = setInterval(() => {
-    const tabTemari = document.getElementById('tab-temari');
-    if(tabTemari && tabTemari.classList.contains('active')) {
-      if(tempsIniciTemari === null) tempsIniciTemari = Date.now();
-      const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-      estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
-      if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
-        estat.stats.paseCompletado = true;
-        estat.coins += 50; guardar();
-        alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
-        actualitzarEstadistiques_V94();
+    // 1. Detectar si hay un PDF del temari abierto en pantalla
+    const pdfObert = document.querySelector('iframe[src*=".pdf"], embed[src*=".pdf"], .pdf-viewer');
+    const estaEstudiant = pdfObert && pdfObert.offsetParent !== null; // que sea visible
+
+    const ara = Date.now();
+
+    if(estaEstudiant) {
+      // Si es la primera vez que detecta el PDF, marca inicio
+      if(tempsIniciTemari === null) {
+        tempsIniciTemari = ara;
+      } else {
+        // Suma solo el tiempo transcurrido desde la última comprobación
+        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        estat.stats.tempsEstudiatAvui += minutsPassats;
+        tempsIniciTemari = ara; // actualiza para la siguiente vuelta
       }
     } else {
-      if(tempsIniciTemari!== null) {
-        const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar(); actualitzarPaseUI();
+      // Si cierra el PDF, guarda el último trozo y resetea el inicio
+      if(tempsIniciTemari !== null) {
+        const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
+        estat.stats.tempsEstudiatAvui += minutsPassats;
+        tempsIniciTemari = null;
       }
     }
-  }, 2000);
+
+    guardar(); // Guardar cada 2s para que no se pierda si cierra la app
+    actualitzarPaseUI();
+
+    // Desbloquear pase
+    if(estat.stats.tempsEstudiatAvui >= 20 && !estat.stats.paseCompletado) {
+      estat.stats.paseCompletado = true;
+      estat.coins += 50;
+      guardar();
+      alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
+      actualitzarEstadistiques_V94();
+    }
+
+  }, 2000); // cada 2 segundos
 }
 
 function comprovarNouDia() {
