@@ -860,17 +860,17 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V9.7.0 - SISTEMA PROGRESO REAL + SBG DINAMICO + EMOJIS =====
+// ===== GASDRIVE DGT CAT V9.7.1 - SISTEMA PROGRESO REAL + SBG DINAMICO + EMOJIS + TIMER FIX =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.7.0 BANCO DE SVGS VACIO - AHORA SE GENERA SOLO =====
+// ===== V9.7.1 BANCO DE SVGS VACIO - AHORA SE GENERA SOLO =====
 const SENALES_SVG = {}; // VACIO A PROPOSITO
 
-// ===== V9.7.0 FUNCIÓN QUE PINTA SBG + EMOJI =====
+// ===== V9.7.1 FUNCIÓN QUE PINTA SBG + EMOJI =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -1007,7 +1007,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.7.0 CAT carregat");
+  console.log("GasDrive V9.7.1 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1136,7 +1136,7 @@ function calcularPreparacioDGT_V94() {
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== PASE 20 MIN - IGUAL QUE V9.5.6 =====
+// ===== V9.7.1 FIX: PASE 20 MIN - YA NO SE REINICIA =====
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
@@ -1268,7 +1268,7 @@ function carregarPregunta(cat) {
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
 
-  // V9.7.0 FIX: Detectar formato nuevo o viejo
+  // V9.7.1 FIX: Detectar formato nuevo o viejo
   const esFormatoNuevo = pOriginal.tipusSBG!== undefined;
   const textPregunta = esFormatoNuevo? pOriginal.pregunta : pOriginal.q;
   const opcionsOriginales = esFormatoNuevo? pOriginal.opcions : pOriginal.a;
@@ -1280,7 +1280,7 @@ function carregarPregunta(cat) {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: textPregunta, id: pOriginal.id || (cat + '_' + s.idx)};
   s.current = p;
 
-  // V9.7.0 NUEVO: PINTAR SBG + EMOJI
+  // V9.7.1 NUEVO: PINTAR SBG + EMOJI
   pintarImatgeSiExisteix(cat, p);
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
@@ -1452,7 +1452,7 @@ function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
   const pOriginal = estat.examen.preguntes[estat.examen.index];
 
-  // V9.7.0 FIX: Detectar formato nuevo o viejo
+  // V9.7.1 FIX: Detectar formato nuevo o viejo
   const esFormatoNuevo = pOriginal.tipusSBG!== undefined;
   const opcionsOriginales = esFormatoNuevo? pOriginal.opcions : pOriginal.a;
   const indexCorrectaOriginal = esFormatoNuevo? pOriginal.correcta : pOriginal.ok;
@@ -1463,7 +1463,7 @@ function carregarPreguntaExamen() {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: esFormatoNuevo? pOriginal.pregunta : pOriginal.q, id: pOriginal.id || ('examen_' + estat.examen.index)};
   estat.examen.preguntes[estat.examen.index] = p;
 
-  // V9.7.0 NUEVO: PINTAR SBG + EMOJI EN EXAMEN
+  // V9.7.1 NUEVO: PINTAR SBG + EMOJI EN EXAMEN
   pintarImatgeSiExisteix('examen', p);
 
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
@@ -1688,16 +1688,17 @@ function dibujarGraficaEvolucion() {
 
 function actualitzarMissatgeMotivacional() { const missatges = ["Vas per bon camí 💪","Cada fallo et fa més fort 🔥","L'examen DGT és teu 🚗","No paris ara 💎","Concentra't i aprovaràs 👑"]; const msg = missatges[Math.floor(Math.random() * missatges.length)]; const el = document.getElementById('motivacio'); if(el) el.textContent = msg; }
 
-// ===== CANVIAR TABS V9.4 =====
+// ===== V9.7.1 FIX: CANVIAR TABS - YA NO REINICIA TIMER =====
 function canviarTab_V94(e, tab) {
-  if(document.getElementById('tab-temari').classList.contains('active')) {
-    if(tempsIniciTemari!== null) {
-      const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
-      estat.stats.tempsEstudiatAvui += minutsPassats;
-      tempsIniciTemari = Date.now();
-      guardar();
-    }
+  // GUARDAR TIEMPO ANTES DE SALIR DEL TEMARI
+  const tabTemari = document.getElementById('tab-temari');
+  if(tabTemari && tabTemari.classList.contains('active') && tempsIniciTemari!== null) {
+    const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
+    estat.stats.tempsEstudiatAvui += minutsPassats;
+    tempsIniciTemari = null; // Lo para, no lo reinicia
+    guardar();
   }
+
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
