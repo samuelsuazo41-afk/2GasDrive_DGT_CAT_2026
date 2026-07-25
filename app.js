@@ -1133,28 +1133,40 @@ function calcularPreparacioDGT_V94() {
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== V9.6.9 FIX: CONTADOR QUE SI FUNCIONA =====
+// ===== PASE 20 MIN V9.6.10 - CONTADOR GLOBAL OPTIMIZADO =====
+let tempsIniciTemari = Date.now(); // V9.6.10: Iniciar al cargar la app
+
 function iniciarComptadorTemari() {
   if(contadorTemari) clearInterval(contadorTemari);
   actualitzarPaseUI();
-  const tabTemari = document.getElementById('tab-temari');
-  if(tabTemari && tabTemari.classList.contains('active')) {
-    tempsIniciTemari = Date.now();
-  }
+  
+  let ultimGuardat = Date.now();
+
   contadorTemari = setInterval(() => {
     try {
       const ara = Date.now();
-      const tabTemari = document.getElementById('tab-temari');
-      const estaEnTemari = tabTemari && tabTemari.classList.contains('active');
-      if(estaEnTemari) {
-        if(tempsIniciTemari === null) tempsIniciTemari = ara;
+      const tabActual = document.querySelector('.tab-content.active');
+      const tabId = tabActual ? tabActual.id : '';
+      
+      // NO contar si está en TEST/CASOS/EXAMEN y está bloqueado
+      const noContar = ['tab-test', 'tab-situaciones', 'tab-examen'].includes(tabId) && !potFerTests();
+      
+      if(!noContar) {
         const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        if(minutsPassats > 0.005) {
+        
+        if(minutsPassats > 0.001) { // evitar sumar 0
           estat.stats.tempsEstudiatAvui += minutsPassats;
           tempsIniciTemari = ara;
-          guardar();
-          actualitzarPaseUI();
+          
+          actualitzarPaseUI(); // UI cada 2 seg
+          
+          if(ara - ultimGuardat > 10000) { // Guardar cada 10 seg
+            guardar();
+            ultimGuardat = ara;
+          }
         }
+        
+        // Desbloquear PASE
         if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
           estat.stats.paseCompletado = true;
           estat.coins += 50;
@@ -1163,16 +1175,11 @@ function iniciarComptadorTemari() {
           actualitzarEstadistiques_V94();
         }
       } else {
-        if(tempsIniciTemari!== null) {
-          const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-          estat.stats.tempsEstudiatAvui += minutsPassats;
-          tempsIniciTemari = null;
-          guardar();
-          actualitzarPaseUI();
-        }
+        tempsIniciTemari = ara; // Pausar contador si está bloqueado
       }
+      
     } catch(err) { console.error("Error contador:", err); }
-  }, 1000);
+  }, 2000); // Cada 2 seg para no matar el móvil con 800 preguntas
 }
 
 function comprovarNouDia() {
