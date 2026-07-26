@@ -1136,33 +1136,58 @@ function calcularPreparacioDGT_V94() {
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== V9.7.2 FIX DEFINITIVO: PASE 20 MIN - PAUSA EN VEZ DE REINICIAR =====
+// ===== FIX DEFINITIVO PASE 20 MIN V9.7.3 =====
 function iniciarComptadorTemari() {
-  if(contadorTemari) clearInterval(contadorTemari);
+  if (contadorTemari) clearInterval(contadorTemari);
+  comprovarNouDia();
   actualitzarPaseUI();
+
   contadorTemari = setInterval(() => {
-    const tabTemari = document.getElementById('tab-temari');
-    if(tabTemari && tabTemari.classList.contains('active')) {
-      if(tempsIniciTemari === null) tempsIniciTemari = Date.now(); // Solo inicia si estaba en null
-      const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-      estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = ara; guardar(); actualitzarPaseUI();
-      if(estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
+    // DETECCIÓN ROBUSTA: ¿estamos en TEMARI?
+    const vistaTemariActiva = document.getElementById('tab-temari')?.classList.contains('active') ||
+                              document.querySelector('.tab-btn.active.emoji')?.textContent.includes('📖') ||
+                              document.body.innerText.includes('.pdf'); // si está viendo el PDF
+
+    if (vistaTemariActiva) {
+      if (tempsIniciTemari === null) {
+        tempsIniciTemari = Date.now();
+        console.log("Timer TEMARI INICIADO");
+      } else {
+        const ara = Date.now();
+        const segundos = (ara - tempsIniciTemari) / 1000;
+        if (segundos >= 5) { // guarda cada 5 segundos para no perder ni 1 segundo
+          estat.stats.tempsEstudiatAvui += segundos / 60;
+          tempsIniciTemari = ara;
+          guardar();
+          actualitzarPaseUI();
+        }
+      }
+
+      if (estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
         estat.stats.paseCompletado = true;
-        estat.coins += 50; guardar();
-        alert(`✅ PASE DESBLOQUEJAT!\n\nHas estudiat 20 minuts. +50 coins\nAra ja pots fer tests tot el dia`);
+        estat.coins += 50;
+        guardar();
+        alert(`✅ PASE DESBLOQUEJAT!\nHas estudiat 20 minuts. +50 coins`);
         actualitzarEstadistiques_V94();
       }
     } else {
-      if(tempsIniciTemari!== null) {
-        const ara = Date.now(); const minutsPassats = (ara - tempsIniciTemari) / 1000 / 60;
-        estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar(); actualitzarPaseUI(); // PAUSA AQUI
+      // PAUSA - pero NO borres, solo guarda lo que llevabas
+      if (tempsIniciTemari!== null) {
+        const ara = Date.now();
+        const segundos = (ara - tempsIniciTemari) / 1000;
+        estat.stats.tempsEstudiatAvui += segundos / 60;
+        tempsIniciTemari = null;
+        guardar();
+        actualitzarPaseUI();
+        console.log("Timer TEMARI PAUSADO, total:", estat.stats.tempsEstudiatAvui);
       }
     }
-  }, 2000);
+  }, 1000); // cada 1s
 }
 
+// ===== FIX FECHA LOCAL ESPAÑA =====
 function comprovarNouDia() {
-  const avui = new Date().toISOString().split('T')[0];
+  const avui = new Date().toLocaleDateString('ca-ES'); // HORA DE GIRONA, NO UTC
   if(estat.stats.diaActual!== avui) {
     const stats = calcularPreparacioDGT_V94();
     estat.stats.historialEvolucio.push({
@@ -1172,18 +1197,31 @@ function comprovarNouDia() {
       cobertura: stats.cobertura
     });
     if(estat.stats.historialEvolucio.length > 30) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
+    estat.stats.tempsEstudiatAvui = 0;
+    estat.stats.diaActual = avui;
+    estat.stats.paseCompletado = false;
+    tempsIniciTemari = null;
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
     for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
-    guardar(); actualitzarPaseUI();
+    guardar();
+    actualitzarPaseUI();
+    console.log("NUEVO DIA:", avui);
   }
 }
 
 function actualitzarPaseUI() {
-  const minuts = Math.floor(estat.stats.tempsEstudiatAvui);
-  const el = document.getElementById('pase-temps'); if(el) el.textContent = `${minuts} min`;
+  const minuts = Math.floor(estat.stats.tempsEstudiatAvui || 0);
+  const el = document.getElementById('pase-temps');
+  if(el) el.textContent = `${minuts} min`;
+
   const msg = document.getElementById('stats-motivacio');
-  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Activo. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al Temari per desbloquejar`; } }
+  if(msg) {
+    if(estat.stats.paseCompletado) msg.textContent = "Pase Actiu. A practicar 💪";
+    else {
+      const falten = Math.max(0, 20 - minuts);
+      msg.textContent = `Estudia ${falten} minuts més al TEMARI per desbloquejar`;
+    }
+  }
 }
 
 // ===== AUTO-MAPEO CON ID =====
