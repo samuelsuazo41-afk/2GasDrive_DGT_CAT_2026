@@ -2179,18 +2179,26 @@ function canviarTab_V94(e, tab) {
   }
 
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   if(e) e.target.closest('.tab-btn').classList.add('active');
+  
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
-  if(tab === 'temari') carregarTemari();
+  if(tab === 'temari') {
+    carregarTemari();
+    iniciarComptadorTemari(); // <-- 1. ARRANCAR EL TIMER AL ENTRAR
+  }
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situaciones') carregarSituacio(sitCategoriaActiva);
-  if(tab === 'estadistiques') actualitzarEstadistiques_V94();
+  if(tab === 'estadistiques') {
+    actualitzarEstadistiques_V94();
+    actualitzarPaseUI(); // <-- 2. ACTUALIZAR EL "0 min" AL ENTRAR
+  }
   if(['test', 'situaciones', 'examen'].includes(tab) &&!potFerTests()) { mostrarPopupPase(); }
-}
+} 
 
 function canviarSubTab(e, tab, subtab) {
   const tabId = tab === 'sit'? 'situaciones' : tab === 'stats'? 'estadistiques' : tab;
