@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V9.7.3</title>
+<title>GasDrive DGT CAT V9.8.0</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -101,47 +101,33 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   box-sizing: border-box;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
-.quadre-pictograma svg {
-  max-width: 150px;
-  max-height: 150px;
-  width: auto;
-  height: auto;
-  filter: drop-shadow(0 0 8px #00D9FF); /* Glow DGT */
-}
-.quadre-pictograma .placeholder {
-  color: rgba(0, 217, 255, 0.4);
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  user-select: none;
-}
-@media (max-width: 400px) {
-  .quadre-pictograma { height: 160px; }
-  .quadre-pictograma svg { max-width: 120px; max-height: 120px; }
-}
+.quadre-pictograma svg { max-width: 150px; max-height: 150px; width: auto; height: auto; filter: drop-shadow(0 0 8px #00D9FF); }
+.quadre-pictograma img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 8px; } /* V9.8.0 PARA JPG REAL */
+.quadre-pictograma .placeholder { color: rgba(0, 217, 255, 0.4); font-size: 14px; font-weight: 500; text-align: center; user-select: none; }
+@media (max-width: 400px) { .quadre-pictograma { height: 160px; } .quadre-pictograma svg { max-width: 120px; max-height: 120px; } }
 
 /* ===== V9.6.4 EMOJIS PISTA DEBAJO SBG ===== */
-.test-emojis {
-  display: none;
-  gap: 8px;
-  justify-content: center;
-  margin: -8px 0 12px 0; /* pegado al cuadro */
-  flex-wrap: wrap;
-}
-.emoji-pista {
-  font-size: 28px;
-  background: rgba(0, 217, 255, 0.08);
-  border: 2px solid rgba(0, 217, 255, 0.25);
+.test-emojis { display: none; gap: 8px; justify-content: center; margin: -8px 0 12px 0; flex-wrap: wrap; }
+.emoji-pista { font-size: 28px; background: rgba(0, 217, 255, 0.08); border: 2px solid rgba(0, 217, 255, 0.25); border-radius: 10px; padding: 5px 9px; animation: bounceIn 0.4s; }
+
+/* ===== V9.8.0 TIP BOX PARA SEÑALES ===== */
+.tip-box {
+  background: linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%);
+  border-left: 5px solid #FFC107;
+  padding: 12px 15px;
   border-radius: 10px;
-  padding: 5px 9px;
-  animation: bounceIn 0.4s;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin-top: 12px;
 }
 </style>
 </head>
 <body>
 <div class="header">
   <h1>🚘 GasDrive DGT CAT</h1>
-  <div class="subtitle">630+ Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
+  <div class="subtitle">800+ Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
   <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700"></div>
 </div>
 
@@ -154,14 +140,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'stats','pase')">⏰ PASE</button>
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'stats','orientacio')">🧭 ORIENTACIÓ</button>
   </div>
-
-  <!-- RESUM -->
   <div id="stats-resum" class="sub-content active">
-    <div class="stats-header">
-      <div style="font-size:48px;font-weight:900;color:#00D9FF;text-align:center" id="stats-global-percent">0%</div>
-      <div class="progress-bar"><div class="progress-fill" id="stats-global-bar"></div></div>
-      <div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div>
-    </div>
+    <div class="stats-header"><div style="font-size:48px;font-weight:900;color:#00D9FF;text-align:center" id="stats-global-percent">0%</div><div class="progress-bar"><div class="progress-fill" id="stats-global-bar"></div></div><div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>💪</span> <b>Retenció 50%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-domini-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>📅</span> <b id="stats-constancia-label">CONSTÀNCIA: 0/30 dies</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-constancia-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>📖</span> <b>Cobertura 7 dies 15%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
@@ -169,18 +149,13 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <div style="display:none"><div id="stats-test-percent"></div><div id="stats-test-bar"></div><div id="stats-casos-percent"></div><div id="stats-casos-bar"></div><div id="stats-examen-percent"></div><div id="stats-examen-bar"></div><div id="stats-fetes"></div></div>
     <button class="btn-dgt" id="btn-dgt-oficial"><div style="text-align:center"><span>🚗</span> <b>PRESENTARME AL EXAMEN DGT OFICIAL</b></div><div style="text-align:center;color:#000;font-size:12px;margin-top:8px">Necessites 90% per desbloquejar</div></button>
   </div>
-
-  <!-- EVOLUCIO -->
   <div id="stats-evolucio" class="sub-content"><div class="card"><h2>📈 Evolució Últims 7 Dies</h2><canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px"></canvas></div></div>
-  <!-- DEBILS -->
   <div id="stats-debils" class="sub-content"><div class="card"><h2>🎯 Punts Dèbils</h2><div id="stats-debils-lista">Fes més tests per detectar els teus punts dèbils</div></div></div>
-  <!-- PASE -->
   <div id="stats-pase" class="sub-content"><div class="card pase-card"><div class="big">⏰</div><h2>PASE DIARI</h2><p>Estudia 20 minuts al TEMARI per desbloquejar els tests d'avui</p><div style="font-size:30px;font-weight:900;color:#00D9FF" id="pase-temps">0 min</div></div></div>
-  <!-- ORIENTACIO -->
   <div id="stats-orientacio" class="sub-content"><div class="card orientacio-card"><h2>🧭 Pla d'Estudi</h2><h3>1. Comença pel TEMARI</h3><p>Estudia 20 min per desbloquejar el dia</p><h3>2. Fes TESTS</h3><p>Practica fins arribar a 90%</p><h3>3. Fes l'EXAMEN</h3><p>Quan tinguis 90% global</p></div></div>
 </div>
 
-<!-- ===== TAB TEST V9.6.4 CON SBG ===== -->
+<!-- ===== TAB TEST V9.8.0 CON IMAGEN REAL ===== -->
 <div id="tab-test" class="tab-content active">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'test','general')">📝 General</button>
@@ -192,17 +167,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   </div>
 
   <div id="test-general" class="sub-content active">
-    <div class="card">
-      <h2>📝 TEST GENERAL</h2>
-      <div class="stats"><div>Aciertos: <span id="test-general-aciertos">0</span></div><div>Racha: <span id="test-general-racha">0</span>🔥</div><div>Score: <span id="test-general-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-general-progress"></div></div>
-      <div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-      <div id="test-general-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
-      <div class="pregunta" id="test-general-pregunta">Carregant...</div>
-      <div id="test-general-opciones"></div>
-      <div class="feedback" id="test-general-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-general" onclick="seguentTest(event,'general')" disabled>SEGÜENT</button>
-    </div>
+    <div class="card"><h2>📝 TEST GENERAL</h2><div class="stats"><div>Aciertos: <span id="test-general-aciertos">0</span></div><div>Racha: <span id="test-general-racha">0</span>🔥</div><div>Score: <span id="test-general-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-general-progress"></div></div><div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-general-emojis" class="test-emojis"></div><div class="pregunta" id="test-general-pregunta">Carregant...</div><div id="test-general-opciones"></div><div class="feedback" id="test-general-feedback"></div><button class="btn-sig" id="btn-sig-test-general" onclick="seguentTest(event,'general')" disabled>SEGÜENT</button></div>
   </div>
 
   <div id="test-senyals" class="sub-content">
@@ -211,7 +176,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <div class="stats"><div>Aciertos: <span id="test-senyals-aciertos">0</span></div><div>Racha: <span id="test-senyals-racha">0</span>🔥</div><div>Score: <span id="test-senyals-score">0</span></div></div>
       <div class="progress-bar"><div class="progress-fill" id="test-senyals-progress"></div></div>
       <div id="test-senyals-imagen" class="quadre-pictograma"><div class="placeholder">Carregant...</div></div>
-      <div id="test-senyals-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
+      <div id="test-senyals-tip" class="tip-box" style="display:none;"></div> <!-- V9.8.0 NUEVO -->
+      <div id="test-senyals-emojis" class="test-emojis"></div>
       <div class="pregunta" id="test-senyals-pregunta">Carregant...</div>
       <div id="test-senyals-opciones"></div>
       <div class="feedback" id="test-senyals-feedback"></div>
@@ -219,85 +185,24 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     </div>
   </div>
 
-  <div id="test-normes" class="sub-content">
-    <div class="card">
-      <h2>📋 TEST NORMES</h2>
-      <div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span></div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div>
-      <div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-      <div id="test-normes-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
-      <div class="pregunta" id="test-normes-pregunta">Carregant...</div>
-      <div id="test-normes-opciones"></div>
-      <div class="feedback" id="test-normes-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-mecanica" class="sub-content">
-    <div class="card">
-      <h2>🔧 TEST MECÀNICA</h2>
-      <div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span></div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div>
-      <div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-      <div id="test-mecanica-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
-      <div class="pregunta" id="test-mecanica-pregunta">Carregant...</div>
-      <div id="test-mecanica-opciones"></div>
-      <div class="feedback" id="test-mecanica-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-auxilis" class="sub-content">
-    <div class="card">
-      <h2>🚑 TEST AUXILIS</h2>
-      <div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span></div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div>
-      <div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-      <div id="test-auxilis-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
-      <div class="pregunta" id="test-auxilis-pregunta">Carregant...</div>
-      <div id="test-auxilis-opciones"></div>
-      <div class="feedback" id="test-auxilis-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button>
-    </div>
-  </div>
-
-  <div id="test-mediambient" class="sub-content">
-    <div class="card">
-      <h2>🌱 TEST MEDI AMBIENT</h2>
-      <div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div>
-      <div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div>
-      <div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-      <div id="test-mediambient-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
-      <div class="pregunta" id="test-mediambient-pregunta">Carregant...</div>
-      <div id="test-mediambient-opciones"></div>
-      <div class="feedback" id="test-mediambient-feedback"></div>
-      <button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button>
-    </div>
-  </div>
+  <div id="test-normes" class="sub-content"><div class="card"><h2>📋 TEST NORMES</h2><div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span></div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div><div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-normes-emojis" class="test-emojis"></div><div class="pregunta" id="test-normes-pregunta">Carregant...</div><div id="test-normes-opciones"></div><div class="feedback" id="test-normes-feedback"></div><button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button></div></div>
+  <div id="test-mecanica" class="sub-content"><div class="card"><h2>🔧 TEST MECÀNICA</h2><div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span></div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div><div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-mecanica-emojis" class="test-emojis"></div><div class="pregunta" id="test-mecanica-pregunta">Carregant...</div><div id="test-mecanica-opciones"></div><div class="feedback" id="test-mecanica-feedback"></div><button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button></div></div>
+  <div id="test-auxilis" class="sub-content"><div class="card"><h2>🚑 TEST AUXILIS</h2><div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span></div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div><div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-auxilis-emojis" class="test-emojis"></div><div class="pregunta" id="test-auxilis-pregunta">Carregant...</div><div id="test-auxilis-opciones"></div><div class="feedback" id="test-auxilis-feedback"></div><button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button></div></div>
+  <div id="test-mediambient" class="sub-content"><div class="card"><h2>🌱 TEST MEDI AMBIENT</h2><div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div><div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-mediambient-emojis" class="test-emojis"></div><div class="pregunta" id="test-mediambient-pregunta">Carregant...</div><div id="test-mediambient-opciones"></div><div class="feedback" id="test-mediambient-feedback"></div><button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button></div></div>
 </div>
 
 <!-- ===== TAB SITUACIONES ===== -->
-<div id="tab-situaciones" class="tab-content">
-  <div class="sub-tabs">
-    <button class="sub-tab-btn active" onclick="canviarSubTab(event,'sit','clima')">🌧️ Clima</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','urbà')">🏙️ Urbà</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button>
-    <button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button>
-  </div>
-  <div id="sit-clima" class="sub-content active"><div class="card"><h2>🌧️ CASOS CLIMA</h2><div class="stats"><div>Aciertos: <span id="sit-clima-aciertos">0</span></div><div>Score: <span id="sit-clima-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div><div class="pregunta" id="sit-clima-pregunta">Carregant...</div><div id="sit-clima-opciones"></div><div class="feedback" id="sit-clima-feedback"></div><button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button></div></div>
-  <div id="sit-urbà" class="sub-content"><div class="card"><h2>🏙️ CASOS URBÀ</h2><div class="stats"><div>Aciertos: <span id="sit-urbà-aciertos">0</span></div><div>Score: <span id="sit-urbà-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div><div class="pregunta" id="sit-urbà-pregunta">Carregant...</div><div id="sit-urbà-opciones"></div><div class="feedback" id="sit-urbà-feedback"></div><button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button></div></div>
-  <div id="sit-carretera" class="sub-content"><div class="card"><h2>🛣️ CASOS CARRETERA</h2><div class="stats"><div>Aciertos: <span id="sit-carretera-aciertos">0</span></div><div>Score: <span id="sit-carretera-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div><div class="pregunta" id="sit-carretera-pregunta">Carregant...</div><div id="sit-carretera-opciones"></div><div class="feedback" id="sit-carretera-feedback"></div><button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button></div></div>
-  <div id="sit-emergència" class="sub-content"><div class="card"><h2>🚨 CASOS EMERGÈNCIA</h2><div class="stats"><div>Aciertos: <span id="sit-emergència-aciertos">0</span></div><div>Score: <span id="sit-emergència-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div><div class="pregunta" id="sit-emergència-pregunta">Carregant...</div><div id="sit-emergència-opciones"></div><div class="feedback" id="sit-emergència-feedback"></div><button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button></div></div>
-</div>
+<div id="tab-situaciones" class="tab-content"><div class="sub-tabs"><button class="sub-tab-btn active" onclick="canviarSubTab(event,'sit','clima')">🌧️ Clima</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','urbà')">🏙️ Urbà</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button></div><div id="sit-clima" class="sub-content active"><div class="card"><h2>🌧️ CASOS CLIMA</h2><div class="stats"><div>Aciertos: <span id="sit-clima-aciertos">0</span></div><div>Score: <span id="sit-clima-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div><div class="pregunta" id="sit-clima-pregunta">Carregant...</div><div id="sit-clima-opciones"></div><div class="feedback" id="sit-clima-feedback"></div><button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button></div></div><div id="sit-urbà" class="sub-content"><div class="card"><h2>🏙️ CASOS URBÀ</h2><div class="stats"><div>Aciertos: <span id="sit-urbà-aciertos">0</span></div><div>Score: <span id="sit-urbà-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div><div class="pregunta" id="sit-urbà-pregunta">Carregant...</div><div id="sit-urbà-opciones"></div><div class="feedback" id="sit-urbà-feedback"></div><button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button></div></div><div id="sit-carretera" class="sub-content"><div class="card"><h2>🛣️ CASOS CARRETERA</h2><div class="stats"><div>Aciertos: <span id="sit-carretera-aciertos">0</span></div><div>Score: <span id="sit-carretera-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div><div class="pregunta" id="sit-carretera-pregunta">Carregant...</div><div id="sit-carretera-opciones"></div><div class="feedback" id="sit-carretera-feedback"></div><button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button></div></div><div id="sit-emergència" class="sub-content"><div class="card"><h2>🚨 CASOS EMERGÈNCIA</h2><div class="stats"><div>Aciertos: <span id="sit-emergència-aciertos">0</span></div><div>Score: <span id="sit-emergència-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div><div class="pregunta" id="sit-emergència-pregunta">Carregant...</div><div id="sit-emergència-opciones"></div><div class="feedback" id="sit-emergència-feedback"></div><button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button></div></div></div>
 
-<!-- ===== TAB EXAMEN V9.6.4 ===== -->
+<!-- ===== TAB EXAMEN V9.8.0 ===== -->
 <div id="tab-examen" class="tab-content">
   <div class="card">
     <h2>📋 EXAMEN OFICIAL DGT</h2>
     <div class="stats"><div>Pregunta: <span id="examen-num">0</span>/30</div><div>Temps: <span id="examen-timer">30:00</span></div><div>Encerts: <span id="examen-aciertos">0</span></div></div>
     <div class="progress-bar"><div class="progress-fill" id="examen-progress"></div></div>
     <div id="examen-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div>
-    <div id="examen-emojis" class="test-emojis"></div> <!-- V9.6.4 NUEVO -->
+    <div id="examen-tip" class="tip-box" style="display:none;"></div> <!-- V9.8.0 NUEVO -->
+    <div id="examen-emojis" class="test-emojis"></div>
     <div class="pregunta" id="examen-pregunta">Prem Inicia l'Examen</div>
     <div id="examen-opciones"></div>
     <div id="examen-resultat" style="display:none"></div>
@@ -323,6 +228,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=9.7.3"></script>
+<script src="./app.js?v=9.8.0"></script>
 </body>
 </html>
