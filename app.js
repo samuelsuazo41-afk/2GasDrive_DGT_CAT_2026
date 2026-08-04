@@ -1,5 +1,5 @@
 // GASDRIVE DGT V8.14 CAT - 630 PREGUNTES DGT 2026
-const VERSION = "9.7.3";
+const VERSION = "9.8.1";
 
 // COMBO DOPAMINA
 const EMOJIS_ENCERT = ['🚀','💎','👑','🔥','💯','⚡','🏆','🦄','🤑','✅','💪','😎','🎯','💥','🌟','🎉'];
@@ -1085,7 +1085,7 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   else estat.stats.historialPregunta[preguntaId].consecutius = 0;
   estat.stats.historialPregunta[preguntaId].ultima = avui;
   guardar();
-}
+} 
 
 // ===== V9.4.6 NUEVA FORMULA ANTI-FARM DURO - CAP DIARIO + CONSTANCIA 40% =====
 function calcularPreparacioDGT_V94() {
