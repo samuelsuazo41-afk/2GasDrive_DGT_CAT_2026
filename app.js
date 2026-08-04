@@ -349,7 +349,6 @@ const PREGUNTES = {
   { id: "R-503", categoria: "reglamentacio", pregunta: "Què indica aquesta senyal de REGLAMENTACIÓ?", opcions: ["Fi de zona escolar", "Fi zona nens", "Fi zona"], correcta: 0, codi: "R-503", tip: "💡 CLAU: S'acaba la zona escolar. Ja pots tornar a la velocitat normal amb precaució.", audio: "Senyal de reglamentació. Fi de zona escolar.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/reglamentacion/R-503.png" },
   { id: "R-504", categoria: "reglamentacio", pregunta: "Què indica aquesta senyal de REGLAMENTACIÓ?", opcions: ["Fi de zona de velocitat limitada", "Fi 20", "Fi zona"], correcta: 0, codi: "R-504", tip: "💡 CLAU: S'acaba la zona de velocitat limitada a 20 km/h. Zona de vianants.", audio: "Senyal de reglamentació. Fi de zona de velocitat limitada.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/reglamentacion/R-504.png" },
   { id: "R-505", categoria: "reglamentacio", pregunta: "Què indica aquesta senyal de REGLAMENTACIÓ?", opcions: ["Fi de zona de prioritat residencial", "Fi zona", "Fi prioritat"], correcta: 0, codi: "R-505", tip: "💡 CLAU: S'acaba la zona on els vianants tenen prioritat total sobre els vehicles.", audio: "Senyal de reglamentació. Fi de zona de prioritat residencial.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/reglamentacion/R-505.png" }
-]
 
  normes: [
     {id:168,q:"Taxa d'alcohol novells:",a:["0.5 g/l","0.3 g/l","0.0 g/l"],ok:2},
