@@ -408,7 +408,7 @@ const PREGUNTES = {
   { id: "S-120", categoria: "informacio", pregunta: "Què indica aquesta senyal d'INFORMACIÓ?", opcions: ["Fi autopista", "Fi via ràpida", "Sortida"], correcta: 0, codi: "S-120", tip: "💡 CLAU: S'acaba l'autopista. Canvien les normes.", audio: "Senyal d'informació. Fi autopista.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/informacion/S-120.png" },
   { id: "S-121", categoria: "informacio", pregunta: "Què indica aquesta senyal d'INFORMACIÓ?", opcions: ["Fi autovia", "Fi via ràpida", "Sortida"], correcta: 0, codi: "S-121", tip: "💡 CLAU: S'acaba l'autovia. Atenció als encreuaments.", audio: "Senyal d'informació. Fi autovia.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/informacion/S-121.png" },
   { id: "S-200", categoria: "informacio", pregunta: "Què indica aquesta senyal d'INFORMACIÓ?", opcions: ["Hospital", "Creu", "Servei sanitari"], correcta: 0, codi: "S-200", tip: "💡 CLAU: Fons BLAU amb H = Hospital proper. Si hi ha emergència pots anar-hi.", audio: "Senyal d'informació. Hospital.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/informacion/S-200.png" }
-]
+],
 
  normes: [
     {id:168,q:"Taxa d'alcohol novells:",a:["0.5 g/l","0.3 g/l","0.0 g/l"],ok:2},
