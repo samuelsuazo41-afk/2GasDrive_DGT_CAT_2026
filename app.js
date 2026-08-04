@@ -242,7 +242,6 @@ const PREGUNTES = {
   ],
  
  senyals: [
- export const senyals = [
   // ===== 1. PERILL P-1 A P-30 - 30 SEÑALES =====
   { id: "P-1a", categoria: "perill", pregunta: "Què indica aquesta senyal de PERILL?", opcions: ["Intersecció amb prioritat a la dreta", "Cedeix el pas", "Stop"], correcta: 0, codi: "P-1a", tip: "💡 CLAU: Els triangles avisen de perill. Si està buit vol dir que TU tens prioritat. Però redueix igual.", audio: "Senyal de perill. Intersecció amb prioritat a la dreta.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/peligro/P-1a.png" },
   { id: "P-1b", categoria: "perill", pregunta: "Què indica aquesta senyal de PERILL?", opcions: ["Intersecció amb prioritat a l'esquerra", "Cedeix el pas", "Stop"], correcta: 0, codi: "P-1b", tip: "💡 CLAU: Igual que la de la dreta. Triangle = alerta. Tu passes primer sobre els que venen de l'esquerra.", audio: "Senyal de perill. Intersecció amb prioritat a l'esquerra.", url: "https://www.dgt.es/export/sites/web-DGT/.galleries/senales/peligro/P-1b.png" },
