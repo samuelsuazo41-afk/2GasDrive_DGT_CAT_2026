@@ -897,17 +897,19 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V9.8.0 - IMAGENES DGT REALES + TIP SIEMPRE + 200 SEÑALES =====
+// ===== GASDRIVE DGT CAT V9.8.1 - IMAGENES DGT REALES + TIP SIEMPRE + 200 SEÑALES =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.0 BANCO DE SVGS ELIMINADO - AHORA USAMOS URL REAL =====
+// ===== V9.8.1 BANCO DE SVGS ELIMINADO - AHORA USAMOS URL REAL =====
 const SENALES_SVG = {}; // YA NO SE USA
 
-// ===== V9.8.0 FUNCIÓN NUEVA: PINTAR IMAGEN DGT REAL + TIP =====
+// TU BANCO VA AQUI: const senyals = [...] // <- TU YA LO TIENES, NO LO BORRES
+
+// ===== V9.8.1 FUNCIÓN ACTUALIZADA: PINTAR IMAGEN DGT REAL + TIP =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -936,7 +938,7 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   // TIP: MOSTRAR SIEMPRE EN SEÑALES
   if(tipDiv && cat === 'senyals' && pregunta.tip){
-    tipDiv.innerHTML = pregunta.tip;
+    tipDiv.innerHTML = `💡 TIP: ${pregunta.tip}`;
     tipDiv.style.display = 'block';
   } else if(tipDiv) {
     tipDiv.innerHTML = '';
@@ -1013,7 +1015,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.0 CAT carregat");
+  console.log("GasDrive V9.8.1 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1073,7 +1075,7 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
 
 // ===== V9.4.6 FIX: HISTORIAL SOLO CON ID REAL =====
 function registrarHistorialPregunta(preguntaId, acierto) {
-  if(!preguntaId || isNaN(preguntaId)) return;
+  if(!preguntaId) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
   const avui = new Date().toISOString();
   if(!estat.stats.historialPregunta[preguntaId]) {
@@ -1235,7 +1237,7 @@ function autoMapearTotesPreguntes() {
     PREGUNTES[cat] = PREGUNTES[cat].map(p => {
       let subtema = 'General'; let pag = 1;
       for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
-      return {...p, id: idCounter++, subtema, pag};
+      return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
   console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
@@ -1310,7 +1312,7 @@ function carregarPregunta(cat) {
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
 
-  // V9.8.0 LIMPIO: Solo formato nuevo q,a,ok
+  // V9.8.1 LIMPIO: Solo formato nuevo q,a,ok
   const opcionsOriginales = pOriginal.a;
   const indexCorrectaOriginal = pOriginal.ok;
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
@@ -1386,6 +1388,9 @@ function seguentTest(e, cat) {
   estat.test[cat].idx++;
   carregarPregunta(cat);
 }
+
+//... AQUI SIGUE TODO TU CODIGO IGUAL: carregarSituacio, examen, garage, etc...
+// NO TOQUE NADA MAS PARA NO ROMPER
 
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
