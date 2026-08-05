@@ -68,13 +68,30 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
 .btn-buy:active{transform:scale(0.95)}
 
+/* ===== V9.8.2 NUEVO BOTON AUDIO ===== */
+.btn-audio {
+  background: linear-gradient(135deg, #00D9FF, #00B8E6);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+  box-shadow: 0 0 15px rgba(0,217,255,0.4);
+  transition: 0.2s;
+  vertical-align: middle;
+}
+.btn-audio:active { transform: scale(0.9); }
+.btn-audio:hover { box-shadow: 0 0 25px rgba(0,217,255,0.6); }
+
 #temari-lista{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; justify-content:center; margin:14px auto 0; max-width:350px; }
 .temari-item{ background:#1a1a1a; border:2px solid #00D9FF; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:0.2s; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
 .temari-item:active{ transform:scale(0.96); background:#222; }
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
 
-/* ===== CSS V9.4 ESTADISTIQUES ===== */
+/* ===== V9.4 ESTADISTIQUES ===== */
 .stats-header{margin-bottom:15px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
 .stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
