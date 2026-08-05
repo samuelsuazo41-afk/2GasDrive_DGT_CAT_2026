@@ -1311,19 +1311,29 @@ function carregarPregunta(cat) {
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
 
-  // V9.8.1 LIMPIO: Solo formato nuevo q,a,ok
-  const opcionsOriginales = pOriginal.a;
-  const indexCorrectaOriginal = pOriginal.ok;
+  // ===== V9.8.2 FIX COMPATIBILIDAD + AUDIO =====
+  // Lee formato viejo q,a,ok y formato nuevo pregunta,opcions,correcta
+  const preguntaTxt = pOriginal.q || pOriginal.pregunta;
+  const opcionsOriginales = pOriginal.a || pOriginal.opcions;
+  const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
+  const audioTxt = pOriginal.audio || ''; // NUEVO
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
 
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: pOriginal.q, id: pOriginal.id || (cat + '_' + s.idx)};
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (cat + '_' + s.idx)};
   s.current = p;
 
   pintarImatgeSiExisteix(cat, p);
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
+
+  // ===== BOTON AUDIO NUEVO =====
+  const contPregunta = document.getElementById(`test-${cat}-pregunta`);
+  if(audioTxt && cat === 'senyals'){
+    contPregunta.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')">🔊</button>`;
+  }
+
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
   document.getElementById(`test-${cat}-score`).textContent = s.puntuacio;
@@ -1342,6 +1352,17 @@ function carregarPregunta(cat) {
     div.onclick = function() { respondreTest_V94(cat, i, this); };
     cont.appendChild(div);
   });
+}
+
+// ===== NUEVA FUNCION PARA REPRODUCIR AUDIO =====
+function parlar(text) {
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel(); // Para el anterior
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ca-ES'; // Catalán
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
 }
 
 function respondreTest_V94(cat, idx, el) {
