@@ -48,17 +48,53 @@
     "nombre": "OTROS PELIGROS",
     "senales_incluidas": ["P-32", "P-33", "P-34", "P-35", "P-50"]
   },
-
-{
-  "panel_id": "R-01",
-  "ruta": "R-01_A_R-05_PRIORIDAD.jpg",
+  {
+    "panel_id": "R-01",
+    "ruta": "R-01_A_R-05_PRIORIDAD.jpg",
+    "categoria": "REGLAMENTARIA", 
+    "nombre": "PRIORIDAD Y PREFERENCIA",
+    "senales_incluidas": [
+      {"codigo": "R-1", "nombre": "CEDA EL PASO", "coordenadas": "x1,y1,x2,y2"},
+      {"codigo": "R-2", "nombre": "STOP", "coordenadas": "x1,y1,x2,y2"},
+      {"codigo": "R-3", "nombre": "PRIORIDAD EN VIA", "coordenadas": "x1,y1,x2,y2"},
+      {"codigo": "R-4", "nombre": "FIN DE PRIORIDAD", "coordenadas": "x1,y1,x2,y2"},
+      {"codigo": "R-5", "nombre": "PRIORIDAD SENTIDO CONTRARIO", "coordenadas": "x1,y1,x2,y2"}
+    ]
+  },
+  {
+    "panel_id": "R-02",
+    "ruta": "R-02_PROHIBICION_VEHICULOS.jpg",
+    "categoria": "REGLAMENTARIA", 
+    "nombre": "PROHIBICION DE VEHICULOS",
+    "senales_incluidas": [
+      {"codigo": "R-106", "nombre": "PROHIBIDO CAMIONES", "coordenadas": ""},
+      {"codigo": "R-107", "nombre": "PROHIBIDO CAMIONES MAS 5.5T", "coordenadas": ""},
+      {"codigo": "R-108", "nombre": "PROHIBIDO VEHICULOS MERCANCIAS PELIGROSAS", "coordenadas": ""},
+      {"codigo": "R-109", "nombre": "PROHIBIDO VEHICULOS MATERIAS EXPLOSIVAS", "coordenadas": ""}
+    ]
+  },
+  {
+    "panel_id": "R-03",
+    "ruta": "R-03_PROHIBICION_OTROS.jpg",
+    "categoria": "REGLAMENTARIA", 
+    "nombre": "PROHIBICION OTROS VEHICULOS Y PEATONES",
+    "senales_incluidas": [
+      {"codigo": "R-111", "nombre": "PROHIBIDO TRACTORES", "coordenadas": ""},
+      {"codigo": "R-114", "nombre": "PROHIBIDO BICICLETAS", "coordenadas": ""},
+      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": ""},
+      {"codigo": "R-117", "nombre": "PROHIBIDO CICLOMOTORES", "coordenadas": ""}
+    ]
+ },
+ {
+  "panel_id": "R-04",
+  "ruta": "R-04_PROHIBICION_PEATONES_ANIMALES.jpg",
   "categoria": "REGLAMENTARIA", 
-  "nombre": "PRIORIDAD Y PREFERENCIA",
+  "nombre": "PROHIBICION PEATONES ANIMALES Y PATINETES",
   "senales_incluidas": [
-    {"codigo": "R-1", "nombre": "CEDA EL PASO", "coordenadas": "x1,y1,x2,y2"},
-    {"codigo": "R-2", "nombre": "STOP", "coordenadas": "x1,y1,x2,y2"},
-    {"codigo": "R-3", "nombre": "PRIORIDAD EN VIA", "coordenadas": "x1,y1,x2,y2"},
-    {"codigo": "R-4", "nombre": "FIN DE PRIORIDAD", "coordenadas": "x1,y1,x2,y2"},
-    {"codigo": "R-5", "nombre": "PRIORIDAD SENTIDO CONTRARIO", "coordenadas": "x1,y1,x2,y2"}
+    {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": ""},
+    {"codigo": "R-117", "nombre": "PROHIBIDO CABALLOS", "coordenadas": ""},
+    {"codigo": "R-118", "nombre": "PROHIBIDO PATINETES", "coordenadas": ""},
+    {"codigo": "R-119", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": ""},
+    {"codigo": "R-120", "nombre": "PROHIBIDO VEHICULOS CONTAMINANTES", "coordenadas": ""}
   ]
 }
