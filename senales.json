@@ -97,4 +97,30 @@
     {"codigo": "R-119", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": ""},
     {"codigo": "R-120", "nombre": "PROHIBIDO VEHICULOS CONTAMINANTES", "coordenadas": ""}
   ]
+},
+{
+  "panel_id": "R-05",
+  "ruta": "R-05_LIMITACIONES_DIMENSIONES.jpg",
+  "categoria": "REGLAMENTARIA", 
+  "nombre": "LIMITACIONES DE DIMENSIONES Y PESO",
+  "senales_incluidas": [
+    {"codigo": "R-200", "nombre": "PROHIBIDO EL PASO", "coordenadas": ""},
+    {"codigo": "R-201", "nombre": "PESO LIMITADO", "coordenadas": ""},
+    {"codigo": "R-202", "nombre": "PESO POR EJE LIMITADO", "coordenadas": ""},
+    {"codigo": "R-203", "nombre": "LONGITUD LIMITADA", "coordenadas": ""},
+    {"codigo": "R-204", "nombre": "ANCHURA LIMITADA", "coordenadas": ""},
+    {"codigo": "R-205", "nombre": "ALTURA LIMITADA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "R-06",
+  "ruta": "R-06_PROHIBICION_MANIOBRAS.jpg",
+  "categoria": "REGLAMENTARIA", 
+  "nombre": "PROHIBICION DE MANIOBRAS Y LIMITACION VELOCIDAD",
+  "senales_incluidas": [
+    {"codigo": "R-301", "nombre": "VELOCIDAD LIMITADA", "coordenadas": ""},
+    {"codigo": "R-302", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": ""},
+    {"codigo": "R-303", "nombre": "PROHIBIDO GIRAR A LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "R-304", "nombre": "PROHIBIDO GIRAR A LA DERECHA", "coordenadas": ""}
+  ]
 }
