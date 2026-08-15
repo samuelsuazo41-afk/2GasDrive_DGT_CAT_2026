@@ -177,5 +177,31 @@
       {"codigo": "R-403c", "nombre": "PASO OBLIGATORIO A AMBOS LADOS", "coordenadas": ""},
       {"codigo": "R-404", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": ""}
     ]
-  }
+  },
+  {
+  "panel_id": "R-11",
+  "ruta": "R-11_FIN_OBLIGACION_VEHICULOS.jpg",
+  "categoria": "REGLAMENTARIA", 
+  "nombre": "FIN DE OBLIGACION PARA VEHICULOS",
+  "senales_incluidas": [
+    {"codigo": "R-507", "nombre": "FIN OBLIGACION VEHICULO MOTOR", "coordenadas": ""},
+    {"codigo": "R-508", "nombre": "FIN OBLIGACION MOTOCICLETA", "coordenadas": ""},
+    {"codigo": "R-509", "nombre": "FIN OBLIGACION CAMION", "coordenadas": ""},
+    {"codigo": "R-510", "nombre": "FIN OBLIGACION CICLOMOTOR BICICLETA", "coordenadas": ""},
+    {"codigo": "R-511", "nombre": "FIN OBLIGACION CARRUAJE CABALLOS", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "R-12",
+  "ruta": "R-12_FIN_OBLIGACION_PEATONES_ESPECIALES.jpg",
+  "categoria": "REGLAMENTARIA", 
+  "nombre": "FIN DE OBLIGACION PEATONES Y ESPECIALES",
+  "senales_incluidas": [
+    {"codigo": "R-512", "nombre": "FIN OBLIGACION CABALLOS", "coordenadas": ""},
+    {"codigo": "R-513", "nombre": "FIN OBLIGACION PEATONES", "coordenadas": ""},
+    {"codigo": "R-514", "nombre": "FIN OBLIGACION TRACTORES", "coordenadas": ""},
+    {"codigo": "R-515", "nombre": "FIN OBLIGACION PATINETES", "coordenadas": ""},
+    {"codigo": "R-516", "nombre": "FIN OBLIGACION BICICLETAS Y PATINETES", "coordenadas": ""}
+  ]
+ }
 ]
