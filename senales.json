@@ -1,54 +1,106 @@
 [
-  {
-    "panel_id": "P-01",
-    "ruta": "P-01_INTERSECCIONES.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "INTERSECCIONES",
-    "senales_incluidas": ["P-1", "P-1a", "P-1b", "P-1c", "P-1d", "P-1e", "P-2"]
-  },
-  {
-    "panel_id": "P-02",
-    "ruta": "P-02_PASO_A_NIVEL.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "PASO A NIVEL",
-    "senales_incluidas": ["P-9b", "P-9c", "P-10a", "P-10b", "P-10c", "P-11"]
-  },
-  {
-    "panel_id": "P-03",
-    "ruta": "P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "FERROCARRIL AEROPUERTO CURVAS RESALTO",
-    "senales_incluidas": ["P-11a", "P-12", "P-13a", "P-13b", "P-14a", "P-14b", "P-15"]
-  },
-  {
-    "panel_id": "P-04",
-    "ruta": "P-04_TUNEL_PENDIENTES_ESTRECHAMIENTO.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "TUNEL PENDIENTES ESTRECHAMIENTO",
-    "senales_incluidas": ["P-15a", "P-15b", "P-16a", "P-16b", "P-17", "P-17a", "P-17b"]
-  },
-  {
-    "panel_id": "P-05",
-    "ruta": "P-05_OBRAS_RESBALADIZO_PEATONES.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "OBRAS RESBALADIZO PEATONES",
-    "senales_incluidas": ["P-17b", "P-18", "P-19", "P-20a", "P-20b", "P-20c"]
-  },
-  {
-    "panel_id": "P-06",
-    "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES",
-    "senales_incluidas": ["P-21a", "P-21b", "P-22a", "P-22b", "P-23", "P-24", "P-24a"]
-  },
-  {
-    "panel_id": "P-07",
-    "ruta": "P-07_OTROS_PELIGROS.jpg",
-    "categoria": "PELIGRO",
-    "nombre": "OTROS PELIGROS",
-    "senales_incluidas": ["P-32", "P-33", "P-34", "P-35", "P-50"]
-  },
-  {
+{
+  "panel_id": "P-01",
+  "ruta": "P-01_INTERSECCIONES.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "INTERSECCIONES",
+  "senales_incluidas": [
+    {"codigo": "P-1", "nombre": "INTERSECCION CON PRIORIDAD SOBRE AMBOS LADOS", "coordenadas": ""},
+    {"codigo": "P-1a", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA DERECHA", "coordenadas": ""},
+    {"codigo": "P-1b", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "P-1c", "nombre": "INCORPORACION POR LA DERECHA", "coordenadas": ""},
+    {"codigo": "P-1d", "nombre": "INCORPORACION POR LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "P-1e", "nombre": "INTERSECCION CON PRIORIDAD FRENTE A AMBOS LADOS", "coordenadas": ""},
+    {"codigo": "P-2", "nombre": "INTERSECCION CON PRIORIDAD SOBRE CRUCE O GLORIETA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-02",
+  "ruta": "P-02_PASO_A_NIVEL.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "PASO A NIVEL",
+  "senales_incluidas": [
+    {"codigo": "P-9b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
+    {"codigo": "P-9c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
+    {"codigo": "P-10a", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
+    {"codigo": "P-10b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
+    {"codigo": "P-10c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
+    {"codigo": "P-11", "nombre": "PASO A NIVEL CON BARRERAS", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-03",
+  "ruta": "P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "FERROCARRIL AEROPUERTO CURVAS RESALTO",
+  "senales_incluidas": [
+    {"codigo": "P-11a", "nombre": "PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
+    {"codigo": "P-12", "nombre": "PROXIMIDAD DE AEROPUERTO", "coordenadas": ""},
+    {"codigo": "P-13a", "nombre": "CURVA PELIGROSA A LA DERECHA", "coordenadas": ""},
+    {"codigo": "P-13b", "nombre": "CURVA PELIGROSA A LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "P-14a", "nombre": "CURVAS PELIGROSAS PRIMERA A LA DERECHA", "coordenadas": ""},
+    {"codigo": "P-14b", "nombre": "CURVAS PELIGROSAS PRIMERA A LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "P-15", "nombre": "RESALTO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-04",
+  "ruta": "P-04_TUNEL_PENDIENTES_ESTRECHAMIENTO.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "TUNEL PENDIENTES ESTRECHAMIENTO",
+  "senales_incluidas": [
+    {"codigo": "P-15a", "nombre": "TUNEL", "coordenadas": ""},
+    {"codigo": "P-15b", "nombre": "BADEN", "coordenadas": ""},
+    {"codigo": "P-16a", "nombre": "DESCENSO PELIGROSO", "coordenadas": ""},
+    {"codigo": "P-16b", "nombre": "ASCENSO PELIGROSO", "coordenadas": ""},
+    {"codigo": "P-17", "nombre": "ESTRECHAMIENTO DE CALZADA", "coordenadas": ""},
+    {"codigo": "P-17a", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA DERECHA", "coordenadas": ""},
+    {"codigo": "P-17b", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA IZQUIERDA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-05",
+  "ruta": "P-05_OBRAS_RESBALADIZO_PEATONES.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "OBRAS RESBALADIZO PEATONES",
+  "senales_incluidas": [
+    {"codigo": "P-17b", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "P-18", "nombre": "OBRAS", "coordenadas": ""},
+    {"codigo": "P-19", "nombre": "CALZADA DESLIZANTE", "coordenadas": ""},
+    {"codigo": "P-20a", "nombre": "PASO DE PEATONES", "coordenadas": ""},
+    {"codigo": "P-20b", "nombre": "PASO DE PEATONES", "coordenadas": ""},
+    {"codigo": "P-20c", "nombre": "PASO DE CICLISTAS Y PEATONES", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-06",
+  "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES",
+  "senales_incluidas": [
+    {"codigo": "P-21a", "nombre": "NIÑOS", "coordenadas": ""},
+    {"codigo": "P-21b", "nombre": "PERSONAS DE EDAD AVANZADA", "coordenadas": ""},
+    {"codigo": "P-22a", "nombre": "PASO DE CICLISTAS", "coordenadas": ""},
+    {"codigo": "P-22b", "nombre": "PASO DE CICLISTAS", "coordenadas": ""},
+    {"codigo": "P-23", "nombre": "PASO DE ANIMALES DOMESTICOS", "coordenadas": ""},
+    {"codigo": "P-24", "nombre": "PASO DE ANIMALES EN LIBERTAD: CIERVOS", "coordenadas": ""},
+    {"codigo": "P-24a", "nombre": "PASO DE ANIMALES EN LIBERTAD: JABALIES", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "P-07",
+  "ruta": "P-07_OTROS_PELIGROS.jpg",
+  "categoria": "PELIGRO",
+  "nombre": "OTROS PELIGROS",
+  "senales_incluidas": [
+    {"codigo": "P-32", "nombre": "DESPRENDIMIENTO", "coordenadas": ""},
+    {"codigo": "P-33", "nombre": "VIENTOS FUERTES TRANSVERSALES", "coordenadas": ""},
+    {"codigo": "P-34", "nombre": "PAVIMENTO DESLIZANTE POR HIELO O NIEVE", "coordenadas": ""},
+    {"codigo": "P-35", "nombre": "TRAFICO EN AMBOS SENTIDOS", "coordenadas": ""},
+    {"codigo": "P-50", "nombre": "OTROS PELIGROS", "coordenadas": ""}
+   ]
+ },
+ {
     "panel_id": "R-01",
     "ruta": "R-01_A_R-05_PRIORIDAD.jpg",
     "categoria": "REGLAMENTARIA", 
