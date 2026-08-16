@@ -438,5 +438,102 @@
     {"codigo": "S-62b", "nombre": "SALIDA", "coordenadas": ""},
     {"codigo": "S-63a", "nombre": "CARRILES", "coordenadas": ""}
   ]
+},
+{
+  "panel_id": "S-19",
+  "ruta": "S-65A_A_S-70A_CARRILES.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE CARRILES",
+  "senales_incluidas": [
+    {"codigo": "S-65a", "nombre": "CARRIL BICI A LA DERECHA", "coordenadas": ""},
+    {"codigo": "S-65b", "nombre": "CARRIL BICI A LA DERECHA CON SENTIDO CONTRARIO", "coordenadas": ""},
+    {"codigo": "S-66", "nombre": "CARRIL BICI Y SENTIDO CONTRARIO", "coordenadas": ""},
+    {"codigo": "S-68", "nombre": "CARRILES CON SENTIDOS DIFERENTES", "coordenadas": ""},
+    {"codigo": "S-70a", "nombre": "DESVIO DE CARRIL", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-20",
+  "ruta": "S-70B_A_S-72B_CONFLUENCIA.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE CARRILES CONFLUENCIA",
+  "senales_incluidas": [
+    {"codigo": "S-70b", "nombre": "DESVIO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-71a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "S-71b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": ""},
+    {"codigo": "S-72a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "S-72b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-21",
+  "ruta": "S-73A_A_S-73B_CONFLUENCIA2.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE CARRILES CONFLUENCIA 2",
+  "senales_incluidas": [
+    {"codigo": "S-73a", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "S-73b", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA DERECHA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-22",
+  "ruta": "S-105C_A_S-108_SERVICIO.jpg",
+  "categoria": "SERVICIO", 
+  "nombre": "SEÑALES DE SERVICIO 2",
+  "senales_incluidas": [
+    {"codigo": "S-105c", "nombre": "ESTACION DE SERVICIO GLP", "coordenadas": ""},
+    {"codigo": "S-105d", "nombre": "ESTACION DE SERVICIO COMBUSTIBLE Y ELECTRICA", "coordenadas": ""},
+    {"codigo": "S-105e", "nombre": "ESTACION DE RECARGA ELECTRICA", "coordenadas": ""},
+    {"codigo": "S-105f", "nombre": "ESTACION DE SERVICIO GLP, COMBUSTIBLE Y ELECTRICA", "coordenadas": ""},
+    {"codigo": "S-106", "nombre": "TALLER Y ESTACION DE SERVICIO", "coordenadas": ""},
+    {"codigo": "S-107", "nombre": "CAMPING", "coordenadas": ""},
+    {"codigo": "S-108", "nombre": "AGUA POTABLE", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-23",
+  "ruta": "S-200_A_S-203_PRESEÑAL.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE PRESEÑALIZACION",
+  "senales_incluidas": [
+    {"codigo": "S-200", "nombre": "PRESEÑALIZACION EN ROTONDA", "coordenadas": ""},
+    {"codigo": "S-201", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": ""},
+    {"codigo": "S-202", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": ""},
+    {"codigo": "S-203", "nombre": "PRESEÑALIZACION ENLACE COMPLEJO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-24",
+  "ruta": "S-220_A_S-222_PRESEÑAL2.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE PRESEÑALIZACION 2",
+  "senales_incluidas": [
+    {"codigo": "S-220", "nombre": "PRESEÑALIZACION 500m", "coordenadas": ""},
+    {"codigo": "S-220a", "nombre": "PRESEÑALIZACION 500m 2 DESTINOS", "coordenadas": ""},
+    {"codigo": "S-222", "nombre": "PRESEÑALIZACION AUTOVIA 500m", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-25",
+  "ruta": "S-222A_A_S-230_PRESEÑAL3.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE PRESEÑALIZACION 3",
+  "senales_incluidas": [
+    {"codigo": "S-222a", "nombre": "PRESEÑALIZACION MIXTA 500m", "coordenadas": ""},
+    {"codigo": "S-225", "nombre": "PRESEÑALIZACION SALIDA 500m", "coordenadas": ""},
+    {"codigo": "S-230", "nombre": "PRESEÑALIZACION AREA DE SERVICIO 1000m", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-26",
+  "ruta": "S-321_A_S-342_DIRECCION.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SEÑALES DE DIRECCION",
+  "senales_incluidas": [
+    {"codigo": "S-321", "nombre": "DIRECCION AEROPUERTO 3km", "coordenadas": ""},
+    {"codigo": "S-322", "nombre": "DIRECCION VIA CICLISTA 0,2km", "coordenadas": ""},
+    {"codigo": "S-341", "nombre": "SALIDA HACIA CARRETERA MULTICARRIL 22", "coordenadas": ""},
+    {"codigo": "S-342", "nombre": "SALIDA HACIA AUTOPISTA 22", "coordenadas": ""}
+  ]
 }
 ]
