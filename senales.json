@@ -322,6 +322,121 @@
     {"codigo": "S-29", "nombre": "FIN DE ZONA RESIDENCIAL", "coordenadas": ""},
     {"codigo": "S-30a", "nombre": "ZONA PEATONAL", "coordenadas": ""}
   ]
+},
+{
+  "panel_id": "S-10",
+  "ruta": "S-31A_A_S-34A_ZONA_SOS.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "FIN ZONA, PEAJE E ITINERARIO SOS",
+  "senales_incluidas": [
+    {"codigo": "S-31a", "nombre": "FIN DE ZONA RESIDENCIAL", "coordenadas": ""},
+    {"codigo": "S-32", "nombre": "PEAJE", "coordenadas": ""},
+    {"codigo": "S-33", "nombre": "ITINERARIO RECOMENDADO PARA PEATONES Y CICLISTAS", "coordenadas": ""},
+    {"codigo": "S-34", "nombre": "POSTE DE SOCORRO CON TELEFONO", "coordenadas": ""},
+    {"codigo": "S-34a", "nombre": "POSTE DE SOCORRO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-11",
+  "ruta": "S-35_A_S-40_BICI_PATINETE.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CARRILES BICI Y VEHICULOS MOVILIDAD PERSONAL",
+  "senales_incluidas": [
+    {"codigo": "S-35", "nombre": "CARRIL BICI", "coordenadas": ""},
+    {"codigo": "S-36", "nombre": "PROHIBIDO BICICLETAS", "coordenadas": ""},
+    {"codigo": "S-37", "nombre": "CARRIL PATINETES", "coordenadas": ""},
+    {"codigo": "S-38", "nombre": "CARRIL BICI Y PATINETES", "coordenadas": ""},
+    {"codigo": "S-39", "nombre": "PROHIBIDO PATINETES", "coordenadas": ""},
+    {"codigo": "S-40", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-12",
+  "ruta": "S-41_A_S-44_CICLO_PEATON.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "VIA CICLISTA Y SENDERO",
+  "senales_incluidas": [
+    {"codigo": "S-41", "nombre": "VIA CICLISTA Y SENDERO", "coordenadas": ""},
+    {"codigo": "S-42", "nombre": "FIN DE VIA CICLISTA Y SENDERO", "coordenadas": ""},
+    {"codigo": "S-43", "nombre": "VIA CICLISTA, PATINETES Y SENDERO", "coordenadas": ""},
+    {"codigo": "S-44", "nombre": "FIN DE VIA CICLISTA, PATINETES Y SENDERO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-13",
+  "ruta": "S-45_A_S-49_PASOS_ZONA20.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "PASO CICLISTAS, ZONA 20 Y CARRIL MOTO",
+  "senales_incluidas": [
+    {"codigo": "S-45", "nombre": "PASO PARA CICLISTAS", "coordenadas": ""},
+    {"codigo": "S-46", "nombre": "FIN DE PASO PARA CICLISTAS", "coordenadas": ""},
+    {"codigo": "S-47", "nombre": "ZONA 20", "coordenadas": ""},
+    {"codigo": "S-48", "nombre": "FIN DE ZONA 20", "coordenadas": ""},
+    {"codigo": "S-49", "nombre": "CARRIL PARA MOTOCICLETAS Y BICICLETAS", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-14",
+  "ruta": "S-50D_A_S-51A_CARRILES.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CARRILES CON VELOCIDAD Y BUS TAXI",
+  "senales_incluidas": [
+    {"codigo": "S-50d", "nombre": "CARRILES CON VELOCIDAD LIMITADA", "coordenadas": ""},
+    {"codigo": "S-50e", "nombre": "CARRILES CON VELOCIDAD LIMITADA", "coordenadas": ""},
+    {"codigo": "S-51a", "nombre": "CARRIL BUS, TAXI Y BICICLETAS", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-15",
+  "ruta": "S-51B_A_S-52C_CARRILES.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CARRIL ALTA OCUPACION Y DESDOBLAMIENTOS",
+  "senales_incluidas": [
+    {"codigo": "S-51b", "nombre": "CARRIL ALTA OCUPACION", "coordenadas": ""},
+    {"codigo": "S-52", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52a", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52b", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52c", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-16",
+  "ruta": "S-52D_A_S-53A_BIFURCACION.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "DESDOBLAMIENTOS Y BIFURCACIONES",
+  "senales_incluidas": [
+    {"codigo": "S-52d", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52e", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52f", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-52g", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
+    {"codigo": "S-53", "nombre": "BIFURCACION", "coordenadas": ""},
+    {"codigo": "S-53a", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-17",
+  "ruta": "S-53B_A_S-61A_SALIDA.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "BIFURCACIONES Y SALIDAS",
+  "senales_incluidas": [
+    {"codigo": "S-53b", "nombre": "BIFURCACION", "coordenadas": ""},
+    {"codigo": "S-53c", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": ""},
+    {"codigo": "S-60a", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-60b", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-61a", "nombre": "SALIDA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-18",
+  "ruta": "S-61B_A_S-63A_SALIDA.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SALIDAS Y CARRILES",
+  "senales_incluidas": [
+    {"codigo": "S-61b", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-61c", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-62a", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-62b", "nombre": "SALIDA", "coordenadas": ""},
+    {"codigo": "S-63a", "nombre": "CARRILES", "coordenadas": ""}
+  ]
 }
 ]
-
