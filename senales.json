@@ -203,5 +203,125 @@
     {"codigo": "R-515", "nombre": "FIN OBLIGACION PATINETES", "coordenadas": ""},
     {"codigo": "R-516", "nombre": "FIN OBLIGACION BICICLETAS Y PATINETES", "coordenadas": ""}
   ]
- }
+},
+{
+  "panel_id": "S-01",
+  "ruta": "S-01_TIPOS_DE_VIA.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "TIPOS DE VIA",
+  "senales_incluidas": [
+    {"codigo": "S-1", "nombre": "AUTOPISTA", "coordenadas": ""},
+    {"codigo": "S-1a", "nombre": "AUTOVIA", "coordenadas": ""},
+    {"codigo": "S-1b", "nombre": "CARRETERA MULTI-CARRIL", "coordenadas": ""},
+    {"codigo": "S-1c", "nombre": "CARRETERA 2+1", "coordenadas": ""},
+    {"codigo": "S-2", "nombre": "FIN DE AUTOPISTA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-02",
+  "ruta": "S-02_TIPOS_DE_VIA_FIN.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "FIN TIPOS DE VIA Y OTROS",
+  "senales_incluidas": [
+    {"codigo": "S-2a", "nombre": "FIN DE AUTOVIA", "coordenadas": ""},
+    {"codigo": "S-2b", "nombre": "FIN DE CARRETERA MULTI-CARRIL", "coordenadas": ""},
+    {"codigo": "S-2c", "nombre": "FIN DE CARRETERA 2+1", "coordenadas": ""},
+    {"codigo": "S-3", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": ""},
+    {"codigo": "S-4", "nombre": "FIN DE CALZADA PARA AUTOMOVILES", "coordenadas": ""},
+    {"codigo": "S-5", "nombre": "TUNEL", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-03",
+  "ruta": "S-06_A_S-11_VELOCIDAD.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CARRIL REVERSIBLE, VELOCIDAD Y SENTIDO",
+  "senales_incluidas": [
+    {"codigo": "S-6", "nombre": "CARRIL REVERSIBLE", "coordenadas": ""},
+    {"codigo": "S-7", "nombre": "VELOCIDAD RECOMENDADA", "coordenadas": ""},
+    {"codigo": "S-8", "nombre": "FIN DE VELOCIDAD RECOMENDADA", "coordenadas": ""},
+    {"codigo": "S-9", "nombre": "VELOCIDADES MINIMA Y RECOMENDADA", "coordenadas": ""},
+    {"codigo": "S-10", "nombre": "FIN DE VELOCIDADES MINIMA Y RECOMENDADA", "coordenadas": ""},
+    {"codigo": "S-11", "nombre": "SENTIDO UNICO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-04",
+  "ruta": "S-11A_A_S-14A_SENTIDO.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CARRILES, DIRECCION, PEATONES Y ESCALERAS",
+  "senales_incluidas": [
+    {"codigo": "S-11a", "nombre": "SENTIDO UNICO, 2 CARRILES", "coordenadas": ""},
+    {"codigo": "S-11b", "nombre": "SENTIDO UNICO, 3 CARRILES", "coordenadas": ""},
+    {"codigo": "S-12a", "nombre": "DIRECCION UNICA A LA DERECHA", "coordenadas": ""},
+    {"codigo": "S-12b", "nombre": "DIRECCION UNICA A LA IZQUIERDA", "coordenadas": ""},
+    {"codigo": "S-13", "nombre": "PASO DE PEATONES", "coordenadas": ""},
+    {"codigo": "S-14a", "nombre": "ESCALERAS", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-05",
+  "ruta": "S-14B_A_S-15A_RAMPAS.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "RAMPAS, BICICLETAS Y CALLE SIN SALIDA",
+  "senales_incluidas": [
+    {"codigo": "S-14b", "nombre": "ESCALERAS CON RAMPA PARA BICICLETAS", "coordenadas": ""},
+    {"codigo": "S-14c", "nombre": "RAMPA", "coordenadas": ""},
+    {"codigo": "S-14d", "nombre": "RAMPA", "coordenadas": ""},
+    {"codigo": "S-14e", "nombre": "ESCALERAS CON RAMPA PARA BICICLETAS", "coordenadas": ""},
+    {"codigo": "S-14f", "nombre": "ESCALERAS CON LUGAR PARA BICICLETAS", "coordenadas": ""},
+    {"codigo": "S-15a", "nombre": "CALLE SIN SALIDA", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-06",
+  "ruta": "S-15B_A_S-17_CALLES.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "CALLES SIN SALIDA Y APARCAMIENTO",
+  "senales_incluidas": [
+    {"codigo": "S-15b", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
+    {"codigo": "S-15c", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
+    {"codigo": "S-15d", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
+    {"codigo": "S-15e", "nombre": "CALLE SIN SALIDA PEATONES Y CICLISTAS", "coordenadas": ""},
+    {"codigo": "S-16", "nombre": "CALLE SIN SALIDA CON SALIDA PARA PEATONES", "coordenadas": ""},
+    {"codigo": "S-17", "nombre": "APARCAMIENTO", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-07",
+  "ruta": "S-21_TRANSITABILIDAD.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "TRANSITABILIDAD PUERTO PAJARES",
+  "senales_incluidas": [
+    {"codigo": "S-21", "nombre": "TRANSITABILIDAD PUERTO PAJARES", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-08",
+  "ruta": "S-22_A_S-26B_SERVICIOS.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "SERVICIOS Y PROXIMIDAD DE SALIDA",
+  "senales_incluidas": [
+    {"codigo": "S-22", "nombre": "LUGAR POSIBLE DE CAMBIO DE SENTIDO", "coordenadas": ""},
+    {"codigo": "S-23", "nombre": "HOSPITAL", "coordenadas": ""},
+    {"codigo": "S-24", "nombre": "TALLER DE REPARACION", "coordenadas": ""},
+    {"codigo": "S-25", "nombre": "SALIDA DE EMERGENCIA", "coordenadas": ""},
+    {"codigo": "S-26a", "nombre": "PROXIMIDAD DE SALIDA 300m", "coordenadas": ""},
+    {"codigo": "S-26b", "nombre": "PROXIMIDAD DE SALIDA 200m", "coordenadas": ""}
+  ]
+},
+{
+  "panel_id": "S-09",
+  "ruta": "S-26C_A_S-30A_ZONAS.jpg",
+  "categoria": "INDICACION", 
+  "nombre": "PROXIMIDAD, SOCORRO Y ZONAS",
+  "senales_incluidas": [
+    {"codigo": "S-26c", "nombre": "PROXIMIDAD DE SALIDA 100m", "coordenadas": ""},
+    {"codigo": "S-27", "nombre": "POSTE DE SOCORRO", "coordenadas": ""},
+    {"codigo": "S-28", "nombre": "ZONA RESIDENCIAL", "coordenadas": ""},
+    {"codigo": "S-29", "nombre": "FIN DE ZONA RESIDENCIAL", "coordenadas": ""},
+    {"codigo": "S-30a", "nombre": "ZONA PEATONAL", "coordenadas": ""}
+  ]
+}
 ]
+
