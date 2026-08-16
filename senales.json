@@ -97,7 +97,7 @@
     {"codigo": "P-34", "nombre": "PAVIMENTO DESLIZANTE POR HIELO O NIEVE", "coordenadas": ""},
     {"codigo": "P-35", "nombre": "TRAFICO EN AMBOS SENTIDOS", "coordenadas": ""},
     {"codigo": "P-50", "nombre": "OTROS PELIGROS", "coordenadas": ""}
-   ]
+  ]
  },
  {
     "panel_id": "R-01",
