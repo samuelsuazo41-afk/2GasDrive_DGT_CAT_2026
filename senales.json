@@ -64,7 +64,6 @@
   "categoria": "PELIGRO",
   "nombre": "OBRAS RESBALADIZO PEATONES",
   "senales_incluidas": [
-    {"codigo": "P-17b", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA IZQUIERDA", "coordenadas": ""},
     {"codigo": "P-18", "nombre": "OBRAS", "coordenadas": ""},
     {"codigo": "P-19", "nombre": "CALZADA DESLIZANTE", "coordenadas": ""},
     {"codigo": "P-20a", "nombre": "PASO DE PEATONES", "coordenadas": ""},
