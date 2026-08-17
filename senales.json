@@ -1,590 +1,572 @@
 [
-{
-  "panel_id": "P-01",
-  "ruta": "P-01_INTERSECCIONES.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "INTERSECCIONES",
-  "senales_incluidas": [
-    {"codigo": "P-1", "nombre": "INTERSECCION CON PRIORIDAD SOBRE AMBOS LADOS", "coordenadas": ""},
-    {"codigo": "P-1a", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA DERECHA", "coordenadas": ""},
-    {"codigo": "P-1b", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "P-1c", "nombre": "INCORPORACION POR LA DERECHA", "coordenadas": ""},
-    {"codigo": "P-1d", "nombre": "INCORPORACION POR LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "P-1e", "nombre": "INTERSECCION CON PRIORIDAD FRENTE A AMBOS LADOS", "coordenadas": ""},
-    {"codigo": "P-2", "nombre": "INTERSECCION CON PRIORIDAD SOBRE CRUCE O GLORIETA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-02",
-  "ruta": "P-02_PASO_A_NIVEL.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "PASO A NIVEL",
-  "senales_incluidas": [
-    {"codigo": "P-9b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
-    {"codigo": "P-9c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
-    {"codigo": "P-10a", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
-    {"codigo": "P-10b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": ""},
-    {"codigo": "P-10c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
-    {"codigo": "P-11", "nombre": "PASO A NIVEL CON BARRERAS", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-03",
-  "ruta": "P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "FERROCARRIL AEROPUERTO CURVAS RESALTO",
-  "senales_incluidas": [
-    {"codigo": "P-11a", "nombre": "PASO A NIVEL SIN BARRERAS", "coordenadas": ""},
-    {"codigo": "P-12", "nombre": "PROXIMIDAD DE AEROPUERTO", "coordenadas": ""},
-    {"codigo": "P-13a", "nombre": "CURVA PELIGROSA A LA DERECHA", "coordenadas": ""},
-    {"codigo": "P-13b", "nombre": "CURVA PELIGROSA A LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "P-14a", "nombre": "CURVAS PELIGROSAS PRIMERA A LA DERECHA", "coordenadas": ""},
-    {"codigo": "P-14b", "nombre": "CURVAS PELIGROSAS PRIMERA A LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "P-15", "nombre": "RESALTO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-04",
-  "ruta": "P-04_TUNEL_PENDIENTES_ESTRECHAMIENTO.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "TUNEL PENDIENTES ESTRECHAMIENTO",
-  "senales_incluidas": [
-    {"codigo": "P-15a", "nombre": "TUNEL", "coordenadas": ""},
-    {"codigo": "P-15b", "nombre": "BADEN", "coordenadas": ""},
-    {"codigo": "P-16a", "nombre": "DESCENSO PELIGROSO", "coordenadas": ""},
-    {"codigo": "P-16b", "nombre": "ASCENSO PELIGROSO", "coordenadas": ""},
-    {"codigo": "P-17", "nombre": "ESTRECHAMIENTO DE CALZADA", "coordenadas": ""},
-    {"codigo": "P-17a", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA DERECHA", "coordenadas": ""},
-    {"codigo": "P-17b", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA IZQUIERDA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-05",
-  "ruta": "P-05_OBRAS_RESBALADIZO_PEATONES.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "OBRAS RESBALADIZO PEATONES",
-  "senales_incluidas": [
-    {"codigo": "P-18", "nombre": "OBRAS", "coordenadas": ""},
-    {"codigo": "P-19", "nombre": "CALZADA DESLIZANTE", "coordenadas": ""},
-    {"codigo": "P-20a", "nombre": "PASO DE PEATONES", "coordenadas": ""},
-    {"codigo": "P-20b", "nombre": "PASO DE PEATONES", "coordenadas": ""},
-    {"codigo": "P-20c", "nombre": "PASO DE CICLISTAS Y PEATONES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-06",
-  "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES",
-  "senales_incluidas": [
-    {"codigo": "P-21a", "nombre": "NIÑOS", "coordenadas": ""},
-    {"codigo": "P-21b", "nombre": "PERSONAS DE EDAD AVANZADA", "coordenadas": ""},
-    {"codigo": "P-22a", "nombre": "PASO DE CICLISTAS", "coordenadas": ""},
-    {"codigo": "P-22b", "nombre": "PASO DE CICLISTAS", "coordenadas": ""},
-    {"codigo": "P-23", "nombre": "PASO DE ANIMALES DOMESTICOS", "coordenadas": ""},
-    {"codigo": "P-24", "nombre": "PASO DE ANIMALES EN LIBERTAD: CIERVOS", "coordenadas": ""},
-    {"codigo": "P-24a", "nombre": "PASO DE ANIMALES EN LIBERTAD: JABALIES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "P-07",
-  "ruta": "P-07_OTROS_PELIGROS.jpg",
-  "categoria": "PELIGRO",
-  "nombre": "OTROS PELIGROS",
-  "senales_incluidas": [
-    {"codigo": "P-32", "nombre": "DESPRENDIMIENTO", "coordenadas": ""},
-    {"codigo": "P-33", "nombre": "VIENTOS FUERTES TRANSVERSALES", "coordenadas": ""},
-    {"codigo": "P-34", "nombre": "PAVIMENTO DESLIZANTE POR HIELO O NIEVE", "coordenadas": ""},
-    {"codigo": "P-35", "nombre": "TRAFICO EN AMBOS SENTIDOS", "coordenadas": ""},
-    {"codigo": "P-50", "nombre": "OTROS PELIGROS", "coordenadas": ""}
-  ]
- },
- {
+  {
+    "panel_id": "P-01",
+    "ruta": "P-01_INTERSECCIONES.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "INTERSECCIONES",
+    "senales_incluidas": [
+      {"codigo": "P-1", "nombre": "INTERSECCION CON PRIORIDAD SOBRE AMBOS LADOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-1a", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-1b", "nombre": "INTERSECCION CON PRIORIDAD SOBRE LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-1c", "nombre": "INCORPORACION POR LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-1d", "nombre": "INCORPORACION POR LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-1e", "nombre": "INTERSECCION CON PRIORIDAD FRENTE A AMBOS LADOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-2", "nombre": "INTERSECCION CON PRIORIDAD SOBRE CRUCE O GLORIETA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-02",
+    "ruta": "P-02_PASO_A_NIVEL.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "PASO A NIVEL",
+    "senales_incluidas": [
+      {"codigo": "P-9b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-9c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-10a", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-10b", "nombre": "PROXIMIDAD DE PASO A NIVEL CON BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-10c", "nombre": "PROXIMIDAD DE PASO A NIVEL SIN BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-11", "nombre": "PASO A NIVEL CON BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-03",
+    "ruta": "P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "FERROCARRIL AEROPUERTO CURVAS RESALTO",
+    "senales_incluidas": [
+      {"codigo": "P-11a", "nombre": "PASO A NIVEL SIN BARRERAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-12", "nombre": "PROXIMIDAD DE AEROPUERTO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-13a", "nombre": "CURVA PELIGROSA A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-13b", "nombre": "CURVA PELIGROSA A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-14a", "nombre": "CURVAS PELIGROSAS PRIMERA A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-14b", "nombre": "CURVAS PELIGROSAS PRIMERA A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-15", "nombre": "RESALTO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-04",
+    "ruta": "P-04_TUNEL_PENDIENTES_ESTRECHAMIENTO.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "TUNEL PENDIENTES ESTRECHAMIENTO",
+    "senales_incluidas": [
+      {"codigo": "P-15a", "nombre": "TUNEL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-15b", "nombre": "BADEN", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-16a", "nombre": "DESCENSO PELIGROSO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-16b", "nombre": "ASCENSO PELIGROSO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-17", "nombre": "ESTRECHAMIENTO DE CALZADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-17a", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-17b", "nombre": "ESTRECHAMIENTO DE CALZADA POR LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-05",
+    "ruta": "P-05_OBRAS_RESBALADIZO_PEATONES.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "OBRAS RESBALADIZO PEATONES",
+    "senales_incluidas": [
+      {"codigo": "P-18", "nombre": "OBRAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-19", "nombre": "CALZADA DESLIZANTE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-20a", "nombre": "PASO DE PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-20b", "nombre": "PASO DE PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-20c", "nombre": "PASO DE CICLISTAS Y PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-06",
+    "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES",
+    "senales_incluidas": [
+      {"codigo": "P-21a", "nombre": "NIÑOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-21b", "nombre": "PERSONAS DE EDAD AVANZADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-22a", "nombre": "PASO DE CICLISTAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-22b", "nombre": "PASO DE CICLISTAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-23", "nombre": "PASO DE ANIMALES DOMESTICOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-24", "nombre": "PASO DE ANIMALES EN LIBERTAD: CIERVOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-24a", "nombre": "PASO DE ANIMALES EN LIBERTAD: JABALIES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "P-07",
+    "ruta": "P-07_OTROS_PELIGROS.jpg",
+    "categoria": "PELIGRO",
+    "nombre": "OTROS PELIGROS",
+    "senales_incluidas": [
+      {"codigo": "P-32", "nombre": "DESPRENDIMIENTO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-33", "nombre": "VIENTOS FUERTES TRANSVERSALES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-34", "nombre": "PAVIMENTO DESLIZANTE POR HIELO O NIEVE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-35", "nombre": "TRAFICO EN AMBOS SENTIDOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "P-50", "nombre": "OTROS PELIGROS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
     "panel_id": "R-01",
     "ruta": "R-01_A_R-05_PRIORIDAD.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PRIORIDAD Y PREFERENCIA",
     "senales_incluidas": [
-      {"codigo": "R-1", "nombre": "CEDA EL PASO", "coordenadas": "x1,y1,x2,y2"},
-      {"codigo": "R-2", "nombre": "STOP", "coordenadas": "x1,y1,x2,y2"},
-      {"codigo": "R-3", "nombre": "PRIORIDAD EN VIA", "coordenadas": "x1,y1,x2,y2"},
-      {"codigo": "R-4", "nombre": "FIN DE PRIORIDAD", "coordenadas": "x1,y1,x2,y2"},
-      {"codigo": "R-5", "nombre": "PRIORIDAD SENTIDO CONTRARIO", "coordenadas": "x1,y1,x2,y2"}
+      {"codigo": "R-1", "nombre": "CEDA EL PASO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-2", "nombre": "STOP", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-3", "nombre": "PRIORIDAD EN VIA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-4", "nombre": "FIN DE PRIORIDAD", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-5", "nombre": "PRIORIDAD SENTIDO CONTRARIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-02",
     "ruta": "R-02_PROHIBICION_VEHICULOS.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PROHIBICION DE VEHICULOS",
     "senales_incluidas": [
-      {"codigo": "R-106", "nombre": "PROHIBIDO CAMIONES", "coordenadas": ""},
-      {"codigo": "R-107", "nombre": "PROHIBIDO CAMIONES MAS 5.5T", "coordenadas": ""},
-      {"codigo": "R-108", "nombre": "PROHIBIDO VEHICULOS MERCANCIAS PELIGROSAS", "coordenadas": ""},
-      {"codigo": "R-109", "nombre": "PROHIBIDO VEHICULOS MATERIAS EXPLOSIVAS", "coordenadas": ""}
+      {"codigo": "R-106", "nombre": "PROHIBIDO CAMIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-107", "nombre": "PROHIBIDO CAMIONES MAS 5.5T", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-108", "nombre": "PROHIBIDO VEHICULOS MERCANCIAS PELIGROSAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-109", "nombre": "PROHIBIDO VEHICULOS MATERIAS EXPLOSIVAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-03",
     "ruta": "R-03_PROHIBICION_OTROS.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PROHIBICION OTROS VEHICULOS Y PEATONES",
     "senales_incluidas": [
-      {"codigo": "R-111", "nombre": "PROHIBIDO TRACTORES", "coordenadas": ""},
-      {"codigo": "R-114", "nombre": "PROHIBIDO BICICLETAS", "coordenadas": ""},
-      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": ""},
-      {"codigo": "R-117", "nombre": "PROHIBIDO CICLOMOTORES", "coordenadas": ""}
+      {"codigo": "R-111", "nombre": "PROHIBIDO TRACTORES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-114", "nombre": "PROHIBIDO BICICLETAS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-117", "nombre": "PROHIBIDO CICLOMOTORES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-04",
     "ruta": "R-04_PROHIBICION_PEATONES_ANIMALES.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PROHIBICION PEATONES ANIMALES Y PATINETES",
     "senales_incluidas": [
-      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": ""},
-      {"codigo": "R-117", "nombre": "PROHIBIDO CABALLOS", "coordenadas": ""},
-      {"codigo": "R-118", "nombre": "PROHIBIDO PATINETES", "coordenadas": ""},
-      {"codigo": "R-119", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": ""},
-      {"codigo": "R-120", "nombre": "PROHIBIDO VEHICULOS CONTAMINANTES", "coordenadas": ""}
+      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-117", "nombre": "PROHIBIDO CABALLOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-118", "nombre": "PROHIBIDO PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-119", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-120", "nombre": "PROHIBIDO VEHICULOS CONTAMINANTES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-05",
     "ruta": "R-05_LIMITACIONES_DIMENSIONES.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "LIMITACIONES DE DIMENSIONES Y PESO",
     "senales_incluidas": [
-      {"codigo": "R-200", "nombre": "PROHIBIDO EL PASO", "coordenadas": ""},
-      {"codigo": "R-201", "nombre": "PESO LIMITADO", "coordenadas": ""},
-      {"codigo": "R-202", "nombre": "PESO POR EJE LIMITADO", "coordenadas": ""},
-      {"codigo": "R-203", "nombre": "LONGITUD LIMITADA", "coordenadas": ""},
-      {"codigo": "R-204", "nombre": "ANCHURA LIMITADA", "coordenadas": ""},
-      {"codigo": "R-205", "nombre": "ALTURA LIMITADA", "coordenadas": ""}
+      {"codigo": "R-200", "nombre": "PROHIBIDO EL PASO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-201", "nombre": "PESO LIMITADO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-202", "nombre": "PESO POR EJE LIMITADO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-203", "nombre": "LONGITUD LIMITADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-204", "nombre": "ANCHURA LIMITADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-205", "nombre": "ALTURA LIMITADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-06",
     "ruta": "R-06_PROHIBICION_MANIOBRAS.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PROHIBICION DE MANIOBRAS Y LIMITACION VELOCIDAD",
     "senales_incluidas": [
-      {"codigo": "R-301", "nombre": "VELOCIDAD LIMITADA", "coordenadas": ""},
-      {"codigo": "R-302", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": ""},
-      {"codigo": "R-303", "nombre": "PROHIBIDO GIRAR A LA IZQUIERDA", "coordenadas": ""},
-      {"codigo": "R-304", "nombre": "PROHIBIDO GIRAR A LA DERECHA", "coordenadas": ""}
+      {"codigo": "R-301", "nombre": "VELOCIDAD LIMITADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-302", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-303", "nombre": "PROHIBIDO GIRAR A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-304", "nombre": "PROHIBIDO GIRAR A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-07",
     "ruta": "R-07_PROHIBICION_ESTACIONAMIENTO.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PROHIBICION DE ADELANTAMIENTO Y ESTACIONAMIENTO",
     "senales_incluidas": [
-      {"codigo": "R-305", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": ""},
-      {"codigo": "R-306", "nombre": "PROHIBIDO ADELANTAR A CAMIONES > 3500 KG", "coordenadas": ""},
-      {"codigo": "R-307", "nombre": "PROHIBIDO PARAR", "coordenadas": ""},
-      {"codigo": "R-307a", "nombre": "PROHIBIDO PARAR EN AMBOS LADOS", "coordenadas": ""}
+      {"codigo": "R-305", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-306", "nombre": "PROHIBIDO ADELANTAR A CAMIONES > 3500 KG", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-307", "nombre": "PROHIBIDO PARAR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-307a", "nombre": "PROHIBIDO PARAR EN AMBOS LADOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-08",
     "ruta": "R-08_RESTRICCIONES_ESTACIONAMIENTO.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "RESTRICCIONES DE ESTACIONAMIENTO",
     "senales_incluidas": [
-      {"codigo": "R-308e", "nombre": "ESTACIONAMIENTO PROHIBIDO, ZONA VADO", "coordenadas": ""},
-      {"codigo": "R-308f", "nombre": "ESTACIONAMIENTO PROHIBIDO, AMBAS DIRECCIONES", "coordenadas": ""},
-      {"codigo": "R-308g", "nombre": "ESTACIONAMIENTO PROHIBIDO, DIRECCION DERECHA", "coordenadas": ""},
-      {"codigo": "R-308h", "nombre": "ESTACIONAMIENTO PROHIBIDO, DIRECCION IZQUIERDA", "coordenadas": ""},
-      {"codigo": "R-309", "nombre": "ZONA DE ESTACIONAMIENTO LIMITADO", "coordenadas": ""}
+      {"codigo": "R-308e", "nombre": "ESTACIONAMIENTO PROHIBIDO, ZONA VADO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-308f", "nombre": "ESTACIONAMIENTO PROHIBIDO, AMBAS DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-308g", "nombre": "ESTACIONAMIENTO PROHIBIDO, DIRECCION DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-308h", "nombre": "ESTACIONAMIENTO PROHIBIDO, DIRECCION IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-309", "nombre": "ZONA DE ESTACIONAMIENTO LIMITADO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-09",
     "ruta": "R-09_SENTIDO_DIRECCION_OBLIGATORIA.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "SENTIDO Y DIRECCION OBLIGATORIA",
     "senales_incluidas": [
-      {"codigo": "R-400a", "nombre": "SENTIDO OBLIGATORIO A LA DERECHA", "coordenadas": ""},
-      {"codigo": "R-400b", "nombre": "SENTIDO OBLIGATORIO A LA IZQUIERDA", "coordenadas": ""},
-      {"codigo": "R-400c", "nombre": "SENTIDO OBLIGATORIO DE FRENTE", "coordenadas": ""},
-      {"codigo": "R-400d", "nombre": "SENTIDO OBLIGATORIO A LA DERECHA", "coordenadas": ""},
-      {"codigo": "R-400e", "nombre": "SENTIDO OBLIGATORIO A LA IZQUIERDA", "coordenadas": ""},
-      {"codigo": "R-401a", "nombre": "DIRECCION OBLIGATORIA A LA DERECHA", "coordenadas": ""},
-      {"codigo": "R-401b", "nombre": "DIRECCION OBLIGATORIA A LA IZQUIERDA", "coordenadas": ""}
+      {"codigo": "R-400a", "nombre": "SENTIDO OBLIGATORIO A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-400b", "nombre": "SENTIDO OBLIGATORIO A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-400c", "nombre": "SENTIDO OBLIGATORIO DE FRENTE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-400d", "nombre": "SENTIDO OBLIGATORIO A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-400e", "nombre": "SENTIDO OBLIGATORIO A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-401a", "nombre": "DIRECCION OBLIGATORIA A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-401b", "nombre": "DIRECCION OBLIGATORIA A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
     "panel_id": "R-10",
     "ruta": "R-10_PASO_OBLIGATORIO_ROTONDA.jpg",
-    "categoria": "REGLAMENTARIA", 
+    "categoria": "REGLAMENTARIA",
     "nombre": "PASO OBLIGATORIO, ROTONDA Y CALZADA",
     "senales_incluidas": [
-      {"codigo": "R-401c", "nombre": "DIRECCION OBLIGATORIA DE FRENTE", "coordenadas": ""},
-      {"codigo": "R-402", "nombre": "INTERSECCION DE SENTIDO GIRATORIO", "coordenadas": ""},
-      {"codigo": "R-403a", "nombre": "PASO OBLIGATORIO A LA DERECHA", "coordenadas": ""},
-      {"codigo": "R-403b", "nombre": "PASO OBLIGATORIO A LA IZQUIERDA", "coordenadas": ""},
-      {"codigo": "R-403c", "nombre": "PASO OBLIGATORIO A AMBOS LADOS", "coordenadas": ""},
-      {"codigo": "R-404", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": ""}
+      {"codigo": "R-401c", "nombre": "DIRECCION OBLIGATORIA DE FRENTE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-402", "nombre": "INTERSECCION DE SENTIDO GIRATORIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-403a", "nombre": "PASO OBLIGATORIO A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-403b", "nombre": "PASO OBLIGATORIO A LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-403c", "nombre": "PASO OBLIGATORIO A AMBOS LADOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-404", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
-  "panel_id": "R-11",
-  "ruta": "R-11_FIN_OBLIGACION_VEHICULOS.jpg",
-  "categoria": "REGLAMENTARIA", 
-  "nombre": "FIN DE OBLIGACION PARA VEHICULOS",
-  "senales_incluidas": [
-    {"codigo": "R-507", "nombre": "FIN OBLIGACION VEHICULO MOTOR", "coordenadas": ""},
-    {"codigo": "R-508", "nombre": "FIN OBLIGACION MOTOCICLETA", "coordenadas": ""},
-    {"codigo": "R-509", "nombre": "FIN OBLIGACION CAMION", "coordenadas": ""},
-    {"codigo": "R-510", "nombre": "FIN OBLIGACION CICLOMOTOR BICICLETA", "coordenadas": ""},
-    {"codigo": "R-511", "nombre": "FIN OBLIGACION CARRUAJE CABALLOS", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "R-12",
-  "ruta": "R-12_FIN_OBLIGACION_PEATONES_ESPECIALES.jpg",
-  "categoria": "REGLAMENTARIA", 
-  "nombre": "FIN DE OBLIGACION PEATONES Y ESPECIALES",
-  "senales_incluidas": [
-    {"codigo": "R-512", "nombre": "FIN OBLIGACION CABALLOS", "coordenadas": ""},
-    {"codigo": "R-513", "nombre": "FIN OBLIGACION PEATONES", "coordenadas": ""},
-    {"codigo": "R-514", "nombre": "FIN OBLIGACION TRACTORES", "coordenadas": ""},
-    {"codigo": "R-515", "nombre": "FIN OBLIGACION PATINETES", "coordenadas": ""},
-    {"codigo": "R-516", "nombre": "FIN OBLIGACION BICICLETAS Y PATINETES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-01",
-  "ruta": "S-01_TIPOS_DE_VIA.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "TIPOS DE VIA",
-  "senales_incluidas": [
-    {"codigo": "S-1", "nombre": "AUTOPISTA", "coordenadas": ""},
-    {"codigo": "S-1a", "nombre": "AUTOVIA", "coordenadas": ""},
-    {"codigo": "S-1b", "nombre": "CARRETERA MULTI-CARRIL", "coordenadas": ""},
-    {"codigo": "S-1c", "nombre": "CARRETERA 2+1", "coordenadas": ""},
-    {"codigo": "S-2", "nombre": "FIN DE AUTOPISTA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-02",
-  "ruta": "S-02_TIPOS_DE_VIA_FIN.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "FIN TIPOS DE VIA Y OTROS",
-  "senales_incluidas": [
-    {"codigo": "S-2a", "nombre": "FIN DE AUTOVIA", "coordenadas": ""},
-    {"codigo": "S-2b", "nombre": "FIN DE CARRETERA MULTI-CARRIL", "coordenadas": ""},
-    {"codigo": "S-2c", "nombre": "FIN DE CARRETERA 2+1", "coordenadas": ""},
-    {"codigo": "S-3", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": ""},
-    {"codigo": "S-4", "nombre": "FIN DE CALZADA PARA AUTOMOVILES", "coordenadas": ""},
-    {"codigo": "S-5", "nombre": "TUNEL", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-03",
-  "ruta": "S-06_A_S-11_VELOCIDAD.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CARRIL REVERSIBLE, VELOCIDAD Y SENTIDO",
-  "senales_incluidas": [
-    {"codigo": "S-6", "nombre": "CARRIL REVERSIBLE", "coordenadas": ""},
-    {"codigo": "S-7", "nombre": "VELOCIDAD RECOMENDADA", "coordenadas": ""},
-    {"codigo": "S-8", "nombre": "FIN DE VELOCIDAD RECOMENDADA", "coordenadas": ""},
-    {"codigo": "S-9", "nombre": "VELOCIDADES MINIMA Y RECOMENDADA", "coordenadas": ""},
-    {"codigo": "S-10", "nombre": "FIN DE VELOCIDADES MINIMA Y RECOMENDADA", "coordenadas": ""},
-    {"codigo": "S-11", "nombre": "SENTIDO UNICO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-04",
-  "ruta": "S-11A_A_S-14A_SENTIDO.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CARRILES, DIRECCION, PEATONES Y ESCALERAS",
-  "senales_incluidas": [
-    {"codigo": "S-11a", "nombre": "SENTIDO UNICO, 2 CARRILES", "coordenadas": ""},
-    {"codigo": "S-11b", "nombre": "SENTIDO UNICO, 3 CARRILES", "coordenadas": ""},
-    {"codigo": "S-12a", "nombre": "DIRECCION UNICA A LA DERECHA", "coordenadas": ""},
-    {"codigo": "S-12b", "nombre": "DIRECCION UNICA A LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "S-13", "nombre": "PASO DE PEATONES", "coordenadas": ""},
-    {"codigo": "S-14a", "nombre": "ESCALERAS", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-05",
-  "ruta": "S-14B_A_S-15A_RAMPAS.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "RAMPAS, BICICLETAS Y CALLE SIN SALIDA",
-  "senales_incluidas": [
-    {"codigo": "S-14b", "nombre": "ESCALERAS CON RAMPA PARA BICICLETAS", "coordenadas": ""},
-    {"codigo": "S-14c", "nombre": "RAMPA", "coordenadas": ""},
-    {"codigo": "S-14d", "nombre": "RAMPA", "coordenadas": ""},
-    {"codigo": "S-14e", "nombre": "ESCALERAS CON RAMPA PARA BICICLETAS", "coordenadas": ""},
-    {"codigo": "S-14f", "nombre": "ESCALERAS CON LUGAR PARA BICICLETAS", "coordenadas": ""},
-    {"codigo": "S-15a", "nombre": "CALLE SIN SALIDA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-06",
-  "ruta": "S-15B_A_S-17_CALLES.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CALLES SIN SALIDA Y APARCAMIENTO",
-  "senales_incluidas": [
-    {"codigo": "S-15b", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
-    {"codigo": "S-15c", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
-    {"codigo": "S-15d", "nombre": "CALLE SIN SALIDA", "coordenadas": ""},
-    {"codigo": "S-15e", "nombre": "CALLE SIN SALIDA PEATONES Y CICLISTAS", "coordenadas": ""},
-    {"codigo": "S-16", "nombre": "CALLE SIN SALIDA CON SALIDA PARA PEATONES", "coordenadas": ""},
-    {"codigo": "S-17", "nombre": "APARCAMIENTO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-07",
-  "ruta": "S-21_TRANSITABILIDAD.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "TRANSITABILIDAD PUERTO PAJARES",
-  "senales_incluidas": [
-    {"codigo": "S-21", "nombre": "TRANSITABILIDAD PUERTO PAJARES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-08",
-  "ruta": "S-22_A_S-26B_SERVICIOS.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SERVICIOS Y PROXIMIDAD DE SALIDA",
-  "senales_incluidas": [
-    {"codigo": "S-22", "nombre": "LUGAR POSIBLE DE CAMBIO DE SENTIDO", "coordenadas": ""},
-    {"codigo": "S-23", "nombre": "HOSPITAL", "coordenadas": ""},
-    {"codigo": "S-24", "nombre": "TALLER DE REPARACION", "coordenadas": ""},
-    {"codigo": "S-25", "nombre": "SALIDA DE EMERGENCIA", "coordenadas": ""},
-    {"codigo": "S-26a", "nombre": "PROXIMIDAD DE SALIDA 300m", "coordenadas": ""},
-    {"codigo": "S-26b", "nombre": "PROXIMIDAD DE SALIDA 200m", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-09",
-  "ruta": "S-26C_A_S-30A_ZONAS.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "PROXIMIDAD, SOCORRO Y ZONAS",
-  "senales_incluidas": [
-    {"codigo": "S-26c", "nombre": "PROXIMIDAD DE SALIDA 100m", "coordenadas": ""},
-    {"codigo": "S-27", "nombre": "POSTE DE SOCORRO", "coordenadas": ""},
-    {"codigo": "S-28", "nombre": "ZONA RESIDENCIAL", "coordenadas": ""},
-    {"codigo": "S-29", "nombre": "FIN DE ZONA RESIDENCIAL", "coordenadas": ""},
-    {"codigo": "S-30a", "nombre": "ZONA PEATONAL", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-10",
-  "ruta": "S-31A_A_S-34A_ZONA_SOS.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "FIN ZONA, PEAJE E ITINERARIO SOS",
-  "senales_incluidas": [
-    {"codigo": "S-31a", "nombre": "FIN DE ZONA RESIDENCIAL", "coordenadas": ""},
-    {"codigo": "S-32", "nombre": "PEAJE", "coordenadas": ""},
-    {"codigo": "S-33", "nombre": "ITINERARIO RECOMENDADO PARA PEATONES Y CICLISTAS", "coordenadas": ""},
-    {"codigo": "S-34", "nombre": "POSTE DE SOCORRO CON TELEFONO", "coordenadas": ""},
-    {"codigo": "S-34a", "nombre": "POSTE DE SOCORRO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-11",
-  "ruta": "S-35_A_S-40_BICI_PATINETE.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CARRILES BICI Y VEHICULOS MOVILIDAD PERSONAL",
-  "senales_incluidas": [
-    {"codigo": "S-35", "nombre": "CARRIL BICI", "coordenadas": ""},
-    {"codigo": "S-36", "nombre": "PROHIBIDO BICICLETAS", "coordenadas": ""},
-    {"codigo": "S-37", "nombre": "CARRIL PATINETES", "coordenadas": ""},
-    {"codigo": "S-38", "nombre": "CARRIL BICI Y PATINETES", "coordenadas": ""},
-    {"codigo": "S-39", "nombre": "PROHIBIDO PATINETES", "coordenadas": ""},
-    {"codigo": "S-40", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-12",
-  "ruta": "S-41_A_S-44_CICLO_PEATON.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "VIA CICLISTA Y SENDERO",
-  "senales_incluidas": [
-    {"codigo": "S-41", "nombre": "VIA CICLISTA Y SENDERO", "coordenadas": ""},
-    {"codigo": "S-42", "nombre": "FIN DE VIA CICLISTA Y SENDERO", "coordenadas": ""},
-    {"codigo": "S-43", "nombre": "VIA CICLISTA, PATINETES Y SENDERO", "coordenadas": ""},
-    {"codigo": "S-44", "nombre": "FIN DE VIA CICLISTA, PATINETES Y SENDERO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-13",
-  "ruta": "S-45_A_S-49_PASOS_ZONA20.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "PASO CICLISTAS, ZONA 20 Y CARRIL MOTO",
-  "senales_incluidas": [
-    {"codigo": "S-45", "nombre": "PASO PARA CICLISTAS", "coordenadas": ""},
-    {"codigo": "S-46", "nombre": "FIN DE PASO PARA CICLISTAS", "coordenadas": ""},
-    {"codigo": "S-47", "nombre": "ZONA 20", "coordenadas": ""},
-    {"codigo": "S-48", "nombre": "FIN DE ZONA 20", "coordenadas": ""},
-    {"codigo": "S-49", "nombre": "CARRIL PARA MOTOCICLETAS Y BICICLETAS", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-14",
-  "ruta": "S-50D_A_S-51A_CARRILES.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CARRILES CON VELOCIDAD Y BUS TAXI",
-  "senales_incluidas": [
-    {"codigo": "S-50d", "nombre": "CARRILES CON VELOCIDAD LIMITADA", "coordenadas": ""},
-    {"codigo": "S-50e", "nombre": "CARRILES CON VELOCIDAD LIMITADA", "coordenadas": ""},
-    {"codigo": "S-51a", "nombre": "CARRIL BUS, TAXI Y BICICLETAS", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-15",
-  "ruta": "S-51B_A_S-52C_CARRILES.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "CARRIL ALTA OCUPACION Y DESDOBLAMIENTOS",
-  "senales_incluidas": [
-    {"codigo": "S-51b", "nombre": "CARRIL ALTA OCUPACION", "coordenadas": ""},
-    {"codigo": "S-52", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52a", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52b", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52c", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-16",
-  "ruta": "S-52D_A_S-53A_BIFURCACION.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "DESDOBLAMIENTOS Y BIFURCACIONES",
-  "senales_incluidas": [
-    {"codigo": "S-52d", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52e", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52f", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-52g", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-53", "nombre": "BIFURCACION", "coordenadas": ""},
-    {"codigo": "S-53a", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-17",
-  "ruta": "S-53B_A_S-61A_SALIDA.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "BIFURCACIONES Y SALIDAS",
-  "senales_incluidas": [
-    {"codigo": "S-53b", "nombre": "BIFURCACION", "coordenadas": ""},
-    {"codigo": "S-53c", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": ""},
-    {"codigo": "S-60a", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-60b", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-61a", "nombre": "SALIDA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-18",
-  "ruta": "S-61B_A_S-63A_SALIDA.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SALIDAS Y CARRILES",
-  "senales_incluidas": [
-    {"codigo": "S-61b", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-61c", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-62a", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-62b", "nombre": "SALIDA", "coordenadas": ""},
-    {"codigo": "S-63a", "nombre": "CARRILES", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-19",
-  "ruta": "S-65A_A_S-70A_CARRILES.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE CARRILES",
-  "senales_incluidas": [
-    {"codigo": "S-65a", "nombre": "CARRIL BICI A LA DERECHA", "coordenadas": ""},
-    {"codigo": "S-65b", "nombre": "CARRIL BICI A LA DERECHA CON SENTIDO CONTRARIO", "coordenadas": ""},
-    {"codigo": "S-66", "nombre": "CARRIL BICI Y SENTIDO CONTRARIO", "coordenadas": ""},
-    {"codigo": "S-68", "nombre": "CARRILES CON SENTIDOS DIFERENTES", "coordenadas": ""},
-    {"codigo": "S-70a", "nombre": "DESVIO DE CARRIL", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-20",
-  "ruta": "S-70B_A_S-72B_CONFLUENCIA.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE CARRILES CONFLUENCIA",
-  "senales_incluidas": [
-    {"codigo": "S-70b", "nombre": "DESVIO DE CARRIL", "coordenadas": ""},
-    {"codigo": "S-71a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "S-71b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": ""},
-    {"codigo": "S-72a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "S-72b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-21",
-  "ruta": "S-73A_A_S-73B_CONFLUENCIA2.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE CARRILES CONFLUENCIA 2",
-  "senales_incluidas": [
-    {"codigo": "S-73a", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA IZQUIERDA", "coordenadas": ""},
-    {"codigo": "S-73b", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA DERECHA", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-22",
-  "ruta": "S-105C_A_S-108_SERVICIO.jpg",
-  "categoria": "SERVICIO", 
-  "nombre": "SEÑALES DE SERVICIO 2",
-  "senales_incluidas": [
-    {"codigo": "S-105c", "nombre": "ESTACION DE SERVICIO GLP", "coordenadas": ""},
-    {"codigo": "S-105d", "nombre": "ESTACION DE SERVICIO COMBUSTIBLE Y ELECTRICA", "coordenadas": ""},
-    {"codigo": "S-105e", "nombre": "ESTACION DE RECARGA ELECTRICA", "coordenadas": ""},
-    {"codigo": "S-105f", "nombre": "ESTACION DE SERVICIO GLP, COMBUSTIBLE Y ELECTRICA", "coordenadas": ""},
-    {"codigo": "S-106", "nombre": "TALLER Y ESTACION DE SERVICIO", "coordenadas": ""},
-    {"codigo": "S-107", "nombre": "CAMPING", "coordenadas": ""},
-    {"codigo": "S-108", "nombre": "AGUA POTABLE", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-23",
-  "ruta": "S-200_A_S-203_PRESEÑAL.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE PRESEÑALIZACION",
-  "senales_incluidas": [
-    {"codigo": "S-200", "nombre": "PRESEÑALIZACION EN ROTONDA", "coordenadas": ""},
-    {"codigo": "S-201", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": ""},
-    {"codigo": "S-202", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": ""},
-    {"codigo": "S-203", "nombre": "PRESEÑALIZACION ENLACE COMPLEJO", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-24",
-  "ruta": "S-220_A_S-222_PRESEÑAL2.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE PRESEÑALIZACION 2",
-  "senales_incluidas": [
-    {"codigo": "S-220", "nombre": "PRESEÑALIZACION 500m", "coordenadas": ""},
-    {"codigo": "S-220a", "nombre": "PRESEÑALIZACION 500m 2 DESTINOS", "coordenadas": ""},
-    {"codigo": "S-222", "nombre": "PRESEÑALIZACION AUTOVIA 500m", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-25",
-  "ruta": "S-222A_A_S-230_PRESEÑAL3.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE PRESEÑALIZACION 3",
-  "senales_incluidas": [
-    {"codigo": "S-222a", "nombre": "PRESEÑALIZACION MIXTA 500m", "coordenadas": ""},
-    {"codigo": "S-225", "nombre": "PRESEÑALIZACION SALIDA 500m", "coordenadas": ""},
-    {"codigo": "S-230", "nombre": "PRESEÑALIZACION AREA DE SERVICIO 1000m", "coordenadas": ""}
-  ]
-},
-{
-  "panel_id": "S-26",
-  "ruta": "S-321_A_S-342_DIRECCION.jpg",
-  "categoria": "INDICACION", 
-  "nombre": "SEÑALES DE DIRECCION",
-  "senales_incluidas": [
-    {"codigo": "S-321", "nombre": "DIRECCION AEROPUERTO 3km", "coordenadas": ""},
-    {"codigo": "S-322", "nombre": "DIRECCION VIA CICLISTA 0,2km", "coordenadas": ""},
-    {"codigo": "S-341", "nombre": "SALIDA HACIA CARRETERA MULTICARRIL 22", "coordenadas": ""},
-    {"codigo": "S-342", "nombre": "SALIDA HACIA AUTOPISTA 22", "coordenadas": ""}
-  ]
-}
+    "panel_id": "R-11",
+    "ruta": "R-11_FIN_OBLIGACION_VEHICULOS.jpg",
+    "categoria": "REGLAMENTARIA",
+    "nombre": "FIN DE OBLIGACION PARA VEHICULOS",
+    "senales_incluidas": [
+      {"codigo": "R-507", "nombre": "FIN OBLIGACION VEHICULO MOTOR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-508", "nombre": "FIN OBLIGACION MOTOCICLETA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-509", "nombre": "FIN OBLIGACION CAMION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-510", "nombre": "FIN OBLIGACION CICLOMOTOR BICICLETA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-511", "nombre": "FIN OBLIGACION CARRUAJE CABALLOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "R-12",
+    "ruta": "R-12_FIN_OBLIGACION_PEATONES_ESPECIALES.jpg",
+    "categoria": "REGLAMENTARIA",
+    "nombre": "FIN DE OBLIGACION PEATONES Y ESPECIALES",
+    "senales_incluidas": [
+      {"codigo": "R-512", "nombre": "FIN OBLIGACION CABALLOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-513", "nombre": "FIN OBLIGACION PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-514", "nombre": "FIN OBLIGACION TRACTORES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-515", "nombre": "FIN OBLIGACION PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-516", "nombre": "FIN OBLIGACION BICICLETAS Y PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-01",
+    "ruta": "S-01_TIPOS_DE_VIA.jpg",
+    "categoria": "INDICACION",
+    "nombre": "TIPOS DE VIA",
+    "senales_incluidas": [
+      {"codigo": "S-1", "nombre": "AUTOPISTA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-1a", "nombre": "AUTOVIA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-1b", "nombre": "CARRETERA MULTI-CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-1c", "nombre": "CARRETERA 2+1", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-2", "nombre": "FIN DE AUTOPISTA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-02",
+    "ruta": "S-02_TIPOS_DE_VIA_FIN.jpg",
+    "categoria": "INDICACION",
+    "nombre": "FIN TIPOS DE VIA Y OTROS",
+    "senales_incluidas": [
+      {"codigo": "S-2a", "nombre": "FIN DE AUTOVIA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-2b", "nombre": "FIN DE CARRETERA MULTI-CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-2c", "nombre": "FIN DE CARRETERA 2+1", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-3", "nombre": "CALZADA PARA AUTOMOVILES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-4", "nombre": "FIN DE CALZADA PARA AUTOMOVILES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-5", "nombre": "TUNEL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-03",
+    "ruta": "S-06_A_S-11_VELOCIDAD.jpg",
+    "categoria": "INDICACION",
+    "nombre": "CARRIL REVERSIBLE, VELOCIDAD Y DIRECCIONES",
+    "senales_incluidas": [
+      {"codigo": "S-6", "nombre": "CARRIL REVERSIBLE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-7", "nombre": "CARRIL PARA AUTOBUS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-8", "nombre": "CARRIL PARA VEHICULOS CON ALTA OCUPACION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-9", "nombre": "VELOCIDAD ACONSEJADA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-10", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-11", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-04",
+    "ruta": "S-12_A_S-15_DIRECCIONES.jpg",
+    "categoria": "INDICACION",
+    "nombre": "DIRECCIONES Y SITUACIONES",
+    "senales_incluidas": [
+      {"codigo": "S-12", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-13", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-14", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-15", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-05",
+    "ruta": "S-16_A_S-17_DIRECCIONES2.jpg",
+    "categoria": "INDICACION",
+    "nombre": "DIRECCIONES 2",
+    "senales_incluidas": [
+      {"codigo": "S-16", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-17", "nombre": "DIRECCIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-06",
+    "ruta": "S-18_A_S-19_SITUACION.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SITUACION DE SEÑALES",
+    "senales_incluidas": [
+      {"codigo": "S-18", "nombre": "SITUACION DE SEÑAL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-19", "nombre": "SITUACION DE SEÑAL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-07",
+    "ruta": "S-20_A_S-21_CARRIL.jpg",
+    "categoria": "INDICACION",
+    "nombre": "CARRIL Y SERVICIOS",
+    "senales_incluidas": [
+      {"codigo": "S-20", "nombre": "CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-21", "nombre": "SERVICIOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-08",
+    "ruta": "S-22_A_S-25_SERVICIOS.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS",
+    "senales_incluidas": [
+      {"codigo": "S-22", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-23", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-24", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-25", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-09",
+    "ruta": "S-26_A_S-29_SERVICIOS2.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 2",
+    "senales_incluidas": [
+      {"codigo": "S-26", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-27", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-28", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-29", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-10",
+    "ruta": "S-30_A_S-33_SERVICIOS3.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 3",
+    "senales_incluidas": [
+      {"codigo": "S-30", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-31", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-32", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-33", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-11",
+    "ruta": "S-34_A_S-37_SERVICIOS4.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 4",
+    "senales_incluidas": [
+      {"codigo": "S-34", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-35", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-36", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-37", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-12",
+    "ruta": "S-38_A_S-41_SERVICIOS5.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 5",
+    "senales_incluidas": [
+      {"codigo": "S-38", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-39", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-40", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-41", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-13",
+    "ruta": "S-42_A_S-45_SERVICIOS6.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 6",
+    "senales_incluidas": [
+      {"codigo": "S-42", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-43", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-44", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-45", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-14",
+    "ruta": "S-46_A_S-49_SERVICIOS7.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 7",
+    "senales_incluidas": [
+      {"codigo": "S-46", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-47", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-48", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-49", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-15",
+    "ruta": "S-50_A_S-51_SERVICIOS8.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SERVICIOS 8",
+    "senales_incluidas": [
+      {"codigo": "S-50", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-51", "nombre": "SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-16",
+    "ruta": "S-52D_A_S-53A_BIFURCACION.jpg",
+    "categoria": "INDICACION",
+    "nombre": "DESDOBLAMIENTOS Y BIFURCACIONES",
+    "senales_incluidas": [
+      {"codigo": "S-52d", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-52e", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-52f", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-52g", "nombre": "DESDOBLAMIENTO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-53", "nombre": "BIFURCACION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-53a", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-17",
+    "ruta": "S-53B_A_S-61A_SALIDA.jpg",
+    "categoria": "INDICACION",
+    "nombre": "BIFURCACIONES Y SALIDAS",
+    "senales_incluidas": [
+      {"codigo": "S-53b", "nombre": "BIFURCACION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-53c", "nombre": "BIFURCACION CON VELOCIDAD", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-60a", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-60b", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-61a", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-18",
+    "ruta": "S-61B_A_S-63A_SALIDA.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SALIDAS Y CARRILES",
+    "senales_incluidas": [
+      {"codigo": "S-61b", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-61c", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-62a", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-62b", "nombre": "SALIDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-63a", "nombre": "CARRILES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-19",
+    "ruta": "S-65A_A_S-70A_CARRILES.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE CARRILES",
+    "senales_incluidas": [
+      {"codigo": "S-65a", "nombre": "CARRIL BICI A LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-65b", "nombre": "CARRIL BICI A LA DERECHA CON SENTIDO CONTRARIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-66", "nombre": "CARRIL BICI Y SENTIDO CONTRARIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-68", "nombre": "CARRILES CON SENTIDOS DIFERENTES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-70a", "nombre": "DESVIO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-20",
+    "ruta": "S-70B_A_S-72B_CONFLUENCIA.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE CARRILES CONFLUENCIA",
+    "senales_incluidas": [
+      {"codigo": "S-70b", "nombre": "DESVIO DE CARRIL", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-71a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-71b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-72a", "nombre": "CONFLUENCIA DE CARRIL POR LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-72b", "nombre": "CONFLUENCIA DE CARRIL POR LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-21",
+    "ruta": "S-73A_A_S-73B_CONFLUENCIA2.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE CARRILES CONFLUENCIA 2",
+    "senales_incluidas": [
+      {"codigo": "S-73a", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA IZQUIERDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-73b", "nombre": "CONFLUENCIA DE DOS CARRILES POR LA DERECHA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-22",
+    "ruta": "S-105C_A_S-108_SERVICIO.jpg",
+    "categoria": "SERVICIO",
+    "nombre": "SEÑALES DE SERVICIO 2",
+    "senales_incluidas": [
+      {"codigo": "S-105c", "nombre": "ESTACION DE SERVICIO GLP", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-105d", "nombre": "ESTACION DE SERVICIO COMBUSTIBLE Y ELECTRICA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-105e", "nombre": "ESTACION DE RECARGA ELECTRICA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-105f", "nombre": "ESTACION DE SERVICIO GLP, COMBUSTIBLE Y ELECTRICA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-106", "nombre": "TALLER Y ESTACION DE SERVICIO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-107", "nombre": "CAMPING", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-108", "nombre": "AGUA POTABLE", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-23",
+    "ruta": "S-200_A_S-203_PRESEÑAL.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE PRESEÑALIZACION",
+    "senales_incluidas": [
+      {"codigo": "S-200", "nombre": "PRESEÑALIZACION EN ROTONDA", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-201", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-202", "nombre": "PRESEÑALIZACION EN INTERSECCION", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-203", "nombre": "PRESEÑALIZACION ENLACE COMPLEJO", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-24",
+    "ruta": "S-220_A_S-222_PRESEÑAL2.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE PRESEÑALIZACION 2",
+    "senales_incluidas": [
+      {"codigo": "S-220", "nombre": "PRESEÑALIZACION 500m", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-220a", "nombre": "PRESEÑALIZACION 500m 2 DESTINOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-222", "nombre": "PRESEÑALIZACION AUTOVIA 500m", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-25",
+    "ruta": "S-222A_A_S-230_PRESEÑAL3.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE PRESEÑALIZACION 3",
+    "senales_incluidas": [
+      {"codigo": "S-222a", "nombre": "PRESEÑALIZACION MIXTA 500m", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-225", "nombre": "PRESEÑALIZACION SALIDA 500m", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-230", "nombre": "PRESEÑALIZACION AREA DE SERVICIO 1000m", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "S-26",
+    "ruta": "S-321_A_S-342_DIRECCION.jpg",
+    "categoria": "INDICACION",
+    "nombre": "SEÑALES DE DIRECCION",
+    "senales_incluidas": [
+      {"codigo": "S-321", "nombre": "DIRECCION AEROPUERTO 3km", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-322", "nombre": "DIRECCION VIA CICLISTA 0,2km", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-341", "nombre": "SALIDA HACIA CARRETERA MULTICARRIL 22", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "S-342", "nombre": "SALIDA HACIA AUTOPISTA 22", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  }
 ]
