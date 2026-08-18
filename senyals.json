@@ -101,7 +101,7 @@
   },
   {
     "panel_id": "R-01",
-    "ruta": "R-01_A_R-05_PRIORIDAD.jpg",
+    "ruta": "R-01_CEDA_STOP.jpg",
     "categoria": "REGLAMENTARIA",
     "nombre": "PRIORIDAD Y PREFERENCIA",
     "senales_incluidas": [
@@ -138,15 +138,13 @@
   },
   {
     "panel_id": "R-04",
-    "ruta": "R-04_PROHIBICION_PEATONES_ANIMALES.jpg",
+    "ruta": "R-04_ADELANTAMIENTO.jpg",
     "categoria": "REGLAMENTARIA",
-    "nombre": "PROHIBICION PEATONES ANIMALES Y PATINETES",
+    "nombre": "PROHIBICION DE ADELANTAR",
     "senales_incluidas": [
-      {"codigo": "R-116", "nombre": "PROHIBIDO PEATONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
-      {"codigo": "R-117", "nombre": "PROHIBIDO CABALLOS", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
-      {"codigo": "R-118", "nombre": "PROHIBIDO PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
-      {"codigo": "R-119", "nombre": "PROHIBIDO BICICLETAS Y PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
-      {"codigo": "R-120", "nombre": "PROHIBIDO VEHICULOS CONTAMINANTES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+      {"codigo": "R-302", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-305", "nombre": "PROHIBIDO ADELANTAR", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
+      {"codigo": "R-306", "nombre": "PROHIBIDO ADELANTAR A CAMIONES > 3500 KG", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
@@ -253,6 +251,15 @@
       {"codigo": "R-514", "nombre": "FIN OBLIGACION TRACTORES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
       {"codigo": "R-515", "nombre": "FIN OBLIGACION PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}},
       {"codigo": "R-516", "nombre": "FIN OBLIGACION BICICLETAS Y PATINETES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
+    ]
+  },
+  {
+    "panel_id": "R-13",
+    "ruta": "R-13_FIN_GENERICO.jpg",
+    "categoria": "REGLAMENTARIA",
+    "nombre": "FIN DE PROHIBICIONES",
+    "senales_incluidas": [
+      {"codigo": "R-500", "nombre": "FIN DE PROHIBICIONES", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   },
   {
@@ -569,4 +576,5 @@
       {"codigo": "S-342", "nombre": "SALIDA HACIA AUTOPISTA 22", "coordenadas": {"x1": 0, "y1": 0, "x2": 0, "y2": 0}}
     ]
   }
-] 
+]
+       
