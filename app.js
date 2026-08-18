@@ -1003,19 +1003,19 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V9.8.1 - IMAGENES DGT REALES + TIP SIEMPRE + 200 SEÑALES =====
+// ===== GASDRIVE DGT CAT V9.8.2 - IMAGENES DGT REALES + TIP DESPUES DE RESPONDER + 200 SEÑALES =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.1 BANCO DE SVGS ELIMINADO - AHORA USAMOS URL REAL =====
+// ===== V9.8.2 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
 const SENALES_SVG = {}; // YA NO SE USA
 
 // TU BANCO VA AQUI: const senyals = [...] // <- TU YA LO TIENES, NO LO BORRES
 
-// ===== V9.8.1 FUNCIÓN ACTUALIZADA: PINTAR IMAGEN DGT REAL + TIP =====
+// ===== V9.8.2 FUNCIÓN ACTUALIZADA: PINTAR PANEL DGT REAL + TIP OCULTO =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -1023,9 +1023,9 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // SI ES SEÑAL: Pintar imagen real de DGT
-  if (cat === 'senyals' && pregunta.url) {
-    imgDiv.innerHTML = `<img src="${pregunta.url}" alt="Senyal DGT" style="width:100%; height:auto; max-height:220px; object-fit:contain; border-radius:12px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);" onerror="this.src='https://www.dgt.es/export/sites/web-DGT/.galleries/senales/peligro/P-25.png'">`;
+  // SI ES SEÑAL: Pintar imagen real de DGT desde ruta_panel
+  if (cat === 'senyals' && pregunta.ruta_panel) {
+    imgDiv.innerHTML = `<img src="./${pregunta.ruta_panel}" alt="Senyal DGT" style="width:100%; height:auto; max-height:220px; object-fit:contain; border-radius:12px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);" onerror="this.src='./R-07_FIN.jpg'">`;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
   }
@@ -1042,11 +1042,8 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     emojisDiv.style.display = 'none';
   }
 
-  // TIP: MOSTRAR SIEMPRE EN SEÑALES
-  if(tipDiv && cat === 'senyals' && pregunta.tip){
-    tipDiv.innerHTML = `💡 TIP: ${pregunta.tip}`;
-    tipDiv.style.display = 'block';
-  } else if(tipDiv) {
+  // TIP: OCULTAR SIEMPRE AQUÍ. Se muestra después de responder
+  if(tipDiv) {
     tipDiv.innerHTML = '';
     tipDiv.style.display = 'none';
   }
@@ -1121,7 +1118,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.1 CAT carregat");
+  console.log("GasDrive V9.8.2 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1191,7 +1188,7 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   else estat.stats.historialPregunta[preguntaId].consecutius = 0;
   estat.stats.historialPregunta[preguntaId].ultima = avui;
   guardar();
-} 
+}
 
 // ===== V9.4.6 NUEVA FORMULA ANTI-FARM DURO - CAP DIARIO + CONSTANCIA 40% =====
 function calcularPreparacioDGT_V94() {
@@ -1419,11 +1416,10 @@ function carregarPregunta(cat) {
   const pOriginal = preguntes[s.idx % preguntes.length];
 
   // ===== V9.8.2 FIX COMPATIBILIDAD + AUDIO =====
-  // Lee formato viejo q,a,ok y formato nuevo pregunta,opcions,correcta
   const preguntaTxt = pOriginal.q || pOriginal.pregunta;
   const opcionsOriginales = pOriginal.a || pOriginal.opcions;
   const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
-  const audioTxt = pOriginal.audio || ''; // NUEVO
+  const audioTxt = pOriginal.audio || '';
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
 
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
@@ -1464,9 +1460,9 @@ function carregarPregunta(cat) {
 // ===== NUEVA FUNCION PARA REPRODUCIR AUDIO =====
 function parlar(text) {
   if('speechSynthesis' in window){
-    speechSynthesis.cancel(); // Para el anterior
+    speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ca-ES'; // Catalán
+    utterance.lang = 'ca-ES';
     utterance.rate = 0.9;
     speechSynthesis.speak(utterance);
   }
@@ -1508,6 +1504,43 @@ function respondreTest_V94(cat, idx, el) {
   btnSig.style.cursor = 'pointer';
   actualitzarCoins();
   guardar();
+
+  // ===== V9.8.2 NUEVO: MOSTRAR TIP DESPUÉS DE RESPONDER SOLO EN SEÑALES =====
+  const tipDiv = document.getElementById(`test-${cat}-tip`);
+  if(tipDiv && cat === 'senyals' && p.tip){
+
+    // CASO 1: ES TRAMPA Y ESTA BLOQUEADO
+    if(p.tip_bloquejat && p.preu_desbloqueig_tip){
+      if(p.usos_gratis_restants > 0){
+        // Usar 1 gratis
+        p.usos_gratis_restants--;
+        tipDiv.innerHTML = `💡 TIP GRATIS [${p.usos_gratis_restants} restants]: ${p.tip}`;
+        tipDiv.style.display = 'block';
+        tipDiv.style.border = '2px solid #2ecc71';
+      } else {
+        // Pedir coins
+        tipDiv.innerHTML = `🔒 TIP BLOQUEJAT <button class="btn-buy-tip" onclick="desbloquejarTip(this, '${cat}', ${s.idx})">Desbloquejar 20💰</button>`;
+        tipDiv.style.display = 'block';
+        tipDiv.style.border = '2px solid #e74c3c';
+      }
+    }
+    // CASO 2: ES NORMAL O YA DESBLOQUEADO
+    else {
+      tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
+      tipDiv.style.display = 'block';
+      tipDiv.style.border = '2px solid #00D9FF';
+    }
+  }
+}
+
+function desbloquejarTip(btn, cat, idx){
+  if(estat.coins < 20){ alert('No tens prous coins'); return; }
+  estat.coins -= 20;
+  const p = estat.test[cat].current;
+  p.tip_bloquejat = false; // Ya queda desbloqueado
+  btn.parentElement.innerHTML = `💡 TIP: ${p.tip}`;
+  actualitzarCoins();
+  guardar();
 }
 
 function seguentTest(e, cat) {
@@ -1516,8 +1549,7 @@ function seguentTest(e, cat) {
   carregarPregunta(cat);
 }
 
-//... AQUI SIGUE TODO TU CODIGO IGUAL: carregarSituacio, examen, garage, etc...
-// NO TOQUE NADA MAS PARA NO ROMPER
+//... AQUI SIGUE TODO TU CODIGO IGUAL: carregarSituacio, examen, garage,
 
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
