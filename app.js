@@ -982,7 +982,7 @@ let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
-let sitCategoriaActiva = 'clima';
+let sitCategoriaActiva = 'clima'; 
 
 // ===== V9.8.4 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
 const SENALES_SVG = {}; // YA NO SE USA
