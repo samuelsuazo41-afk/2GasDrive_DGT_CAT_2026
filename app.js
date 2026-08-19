@@ -977,19 +977,19 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V9.8.2 - IMAGENES DGT REALES + TIP DESPUES DE RESPONDER + 200 SEÑALES =====
+// ===== GASDRIVE DGT CAT V9.8.4 - IMAGENES DGT REALES + TRAMPES + TIP DESPUES DE RESPONDER + 200 SEÑALES =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.2 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
+// ===== V9.8.4 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
 const SENALES_SVG = {}; // YA NO SE USA
 
-// TU BANCO VA AQUI: const senyals = [...] // <- TU YA LO TIENES, NO LO BORRES
+// TU BANCO VA AQUI: const senyals = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.trampes aqui tambien
 
-// ===== V9.8.2 FUNCIÓN ACTUALIZADA: PINTAR PANEL DGT REAL + TIP OCULTO =====
+// ===== V9.8.4 FUNCIÓN ACTUALIZADA: PINTAR PANEL DGT REAL COMPLETO SIN COORDENADAS =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -997,17 +997,33 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // SI ES SEÑAL: Pintar imagen real de DGT desde ruta_panel
-  if (cat === 'senyals' && pregunta.ruta_panel) {
-    imgDiv.innerHTML = `<img src="./${pregunta.ruta_panel}" alt="Senyal DGT" style="width:100%; height:auto; max-height:220px; object-fit:contain; border-radius:12px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);" onerror="this.src='./R-07_FIN.jpg'">`;
+  // SI ES SEÑAL O TRAMPA: Pintar panel completo desde ruta_panel
+  if ((cat === 'senyals' || cat === 'trampes') && pregunta.ruta_panel) {
+    imgDiv.innerHTML = `
+      <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
+        <img
+          src="./${pregunta.ruta_panel}"
+          alt="Panel DGT ${pregunta.panel_id || ''}"
+          style="width:100%; height:auto; max-height:280px; object-fit:contain; border-radius:12px; display:block;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <div style="display:none; color:#ff6b6b; text-align:center; padding:20px;">
+          ❌ No s'ha trobat: ${pregunta.ruta_panel}
+        </div>
+        <div style="text-align:center; color:#888; font-size:12px; margin-top:8px;">
+          Panel: ${pregunta.panel_id || 'N/A'}
+        </div>
+      </div>
+    `;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
   }
   // SI NO ES SEÑAL: Deja placeholder
   else {
-    imgDiv.innerHTML = `<div class="placeholder">Sense imatge</div>`;
+    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px;">Sense imatge</div>`;
     imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
+    imgDiv.style.borderRadius = '12px';
   }
 
   // EMOJIS: Desactivados para señales
@@ -1048,6 +1064,7 @@ let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
     general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     senyals: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
+    trampes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, // NUEVO
     normes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     mecanica: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     auxilis: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
@@ -1084,7 +1101,7 @@ let estat = {
     tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false,
     puntsDebils: {}, preguntesFetes: 0, encertsTotals: 0, perCategoria: {}, historialEvolucio: [], historialPregunta: {}
   },
-  test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} },
+  test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, trampes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} }, // AÑADIDO TRAMPES
   examen: { activa: false, preguntes: [], index: 0, encerts: 0, fallos: 0, timer: null, temps: 1800, categoria: 'general' },
   sit: { clima: {idx:0,encerts:0,puntuacio:0,current:null}, urbà: {idx:0,encerts:0,puntuacio:0,current:null}, carretera: {idx:0,encerts:0,puntuacio:0,current:null}, emergència: {idx:0,encerts:0,puntuacio:0,current:null} }
 };
@@ -1092,13 +1109,13 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.2 CAT carregat");
+  console.log("GasDrive V9.8.4 CAT carregat");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
   actualitzarCoins();
-  carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
+  carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('trampes'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient'); // AÑADIDO TRAMPES
   carregarSituacio('clima');
   actualitzarMissatgeMotivacional();
 }
@@ -1334,9 +1351,9 @@ function dibuixarPuntsDebils_V94() {
   const cont = document.getElementById('stats-debils-lista'); if(!cont) return;
   cont.innerHTML = '<h3 style="margin-bottom:15px; color:#00D9FF">📍 ON HAS DE MILLORAR ARA MATEIX</h3>';
   if(!estat.stats.puntsDebils || Object.keys(estat.stats.puntsDebils).length === 0) { cont.innerHTML += '<div style="text-align:center;color:#999">Fes més tests per detectar els teus punts dèbils</div>'; return; }
-  const categories = ['senyals','normes','mecanica','auxilis','mediambient'];
-  const noms = ['🚦 SENYALS','📋 NORMES','⚙️ MECÀNICA','🚑 AUXILIS','♻️ MEDI AMBIENT'];
-  const temari = ['TEMARI 1','TEMARI 2','TEMARI 4','TEMARI 3','TEMARI 5'];
+  const categories = ['senyals','trampes','normes','mecanica','auxilis','mediambient']; // AÑADIDO TRAMPES
+  const noms = ['🚦 SENYALS','🪤 TRAMPES','📋 NORMES','⚙️ MECÀNICA','🚑 AUXILIS','♻️ MEDI AMBIENT']; // AÑADIDO TRAMPES
+  const temari = ['TEMARI 1','TEMARI 1','TEMARI 2','TEMARI 4','TEMARI 3','TEMARI 5']; // AÑADIDO TRAMPES
   categories.forEach((cat, i) => {
     if(!estat.stats.puntsDebils[cat]) {
       cont.innerHTML += `<div style="margin-bottom:15px; padding:12px; background:#1a1a1a; border-radius:8px;"><div style="font-weight:700; color:#00D9FF">${noms[i]}</div><div style="color:#666">Encara no tens dades</div></div>`;
@@ -1389,7 +1406,7 @@ function carregarPregunta(cat) {
   if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
 
-  // ===== V9.8.2 FIX COMPATIBILIDAD + AUDIO =====
+  // ===== V9.8.4 FIX COMPATIBILIDAD + AUDIO =====
   const preguntaTxt = pOriginal.q || pOriginal.pregunta;
   const opcionsOriginales = pOriginal.a || pOriginal.opcions;
   const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
@@ -1405,9 +1422,9 @@ function carregarPregunta(cat) {
 
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
 
-  // ===== BOTON AUDIO NUEVO =====
+  // ===== BOTON AUDIO NUEVO PARA SENYALS Y TRAMPES =====
   const contPregunta = document.getElementById(`test-${cat}-pregunta`);
-  if(audioTxt && cat === 'senyals'){
+  if(audioTxt && (cat === 'senyals' || cat === 'trampes')){
     contPregunta.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')">🔊</button>`;
   }
 
@@ -1479,42 +1496,13 @@ function respondreTest_V94(cat, idx, el) {
   actualitzarCoins();
   guardar();
 
-  // ===== V9.8.2 NUEVO: MOSTRAR TIP DESPUÉS DE RESPONDER SOLO EN SEÑALES =====
+  // ===== V9.8.4 NUEVO: MOSTRAR TIP DESPUÉS DE RESPONDER SOLO EN SEÑALES Y TRAMPAS =====
   const tipDiv = document.getElementById(`test-${cat}-tip`);
-  if(tipDiv && cat === 'senyals' && p.tip){
-
-    // CASO 1: ES TRAMPA Y ESTA BLOQUEADO
-    if(p.tip_bloquejat && p.preu_desbloqueig_tip){
-      if(p.usos_gratis_restants > 0){
-        // Usar 1 gratis
-        p.usos_gratis_restants--;
-        tipDiv.innerHTML = `💡 TIP GRATIS [${p.usos_gratis_restants} restants]: ${p.tip}`;
-        tipDiv.style.display = 'block';
-        tipDiv.style.border = '2px solid #2ecc71';
-      } else {
-        // Pedir coins
-        tipDiv.innerHTML = `🔒 TIP BLOQUEJAT <button class="btn-buy-tip" onclick="desbloquejarTip(this, '${cat}', ${s.idx})">Desbloquejar 20💰</button>`;
-        tipDiv.style.display = 'block';
-        tipDiv.style.border = '2px solid #e74c3c';
-      }
-    }
-    // CASO 2: ES NORMAL O YA DESBLOQUEADO
-    else {
-      tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
-      tipDiv.style.display = 'block';
-      tipDiv.style.border = '2px solid #00D9FF';
-    }
+  if(tipDiv && (cat === 'senyals' || cat === 'trampes') && p.tip){
+    tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
+    tipDiv.style.display = 'block';
+    tipDiv.style.border = '2px solid #00D9FF';
   }
-}
-
-function desbloquejarTip(btn, cat, idx){
-  if(estat.coins < 20){ alert('No tens prous coins'); return; }
-  estat.coins -= 20;
-  const p = estat.test[cat].current;
-  p.tip_bloquejat = false; // Ya queda desbloqueado
-  btn.parentElement.innerHTML = `💡 TIP: ${p.tip}`;
-  actualitzarCoins();
-  guardar();
 }
 
 function seguentTest(e, cat) {
@@ -1599,7 +1587,7 @@ function seguentSituacio(e, cat) {
 
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
-  const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima];
+  const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.trampes,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima]; // AÑADIDO TRAMPES
   if(totes.length < 30) { alert('Falten preguntes. Necessites 30 mínim.'); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -1629,7 +1617,6 @@ function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
   const pOriginal = estat.examen.preguntes[estat.examen.index];
 
-  // V9.8.0 LIMPIO: Solo formato nuevo q,a,ok
   const opcionsOriginales = pOriginal.a;
   const indexCorrectaOriginal = pOriginal.ok;
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
@@ -1863,7 +1850,7 @@ function dibujarGraficaEvolucion() {
 
 function actualitzarMissatgeMotivacional() { const missatges = ["Vas per bon camí 💪","Cada fallo et fa més fort 🔥","L'examen DGT és teu 🚗","No paris ara 💎","Concentra't i aprovaràs 👑"]; const msg = missatges[Math.floor(Math.random() * missatges.length)]; const el = document.getElementById('motivacio'); if(el) el.textContent = msg; }
 
-// ===== V9.8.0 FIX: CANVIAR TABS =====
+// ===== V9.8.4 FIX: CANVIAR TABS =====
 function canviarTab_V94(e, tab) {
   const tabTemari = document.getElementById('tab-temari');
   if(tabTemari && tabTemari.classList.contains('active') && tempsIniciTemari!== null) {
@@ -1924,4 +1911,6 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-}
+} 
+
+
