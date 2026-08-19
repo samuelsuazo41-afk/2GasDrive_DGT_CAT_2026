@@ -1,4 +1,4 @@
-const CACHE = 'gasdrive-v10.6.65'; // SUBE ESTA VERSION CADA VEZ QUE CAMBIES ALGO
+const CACHE = 'gasdrive-v10.6.67'; // SUBE ESTA VERSION CADA VEZ QUE CAMBIES ALGO
 const FILES = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ const FILES = [
   './icon-192.png',
   './icon-512.png',
 
-  // ===== V9.8.2 BANCO NUEVO =====
+  // ===== BANCO NUEVO =====
   './senyals.json', // TU JSON CON ruta_panel
 
   // PDFs Temari - 5 arxius complets
@@ -19,8 +19,8 @@ const FILES = [
   './04_Manual_VIII_Mecanica_2024.pdf',
   './05_Medi_Ambient_Distintius_DGT_2025.pdf',
 
-  // ===== V9.8.2 TODOS LOS PANELES DGT EN RAIZ =====
-  // P - PERILL
+  // ===== TODOS LOS PANELES DGT REALES DE TU JSON =====
+  // P - PELIGRO
   './P-01_INTERSECCIONES.jpg',
   './P-02_PASO_A_NIVEL.jpg',
   './P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg',
@@ -29,11 +29,11 @@ const FILES = [
   './P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg',
   './P-07_OTROS_PELIGROS.jpg',
 
-  // R - REGLAMENTACION
-  './R-01_A_R_05_PRIORIDAD.jpg',
+  // R - REGLAMENTARIA
+  './R-01_CEDA_STOP.jpg',
   './R-02_PROHIBICION_VEHICULOS.jpg',
   './R-03_PROHIBICION_OTROS.jpg',
-  './R-04_PROHIBICION_PEATONES_ANIMALES.jpg',
+  './R-04_ADELANTAMIENTO.jpg',
   './R-05_LIMITACIONES_DIMENSIONES.jpg',
   './R-06_PROHIBICION_MANIOBRAS.jpg',
   './R-07_PROHIBICION_ESTACIONAMIENTO.jpg',
@@ -42,23 +42,24 @@ const FILES = [
   './R-10_PASO_OBLIGATORIO_ROTONDA.jpg',
   './R-11_FIN_OBLIGACION_VEHICULOS.jpg',
   './R-12_FIN_OBLIGACION_PEATONES_ESPECIALES.jpg',
+  './R-13_FIN_GENERICO.jpg',
 
-  // S - INFORMACION
+  // S - INDICACION
   './S-01_TIPOS_DE_VIA.jpg',
-  './S-02_TIPOS_DE_VIAS_FIN.jpg',
+  './S-02_TIPOS_DE_VIA_FIN.jpg',
   './S-06_A_S-11_VELOCIDAD.jpg',
-  './S-11A_A_S-14A_SENTIDO.jpg',
-  './S-14B_A_S-15A_RAMPAS.jpg',
-  './S-15B_A_S-17_CALLES.jpg',
-  './S-21_TRANSITABILIDAD.jpg',
-  './S-22_A_S-26B_SERVICIOS.jpg',
-  './S-26C_A_S-30A_ZONAS.jpg',
-  './S-31A_A_S-34A_ZONA_SOS.jpg',
-  './S-35_A_S-40_BICI_PATINETE.jpg',
-  './S-41_A_S-44_CICLO_PEATON.jpg',
-  './S-45_A_S-49_PASOS_ZONA20.jpg',
-  './S-50D_A_S-51A_CARRILES.jpg',
-  './S-51B_A_S-52C_CARRILES.jpg',
+  './S-12_A_S-15_DIRECCIONES.jpg',
+  './S-16_A_S-17_DIRECCIONES2.jpg',
+  './S-18_A_S-19_SITUACION.jpg',
+  './S-20_A_S-21_CARRIL.jpg',
+  './S-22_A_S-25_SERVICIOS.jpg',
+  './S-26_A_S-29_SERVICIOS2.jpg',
+  './S-30_A_S-33_SERVICIOS3.jpg',
+  './S-34_A_S-37_SERVICIOS4.jpg',
+  './S-38_A_S-41_SERVICIOS5.jpg',
+  './S-42_A_S-45_SERVICIOS6.jpg',
+  './S-46_A_S-49_SERVICIOS7.jpg',
+  './S-50_A_S-51_SERVICIOS8.jpg',
   './S-52D_A_S-53A_BIFURCACION.jpg',
   './S-53B_A_S-61A_SALIDA.jpg',
   './S-61B_A_S-63A_SALIDA.jpg',
