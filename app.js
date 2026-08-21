@@ -241,7 +241,7 @@ const PREGUNTES = {
     {id:104,q:"En cas de vessament d’oli a la calçada?",a:["Accelera per passar ràpid","Avisa i circula amb precaució","Frena fort"],ok:1}
   ],
  
- const BANCO_PREGUNTAS_COMPLETO = [
+senyals: [
   // ========= PELIGRO P-1 A P-50 = 30 BASE + 5 TRAMPA = 35 =========
   // 1. INTERSECCIONES P-01
   { id: "P-1", categoria: "peligro", pregunta: "Què indica aquesta senyal P-1 de PERILL?", opcions: ["Intersecció amb prioritat a la dreta", "Intersecció amb prioritat a l'esquerra", "Glorieta"], correcta: 0, codi: "P-1", nombre_senal: "INTERSECCION CON PRIORIDAD A LA DERECHA", tip: "💡 CLAU: Creu. Els de la dreta tenen prioritat.", audio: "Senyal P-1 de perill. Intersecció amb prioritat a la dreta.", panel_id: "P-01", ruta_panel: "P-01_INTERSECCIONES.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } },
