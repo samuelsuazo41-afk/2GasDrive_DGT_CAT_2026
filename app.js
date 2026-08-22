@@ -576,7 +576,7 @@ senyals: [
 { id: "S-341-TRAMPA-20", categoria: "INDICACION", pregunta: "Veus S-341 fons blanc amb sortida 22. Cap on vas?", opcions: ["Sortida cap a carretera convencional", "Sortida cap a autopista", "Sortida cap a autovia"], correcta: 0, codi: "S-341", nombre_senal: "SORTIDA BLANCA VS BLAVA - TRAMPA", tip: "💡 TRAMPA CLAU DGT: FONS BLANC = CARRETERA. FONS BLAU = AUTOPISTA/AUTOVIA. S-341 blanc, S-342 blau", audio: "Trampa sortida blanca vs blava.", panel_id: "S-26", ruta_panel: "S-321_A_S-342_DIRECCION.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } },
 { id: "S-342-TRAMPA-21", categoria: "INDICACION", pregunta: "Veus S-342 fons blau amb sortida 22. Cap on vas?", opcions: ["Sortida cap a autopista o autovia", "Sortida cap a carretera", "Sortida cap a poble"], correcta: 0, codi: "S-342", nombre_senal: "SORTIDA AUTOPISTA - TRAMPA", tip: "💡 TRAMPA CLAU: FONS BLAU = AUTOPISTA. Això surt molt a l'examen", audio: "Trampa sortida cap a autopista.", panel_id: "S-26", ruta_panel: "S-321_A_S-342_DIRECCION.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } },
 { id: "S-105-TRAMPA-22", categoria: "SERVICIO", pregunta: "Veus S-105c WC, S-105d gasolinera, S-105e hotel. Quina categoria són?", opcions: ["Senyals de servei", "Senyals d'indicació general", "Senyals de preseñalització"], correcta: 0, codi: "S-105c", nombre_senal: "SERVICIO - TRAMPA", tip: "💡 APREN: S-100 a S-199 són SERVEIS. Blau amb pictograma blanc", audio: "Trampa senyals de servei.", panel_id: "S-22", ruta_panel: "S-105C_A_S-108_SERVICIO.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } }
-]
+],
 
 
 normes: [
