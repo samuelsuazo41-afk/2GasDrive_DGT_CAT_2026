@@ -243,7 +243,6 @@ const PREGUNTES = {
  
 senyals: [
 // ===== BLOQUE 1: PREGUNTAS SEÑALES V2 PRO - 48 PREGUNTAS =====
-const SENYALS_BLOQUE_1_V2 = [
   // --- P-01 INTERSECCIONES 7 ---
   { id: "P-1", categoria: "PELIGRO", codi: "P-1", nombre_senal: "INTERSECCION CON PRIORIDAD A LA DERECHA", pregunta: "Arribes a una cruïlla sense semàfors ni Stop i veus aquesta senyal. Qui té prioritat?", opcions: ["Jo cedeixo al que ve per la meva DRETA", "Jo tinc prioritat sobre tots", "Cedeixo al de l'ESQUERRA"], correcta: 0, tip: "💡 APREN PER SEMPRE: P-1 = Creu negra. Cruïlla sense regular. Regla d'or DGT: PRIORITAT A LA DRETA. Truc: Rellotge, les 3h és la teva dreta. OJO: No val dins glorieta P-2.", audio: "P-1. Creu negra. Prioritat a la dreta. Cedeix al que ve per la dreta.", panel_id: "P-01", ruta_panel: "P-01_INTERSECCIONES.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } },
   { id: "P-1a", categoria: "PELIGRO", codi: "P-1a", nombre_senal: "INTERSECCION CON PRIORIDAD A LA IZQUIERDA", pregunta: "Veus aquesta senyal amb la creu desplaçada. Quin és el canvi respecte la P-1?", opcions: ["Aquí la prioritat la té el que ve per l'ESQUERRA", "És igual que la P-1, prioritat a la dreta", "Indica que s'acaba la prioritat"], correcta: 0, tip: "💡 TRAMPA ÚNICA DGT: P-1a és l'ÚNICA senyal de tot Espanya on tens prioritat per l'ESQUERRA. Si la veus a l'examen, és ella.", audio: "P-1a. L'única amb prioritat a l'esquerra.", panel_id: "P-01", ruta_panel: "P-01_INTERSECCIONES.jpg", coords: { x1: 0, y1: 0, x2: 0, y2: 0 } },
