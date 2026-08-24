@@ -30,21 +30,21 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .sub-content{display:none}
 .sub-content.active{display:block;animation:fadeIn 0.3s}
 
-.card{ background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:16px 12px; margin:0 auto 12px; box-shadow:0 4px 20px rgba(0,0,0,0.5); max-width:420px; }
-.card h2{color:#00D9FF;font-size:17px;margin-bottom:10px;text-align:center}
-.pregunta{font-size:16px;margin:12px 0;line-height:1.4}
-.opcio{ background:#2a2a2a;border:2px solid #333;padding:12px;margin:9px 0;border-radius:10px; cursor:pointer;transition:0.2s;font-size:14px;position:relative;user-select:none; -webkit-tap-highlight-color:transparent; }
+.card{ background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:16px 12px; margin:0 auto 12px; box-shadow:0 4px 20px rgba(0,0,0,0.5); max-width:420px; display:flex; flex-direction:column; gap:12px; height:auto; overflow:visible; }
+.card h2{color:#00D9FF;font-size:17px;margin-bottom:2px;text-align:center}
+.pregunta{font-size:16px;margin:0;line-height:1.4;position:relative;z-index:2;flex-shrink:0;width:100%}
+.opcio{ background:#2a2a2a;border:2px solid #333;padding:12px;margin:0;border-radius:10px; cursor:pointer;transition:0.2s;font-size:14px;position:relative;user-select:none; -webkit-tap-highlight-color:transparent; }
 .opcio:hover{background:#333;border-color:#00D9FF}
 .opcio.correcta{background:#0a4!important;border-color:#0f5!important;animation:pulse 0.5s}
 .opcio.incorrecta{background:#a00!important;border-color:#f00!important;animation:shake 0.5s}
 .opcio.bloquejada{pointer-events:none}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
-.btn-sig{background:linear-gradient(180deg,#4a4a4a 0%,#2a2a2a 100%);color:#fff;border:none;padding:14px;width:100%;font-size:15px;font-weight:700;margin-top:10px;border-radius:10px;cursor:pointer}
+.btn-sig{background:linear-gradient(180deg,#4a4a4a 0%,#2a2a2a 100%);color:#fff;border:none;padding:14px;width:100%;font-size:15px;font-weight:700;margin-top:4px;border-radius:10px;cursor:pointer;flex-shrink:0}
 .btn-sig:disabled{background:#333;color:#666;cursor:not-allowed}
-.stats{display:flex;justify-content:space-between;background:#0f0f0f;padding:9px;border-radius:7px;margin-bottom:10px;font-size:12px}
+.stats{display:flex;justify-content:space-between;background:#0f0f0f;padding:9px;border-radius:7px;margin-bottom:0;font-size:12px;flex-shrink:0}
 .stats span{color:#00D9FF;font-weight:700}
-.feedback{text-align:center;font-size:18px;font-weight:900;margin:12px 0;padding:10px;border-radius:9px;animation:bounceIn 0.5s}
+.feedback{text-align:center;font-size:18px;font-weight:900;margin:0;padding:10px;border-radius:9px;animation:bounceIn 0.5s;flex-shrink:0}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
@@ -58,17 +58,16 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:13px;text-align:center;cursor:pointer}
 .emoji-item.locked{opacity:0.4}
 
-.tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:9px 0;border-radius:6px;display:flex;align-items:center}
+.tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:0;border-radius:6px;display:flex;align-items:center;flex-shrink:0}
 .tip-emoji{font-size:22px;margin-right:10px}
 
-.progress-bar{background:#222;height:7px;border-radius:3px;margin:7px 0;overflow:hidden}
+.progress-bar{background:#222;height:7px;border-radius:3px;margin:0;overflow:hidden;flex-shrink:0;width:100%}
 .progress-fill{background:linear-gradient(90deg,#00D9FF,#0f5);height:100%;width:0%;transition:width 0.3s}
 
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
 .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
 .btn-buy:active{transform:scale(0.95)}
 
-/* ===== V9.8.2 NUEVO BOTON AUDIO ===== */
 .btn-audio {
   background: linear-gradient(135deg, #00D9FF, #00B8E6);
   color: white;
@@ -85,7 +84,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .btn-audio:active { transform: scale(0.9); }
 .btn-audio:hover { box-shadow: 0 0 25px rgba(0,217,255,0.6); }
 
-/* ===== V9.8.4 NUEVO BOTON DESBLOQUEAR TIP ===== */
 .btn-buy-tip{
   background:linear-gradient(135deg,#FFD700 0%,#FFA500 100%);
   color:#000;border:none;padding:8px 12px;border-radius:8px;
@@ -101,7 +99,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
 
-/* ===== V9.4 ESTADISTIQUES ===== */
 .stats-header{margin-bottom:15px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
 .stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
@@ -113,30 +110,38 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .orientacio-card h3{color:#00D9FF;margin-top:12px;font-size:15px}
 .orientacio-card p{color:#999;font-size:13px;margin:5px 0}
 
-/* ===== V9.8.1 CUADRO PICTOGRAMA DGT REAL ===== */
+/* ===== V9.8.5 FIX ELÀSTIC - EL QUADRE CREIX I EMPUJA ===== */
 .quadre-pictograma {
   width: 100%;
-  height: 220px; 
+  height: auto; /* ELIMINEM 220px fixe */
+  min-height: 140px;
+  max-height: none;
   background: linear-gradient(145deg, #1a1a2e, #16213e);
-  border: 2px dashed rgba(0, 217, 255, 0.3);
+  border: 2px solid rgba(0, 217, 255, 0.5);
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1), inset 0 0 15px rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  padding: 15px;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.15), inset 0 0 15px rgba(0,0,0,0.3);
+  display: block;
+  margin: 0;
+  padding: 10px;
   box-sizing: border-box;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
-.quadre-pictograma img { max-width: 100%; max-height: 100%; width: auto; height: height: auto; border-radius: 12px; } 
-.quadre-pictograma .placeholder { color: rgba(0, 217, 255, 0.4); font-size: 14px; font-weight: 500; text-align: center; user-select: none; }
-@media (max-width: 400px) { .quadre-pictograma { height: 180px; } }
+.quadre-pictograma img { 
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  display: block;
+  border-radius: 12px;
+  object-fit: contain;
+} 
+.quadre-pictograma .placeholder { color: rgba(0, 217, 255, 0.4); font-size: 14px; font-weight: 500; text-align: center; user-select: none; padding: 20px; }
 
-/* ===== V9.6.4 EMOJIS PISTA ===== */
-.test-emojis { display: none; gap: 8px; justify-content: center; margin: -8px 0 12px 0; flex-wrap: wrap; }
+.test-emojis { display: none; gap: 8px; justify-content: center; margin: 0; flex-wrap: wrap; flex-shrink:0 }
 
-/* ===== V9.8.1 TIP BOX TEMA OSCURO ===== */
 .tip-box {
   background: linear-gradient(135deg, #332a00 0%, #2a2a00 100%);
   border-left: 5px solid #FFD700;
@@ -146,9 +151,14 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   font-weight: 700;
   color: #FFD700;
   line-height: 1.4;
-  margin-top: 12px;
+  margin: 0;
   box-shadow: 0 0 15px rgba(255,215,0,0.15);
   display: none;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
 }
 </style>
 </head>
