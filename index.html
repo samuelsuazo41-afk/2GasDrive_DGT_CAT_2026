@@ -13,23 +13,20 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .subtitle{font-size:11px;opacity:0.9;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:6px}
 .coins{display:inline-flex;align-items:center;background:#FFD700;color:#000;padding:2px 9px;border-radius:14px;font-weight:900;font-size:11px}
 #motivacio{margin-top:6px;font-size:12px;color:#FFD700;font-weight:600}
-
-.tabs{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;z-index:100;overflow-x:auto}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;z-index:100;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
 .tab-btn{flex:1;min-width:70px;padding:11px 4px;background:none;border:none;color:#666;font-size:10px;cursor:pointer;transition:0.2s}
 .tab-btn.active{color:#00D9FF;background:#1a1a1a}
 .tab-btn .emoji{font-size:19px;display:block;margin-bottom:3px}
-
 .tab-content{display:none;padding:12px;animation:fadeIn 0.3s;padding-bottom:80px;min-height:calc(100vh - 140px)}
 .tab-content.active{display:block}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.sub-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+.sub-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.sub-tabs::-webkit-scrollbar{display:none}
 .sub-tab-btn{background:#222;border:1px solid #333;color:#999;padding:7px 14px;border-radius:18px;font-size:12px;cursor:pointer;white-space:nowrap;transition:0.2s}
 .sub-tab-btn.active{background:#00D9FF;color:#000;border-color:#00D9FF;font-weight:700}
-
 .sub-content{display:none}
 .sub-content.active{display:block;animation:fadeIn 0.3s}
-
 .card{ background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:16px 12px; margin:0 auto 12px; box-shadow:0 4px 20px rgba(0,0,0,0.5); max-width:420px; display:flex; flex-direction:column; gap:12px; height:auto; overflow:visible; }
 .card h2{color:#00D9FF;font-size:17px;margin-bottom:2px;text-align:center}
 .pregunta{font-size:16px;margin:0;line-height:1.4;position:relative;z-index:2;flex-shrink:0;width:100%}
@@ -44,76 +41,43 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .btn-sig:disabled{background:#333;color:#666;cursor:not-allowed}
 .stats{display:flex;justify-content:space-between;background:#0f0f0f;padding:9px;border-radius:7px;margin-bottom:0;font-size:12px;flex-shrink:0}
 .stats span{color:#00D9FF;font-weight:700}
-.feedback{text-align:center;font-size:18px;font-weight:900;margin:0;padding:10px;border-radius:9px;animation:bounceIn 0.5s;flex-shrink:0}
+.feedback{text-align:center;font-size:18px;font-weight:900;margin:0;padding:10px;border-radius:9px;animation:bounceIn 0.5s;flex-shrink:0;min-height:10px}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-
 .garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0}
 .garage-car.locked{opacity:0.4}
 .garage-car h3{color:#00D9FF;margin:7px 0}
 .score-big{text-align:center;font-size:44px;font-weight:900;color:#00D9FF;margin:18px 0;text-shadow:0 0 20px rgba(0,217,255,0.5)}
-
 .emoji-shop{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px}
 .emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:13px;text-align:center;cursor:pointer}
 .emoji-item.locked{opacity:0.4}
-
 .tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:0;border-radius:6px;display:flex;align-items:center;flex-shrink:0}
 .tip-emoji{font-size:22px;margin-right:10px}
-
 .progress-bar{background:#222;height:7px;border-radius:3px;margin:0;overflow:hidden;flex-shrink:0;width:100%}
 .progress-fill{background:linear-gradient(90deg,#00D9FF,#0f5);height:100%;width:0%;transition:width 0.3s}
-
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
 .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
 .btn-buy:active{transform:scale(0.95)}
-
-.btn-audio {
-  background: linear-gradient(135deg, #00D9FF, #00B8E6);
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 50%;
-  font-size: 18px;
-  cursor: pointer;
-  margin-left: 10px;
-  box-shadow: 0 0 15px rgba(0,217,255,0.4);
-  transition: 0.2s;
-  vertical-align: middle;
-}
+.btn-audio { background: linear-gradient(135deg, #00D9FF, #00B8E6); color: white; border: none; padding: 6px 12px; border-radius: 50%; font-size: 18px; cursor: pointer; margin-left: 10px; box-shadow: 0 0 15px rgba(0,217,255,0.4); transition: 0.2s; vertical-align: middle; }
 .btn-audio:active { transform: scale(0.9); }
 .btn-audio:hover { box-shadow: 0 0 25px rgba(0,217,255,0.6); }
-
-.btn-buy-tip{
-  background:linear-gradient(135deg,#FFD700 0%,#FFA500 100%);
-  color:#000;border:none;padding:8px 12px;border-radius:8px;
-  font-weight:900;font-size:13px;margin-left:10px;cursor:pointer;
-  box-shadow:0 0 15px rgba(255,215,0,0.3);
-  transition:0.2s;
-}
-.btn-buy-tip:active{transform:scale(0.95)}
-
 #temari-lista{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; justify-content:center; margin:14px auto 0; max-width:350px; }
 .temari-item{ background:#1a1a1a; border:2px solid #00D9FF; border-radius:12px; padding:16px 10px; text-align:center; cursor:pointer; transition:0.2s; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
 .temari-item:active{ transform:scale(0.96); background:#222; }
 .temari-item.locked{ border-color:#444; opacity:0.4; cursor:not-allowed; }
 .temari-item div:nth-child(2){ font-size:14px; font-weight:700; margin:8px 0 4px; }
-
 .stats-header{margin-bottom:15px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
 .stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
 .btn-dgt{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:16px;border-radius:12px;font-weight:900;font-size:15px;width:100%;margin-top:15px;cursor:pointer}
-.debil-item{background:#222;border:1px solid #333;border-radius:10px;padding:12px;margin:8px 0}
-.debil-item.debil{border-left:4px solid #f00}
 .big{font-size:50px;text-align:center;margin:10px 0}
 .pase-card{text-align:center}
 .orientacio-card h3{color:#00D9FF;margin-top:12px;font-size:15px}
 .orientacio-card p{color:#999;font-size:13px;margin:5px 0}
-
-/* ===== V9.8.5 FIX ELÀSTIC - EL QUADRE CREIX I EMPUJA ===== */
 .quadre-pictograma {
   width: 100%;
-  height: auto; /* ELIMINEM 220px fixe */
+  height: auto;
   min-height: 140px;
   max-height: none;
   background: linear-gradient(145deg, #1a1a2e, #16213e);
@@ -129,19 +93,9 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   position: relative;
   z-index: 1;
 }
-.quadre-pictograma img { 
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  max-height: none;
-  display: block;
-  border-radius: 12px;
-  object-fit: contain;
-} 
+.quadre-pictograma img { width: 100%; max-width: 100%; height: auto; max-height: none; display: block; border-radius: 12px; object-fit: contain; } 
 .quadre-pictograma .placeholder { color: rgba(0, 217, 255, 0.4); font-size: 14px; font-weight: 500; text-align: center; user-select: none; padding: 20px; }
-
-.test-emojis { display: none; gap: 8px; justify-content: center; margin: 0; flex-wrap: wrap; flex-shrink:0 }
-
+.test-emojis { display: none !important; }
 .tip-box {
   background: linear-gradient(135deg, #332a00 0%, #2a2a00 100%);
   border-left: 5px solid #FFD700;
@@ -169,7 +123,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700"></div>
 </div>
 
-<!-- ===== TAB ESTADISTIQUES V9.4 ===== -->
 <div id="tab-estadistiques" class="tab-content">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'stats','resum')">📊 RESUM</button>
@@ -184,7 +137,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <div class="stat-card"><div class="stat-card-header"><div><span>📅</span> <b id="stats-constancia-label">CONSTÀNCIA: 0/20 dies</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-constancia-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>📖</span> <b>Cobertura 7 dies 15%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>📋</span> <b>Estabilitat Simulacres 10%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-simulacres-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div><div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Millor ratxa: 0/6</div></div>
-    <div style="display:none"><div id="stats-test-percent"></div><div id="stats-test-bar"></div><div id="stats-casos-percent"></div><div id="stats-casos-bar"></div><div id="stats-examen-percent"></div><div id="stats-examen-bar"></div><div id="stats-fetes"></div></div>
     <button class="btn-dgt" id="btn-dgt-oficial"><div style="text-align:center"><span>🚗</span> <b>PRESENTARME AL EXAMEN DGT OFICIAL</b></div><div style="text-align:center;color:#000;font-size:12px;margin-top:8px">Necessites 90% per desbloquejar</div></button>
   </div>
   <div id="stats-evolucio" class="sub-content"><div class="card"><h2>📈 Evolució Últims 7 Dies</h2><canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px"></canvas></div></div>
@@ -193,7 +145,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <div id="stats-orientacio" class="sub-content"><div class="card orientacio-card"><h2>🧭 Pla d'Estudi</h2><h3>1. Comença pel TEMARI</h3><p>Estudia 20 min per desbloquejar el dia</p><h3>2. Fes TESTS</h3><p>Practica fins arribar a 90%</p><h3>3. Fes l'EXAMEN</h3><p>Quan tinguis 90% global</p></div></div>
 </div>
 
-<!-- ===== TAB TEST V9.8.1 CON IMAGEN REAL ===== -->
 <div id="tab-test" class="tab-content active">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="canviarSubTab(event,'test','general')">📝 General</button>
@@ -229,10 +180,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <div id="test-mediambient" class="sub-content"><div class="card"><h2>🌱 TEST MEDI AMBIENT</h2><div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div><div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-mediambient-emojis" class="test-emojis"></div><div class="pregunta" id="test-mediambient-pregunta">Carregant...</div><div id="test-mediambient-opciones"></div><div class="feedback" id="test-mediambient-feedback"></div><button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button></div></div>
 </div>
 
-<!-- ===== TAB SITUACIONES ===== -->
 <div id="tab-situaciones" class="tab-content"><div class="sub-tabs"><button class="sub-tab-btn active" onclick="canviarSubTab(event,'sit','clima')">🌧️ Clima</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','urbà')">🏙️ Urbà</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button></div><div id="sit-clima" class="sub-content active"><div class="card"><h2>🌧️ CASOS CLIMA</h2><div class="stats"><div>Aciertos: <span id="sit-clima-aciertos">0</span></div><div>Score: <span id="sit-clima-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div><div class="pregunta" id="sit-clima-pregunta">Carregant...</div><div id="sit-clima-opciones"></div><div class="feedback" id="sit-clima-feedback"></div><button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button></div></div><div id="sit-urbà" class="sub-content"><div class="card"><h2>🏙️ CASOS URBÀ</h2><div class="stats"><div>Aciertos: <span id="sit-urbà-aciertos">0</span></div><div>Score: <span id="sit-urbà-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div><div class="pregunta" id="sit-urbà-pregunta">Carregant...</div><div id="sit-urbà-opciones"></div><div class="feedback" id="sit-urbà-feedback"></div><button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button></div></div><div id="sit-carretera" class="sub-content"><div class="card"><h2>🛣️ CASOS CARRETERA</h2><div class="stats"><div>Aciertos: <span id="sit-carretera-aciertos">0</span></div><div>Score: <span id="sit-carretera-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div><div class="pregunta" id="sit-carretera-pregunta">Carregant...</div><div id="sit-carretera-opciones"></div><div class="feedback" id="sit-carretera-feedback"></div><button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button></div></div><div id="sit-emergència" class="sub-content"><div class="card"><h2>🚨 CASOS EMERGÈNCIA</h2><div class="stats"><div>Aciertos: <span id="sit-emergència-aciertos">0</span></div><div>Score: <span id="sit-emergència-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div><div class="pregunta" id="sit-emergència-pregunta">Carregant...</div><div id="sit-emergència-opciones"></div><div class="feedback" id="sit-emergència-feedback"></div><button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button></div></div></div>
 
-<!-- ===== TAB EXAMEN V9.8.1 ===== -->
 <div id="tab-examen" class="tab-content">
   <div class="card">
     <h2>📋 EXAMEN OFICIAL DGT</h2>
@@ -249,7 +198,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   </div>
 </div>
 
-<!-- ===== OTROS TABS ===== -->
 <div id="tab-garage" class="tab-content"><div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div></div>
 <div id="tab-tienda" class="tab-content"><div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div></div>
 <div id="tab-tips" class="tab-content"><div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div><div style="display:flex;gap:10px;margin-top:15px"><button class="btn" style="flex:1" onclick="prevTip(event)">ANTERIOR</button><span id="tip-counter" style="align-self:center">1/100</span><button class="btn" style="flex:1" onclick="nextTip(event)">SEGÜENT</button></div></div></div>
