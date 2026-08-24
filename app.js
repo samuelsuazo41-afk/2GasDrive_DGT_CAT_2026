@@ -1114,19 +1114,21 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V9.8.4 - IMAGENES DGT REALES + TRAMPES + TIP DESPUES DE RESPONDER + 200 SEÑALES =====
+
+
+// ===== GASDRIVE DGT CAT V9.8.5 HOTFIX - EXAMEN 0/30 FIX + IMAGENES DGT REALES + P-01B 52 PREGUNTAS =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
-let sitCategoriaActiva = 'clima'; 
+let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.4 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
+// ===== V9.8.5 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
 const SENALES_SVG = {}; // YA NO SE USA
 
-// TU BANCO VA AQUI: const senyals = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.trampes aqui tambien
+// TU BANCO VA AQUI: const PREGUNTES = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.trampes aqui tambien
 
-// ===== V9.8.4 FUNCIÓN ACTUALIZADA: PINTAR PANEL DGT REAL COMPLETO SIN COORDENADAS =====
+// ===== V9.8.5 HOTFIX: PINTAR PANEL DGT REAL - FIX ROOT + assets/paneles + EXAMEN =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -1134,53 +1136,51 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // SI ES SEÑAL O TRAMPA: Pintar panel completo desde ruta_panel
-  if ((cat === 'senyals' || cat === 'trampes') && pregunta.ruta_panel) {
+  // FIX V9.8.5: Ahora EXAMEN también pinta paneles + soporte doble ruta
+  if ((cat === 'senyals' || cat === 'trampes' || cat === 'examen') && pregunta.ruta_panel) {
+    const ruta1 = `./${pregunta.ruta_panel}`;
+    const ruta2 = `./assets/paneles/${pregunta.ruta_panel}`;
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
         <img
-          src="./${pregunta.ruta_panel}"
+          src="${ruta1}"
           alt="Panel DGT ${pregunta.panel_id || ''}"
-          style="width:100%; height:auto; max-height:280px; object-fit:contain; border-radius:12px; display:block;"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;"
+          onerror="this.onerror=null; this.src='${ruta2}'; this.nextElementSibling.style.display='block';"
         />
         <div style="display:none; color:#ff6b6b; text-align:center; padding:20px;">
-          ❌ No s'ha trobat: ${pregunta.ruta_panel}
+          ❌ No s'ha trobat: ${pregunta.ruta_panel}<br><small>Prova: ${ruta1} o ${ruta2}</small>
         </div>
         <div style="text-align:center; color:#888; font-size:12px; margin-top:8px;">
-          Panel: ${pregunta.panel_id || 'N/A'}
+          Panel: ${pregunta.panel_id || 'N/A'} - ${pregunta.codi || ''}
         </div>
       </div>
     `;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
-  }
-  // SI NO ES SEÑAL: Deja placeholder
-  else {
-    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px;">Sense imatge</div>`;
+  } else {
+    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px;">Sense pictograma</div>`;
     imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
     imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
     imgDiv.style.borderRadius = '12px';
   }
 
-  // EMOJIS: Desactivados para señales
   if(emojisDiv) {
     emojisDiv.innerHTML = '';
     emojisDiv.style.display = 'none';
   }
 
-  // TIP: OCULTAR SIEMPRE AQUÍ. Se muestra después de responder
   if(tipDiv) {
     tipDiv.innerHTML = '';
     tipDiv.style.display = 'none';
   }
 }
 
-// NUEVO: Total dinámico para cuando metas 800+ preguntas
+// FIX V9.8.5: Total dinámico anti-crash si PREGUNTES no existe aún
 function getTotalBanco() {
   let total = 0;
-  for(let cat in PREGUNTES) total += PREGUNTES[cat].length;
-  for(let cat in SITUACIONS) total += SITUACIONS[cat].length;
+  if(typeof PREGUNTES!== 'undefined') for(let cat in PREGUNTES) if(Array.isArray(PREGUNTES[cat])) total += PREGUNTES[cat].length;
+  if(typeof SITUACIONS!== 'undefined') for(let cat in SITUACIONS) if(Array.isArray(SITUACIONS[cat])) total += SITUACIONS[cat].length;
   return total;
 }
 
@@ -1196,12 +1196,11 @@ const MAPEO_PALABRAS_CLAVE = {
   'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
 };
 
-// SISTEMA PROGRESO V9.4 CON SET Y CAP DIARIO
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   tests: {
     general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     senyals: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    trampes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, // NUEVO
+    trampes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     normes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     mecanica: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
     auxilis: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
@@ -1217,7 +1216,6 @@ let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
   diesEstudi: new Set()
 };
 
-// Convertir datos guardados a Set al iniciar
 for(let c in PROGRESO.tests) {
   PROGRESO.tests[c].unicas = new Set(PROGRESO.tests[c].unicas || []);
   PROGRESO.tests[c].dies = PROGRESO.tests[c].dies || {};
@@ -1238,7 +1236,7 @@ let estat = {
     tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false,
     puntsDebils: {}, preguntesFetes: 0, encertsTotals: 0, perCategoria: {}, historialEvolucio: [], historialPregunta: {}
   },
-  test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, trampes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} }, // AÑADIDO TRAMPES
+  test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, trampes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} },
   examen: { activa: false, preguntes: [], index: 0, encerts: 0, fallos: 0, timer: null, temps: 1800, categoria: 'general' },
   sit: { clima: {idx:0,encerts:0,puntuacio:0,current:null}, urbà: {idx:0,encerts:0,puntuacio:0,current:null}, carretera: {idx:0,encerts:0,puntuacio:0,current:null}, emergència: {idx:0,encerts:0,puntuacio:0,current:null} }
 };
@@ -1246,18 +1244,17 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.4 CAT carregat");
+  console.log("GasDrive V9.8.5 HOTFIX carregat - P-01B FIX");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
   mostrarIntro();
   actualitzarCoins();
-  carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('trampes'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient'); // AÑADIDO TRAMPES
+  carregarPregunta('general'); carregarPregunta('senyals'); carregarPregunta('trampes'); carregarPregunta('normes'); carregarPregunta('mecanica'); carregarPregunta('auxilis'); carregarPregunta('mediambient');
   carregarSituacio('clima');
   actualitzarMissatgeMotivacional();
 }
 
-// GUARDAR: Convertir Set a Array
 function guardar() {
   localStorage.setItem('gd_coins', estat.coins);
   localStorage.setItem('gd_cotxes', JSON.stringify(estat.cotxes));
@@ -1265,7 +1262,6 @@ function guardar() {
   localStorage.setItem('gd_emojis', JSON.stringify(estat.emojis));
   localStorage.setItem('gd_historial', JSON.stringify(estat.historial));
   localStorage.setItem('gd_stats', JSON.stringify(estat.stats));
-
   const progGuardar = JSON.parse(JSON.stringify(PROGRESO));
   for(let c in progGuardar.tests) progGuardar.tests[c].unicas = [...PROGRESO.tests[c].unicas];
   for(let c in progGuardar.casos) progGuardar.casos[c].unicas = [...PROGRESO.casos[c].unicas];
@@ -1275,7 +1271,6 @@ function guardar() {
 
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
-// ===== FUNCIONES PROGRESO REAL =====
 function actualizarMetricasTest(categoria, preguntaId, acierto) {
   if(!PROGRESO.tests[categoria]) return;
   const prog = PROGRESO.tests[categoria];
@@ -1304,7 +1299,6 @@ function actualizarMetricasCaso(subcat, preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.6 FIX: HISTORIAL SOLO CON ID REAL =====
 function registrarHistorialPregunta(preguntaId, acierto) {
   if(!preguntaId) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
@@ -1318,11 +1312,9 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   guardar();
 }
 
-// ===== V9.4.6 NUEVA FORMULA ANTI-FARM DURO - CAP DIARIO + CONSTANCIA 40% =====
 function calcularPreparacioDGT_V94() {
   const avui = new Date();
   const fa7Dies = new Date(avui.getTime() - 7 * 24 * 60 * 60 * 1000);
-
   let totalPreg = 0, domina = 0, aprenent = 0;
   let historial = estat.stats.historialPregunta || {};
   for(let cat in PREGUNTES) {
@@ -1338,7 +1330,6 @@ function calcularPreparacioDGT_V94() {
   let retencioRaw = totalPreg > 0? ((domina * 1.0) + (aprenent * 0.5)) / totalPreg * 100 : 0;
   const retencioAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].retencio || 0 : 0;
   const retencio = Math.min(retencioRaw, retencioAyer + 3);
-
   let diesValids = 0;
   PROGRESO.diesEstudi.forEach(dia => {
     let fetesDia = 0, encertsDia = 0, totalDia = 0;
@@ -1352,7 +1343,6 @@ function calcularPreparacioDGT_V94() {
   });
   let constancia = Math.round((diesValids / 20) * 100);
   if(constancia > 100) constancia = 100;
-
   let unicas7Dies = new Set();
   for(let cat in PREGUNTES) {
     PREGUNTES[cat].forEach(p => {
@@ -1363,33 +1353,27 @@ function calcularPreparacioDGT_V94() {
   let coberturaRaw = Math.round((unicas7Dies.size / getTotalBanco()) * 100);
   const coberturaAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].cobertura || 0 : 0;
   const cobertura = Math.min(coberturaRaw, coberturaAyer + 5);
-
   let maxRatxa = 0, ratxa = 0;
   PROGRESO.examen.historial.forEach(e => {
     if(e.nota >= 27) { ratxa++; maxRatxa = Math.max(maxRatxa, ratxa); }
     else ratxa = 0;
   });
   const estabilitat = maxRatxa >= 6? 100 : Math.round((maxRatxa / 6) * 100);
-
   const preparacio = Math.round((retencio * 0.3) + (constancia * 0.4) + (cobertura * 0.2) + (estabilitat * 0.1));
   return { preparacio, retencio, constancia, cobertura, estabilitat, domina, aprenent, diesValids, maxRatxa, total: totalPreg };
 }
 
-// ===== FIX DEFINITIVO PASE 20 MIN V9.7.3 =====
 function iniciarComptadorTemari() {
   if (contadorTemari) clearInterval(contadorTemari);
   comprovarNouDia();
   actualitzarPaseUI();
-
   contadorTemari = setInterval(() => {
     const vistaTemariActiva = document.getElementById('tab-temari')?.classList.contains('active') ||
                               document.querySelector('.tab-btn.active.emoji')?.textContent.includes('📖') ||
                               document.body.innerText.includes('.pdf');
-
     if (vistaTemariActiva) {
       if (tempsIniciTemari === null) {
         tempsIniciTemari = Date.now();
-        console.log("Timer TEMARI INICIADO");
       } else {
         const ara = Date.now();
         const segundos = (ara - tempsIniciTemari) / 1000;
@@ -1400,7 +1384,6 @@ function iniciarComptadorTemari() {
           actualitzarPaseUI();
         }
       }
-
       if (estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
         estat.stats.paseCompletado = true;
         estat.coins += 50;
@@ -1416,13 +1399,11 @@ function iniciarComptadorTemari() {
         tempsIniciTemari = null;
         guardar();
         actualitzarPaseUI();
-        console.log("Timer TEMARI PAUSADO, total:", estat.stats.tempsEstudiatAvui);
       }
     }
   }, 1000);
 }
 
-// ===== FIX FECHA LOCAL ESPAÑA =====
 function comprovarNouDia() {
   const avui = new Date().toLocaleDateString('ca-ES');
   if(estat.stats.diaActual!== avui) {
@@ -1442,7 +1423,6 @@ function comprovarNouDia() {
     for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
     guardar();
     actualitzarPaseUI();
-    console.log("NUEVO DIA:", avui);
   }
 }
 
@@ -1450,7 +1430,6 @@ function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui || 0);
   const el = document.getElementById('pase-temps');
   if(el) el.textContent = `${minuts} min`;
-
   const msg = document.getElementById('stats-motivacio');
   if(msg) {
     if(estat.stats.paseCompletado) msg.textContent = "Pase Actiu. A practicar 💪";
@@ -1461,20 +1440,19 @@ function actualitzarPaseUI() {
   }
 }
 
-// ===== AUTO-MAPEO CON ID =====
 function autoMapearTotesPreguntes() {
   let idCounter = 1;
+  if(typeof PREGUNTES === 'undefined') { console.warn('PREGUNTES no definit encara'); return; }
   for(let cat in PREGUNTES) {
     PREGUNTES[cat] = PREGUNTES[cat].map(p => {
       let subtema = 'General'; let pag = 1;
-      for(let key in MAPEO_PALABRAS_CLAVE) { if(p.q.toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
+      for(let key in MAPEO_PALABRAS_CLAVE) { if((p.q||p.pregunta||'').toLowerCase().includes(key)) { subtema = MAPEO_PALABRAS_CLAVE[key].subtema; pag = MAPEO_PALABRAS_CLAVE[key].pag; break; } }
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANCO MAPEADO CON ID. Total:', getTotalBanco());
+  console.log('✅ BANCO MAPEADO V9.8.5. Total:', getTotalBanco());
 }
 
-// ===== PUNTOS DEBILS V9.4.6 =====
 function registrarFallada(categoria, subtema, pagina) {
   if(!subtema || subtema === 'undefined') subtema = 'General';
   if(!pagina) pagina = 1;
@@ -1488,9 +1466,9 @@ function dibuixarPuntsDebils_V94() {
   const cont = document.getElementById('stats-debils-lista'); if(!cont) return;
   cont.innerHTML = '<h3 style="margin-bottom:15px; color:#00D9FF">📍 ON HAS DE MILLORAR ARA MATEIX</h3>';
   if(!estat.stats.puntsDebils || Object.keys(estat.stats.puntsDebils).length === 0) { cont.innerHTML += '<div style="text-align:center;color:#999">Fes més tests per detectar els teus punts dèbils</div>'; return; }
-  const categories = ['senyals','trampes','normes','mecanica','auxilis','mediambient']; // AÑADIDO TRAMPES
-  const noms = ['🚦 SENYALS','🪤 TRAMPES','📋 NORMES','⚙️ MECÀNICA','🚑 AUXILIS','♻️ MEDI AMBIENT']; // AÑADIDO TRAMPES
-  const temari = ['TEMARI 1','TEMARI 1','TEMARI 2','TEMARI 4','TEMARI 3','TEMARI 5']; // AÑADIDO TRAMPES
+  const categories = ['senyals','trampes','normes','mecanica','auxilis','mediambient'];
+  const noms = ['🚦 SENYALS','🪤 TRAMPES','📋 NORMES','⚙️ MECÀNICA','🚑 AUXILIS','♻️ MEDI AMBIENT'];
+  const temari = ['TEMARI 1','TEMARI 1','TEMARI 2','TEMARI 4','TEMARI 3','TEMARI 5'];
   categories.forEach((cat, i) => {
     if(!estat.stats.puntsDebils[cat]) {
       cont.innerHTML += `<div style="margin-bottom:15px; padding:12px; background:#1a1a1a; border-radius:8px;"><div style="font-weight:700; color:#00D9FF">${noms[i]}</div><div style="color:#666">Encara no tens dades</div></div>`;
@@ -1508,7 +1486,6 @@ function dibuixarPuntsDebils_V94() {
 
 function anarAPagina(pagina) { canviarTab_V94(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
 
-// ===== STATS REALES V9.4.6 =====
 function actualitzarEstadistiques_V94() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
@@ -1536,35 +1513,26 @@ function potFerTests() { comprovarNouDia(); return estat.stats.paseCompletado; }
 function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floor(estat.stats.tempsEstudiatAvui)); alert(`⛔ PASE BLOQUEJAT\nEstudia ${minutsQueFalten} minuts més al TEMARI per desbloquejar els tests d'avui.`); }
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-// ===== TEST / CASOS / EXAMEN =====
 function carregarPregunta(cat) {
   const s = estat.test[cat];
+  if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[cat] || PREGUNTES[cat].length===0) return;
   const preguntes = barrejarArray(PREGUNTES[cat]);
-  if(!preguntes || preguntes.length === 0) return;
   const pOriginal = preguntes[s.idx % preguntes.length];
-
-  // ===== V9.8.4 FIX COMPATIBILIDAD + AUDIO =====
   const preguntaTxt = pOriginal.q || pOriginal.pregunta;
   const opcionsOriginales = pOriginal.a || pOriginal.opcions;
   const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
   const audioTxt = pOriginal.audio || '';
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
-
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (cat + '_' + s.idx)};
   s.current = p;
-
   pintarImatgeSiExisteix(cat, p);
-
   document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
-
-  // ===== BOTON AUDIO NUEVO PARA SENYALS Y TRAMPES =====
   const contPregunta = document.getElementById(`test-${cat}-pregunta`);
   if(audioTxt && (cat === 'senyals' || cat === 'trampes')){
     contPregunta.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')">🔊</button>`;
   }
-
   document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
   document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
   document.getElementById(`test-${cat}-score`).textContent = s.puntuacio;
@@ -1585,7 +1553,6 @@ function carregarPregunta(cat) {
   });
 }
 
-// ===== NUEVA FUNCION PARA REPRODUCIR AUDIO =====
 function parlar(text) {
   if('speechSynthesis' in window){
     speechSynthesis.cancel();
@@ -1614,8 +1581,7 @@ function respondreTest_V94(cat, idx, el) {
     document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto';
     document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`;
     mostrarEmoji(true, el);
-  }
-  else {
+  } else {
     el.classList.add('incorrecta');
     cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
     document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo';
@@ -1632,8 +1598,6 @@ function respondreTest_V94(cat, idx, el) {
   btnSig.style.cursor = 'pointer';
   actualitzarCoins();
   guardar();
-
-  // ===== V9.8.4 NUEVO: MOSTRAR TIP DESPUÉS DE RESPONDER SOLO EN SEÑALES Y TRAMPAS =====
   const tipDiv = document.getElementById(`test-${cat}-tip`);
   if(tipDiv && (cat === 'senyals' || cat === 'trampes') && p.tip){
     tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
@@ -1648,11 +1612,10 @@ function seguentTest(e, cat) {
   carregarPregunta(cat);
 }
 
-//... AQUI SIGUE TODO TU CODIGO IGUAL: carregarSituacio, examen, garage,
-
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
+  if(typeof SITUACIONS === 'undefined' ||!SITUACIONS[cat]) return;
   const casos = barrejarArray(SITUACIONS[cat]);
   if(!casos || casos.length === 0) return;
   const pOriginal = casos[s.idx % casos.length];
@@ -1722,10 +1685,20 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
+// ===== V9.8.5 HOTFIX DEFINITIU EXAMEN 0/30 - AGARRA TOTES LES CATEGORIES =====
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
-  const totes = [...PREGUNTES.general,...PREGUNTES.senyals,...PREGUNTES.trampes,...PREGUNTES.normes,...PREGUNTES.mecanica,...SITUACIONS.clima]; // AÑADIDO TRAMPES
-  if(totes.length < 30) { alert('Falten preguntes. Necessites 30 mínim.'); return; }
+  let totes = [];
+  if(typeof PREGUNTES!== 'undefined') {
+    for(let key in PREGUNTES) {
+      if(Array.isArray(PREGUNTES[key])) totes = totes.concat(PREGUNTES[key]);
+    }
+  }
+  if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) {
+    totes = totes.concat(SITUACIONS.clima.slice(0,5));
+  }
+  console.log("V9.8.5 HOTFIX EXAMEN - Total banc:", totes.length);
+  if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim. Revisa si PREGUNTES.senyals carrega bé (ha de tenir 52).`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
   estat.examen.index = 0;
@@ -1753,18 +1726,14 @@ function iniciarTimerExamen() {
 function carregarPreguntaExamen() {
   if(estat.examen.index >= 30) return finalitzarExamen();
   const pOriginal = estat.examen.preguntes[estat.examen.index];
-
-  const opcionsOriginales = pOriginal.a;
-  const indexCorrectaOriginal = pOriginal.ok;
+  const opcionsOriginales = pOriginal.a || pOriginal.opcions;
+  const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
-
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: pOriginal.q, id: pOriginal.id || ('examen_' + estat.examen.index)};
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: pOriginal.q || pOriginal.pregunta, id: pOriginal.id || ('examen_' + estat.examen.index)};
   estat.examen.preguntes[estat.examen.index] = p;
-
   pintarImatgeSiExisteix('examen', p);
-
   document.getElementById('examen-num').textContent = estat.examen.index + 1;
   document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
   document.getElementById('examen-progress').style.width = `${(estat.examen.index/30)*100}%`;
@@ -1809,6 +1778,8 @@ function respondreExamen(idx, el) {
   document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
   actualitzarCoins();
   guardar();
+  const tipDiv = document.getElementById('examen-tip');
+  if(tipDiv && p.tip){ tipDiv.innerHTML = `💡 TIP: ${p.tip}`; tipDiv.style.display = 'block'; tipDiv.style.border = '2px solid #00D9FF'; }
 }
 
 function seguentPreguntaExamen(e) {
@@ -1852,7 +1823,6 @@ function reiniciarExamen() {
   document.getElementById('examen-timer').textContent = '30:00';
 }
 
-// ===== GARAGE, BOTIGA, TIPS, TEMARI =====
 function carregarGaratge() {
   const cont = document.getElementById('garage-lista');
   cont.innerHTML = '';
@@ -1949,7 +1919,6 @@ function obrirPDF(ruta) {
 
 function tancarPDF() { const modal = document.getElementById('pdf-modal'); if(modal) modal.remove(); }
 
-// ===== GRAFICA EVOLUCIO =====
 function dibujarGraficaEvolucion() {
   const canvas = document.getElementById('grafica-evolucion');
   if(!canvas) return;
@@ -1987,7 +1956,6 @@ function dibujarGraficaEvolucion() {
 
 function actualitzarMissatgeMotivacional() { const missatges = ["Vas per bon camí 💪","Cada fallo et fa més fort 🔥","L'examen DGT és teu 🚗","No paris ara 💎","Concentra't i aprovaràs 👑"]; const msg = missatges[Math.floor(Math.random() * missatges.length)]; const el = document.getElementById('motivacio'); if(el) el.textContent = msg; }
 
-// ===== V9.8.4 FIX: CANVIAR TABS =====
 function canviarTab_V94(e, tab) {
   const tabTemari = document.getElementById('tab-temari');
   if(tabTemari && tabTemari.classList.contains('active') && tempsIniciTemari!== null) {
@@ -1996,12 +1964,10 @@ function canviarTab_V94(e, tab) {
     tempsIniciTemari = null;
     guardar();
   }
-
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   if(e) e.target.closest('.tab-btn').classList.add('active');
-
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
@@ -2043,11 +2009,8 @@ function mostrarEmoji(encert, element) {
   if(navigator.vibrate) navigator.vibrate(encert? [30,20,30] : 100);
 }
 
-// ===== SERVICE WORKER =====
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-} 
-
-
+}
