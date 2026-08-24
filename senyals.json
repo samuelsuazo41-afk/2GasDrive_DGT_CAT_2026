@@ -1,7 +1,8 @@
 const BANCO_PANELES_OFICIAL_V2 = [
-  // ===== PELIGRO - 7 PANELES - V2 EDITADO POR TI =====
+// ===== PELIGRO - 8 PANELES - V2.1 ACTUALIZADO CON P-01B =====
   { "panel_id": "P-01", "ruta": "P-01_INTERSECCIONES.jpg", "categoria": "PELIGRO", "nombre": "INTERSECCIONES", "senales_incluidas": ["P-1","P-1a","P-1b","P-1c","P-1d","P-1e","P-2"] },
-  { "panel_id": "P-02", "ruta": "P-02_PASO_A_NIVEL.jpg", "categoria": "PELIGRO", "nombre": "PASO A NIVEL", "senales_incluidas": ["P-9b","P-9c","P-10a","P-10b","P-10c","P-11a"] },
+  { "panel_id": "P-01B", "ruta": "P-01B_SEMAFOROS_GLORIETA_PUENTE_MOVIL_TRANVIA_P3-P6.jpg", "categoria": "PELIGRO", "nombre": "SEMAFOROS GLORIETA PUENTE MOVIL TRANVIA", "senales_incluidas": ["P-3","P-4","P-5","P-6"] },
+  { "panel_id": "P-02", "ruta": "P-02_PASO_A_NIVEL.jpg", "categoria": "PELIGRO", "nombre": "PASO A NIVEL", "senales_incluidas": ["P-7","P-8","P-9b","P-9c","P-10a","P-10b","P-10c","P-11a"] },
   { "panel_id": "P-03", "ruta": "P-03_FERROCARRIL_AEROPUERTO_CURVAS_RESALTO.jpg", "categoria": "PELIGRO", "nombre": "FERROCARRIL AEROPUERTO CURVAS RESALTO", "senales_incluidas": ["P-12","P-13a","P-13b","P-14a","P-14b","P-15"] },
   { "panel_id": "P-04", "ruta": "P-04_TUNEL_PENDIENTES_ESTRECHAMIENTO.jpg", "categoria": "PELIGRO", "nombre": "TUNEL PENDIENTES ESTRECHAMIENTO", "senales_incluidas": ["P-15a","P-15b","P-16a","P-16b","P-17","P-17a"] },
   { "panel_id": "P-05", "ruta": "P-05_OBRAS_RESBALADIZO_PEATONES.jpg", "categoria": "PELIGRO", "nombre": "OBRAS RESBALADIZO PEATONES", "senales_incluidas": ["P-17b","P-18","P-19","P-20a","P-20b","P-20c"] },
