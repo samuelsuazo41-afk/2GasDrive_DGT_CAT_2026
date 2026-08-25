@@ -1236,62 +1236,69 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.8.7 HÍBRID - MECANICA IMAGES + EXAMEN DGT REAL + NORMES EMOJI COMBO 2-3 + FOQUITO =====
+  // ===== GASDRIVE DGT CAT V9.8.8 FIX MECÀNICA - IMATGES M- + EXAMEN + TIPS =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.5 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL + EMOJI COMBO =====
-const SENALES_SVG = {}; // YA NO SE USA
+const SENALES_SVG = {};
 
-// TU BANCO VA AQUI: const PREGUNTES = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.mecanica y PREGUNTES.trampes aqui tambien
-
-// ===== V9.8.7 HOTFIX HÍBRID: PINTA PANEL DGT REAL + MECANICA M- + EMOJI COMBO NORMES + EXAMEN =====
+// ===== V9.8.8 FIX: PINTA PANELL REAL + BLINDATGE MECÀNICA =====
 function pintarImatgeSiExisteix(cat, pregunta) {
-  const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
+  // FIX 1: Busca amb i sense accent
+  let imgDiv = document.getElementById(`test-${cat}-imagen`)
+            || document.getElementById(`test-mecanica-imagen`)
+            || document.getElementById(`test-mecànica-imagen`)
+            || document.getElementById(`examen-imagen`)
+            || document.querySelector(`[id*="${cat}"][id*="imagen"]`);
+
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
-  const tipDiv = document.getElementById(`test-${cat}-tip`) || document.getElementById(`examen-tip`);
+  const tipDiv = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`examen-tip`);
 
-  if (!imgDiv) return;
+  if (!imgDiv) {
+    console.warn("[V9.8.8] No trobo imgDiv per cat:", cat, pregunta);
+    return;
+  }
+  if (!pregunta) return;
 
-  // ===== CAS 1: SENYALS / TRAMPES / MECANICA / EXAMEN amb ruta_panel DGT REAL (el teu format) =====
-  // V9.8.7: AFEGIT 'mecanica' I DETECCIÓ M- AL EXAMEN
-  const esPanelReal = pregunta.ruta_panel && (
-    cat === 'senyals' || cat === 'trampes' || cat === 'mecanica' || cat === 'examen' ||
-    pregunta.ruta_panel.startsWith('P-') || pregunta.ruta_panel.startsWith('R-') ||
-    pregunta.ruta_panel.startsWith('S-') || pregunta.ruta_panel.startsWith('M-')
+  const ruta = pregunta.ruta_panel || pregunta.ruta || "";
+  const esMecanica = ruta.startsWith('M-') || pregunta.categoria === 'MECANICA' || cat.toLowerCase().includes('meca');
+
+  // FIX 2: Si és mecànica, sempre és panell real
+  const esPanelReal = ruta && (
+    esMecanica ||
+    cat === 'senyals' || cat === 'trampes' || cat === 'mecanica' || cat === 'mecànica' || cat === 'examen' ||
+    ruta.startsWith('P-') || ruta.startsWith('R-') || ruta.startsWith('S-')
   );
 
   if (esPanelReal) {
-    const ruta1 = `./${pregunta.ruta_panel}`;
-    const ruta2 = `./assets/paneles/${pregunta.ruta_panel}`;
-    const ruta3 = `./assets/mecanica/${pregunta.ruta_panel}`; // Fallback per si tens carpeta mecanica
+    const ruta1 = `./${ruta}`;
+    const ruta2 = `./assets/paneles/${ruta}`;
+    const ruta3 = `./assets/mecanica/${ruta}`;
+
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
         <img
           src="${ruta1}"
-          alt="Panel ${pregunta.panel_id || ''}"
+          alt="Panell ${pregunta.panel_id || ''}"
           style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;"
-          onerror="this.onerror=null; if(this.src.includes('${ruta1.substring(2)}')){this.src='${ruta2}';} else if(this.src.includes('paneles')){this.src='${ruta3}';} else {this.style.display='none'; this.nextElementSibling.style.display='block';}"
+          onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'}"
         />
-        <div style="display:none; color:#ff6b6b; text-align:center; padding:20px;">
-          ❌ No s'ha trobat: ${pregunta.ruta_panel}<br><small>Prova: ${ruta1} o ${ruta2}</small>
-        </div>
-        <div style="text-align:center; color:#888; font-size:12px; margin-top:8px;">
-          Panel: ${pregunta.panel_id || 'N/A'} - ${pregunta.codi || pregunta.pictograma || ''}
+        <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">
+          Panell: ${pregunta.panel_id || 'N/A'} - ${ruta}
         </div>
       </div>
     `;
+    imgDiv.style.display = 'block';
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
     if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
-    if(tipDiv){ tipDiv.innerHTML=''; tipDiv.style.display='none'; }
     return;
   }
 
-  // ===== CAS 2: NOU FORMAT NORMES amb COMBO EMOJIS 2-3 + FORMA + FOQUITO =====
+  // CAS NORMES EMOJI
   if (pregunta.emoji) {
     let htmlEmojis = '';
     try {
@@ -1304,36 +1311,25 @@ function pintarImatgeSiExisteix(cat, pregunta) {
       const size = parts.length > 2? '26px' : '32px';
       htmlEmojis = parts.map(s => `<span style="font-size:${size}">${s}</span>`).join('');
     }
-
     const forma = pregunta.forma || 'circulo-rojo';
     let extraStyle = '';
     if(forma === 'circulo-rojo') extraStyle = 'border:6px solid #e53935; border-radius:50%; background:white;';
     if(forma === 'cuadrado-azul') extraStyle = 'border:6px solid #1e88e5; border-radius:16px; background:white;';
     if(forma === 'triangulo-amarillo') extraStyle = 'border:6px solid #fdd835; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background:white; width:130px; height:115px;';
-
-    imgDiv.innerHTML = `
-      <div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(0,217,255,0.15); ${extraStyle}">
-        <div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center; ${forma==='triangulo-amarillo'?'margin-top:18px':''}">
-          ${htmlEmojis}
-        </div>
-      </div>
-    `;
+    imgDiv.innerHTML = `<div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; ${extraStyle}"><div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center;">${htmlEmojis}</div></div>`;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
-    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
-    if(tipDiv){ tipDiv.innerHTML=''; tipDiv.style.display='none'; }
     return;
   }
 
-  // ===== CAS 3: RES - PLACEHOLDER =====
-  imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma</div>`;
-  imgDiv.style.border = 'none';
-  imgDiv.style.boxShadow = 'none';
-  if(emojisDiv) { emojisDiv.innerHTML = ''; emojisDiv.style.display = 'none'; }
-  if(tipDiv) { tipDiv.innerHTML = ''; tipDiv.style.display = 'none'; }
+  // DEBUG FINAL
+  if(esMecanica &&!ruta){
+    imgDiv.innerHTML = `<div style="color:#ff6b6b; text-align:center; padding:15px; border:1px dashed #ff6b6b;">DEBUG MECÀNICA: ruta_panel buit<br>ID: ${pregunta.id}<br>Revisa PREGUNTES.mecanica</div>`;
+  } else {
+    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma</div>`;
+  }
 }
 
-// FIX V9.8.5: Total dinámico anti-crash si PREGUNTES no existe aún
 function getTotalBanco() {
   let total = 0;
   if(typeof PREGUNTES!== 'undefined') for(let cat in PREGUNTES) if(Array.isArray(PREGUNTES[cat])) total += PREGUNTES[cat].length;
@@ -1402,7 +1398,14 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.7 MECANICA carregat - SENYALS + MECANICA + NORMES");
+  console.log("GasDrive V9.8.8 FIX MECANICA carregat");
+  // FIX 3: Si tens BANCO_MECANICA_66 separat, el fiquem dins PREGUNTES
+  if(typeof PREGUNTES!== 'undefined'){
+    if((!PREGUNTES.mecanica || PREGUNTES.mecanica.length===0) && typeof BANCO_MECANICA_66!== 'undefined'){
+      PREGUNTES.mecanica = BANCO_MECANICA_66;
+      console.log("FIX: PREGUNTES.mecanica injectat des de BANCO_MECANICA_66", PREGUNTES.mecanica.length);
+    }
+  }
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1610,7 +1613,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANCO MAPEADO V9.8.7. Total:', getTotalBanco());
+  console.log('✅ BANC MAPEJAT V9.8.8. Total:', getTotalBanco(), 'Mecanica:', PREGUNTES.mecanica?.length);
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1674,9 +1677,17 @@ function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floo
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
 function carregarPregunta(cat) {
-  const s = estat.test[cat];
-  if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[cat] || PREGUNTES[cat].length===0) return;
-  const preguntes = barrejarArray(PREGUNTES[cat]);
+  // FIX accent
+  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
+
+  const s = estat.test[catBusqueda] || estat.test['mecanica'];
+  if(!s) return;
+  if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[catBusqueda] || PREGUNTES[catBusqueda].length===0){
+    console.warn(`[V9.8.8] PREGUNTES.${catBusqueda} buit o no existeix`);
+    return;
+  }
+  const preguntes = barrejarArray(PREGUNTES[catBusqueda]);
   const pOriginal = preguntes[s.idx % preguntes.length];
   const preguntaTxt = pOriginal.q || pOriginal.pregunta;
   const opcionsOriginales = pOriginal.a || pOriginal.opcions;
@@ -1685,31 +1696,35 @@ function carregarPregunta(cat) {
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (cat + '_' + s.idx)};
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (catBusqueda + '_' + s.idx)};
   s.current = p;
+  pintarImatgeSiExisteix(catBusqueda, p);
+  // També intenta pintar amb accent
   pintarImatgeSiExisteix(cat, p);
-  const preguntaEl = document.getElementById(`test-${cat}-pregunta`);
+
+  const preguntaEl = document.getElementById(`test-${cat}-pregunta`) || document.getElementById(`test-${catBusqueda}-pregunta`) || document.getElementById(`test-mecànica-pregunta`);
   if(preguntaEl){
     preguntaEl.textContent = p.q;
-    if(audioTxt && (cat === 'senyals' || cat === 'trampes' || cat === 'normes' || cat === 'mecanica')){
+    if(audioTxt){
       preguntaEl.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')" style="background:#00D9FF; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">🔊</button>`;
     }
   }
-  const acEl = document.getElementById(`test-${cat}-aciertos`); if(acEl) acEl.textContent = s.encerts;
-  const rachaEl = document.getElementById(`test-${cat}-racha`); if(rachaEl) rachaEl.textContent = s.ratxa;
-  const scoreEl = document.getElementById(`test-${cat}-score`); if(scoreEl) scoreEl.textContent = s.puntuacio;
-  const progEl = document.getElementById(`test-${cat}-progress`); if(progEl) progEl.style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
-  const cont = document.getElementById(`test-${cat}-opciones`);
+  const acEl = document.getElementById(`test-${cat}-aciertos`) || document.getElementById(`test-${catBusqueda}-aciertos`); if(acEl) acEl.textContent = s.encerts;
+  const rachaEl = document.getElementById(`test-${cat}-racha`) || document.getElementById(`test-${catBusqueda}-racha`); if(rachaEl) rachaEl.textContent = s.ratxa;
+  const scoreEl = document.getElementById(`test-${cat}-score`) || document.getElementById(`test-${catBusqueda}-score`); if(scoreEl) scoreEl.textContent = s.puntuacio;
+  const progEl = document.getElementById(`test-${cat}-progress`) || document.getElementById(`test-${catBusqueda}-progress`); if(progEl) progEl.style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
+  const cont = document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-${catBusqueda}-opciones`) || document.getElementById(`test-mecànica-opciones`);
   if(!cont) return;
   cont.innerHTML = '';
-  const fb = document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`);
+  const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`); if(fb) fb.textContent = '';
+  const tipReset = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-${catBusqueda}-tip`) || document.getElementById(`test-mecànica-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
+  const btnSig = document.getElementById(`btn-sig-test-${cat}`) || document.getElementById(`btn-sig-test-${catBusqueda}`);
   if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
     div.textContent = txt;
-    div.onclick = function() { respondreTest_V94(cat, i, this); };
+    div.onclick = function() { respondreTest_V94(catBusqueda, i, this); };
     cont.appendChild(div);
   });
 }
@@ -1726,9 +1741,11 @@ function parlar(text) {
 
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
-  const s = estat.test[cat];
+  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
+  const s = estat.test[catBusqueda];
   const p = s.current;
-  const cont = document.getElementById(`test-${cat}-opciones`);
+  const cont = document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-${catBusqueda}-opciones`) || document.getElementById(`test-mecànica-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
@@ -1739,43 +1756,49 @@ function respondreTest_V94(cat, idx, el) {
     s.ratxa++;
     s.puntuacio += 10 + (s.ratxa * 2);
     estat.coins += 5;
-    const fb = document.getElementById(`test-${cat}-feedback`);
+    const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`);
     if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; }
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
     cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
-    const fb = document.getElementById(`test-${cat}-feedback`);
+    const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`);
     if(fb){ fb.className = 'feedback fallo'; fb.textContent = '❌ FALLO'; }
     mostrarEmoji(false, el);
     s.ratxa = 0;
-    registrarFallada(cat, p.subtema, p.pag);
+    registrarFallada(catBusqueda, p.subtema, p.pag);
   }
-  actualizarMetricasTest(cat, preguntaId, correcte);
+  actualizarMetricasTest(catBusqueda, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`);
+  const btnSig = document.getElementById(`btn-sig-test-${cat}`) || document.getElementById(`btn-sig-test-${catBusqueda}`);
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   actualitzarCoins();
   guardar();
-  const tipDiv = document.getElementById(`test-${cat}-tip`);
-  if(tipDiv && p.tip){
-    tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
-    tipDiv.style.display = 'block';
-    tipDiv.style.border = '2px solid #00D9FF';
-    tipDiv.style.background = '#fff9c4';
-    tipDiv.style.color = '#000';
-    tipDiv.style.padding = '10px';
-    tipDiv.style.borderRadius = '8px';
-    tipDiv.style.marginTop = '10px';
+  const tipDiv = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-${catBusqueda}-tip`) || document.getElementById(`test-mecànica-tip`);
+  if(tipDiv){
+    const txt = p.tip || p.explicacion || p.explicacio || "";
+    if(txt){
+      tipDiv.innerHTML = `💡 ${txt}`;
+      tipDiv.style.display = 'block';
+      tipDiv.style.border = '2px solid #00D9FF';
+      tipDiv.style.background = '#fff9c4';
+      tipDiv.style.color = '#000';
+      tipDiv.style.padding = '10px';
+      tipDiv.style.borderRadius = '8px';
+      tipDiv.style.marginTop = '10px';
+    }
   }
 }
 
 function seguentTest(e, cat) {
   e.preventDefault();
-  estat.test[cat].idx++;
-  carregarPregunta(cat);
+  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
+  estat.test[catBusqueda].idx++;
+  carregarPregunta(catBusqueda);
 }
 
+// RESTO IGUAL - SITUACIONS, EXAMEN, GARATGE etc.
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
@@ -1844,7 +1867,6 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
-// ===== V9.8.7 EXAMEN HÍBRID - AGARRA SENYALS + NORMES + MECANICA + SITUACIONS =====
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
   let totes = [];
@@ -1856,7 +1878,7 @@ function iniciarExamen(e) {
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) {
     totes = totes.concat(SITUACIONS.clima.slice(0,5));
   }
-  console.log("V9.8.7 HÍBRID EXAMEN - Total banc:", totes.length, "inclou mecanica:", PREGUNTES.mecanica?.length);
+  console.log("V9.8.8 EXAMEN Total:", totes.length, "Mecanica:", PREGUNTES.mecanica?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -1902,6 +1924,7 @@ function carregarPreguntaExamen() {
   cont.innerHTML = '';
   const btnSig = document.getElementById('btn-sig-examen');
   if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
+  const tipEl = document.getElementById('examen-tip'); if(tipEl){ tipEl.innerHTML=''; tipEl.style.display='none'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
@@ -1935,15 +1958,18 @@ function respondreExamen(idx, el) {
   actualitzarCoins();
   guardar();
   const tipDiv = document.getElementById('examen-tip');
-  if(tipDiv && p.tip){
-    tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
-    tipDiv.style.display = 'block';
-    tipDiv.style.border = '2px solid #00D9FF';
-    tipDiv.style.background = '#fff9c4';
-    tipDiv.style.color = '#000';
-    tipDiv.style.padding = '10px';
-    tipDiv.style.borderRadius = '8px';
-    tipDiv.style.marginTop = '10px';
+  if(tipDiv){
+    const txt = p.tip || p.explicacion || p.explicacio || "";
+    if(txt){
+      tipDiv.innerHTML = `💡 ${txt}`;
+      tipDiv.style.display = 'block';
+      tipDiv.style.border = '2px solid #00D9FF';
+      tipDiv.style.background = '#fff9c4';
+      tipDiv.style.color = '#000';
+      tipDiv.style.padding = '10px';
+      tipDiv.style.borderRadius = '8px';
+      tipDiv.style.marginTop = '10px';
+    }
   }
 }
 
@@ -1991,7 +2017,6 @@ function reiniciarExamen() {
   const tipEl = document.getElementById('examen-tip'); if(tipEl){ tipEl.innerHTML=''; tipEl.style.display='none'; }
 }
 
-//... RESTO FUNCIONES GARATGE / BOTIGA / TIPS / TEMARI / GRAFICA igual que V9.8.5...
 function carregarGaratge() {
   const cont = document.getElementById('garage-lista'); if(!cont) return;
   cont.innerHTML = '';
@@ -2116,8 +2141,11 @@ function canviarSubTab(e, tab, subtab) {
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
   if(e && e.target) e.target.classList.add('active');
-  const subEl = document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`); if(subEl) subEl.classList.add('active');
-  if(tab === 'test') carregarPregunta(subtab);
+  const subEl = document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`);
+  if(subEl) subEl.classList.add('active');
+  // FIX: normalitza subtab amb accent
+  const subtabReal = subtab.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  if(tab === 'test') carregarPregunta(subtabReal);
   if(tab === 'sit') carregarSituacio(subtab);
   if(tab === 'stats') actualitzarEstadistiques_V94();
 }
@@ -2136,4 +2164,4 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-}   
+}
