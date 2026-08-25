@@ -49,5 +49,18 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "S-23", "ruta": "S-200_A_S-203_PRESENAL.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION", "senales_incluidas": ["S-200","S-201","S-202","S-203"] },
   { "panel_id": "S-24", "ruta": "S-220_A_S-222_PRESENAL2.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 2", "senales_incluidas": ["S-220","S-220a","S-222"] },
   { "panel_id": "S-25", "ruta": "S-222A_A_S-230_PRESENAL3.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 3", "senales_incluidas": ["S-222a","S-225","S-230"] },
-  { "panel_id": "S-26", "ruta": "S-321_A_S-342_DIRECCION.jpg", "categoria": "INDICACION", "nombre": "SENALES DE DIRECCION", "senales_incluidas": ["S-321","S-322","S-341","S-342"] }
+  { "panel_id": "S-26", "ruta": "S-321_A_S-342_DIRECCION.jpg", "categoria": "INDICACION", "nombre": "SENALES DE DIRECCION", "senales_incluidas": ["S-321","S-322","S-341","S-342"] },
+
+  // ===== MECANICA - 11 PANELES - 100% MANUAL VIII - V2.2 NUEVO =====
+  { "panel_id": "M-01", "ruta": "M-01_MOTOR_BASIC.jpg", "categoria": "MECANICA", "nombre": "MOTOR BASIC", "senales_incluidas": ["MOTOR","PISTON","ACEITE","REFRIGERACION","TERMOSTATO","FILTRO_ACEITE"] },
+  { "panel_id": "M-02", "ruta": "M-02_FRENOS_RUEDAS.jpg", "categoria": "MECANICA", "nombre": "FRENOS Y RUEDAS", "senales_incluidas": ["FRENO","PASTILLAS","ABS","NEUMATICO","SUSPENSION","DIRECCION"] },
+  { "panel_id": "M-03", "ruta": "M-03_ELECTRICO_ARRANQUE.jpg", "categoria": "MECANICA", "nombre": "ELECTRICO ARRANQUE", "senales_incluidas": ["BATERIA","ALTERNADOR","ARRANQUE","BUJIA","CORREA","CHASIS"] },
+  { "panel_id": "M-04", "ruta": "M-04_TRANSMISION.jpg", "categoria": "MECANICA", "nombre": "TRANSMISION", "senales_incluidas": ["EMBRAGUE","CAJA_CAMBIOS","PALIER","DIFERENCIAL","GRUPO_CONICO","CARDAN"] },
+  { "panel_id": "M-05", "ruta": "M-05_REFRIGERACION.jpg", "categoria": "MECANICA", "nombre": "REFRIGERACION", "senales_incluidas": ["BOMBA_AGUA","RADIADOR","VENTILADOR","DEPOSITO_EXPANSION","MANGUITO","ANTICONGELANTE"] },
+  { "panel_id": "M-06", "ruta": "M-06_FILTROS_TURBO.jpg", "categoria": "MECANICA", "nombre": "FILTROS TURBO", "senales_incluidas": ["VARILLA_ACEITE","FILTRO_ACEITE","FILTRO_AIRE","FILTRO_GASOIL","TURBO","INTERCOOLER"] },
+  { "panel_id": "M-07", "ruta": "M-07_HIBRIDO_TECH.jpg", "categoria": "MECANICA", "nombre": "HIBRIDO TECH", "senales_incluidas": ["MOTOR_ELECTRICO","BATERIA_LITIO","FRENO_REGENERATIVO","ESP","EBS","BAS"] },
+  { "panel_id": "M-08", "ruta": "M-08_AVERIAS_HUMOS.jpg", "categoria": "MECANICA", "nombre": "AVERIAS HUMOS", "senales_incluidas": ["HUMO_BLANCO","HUMO_NEGRO","HUMO_AZUL","SOBRECALENTAMIENTO","CHIRRIDO_CORREA","FUGA_LIQUIDO"] },
+  { "panel_id": "M-09", "ruta": "M-09_CAMION_INDUSTRIAL.jpg", "categoria": "MECANICA", "nombre": "CAMION INDUSTRIAL", "senales_incluidas": ["CABEZA_TRACTORA","REMOLQUE","QUINTA_RUEDA","EJE_TANDEM","FRENO_AIRE","RETARDER"] },
+  { "panel_id": "M-10", "ruta": "M-10_HERRAMIENTAS_V16.jpg", "categoria": "MECANICA", "nombre": "HERRAMIENTAS V16", "senales_incluidas": ["GATO","LLAVE_RUEDAS","V16","CHALECO","TRIANGULO","EXTINTOR"] },
+  { "panel_id": "M-11", "ruta": "M-11_RESTO_TEMARIO.jpg", "categoria": "MECANICA", "nombre": "RESTO TEMARIO", "senales_incluidas": ["BASTIDOR","CARROCERIA_DEFORMACION","AIRBAG","CATALIZADOR","SONDA_LAMBDA","INYECCION_ECO"] }
 ];
