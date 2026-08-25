@@ -1236,59 +1236,45 @@ const EMOJI_BOTIGA = [
 ];
 
 
-  // ===== GASDRIVE DGT CAT V9.8.8 FIX MECÀNICA - IMATGES M- + EXAMEN + TIPS =====
+// ===== GASDRIVE DGT CAT V9.8.9 HÍBRID - MECANICA + SENYALS DGT REAL + NORMES + EXAMEN =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
-
 const SENALES_SVG = {};
 
-// ===== V9.8.8 FIX: PINTA PANELL REAL + BLINDATGE MECÀNICA =====
+// ===== V9.8.9 PINTA IMATGE HÍBRID - ACCEPTA RUTA_PANEL DE SENYALS I M- MECANICA =====
 function pintarImatgeSiExisteix(cat, pregunta) {
-  // FIX 1: Busca amb i sense accent
-  let imgDiv = document.getElementById(`test-${cat}-imagen`)
+  if (!pregunta) return;
+  const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+  let imgDiv = document.getElementById(`test-${catNet}-imagen`)
+            || document.getElementById(`test-${cat}-imagen`)
             || document.getElementById(`test-mecanica-imagen`)
             || document.getElementById(`test-mecànica-imagen`)
-            || document.getElementById(`examen-imagen`)
-            || document.querySelector(`[id*="${cat}"][id*="imagen"]`);
+            || document.getElementById(`examen-imagen`);
 
-  const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
-  const tipDiv = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`examen-tip`);
+  const emojisDiv = document.getElementById(`test-${catNet}-emojis`) || document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
+  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`examen-tip`);
 
-  if (!imgDiv) {
-    console.warn("[V9.8.8] No trobo imgDiv per cat:", cat, pregunta);
-    return;
-  }
-  if (!pregunta) return;
+  if (!imgDiv) return;
 
-  const ruta = pregunta.ruta_panel || pregunta.ruta || "";
-  const esMecanica = ruta.startsWith('M-') || pregunta.categoria === 'MECANICA' || cat.toLowerCase().includes('meca');
-
-  // FIX 2: Si és mecànica, sempre és panell real
-  const esPanelReal = ruta && (
-    esMecanica ||
-    cat === 'senyals' || cat === 'trampes' || cat === 'mecanica' || cat === 'mecànica' || cat === 'examen' ||
-    ruta.startsWith('P-') || ruta.startsWith('R-') || ruta.startsWith('S-')
-  );
+  const ruta = (pregunta.ruta_panel || pregunta.ruta || "").trim();
+  const esMecanica = ruta.startsWith('M-') || pregunta.categoria === 'MECANICA' || catNet === 'mecanica';
+  const esSenyal = ruta.startsWith('P-') || ruta.startsWith('R-') || ruta.startsWith('S-');
+  const esPanelReal = ruta && (esMecanica || esSenyal || ['senyals','trampes','mecanica','examen','general'].includes(catNet));
 
   if (esPanelReal) {
     const ruta1 = `./${ruta}`;
     const ruta2 = `./assets/paneles/${ruta}`;
     const ruta3 = `./assets/mecanica/${ruta}`;
-
+    const ruta4 = `./paneles/${ruta}`;
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
-        <img
-          src="${ruta1}"
-          alt="Panell ${pregunta.panel_id || ''}"
-          style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;"
-          onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'}"
-        />
-        <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">
-          Panell: ${pregunta.panel_id || 'N/A'} - ${ruta}
-        </div>
+        <img src="${ruta1}" alt="Panel ${pregunta.panel_id || ''}" style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;" onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'; this.onerror=function(){this.onerror=null; this.src='${ruta4}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}"/>
+        <div style="display:none; color:#ff6b6b; text-align:center; padding:15px;">❌ No s'ha trobat: ${ruta}<br><small>Posa'l a l'arrel al costat d'index.html</small></div>
+        <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">Panel: ${pregunta.panel_id || 'N/A'} - ${ruta}</div>
       </div>
     `;
     imgDiv.style.display = 'block';
@@ -1298,7 +1284,6 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     return;
   }
 
-  // CAS NORMES EMOJI
   if (pregunta.emoji) {
     let htmlEmojis = '';
     try {
@@ -1316,18 +1301,21 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     if(forma === 'circulo-rojo') extraStyle = 'border:6px solid #e53935; border-radius:50%; background:white;';
     if(forma === 'cuadrado-azul') extraStyle = 'border:6px solid #1e88e5; border-radius:16px; background:white;';
     if(forma === 'triangulo-amarillo') extraStyle = 'border:6px solid #fdd835; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background:white; width:130px; height:115px;';
-    imgDiv.innerHTML = `<div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; ${extraStyle}"><div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center;">${htmlEmojis}</div></div>`;
+    imgDiv.innerHTML = `<div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(0,217,255,0.15); ${extraStyle}"><div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center; ${forma==='triangulo-amarillo'?'margin-top:18px':''}">${htmlEmojis}</div></div>`;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
+    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
     return;
   }
 
-  // DEBUG FINAL
-  if(esMecanica &&!ruta){
-    imgDiv.innerHTML = `<div style="color:#ff6b6b; text-align:center; padding:15px; border:1px dashed #ff6b6b;">DEBUG MECÀNICA: ruta_panel buit<br>ID: ${pregunta.id}<br>Revisa PREGUNTES.mecanica</div>`;
+  if(esMecanica){
+    imgDiv.innerHTML = `<div style="color:#ff6b6b; text-align:center; padding:15px; border:1px dashed #ff6b6b; border-radius:8px;">⚙️ MECÀNICA: ruta_panel buit<br>ID: ${pregunta.id}<br>Revisa PREGUNTES.mecanica</div>`;
   } else {
     imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma</div>`;
   }
+  imgDiv.style.border = 'none';
+  imgDiv.style.boxShadow = 'none';
+  if(emojisDiv) { emojisDiv.innerHTML = ''; emojisDiv.style.display = 'none'; }
 }
 
 function getTotalBanco() {
@@ -1351,33 +1339,14 @@ const MAPEO_PALABRAS_CLAVE = {
 };
 
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
-  tests: {
-    general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    senyals: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    trampes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    normes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    mecanica: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    auxilis: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    mediambient: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }
-  },
-  casos: {
-    clima: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    urbà: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    carretera: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} },
-    emergència: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }
-  },
+  tests: { general: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, senyals: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, trampes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, normes: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, mecanica: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, auxilis: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, mediambient: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} } },
+  casos: { clima: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, urbà: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, carretera: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} }, emergència: { total: 0, aciertos: 0, unicas: new Set(), falladas: [], dies: {} } },
   examen: { realitzats: 0, aprovats: 0, historial: [] },
   diesEstudi: new Set()
 };
 
-for(let c in PROGRESO.tests) {
-  PROGRESO.tests[c].unicas = new Set(PROGRESO.tests[c].unicas || []);
-  PROGRESO.tests[c].dies = PROGRESO.tests[c].dies || {};
-}
-for(let c in PROGRESO.casos) {
-  PROGRESO.casos[c].unicas = new Set(PROGRESO.casos[c].unicas || []);
-  PROGRESO.casos[c].dies = PROGRESO.casos[c].dies || {};
-}
+for(let c in PROGRESO.tests) { PROGRESO.tests[c].unicas = new Set(PROGRESO.tests[c].unicas || []); PROGRESO.tests[c].dies = PROGRESO.tests[c].dies || {}; }
+for(let c in PROGRESO.casos) { PROGRESO.casos[c].unicas = new Set(PROGRESO.casos[c].unicas || []); PROGRESO.casos[c].dies = PROGRESO.casos[c].dies || {}; }
 PROGRESO.diesEstudi = new Set(PROGRESO.diesEstudi || []);
 
 let estat = {
@@ -1386,10 +1355,7 @@ let estat = {
   accessoris: JSON.parse(localStorage.getItem('gd_accessoris')) || [],
   emojis: JSON.parse(localStorage.getItem('gd_emojis')) || [],
   historial: JSON.parse(localStorage.getItem('gd_historial')) || [],
-  stats: JSON.parse(localStorage.getItem('gd_stats')) || {
-    tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false,
-    puntsDebils: {}, preguntesFetes: 0, encertsTotals: 0, perCategoria: {}, historialEvolucio: [], historialPregunta: {}
-  },
+  stats: JSON.parse(localStorage.getItem('gd_stats')) || { tempsEstudiatAvui: 0, diaActual: new Date().toISOString().split('T')[0], paseCompletado: false, puntsDebils: {}, preguntesFetes: 0, encertsTotals: 0, perCategoria: {}, historialEvolucio: [], historialPregunta: {} },
   test: { general: {idx:0,encerts:0,ratxa:0,puntuacio:0}, senyals: {idx:0,encerts:0,ratxa:0,puntuacio:0}, trampes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, normes: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mecanica: {idx:0,encerts:0,ratxa:0,puntuacio:0}, auxilis: {idx:0,encerts:0,ratxa:0,puntuacio:0}, mediambient: {idx:0,encerts:0,ratxa:0,puntuacio:0} },
   examen: { activa: false, preguntes: [], index: 0, encerts: 0, fallos: 0, timer: null, temps: 1800, categoria: 'general' },
   sit: { clima: {idx:0,encerts:0,puntuacio:0,current:null}, urbà: {idx:0,encerts:0,puntuacio:0,current:null}, carretera: {idx:0,encerts:0,puntuacio:0,current:null}, emergència: {idx:0,encerts:0,puntuacio:0,current:null} }
@@ -1398,12 +1364,10 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.8 FIX MECANICA carregat");
-  // FIX 3: Si tens BANCO_MECANICA_66 separat, el fiquem dins PREGUNTES
+  console.log("GasDrive V9.8.9 HÍBRID MECANICA+SENYALS carregat");
   if(typeof PREGUNTES!== 'undefined'){
     if((!PREGUNTES.mecanica || PREGUNTES.mecanica.length===0) && typeof BANCO_MECANICA_66!== 'undefined'){
       PREGUNTES.mecanica = BANCO_MECANICA_66;
-      console.log("FIX: PREGUNTES.mecanica injectat des de BANCO_MECANICA_66", PREGUNTES.mecanica.length);
     }
   }
   autoMapearTotesPreguntes();
@@ -1433,8 +1397,9 @@ function guardar() {
 function actualitzarCoins() { const el = document.getElementById('coins'); if(el) el.textContent = `💰 ${estat.coins}`; }
 
 function actualizarMetricasTest(categoria, preguntaId, acierto) {
-  if(!PROGRESO.tests[categoria]) return;
-  const prog = PROGRESO.tests[categoria];
+  const catNet = categoria.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  if(!PROGRESO.tests[catNet]) return;
+  const prog = PROGRESO.tests[catNet];
   const avui = estat.stats.diaActual;
   prog.total++;
   if(acierto) prog.aciertos++;
@@ -1464,9 +1429,7 @@ function registrarHistorialPregunta(preguntaId, acierto) {
   if(!preguntaId) return;
   if(!estat.stats.historialPregunta) estat.stats.historialPregunta = {};
   const avui = new Date().toISOString();
-  if(!estat.stats.historialPregunta[preguntaId]) {
-    estat.stats.historialPregunta[preguntaId] = { consecutius: 0, ultima: avui };
-  }
+  if(!estat.stats.historialPregunta[preguntaId]) { estat.stats.historialPregunta[preguntaId] = { consecutius: 0, ultima: avui }; }
   if(acierto) estat.stats.historialPregunta[preguntaId].consecutius++;
   else estat.stats.historialPregunta[preguntaId].consecutius = 0;
   estat.stats.historialPregunta[preguntaId].ultima = avui;
@@ -1535,34 +1498,15 @@ function iniciarComptadorTemari() {
   contadorTemari = setInterval(() => {
     const vistaTemariActiva = document.getElementById('tab-temari')?.classList.contains('active');
     if (vistaTemariActiva) {
-      if (tempsIniciTemari === null) {
-        tempsIniciTemari = Date.now();
-      } else {
+      if (tempsIniciTemari === null) { tempsIniciTemari = Date.now(); }
+      else {
         const ara = Date.now();
         const segundos = (ara - tempsIniciTemari) / 1000;
-        if (segundos >= 5) {
-          estat.stats.tempsEstudiatAvui += segundos / 60;
-          tempsIniciTemari = ara;
-          guardar();
-          actualitzarPaseUI();
-        }
+        if (segundos >= 5) { estat.stats.tempsEstudiatAvui += segundos / 60; tempsIniciTemari = ara; guardar(); actualitzarPaseUI(); }
       }
-      if (estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) {
-        estat.stats.paseCompletado = true;
-        estat.coins += 50;
-        guardar();
-        alert(`✅ PASE DESBLOQUEJAT!\nHas estudiat 20 minuts. +50 coins`);
-        actualitzarEstadistiques_V94();
-      }
+      if (estat.stats.tempsEstudiatAvui >= 20 &&!estat.stats.paseCompletado) { estat.stats.paseCompletado = true; estat.coins += 50; guardar(); alert(`✅ PASE DESBLOQUEJAT!\nHas estudiat 20 minuts. +50 coins`); actualitzarEstadistiques_V94(); }
     } else {
-      if (tempsIniciTemari!== null) {
-        const ara = Date.now();
-        const segundos = (ara - tempsIniciTemari) / 1000;
-        estat.stats.tempsEstudiatAvui += segundos / 60;
-        tempsIniciTemari = null;
-        guardar();
-        actualitzarPaseUI();
-      }
+      if (tempsIniciTemari!== null) { const ara = Date.now(); const segundos = (ara - tempsIniciTemari) / 1000; estat.stats.tempsEstudiatAvui += segundos / 60; tempsIniciTemari = null; guardar(); actualitzarPaseUI(); }
     }
   }, 1000);
 }
@@ -1571,36 +1515,20 @@ function comprovarNouDia() {
   const avui = new Date().toLocaleDateString('ca-ES');
   if(estat.stats.diaActual!== avui) {
     const stats = calcularPreparacioDGT_V94();
-    estat.stats.historialEvolucio.push({
-      dia: estat.stats.diaActual,
-      percent: stats.preparacio,
-      retencio: stats.retencio,
-      cobertura: stats.cobertura
-    });
+    estat.stats.historialEvolucio.push({ dia: estat.stats.diaActual, percent: stats.preparacio, retencio: stats.retencio, cobertura: stats.cobertura });
     if(estat.stats.historialEvolucio.length > 30) estat.stats.historialEvolucio.shift();
-    estat.stats.tempsEstudiatAvui = 0;
-    estat.stats.diaActual = avui;
-    estat.stats.paseCompletado = false;
-    tempsIniciTemari = null;
+    estat.stats.tempsEstudiatAvui = 0; estat.stats.diaActual = avui; estat.stats.paseCompletado = false; tempsIniciTemari = null;
     for(let c in PROGRESO.tests) PROGRESO.tests[c].dies = {};
     for(let c in PROGRESO.casos) PROGRESO.casos[c].dies = {};
-    guardar();
-    actualitzarPaseUI();
+    guardar(); actualitzarPaseUI();
   }
 }
 
 function actualitzarPaseUI() {
   const minuts = Math.floor(estat.stats.tempsEstudiatAvui || 0);
-  const el = document.getElementById('pase-temps');
-  if(el) el.textContent = `${minuts} min`;
+  const el = document.getElementById('pase-temps'); if(el) el.textContent = `${minuts} min`;
   const msg = document.getElementById('stats-motivacio');
-  if(msg) {
-    if(estat.stats.paseCompletado) msg.textContent = "Pase Actiu. A practicar 💪";
-    else {
-      const falten = Math.max(0, 20 - minuts);
-      msg.textContent = `Estudia ${falten} minuts més al TEMARI per desbloquejar`;
-    }
-  }
+  if(msg) { if(estat.stats.paseCompletado) msg.textContent = "Pase Actiu. A practicar 💪"; else { const falten = Math.max(0, 20 - minuts); msg.textContent = `Estudia ${falten} minuts més al TEMARI per desbloquejar`; } }
 }
 
 function autoMapearTotesPreguntes() {
@@ -1613,7 +1541,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANC MAPEJAT V9.8.8. Total:', getTotalBanco(), 'Mecanica:', PREGUNTES.mecanica?.length);
+  console.log('✅ BANC MAPEJAT V9.8.9. Total:', getTotalBanco(), 'Senyals:', PREGUNTES.senyals?.length, 'Mecanica:', PREGUNTES.mecanica?.length);
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1633,18 +1561,13 @@ function dibuixarPuntsDebils_V94() {
   const noms = ['🚦 SENYALS','🪤 TRAMPES','📋 NORMES','⚙️ MECÀNICA','🚑 AUXILIS','♻️ MEDI AMBIENT'];
   const temari = ['TEMARI 1','TEMARI 1','TEMARI 2','TEMARI 4','TEMARI 3','TEMARI 5'];
   categories.forEach((cat, i) => {
-    if(!estat.stats.puntsDebils[cat]) {
-      cont.innerHTML += `<div style="margin-bottom:15px; padding:12px; background:#1a1a1a; border-radius:8px;"><div style="font-weight:700; color:#00D9FF">${noms[i]}</div><div style="color:#666">Encara no tens dades</div></div>`;
-      return;
-    }
+    if(!estat.stats.puntsDebils[cat]) { cont.innerHTML += `<div style="margin-bottom:15px; padding:12px; background:#1a1a1a; border-radius:8px;"><div style="font-weight:700; color:#00D9FF">${noms[i]}</div><div style="color:#666">Encara no tens dades</div></div>`; return; }
     let maxFallos = 0; let pitjorSubtema = 'General'; let pag = 1;
     for(let sub in estat.stats.puntsDebils[cat]) { if(estat.stats.puntsDebils[cat][sub].fallos > maxFallos) { maxFallos = estat.stats.puntsDebils[cat][sub].fallos; pitjorSubtema = sub || 'General'; pag = estat.stats.puntsDebils[cat][sub].pag || 1; } }
     cont.innerHTML += `<div style="margin-bottom:15px; padding:12px; background:#1a1a1a; border-left:4px solid #FFD700; border-radius:8px;"><div style="font-weight:700; color:#00D9FF; margin-bottom:6px">${noms[i]}</div><div>El teu punt dèbil: <b>"${pitjorSubtema}"</b></div><div style="color:#999; font-size:13px">Recomanació: Repassa <b>${temari[i]}</b> - Pàgina <b>${pag}</b></div></div>`;
   });
   const stats = calcularPreparacioDGT_V94();
-  if(stats.aprenent > 0) {
-    cont.innerHTML += `<div style="margin-top:15px; padding:12px; background:#3d1f1f; border-radius:8px; color:#ff6b6b; font-weight:600">⚠️ ALERTA: Tens ${stats.aprenent} preguntes que perdran memòria en 3 dies</div>`;
-  }
+  if(stats.aprenent > 0) { cont.innerHTML += `<div style="margin-top:15px; padding:12px; background:#3d1f1f; border-radius:8px; color:#ff6b6b; font-weight:600">⚠️ ALERTA: Tens ${stats.aprenent} preguntes que perdran memòria en 3 dies</div>`; }
 }
 
 function anarAPagina(pagina) { canviarTab_V94(null, 'temari'); alert(`Obre el TEMARI a la Pàgina ${pagina}`); }
@@ -1677,54 +1600,48 @@ function mostrarPopupPase() { const minutsQueFalten = Math.max(0, 20 - Math.floo
 function barrejarArray(arr) { const a = arr.slice(); for(let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
 function carregarPregunta(cat) {
-  // FIX accent
-  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
-
-  const s = estat.test[catBusqueda] || estat.test['mecanica'];
+  const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const s = estat.test[catNet];
   if(!s) return;
-  if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[catBusqueda] || PREGUNTES[catBusqueda].length===0){
-    console.warn(`[V9.8.8] PREGUNTES.${catBusqueda} buit o no existeix`);
+  if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[catNet] || PREGUNTES[catNet].length===0){
+    console.warn(`[V9.8.9] PREGUNTES.${catNet} buit o no existeix. Revisa app.js`);
     return;
   }
-  const preguntes = barrejarArray(PREGUNTES[catBusqueda]);
+  const preguntes = barrejarArray(PREGUNTES[catNet]);
   const pOriginal = preguntes[s.idx % preguntes.length];
   const preguntaTxt = pOriginal.q || pOriginal.pregunta;
   const opcionsOriginales = pOriginal.a || pOriginal.opcions;
   const indexCorrectaOriginal = pOriginal.ok!== undefined? pOriginal.ok : pOriginal.correcta;
-  const audioTxt = pOriginal.audio || '';
   const textCorrecte = opcionsOriginales[indexCorrectaOriginal];
   const opcionsBarrejades = barrejarArray(opcionsOriginales);
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
-  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (catBusqueda + '_' + s.idx)};
+  const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (catNet + '_' + s.idx)};
   s.current = p;
-  pintarImatgeSiExisteix(catBusqueda, p);
-  // També intenta pintar amb accent
-  pintarImatgeSiExisteix(cat, p);
-
-  const preguntaEl = document.getElementById(`test-${cat}-pregunta`) || document.getElementById(`test-${catBusqueda}-pregunta`) || document.getElementById(`test-mecànica-pregunta`);
+  pintarImatgeSiExisteix(catNet, p);
+  const preguntaEl = document.getElementById(`test-${catNet}-pregunta`) || document.getElementById(`test-${cat}-pregunta`) || document.getElementById(`test-mecànica-pregunta`);
   if(preguntaEl){
     preguntaEl.textContent = p.q;
+    const audioTxt = pOriginal.audio || p.audio || '';
     if(audioTxt){
       preguntaEl.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')" style="background:#00D9FF; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">🔊</button>`;
     }
   }
-  const acEl = document.getElementById(`test-${cat}-aciertos`) || document.getElementById(`test-${catBusqueda}-aciertos`); if(acEl) acEl.textContent = s.encerts;
-  const rachaEl = document.getElementById(`test-${cat}-racha`) || document.getElementById(`test-${catBusqueda}-racha`); if(rachaEl) rachaEl.textContent = s.ratxa;
-  const scoreEl = document.getElementById(`test-${cat}-score`) || document.getElementById(`test-${catBusqueda}-score`); if(scoreEl) scoreEl.textContent = s.puntuacio;
-  const progEl = document.getElementById(`test-${cat}-progress`) || document.getElementById(`test-${catBusqueda}-progress`); if(progEl) progEl.style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
-  const cont = document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-${catBusqueda}-opciones`) || document.getElementById(`test-mecànica-opciones`);
+  const acEl = document.getElementById(`test-${catNet}-aciertos`) || document.getElementById(`test-${cat}-aciertos`); if(acEl) acEl.textContent = s.encerts;
+  const rachaEl = document.getElementById(`test-${catNet}-racha`) || document.getElementById(`test-${cat}-racha`); if(rachaEl) rachaEl.textContent = s.ratxa;
+  const scoreEl = document.getElementById(`test-${catNet}-score`) || document.getElementById(`test-${cat}-score`); if(scoreEl) scoreEl.textContent = s.puntuacio;
+  const progEl = document.getElementById(`test-${catNet}-progress`) || document.getElementById(`test-${cat}-progress`); if(progEl) progEl.style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
+  const cont = document.getElementById(`test-${catNet}-opciones`) || document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-mecànica-opciones`);
   if(!cont) return;
   cont.innerHTML = '';
-  const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`); if(fb) fb.textContent = '';
-  const tipReset = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-${catBusqueda}-tip`) || document.getElementById(`test-mecànica-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`) || document.getElementById(`btn-sig-test-${catBusqueda}`);
+  const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
+  const tipReset = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
+  const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
   if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
     div.textContent = txt;
-    div.onclick = function() { respondreTest_V94(catBusqueda, i, this); };
+    div.onclick = function() { respondreTest_V94(catNet, i, this); };
     cont.appendChild(div);
   });
 }
@@ -1741,11 +1658,10 @@ function parlar(text) {
 
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
-  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
-  const s = estat.test[catBusqueda];
+  const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const s = estat.test[catNet];
   const p = s.current;
-  const cont = document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-${catBusqueda}-opciones`) || document.getElementById(`test-mecànica-opciones`);
+  const cont = document.getElementById(`test-${catNet}-opciones`) || document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-mecànica-opciones`);
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
@@ -1756,29 +1672,29 @@ function respondreTest_V94(cat, idx, el) {
     s.ratxa++;
     s.puntuacio += 10 + (s.ratxa * 2);
     estat.coins += 5;
-    const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`);
+    const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`);
     if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; }
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
     cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
-    const fb = document.getElementById(`test-${cat}-feedback`) || document.getElementById(`test-${catBusqueda}-feedback`);
+    const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`);
     if(fb){ fb.className = 'feedback fallo'; fb.textContent = '❌ FALLO'; }
     mostrarEmoji(false, el);
     s.ratxa = 0;
-    registrarFallada(catBusqueda, p.subtema, p.pag);
+    registrarFallada(catNet, p.subtema, p.pag);
   }
-  actualizarMetricasTest(catBusqueda, preguntaId, correcte);
+  actualizarMetricasTest(catNet, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-test-${cat}`) || document.getElementById(`btn-sig-test-${catBusqueda}`);
+  const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   actualitzarCoins();
   guardar();
-  const tipDiv = document.getElementById(`test-${cat}-tip`) || document.getElementById(`test-${catBusqueda}-tip`) || document.getElementById(`test-mecànica-tip`);
+  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`);
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
-      tipDiv.innerHTML = `💡 ${txt}`;
+      tipDiv.innerHTML = `💡 TIP: ${txt}`;
       tipDiv.style.display = 'block';
       tipDiv.style.border = '2px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
@@ -1792,13 +1708,11 @@ function respondreTest_V94(cat, idx, el) {
 
 function seguentTest(e, cat) {
   e.preventDefault();
-  const catReal = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const catBusqueda = catReal === 'mecanica'? 'mecanica' : cat;
-  estat.test[catBusqueda].idx++;
-  carregarPregunta(catBusqueda);
+  const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  estat.test[catNet].idx++;
+  carregarPregunta(catNet);
 }
 
-// RESTO IGUAL - SITUACIONS, EXAMEN, GARATGE etc.
 function carregarSituacio(cat) {
   if(!cat) cat = sitCategoriaActiva;
   const s = estat.sit[cat];
@@ -1871,14 +1785,10 @@ function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
   let totes = [];
   if(typeof PREGUNTES!== 'undefined') {
-    for(let key in PREGUNTES) {
-      if(Array.isArray(PREGUNTES[key])) totes = totes.concat(PREGUNTES[key]);
-    }
+    for(let key in PREGUNTES) { if(Array.isArray(PREGUNTES[key])) totes = totes.concat(PREGUNTES[key]); }
   }
-  if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) {
-    totes = totes.concat(SITUACIONS.clima.slice(0,5));
-  }
-  console.log("V9.8.8 EXAMEN Total:", totes.length, "Mecanica:", PREGUNTES.mecanica?.length);
+  if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) { totes = totes.concat(SITUACIONS.clima.slice(0,5)); }
+  console.log("V9.8.9 EXAMEN Total:", totes.length, "Senyals:", PREGUNTES.senyals?.length, "Mecanica:", PREGUNTES.mecanica?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -1940,18 +1850,8 @@ function respondreExamen(idx, el) {
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
-  if(correcte) {
-    el.classList.add('correcta');
-    estat.examen.encerts++;
-    estat.coins += 20;
-    mostrarEmoji(true, el);
-  } else {
-    el.classList.add('incorrecta');
-    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
-    estat.examen.fallos++;
-    mostrarEmoji(false, el);
-    registrarFallada('examen', p.subtema, p.pag);
-  }
+  if(correcte) { el.classList.add('correcta'); estat.examen.encerts++; estat.coins += 20; mostrarEmoji(true, el); }
+  else { el.classList.add('incorrecta'); cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta'); estat.examen.fallos++; mostrarEmoji(false, el); registrarFallada('examen', p.subtema, p.pag); }
   const btnSig = document.getElementById('btn-sig-examen');
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   const acEl = document.getElementById('examen-aciertos'); if(acEl) acEl.textContent = estat.examen.encerts;
@@ -1961,7 +1861,7 @@ function respondreExamen(idx, el) {
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
-      tipDiv.innerHTML = `💡 ${txt}`;
+      tipDiv.innerHTML = `💡 TIP: ${txt}`;
       tipDiv.style.display = 'block';
       tipDiv.style.border = '2px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
@@ -2142,8 +2042,9 @@ function canviarSubTab(e, tab, subtab) {
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
   if(e && e.target) e.target.classList.add('active');
   const subEl = document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`);
+  const subElNet = document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}`);
   if(subEl) subEl.classList.add('active');
-  // FIX: normalitza subtab amb accent
+  else if(subElNet) subElNet.classList.add('active');
   const subtabReal = subtab.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   if(tab === 'test') carregarPregunta(subtabReal);
   if(tab === 'sit') carregarSituacio(subtab);
@@ -2164,4 +2065,4 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-}
+} 
