@@ -1235,7 +1235,7 @@ const EMOJI_BOTIGA = [
 ];
 
 
-// ===== GASDRIVE DGT CAT V9.8.6 HÍBRID - EXAMEN 0/30 FIX + IMAGENES DGT REALES + NORMES EMOJI COMBO 2-3 + FOQUITO =====
+// ===== GASDRIVE DGT CAT V9.8.7 HÍBRID - MECANICA IMAGES + EXAMEN DGT REAL + NORMES EMOJI COMBO 2-3 + FOQUITO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -1245,9 +1245,9 @@ let sitCategoriaActiva = 'clima';
 // ===== V9.8.5 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL + EMOJI COMBO =====
 const SENALES_SVG = {}; // YA NO SE USA
 
-// TU BANCO VA AQUI: const PREGUNTES = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.trampes aqui tambien
+// TU BANCO VA AQUI: const PREGUNTES = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.mecanica y PREGUNTES.trampes aqui tambien
 
-// ===== V9.8.6 HOTFIX HÍBRID: PINTA PANEL DGT REAL + EMOJI COMBO NORMES + EXAMEN =====
+// ===== V9.8.7 HOTFIX HÍBRID: PINTA PANEL DGT REAL + MECANICA M- + EMOJI COMBO NORMES + EXAMEN =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -1255,23 +1255,31 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // ===== CAS 1: SENYALS / TRAMPES / EXAMEN amb ruta_panel DGT REAL (el teu format) =====
-  if ((cat === 'senyals' || cat === 'trampes' || cat === 'examen') && pregunta.ruta_panel) {
+  // ===== CAS 1: SENYALS / TRAMPES / MECANICA / EXAMEN amb ruta_panel DGT REAL (el teu format) =====
+  // V9.8.7: AFEGIT 'mecanica' I DETECCIÓ M- AL EXAMEN
+  const esPanelReal = pregunta.ruta_panel && (
+    cat === 'senyals' || cat === 'trampes' || cat === 'mecanica' || cat === 'examen' ||
+    pregunta.ruta_panel.startsWith('P-') || pregunta.ruta_panel.startsWith('R-') ||
+    pregunta.ruta_panel.startsWith('S-') || pregunta.ruta_panel.startsWith('M-')
+  );
+
+  if (esPanelReal) {
     const ruta1 = `./${pregunta.ruta_panel}`;
     const ruta2 = `./assets/paneles/${pregunta.ruta_panel}`;
+    const ruta3 = `./assets/mecanica/${pregunta.ruta_panel}`; // Fallback per si tens carpeta mecanica
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
         <img
           src="${ruta1}"
-          alt="Panel DGT ${pregunta.panel_id || ''}"
+          alt="Panel ${pregunta.panel_id || ''}"
           style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;"
-          onerror="this.onerror=null; this.src='${ruta2}'; this.nextElementSibling.style.display='block';"
+          onerror="this.onerror=null; if(this.src.includes('${ruta1.substring(2)}')){this.src='${ruta2}';} else if(this.src.includes('paneles')){this.src='${ruta3}';} else {this.style.display='none'; this.nextElementSibling.style.display='block';}"
         />
         <div style="display:none; color:#ff6b6b; text-align:center; padding:20px;">
           ❌ No s'ha trobat: ${pregunta.ruta_panel}<br><small>Prova: ${ruta1} o ${ruta2}</small>
         </div>
         <div style="text-align:center; color:#888; font-size:12px; margin-top:8px;">
-          Panel: ${pregunta.panel_id || 'N/A'} - ${pregunta.codi || ''}
+          Panel: ${pregunta.panel_id || 'N/A'} - ${pregunta.codi || pregunta.pictograma || ''}
         </div>
       </div>
     `;
@@ -1284,7 +1292,6 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   // ===== CAS 2: NOU FORMAT NORMES amb COMBO EMOJIS 2-3 + FORMA + FOQUITO =====
   if (pregunta.emoji) {
-    // Suport Intl.Segmenter per emojis complexos 👨‍👩‍👧‍👦 1️⃣8️⃣ 💡
     let htmlEmojis = '';
     try {
       const segmenter = new Intl.Segmenter('ca', { granularity: 'grapheme' });
@@ -1292,7 +1299,6 @@ function pintarImatgeSiExisteix(cat, pregunta) {
       const size = segs.length > 2? '26px' : segs.length === 2? '32px' : '42px';
       htmlEmojis = segs.map(s => `<span style="font-size:${size}; line-height:1;">${s}</span>`).join('');
     } catch(e) {
-      // Fallback si navegador vell
       const parts = [...pregunta.emoji];
       const size = parts.length > 2? '26px' : '32px';
       htmlEmojis = parts.map(s => `<span style="font-size:${size}">${s}</span>`).join('');
@@ -1343,7 +1349,8 @@ const MAPEO_PALABRAS_CLAVE = {
   'multa': {subtema: 'Multes i Punts', pag: 30}, 'itv': {subtema: 'Documentació Vehicle', pag: 38}, 'pneumàtic': {subtema: 'Pneumàtics', pag: 92},
   'oli': {subtema: 'Nivells i Líquids', pag: 88}, 'fre': {subtema: 'Sistema Frenada', pag: 89}, 'RCP': {subtema: 'PCR i Reanimació', pag: 96},
   'hemorràgia': {subtema: 'Hemorràgies', pag: 100}, 'CO2': {subtema: 'Contaminació', pag: 103}, 'ZBE': {subtema: 'Zones Baixes Emissions', pag: 105},
-  'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115}
+  'pluja': {subtema: 'Conducció Pluja', pag: 110}, 'boira': {subtema: 'Conducció Boira', pag: 111}, 'accident': {subtema: 'Actuació Accident', pag: 115},
+  'motor': {subtema: 'Motor', pag: 85}, 'embragatge': {subtema: 'Transmissió', pag: 87}, 'bateria': {subtema: 'Sistema Elèctric', pag: 86}
 };
 
 let PROGRESO = JSON.parse(localStorage.getItem('gd_progreso_v2')) || {
@@ -1394,7 +1401,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.6 HÍBRID carregat - NORMES emoji combo + SENYALS panel");
+  console.log("GasDrive V9.8.7 MECANICA carregat - SENYALS + MECANICA + NORMES");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1602,7 +1609,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANCO MAPEADO V9.8.6. Total:', getTotalBanco());
+  console.log('✅ BANCO MAPEADO V9.8.7. Total:', getTotalBanco());
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1683,7 +1690,7 @@ function carregarPregunta(cat) {
   const preguntaEl = document.getElementById(`test-${cat}-pregunta`);
   if(preguntaEl){
     preguntaEl.textContent = p.q;
-    if(audioTxt && (cat === 'senyals' || cat === 'trampes' || cat === 'normes')){
+    if(audioTxt && (cat === 'senyals' || cat === 'trampes' || cat === 'normes' || cat === 'mecanica')){
       preguntaEl.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')" style="background:#00D9FF; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">🔊</button>`;
     }
   }
@@ -1836,7 +1843,7 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
-// ===== V9.8.6 EXAMEN HÍBRID - AGARRA SENYALS + NORMES + SITUACIONS =====
+// ===== V9.8.7 EXAMEN HÍBRID - AGARRA SENYALS + NORMES + MECANICA + SITUACIONS =====
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
   let totes = [];
@@ -1848,7 +1855,7 @@ function iniciarExamen(e) {
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) {
     totes = totes.concat(SITUACIONS.clima.slice(0,5));
   }
-  console.log("V9.8.6 HÍBRID EXAMEN - Total banc:", totes.length);
+  console.log("V9.8.7 HÍBRID EXAMEN - Total banc:", totes.length, "inclou mecanica:", PREGUNTES.mecanica?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -2128,4 +2135,4 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-}
+}   
