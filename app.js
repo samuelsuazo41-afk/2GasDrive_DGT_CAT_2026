@@ -785,61 +785,97 @@ normes: [
 ],
 
 
-
   mecanica: [
-    {id:241,q:"Pressió baixa causa:",a:["Major consum","Menor adherència","Totes dues"],ok:2},
-    {id:242,q:"Líquid de frens baix:",a:["Desgast pastilles","Fuga","Totes dues poden ser"],ok:2},
-    {id:243,q:"Testimoni oli vermell:",a:["Revisar nivell","Atura el motor JA","Canviar oli"],ok:1},
-    {id:244,q:"Bateria descarregada:",a:["Empènyer","Pinces","Totes dues"],ok:2},
-    {id:245,q:"Pneumàtic llis:",a:["Multa","Accident","Totes dues"],ok:2},
-    {id:246,q:"Anticongelant serveix per:",a:["Només fred","Fred i calor","Només calor"],ok:1},
-    {id:247,q:"Nivell refrigerant baix:",a:["Afegeix aigua","Afegeix refrigerant","No toquis"],ok:1},
-    {id:248,q:"Sobreescalfament:",a:["Accelera","Para i espera","Obre tap"],ok:1},
-    {id:249,q:"Oli massa alt:",a:["Millor lubricació","Pot fer mal al motor","No passa res"],ok:1},
-    {id:250,q:"Oli massa baix:",a:["Millor consum","Fricció i desgast","No passa res"],ok:1},
-    {id:251,q:"Pastilles frens gastades:",a:["Millor frenada","Menor frenada + soroll","No passa res"],ok:1},
-    {id:252,q:"Discs frens ratllats:",a:["Millor frenada","Vibració al frenar","No passa res"],ok:1},
-    {id:253,q:"Amortidors gastats:",a:["Millor confort","Menor adherència","No passa res"],ok:1},
-    {id:254,q:"Direcció dura:",a:["Millor control","Falta líquid direcció","No passa res"],ok:1},
-    {id:255,q:"Embragatge rellisca:",a:["Millor sortida","Pèrdua potència","No passa res"],ok:1},
-    {id:256,q:"Caixa canvis rasca:",a:["Normal","Sincronitzadors gastats","No passa res"],ok:1},
-    {id:257,q:"Escapament sorollós:",a:["Millor potència","Forat o junta trencada","No passa res"],ok:1},
-    {id:258,q:"Fum blanc escapament:",a:["Normal","Vapor d’aigua o refrigerant","Oli cremat"],ok:1},
-    {id:259,q:"Fum negre escapament:",a:["Normal","Excés combustible","Oli cremat"],ok:1},
-    {id:260,q:"Fum blau escapament:",a:["Normal","Oli cremat","Excés combustible"],ok:1},
-    {id:261,q:"Testimoni motor groc:",a:["Para JA","Revisa aviat","No passa res"],ok:1},
-    {id:262,q:"Testimoni ABS ences:",a:["No frena","ABS no funciona","No passa res"],ok:1},
-    {id:263,q:"Testimoni airbag ences:",a:["Airbag no funciona","Airbag millorat","No passa res"],ok:0},
-    {id:264,q:"Testimoni bateria ences:",a:["Bateria carregant","Alternador falla","No passa res"],ok:1},
-    {id:265,q:"Testimoni pressió pneumàtics:",a:["Pressió correcta","Pressió baixa","No passa res"],ok:1},
-    {id:266,q:"Neteja líquid parabrises:",a:["Només aigua","Aigua + producte","Només producte"],ok:1},
-    {id:267,q:"Eixugaparabrises no neteja:",a:["Normal","Gomes gastades","Motor trencat"],ok:1},
-    {id:268,q:"Llums no engeguen:",a:["Bombeta fosa","Fusible trencat","Totes dues"],ok:2},
-    {id:269,q:"Intermitent va ràpid:",a:["Normal","Bombeta fosa","Relé trencat"],ok:1},
-    {id:270,q:"Clàxon no sona:",a:["Normal","Fusible o clàxon trencat","No passa res"],ok:1},
-    {id:271,q:"Aire condicionat no refreda:",a:["Normal","Falta gas","Compressor trencat"],ok:1},
-    {id:272,q:"Calefacció no escalfa:",a:["Normal","Termòstat tancat","Radiador trencat"],ok:1},
-    {id:273,q:"Porta no tanca:",a:["Normal","Pany trencat","Goma desgastada"],ok:1},
-    {id:274,q:"Vidre no baixa:",a:["Normal","Motor elevallunes trencat","Fusible trencat"],ok:1},
-    {id:275,q:"Seient no es mou:",a:["Normal","Motor seient trencat","Palanca trencada"],ok:1},
-    {id:276,q:"Volant vibra:",a:["Normal","Rodes desequilibrades","Direcció trencada"],ok:1},
-    {id:277,q:"Cotxe tira a un costat:",a:["Normal","Paral·lelisme mal","Pneumàtic baix"],ok:1},
-    {id:278,q:"Frenada vibra:",a:["Normal","Discs alabejats","Pastilles noves"],ok:1},
-    {id:279,q:"Soroll en girar:",a:["Normal","Palier trencat","Direcció trencada"],ok:1},
-    {id:280,q:"Soroll en accelerar:",a:["Normal","Corretja desgastada","Motor trencat"],ok:1},
-    {id:281,q:"Soroll en frenar:",a:["Normal","Pastilles gastades","Discs nous"],ok:1},
-    {id:282,q:"Soroll en passar sots:",a:["Normal","Suspensió gastada","Rodes noves"],ok:1},
-    {id:283,q:"Cotxe no arrenca:",a:["Normal","Bateria o motor arrencada","No passa res"],ok:1},
-    {id:284,q:"Cotxe s’atura:",a:["Normal","Falta combustible o avaria","No passa res"],ok:1},
-    {id:285,q:"Cotxe perd potència:",a:["Normal","Filtre brut o avaria","No passa res"],ok:1},
-    {id:286,q:"Cotxe consumeix molt:",a:["Normal","Pressió baixa o avaria","No passa res"],ok:1},
-    {id:287,q:"Cotxe fuma:",a:["Normal","Avaria motor","No passa res"],ok:1},
-    {id:288,q:"Cotxe olor a cremat:",a:["Normal","Fricció o curtcircuit","No passa res"],ok:1},
-    {id:289,q:"Cotxe olor a gasolina:",a:["Normal","Fuita combustible","No passa res"],ok:1},
-    {id:290,q:"Cotxe olor a oli:",a:["Normal","Fuita oli","No passa res"],ok:1},
-    {id:291,q:"Cotxe olor a refrigerant:",a:["Normal","Fuita refrigerant","No passa res"],ok:1}
-  ],
-  auxilis: [
+  // ===== M-01_MOTOR_BASIC.jpg - 6 preguntes =====
+  { id: "M-01-01", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "MOTOR", pregunta: "¿Qué es el motor de combustión?", opciones: ["Convierte combustible en movimiento", "Filtra el aire", "Enfría el líquido"], correcta: 0, explicacion: "El motor quema la mezcla aire-combustible para generar movimiento. Es el corazón del vehículo." },
+  { id: "M-01-02", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "PISTON", pregunta: "¿Qué hace el pistón dentro del cilindro?", opciones: ["Sube y baja comprimiendo la mezcla", "Filtra el aceite", "Carga la batería"], correcta: 0, explicacion: "El pistón comprime la mezcla y transmite la fuerza de la explosión al cigüeñal." },
+  { id: "M-01-03", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "ACEITE", pregunta: "¿Para qué sirve el aceite del motor?", opciones: ["Lubricar, limpiar y refrigerar piezas", "Solo para dar color", "Para frenar"], correcta: 0, explicacion: "El aceite reduce el rozamiento, limpia residuos y ayuda a evacuar calor." },
+  { id: "M-01-04", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "REFRIGERACION", pregunta: "Si el testigo de temperatura se enciende en rojo, ¿qué debes hacer?", opciones: ["Detenerse lo antes posible en lugar seguro y parar motor", "Acelerar para enfriar", "Seguir circulando"], correcta: 0, explicacion: "Sobrecalentamiento grave. Parar motor para evitar gripado." },
+  { id: "M-01-05", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "TERMOSTATO", pregunta: "¿Qué función tiene el termostato?", opciones: ["Regular la temperatura dejando pasar refrigerante al radiador", "Cargar la batería", "Filtrar gasoil"], correcta: 0, explicacion: "Cierra el paso en frío para calentar rápido y abre cuando llega a temperatura óptima." },
+  { id: "M-01-06", panel_id: "M-01", ruta_panel: "M-01_MOTOR_BASIC.jpg", categoria: "MECANICA", pictograma: "FILTRO_ACEITE", pregunta: "¿Cada cuánto se revisa el nivel de aceite?", opciones: ["Regularmente con motor frío y en llano", "Solo en la ITV", "Nunca"], correcta: 0, explicacion: "Revisión visual con varilla, motor frío y vehículo horizontal." },
+
+  // ===== M-02_FRENOS_RUEDAS.jpg =====
+  { id: "M-02-01", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "FRENO", pregunta: "¿Qué elemento crea la fricción para frenar?", opciones: ["Pastillas contra disco", "El aceite", "El filtro de aire"], correcta: 0, explicacion: "La pinza aprieta las pastillas contra el disco y genera fricción." },
+  { id: "M-02-02", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "PASTILLAS", pregunta: "¿Cómo notas desgaste de pastillas?", opciones: ["Ruido agudo al frenar y mayor distancia", "El motor suena más", "El volante vibra solo"], correcta: 0, explicacion: "Chirrido metálico y pedal más largo indican desgaste." },
+  { id: "M-02-03", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "ABS", pregunta: "¿Para qué sirve el ABS?", opciones: ["Evitar bloqueo de ruedas y mantener dirección al frenar fuerte", "Aumentar velocidad", "Ahorrar combustible"], correcta: 0, explicacion: "ABS modula presión para no bloquear y poder girar." },
+  { id: "M-02-04", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "NEUMATICO", pregunta: "¿Qué indica el dibujo mínimo legal del neumático?", opciones: ["1,6 mm de profundidad", "0,2 mm", "5 mm"], correcta: 0, explicacion: "Mínimo 1,6 mm. Por debajo pierde adherencia, sobre todo en mojado." },
+  { id: "M-02-05", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "SUSPENSION", pregunta: "¿Qué hace la suspensión?", opciones: ["Mantener contacto rueda-suelo y confort", "Cargar batería", "Filtrar gasoil"], correcta: 0, explicacion: "Amortigua baches y mantiene estabilidad." },
+  { id: "M-02-06", panel_id: "M-02", ruta_panel: "M-02_FRENOS_RUEDAS.jpg", categoria: "MECANICA", pictograma: "DIRECCION", pregunta: "¿Qué es la dirección asistida?", opciones: ["Sistema que ayuda a girar el volante con menos esfuerzo", "Un tipo de freno", "Un filtro"], correcta: 0, explicacion: "Hidráulica o eléctrica, facilita el giro, sobre todo en parado." },
+
+  // ===== M-03_ELECTRICO_ARRANQUE.jpg =====
+  { id: "M-03-01", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "BATERIA", pregunta: "¿Qué hace la batería de 12V?", opciones: ["Alimentar arranque y sistemas con motor parado", "Filtrar aceite", "Enfriar motor"], correcta: 0, explicacion: "Almacena energía para arranque, luces y electrónica." },
+  { id: "M-03-02", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "ALTERNADOR", pregunta: "¿Qué hace el alternador?", opciones: ["Cargar la batería con motor en marcha", "Frenar el coche", "Filtrar aire"], correcta: 0, explicacion: "Convierte energía del motor en electricidad para cargar batería." },
+  { id: "M-03-03", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "ARRANQUE", pregunta: "¿Qué hace el motor de arranque?", opciones: ["Hacer girar el motor para arrancar", "Enfriar radiador", "Abrir puertas"], correcta: 0, explicacion: "Pequeño motor eléctrico que inicia el giro del motor térmico." },
+  { id: "M-03-04", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "BUJIA", pregunta: "¿En qué motor hay bujías?", opciones: ["En gasolina, crean chispa", "En diésel solo", "En ninguno"], correcta: 0, explicacion: "Gasolina: bujía genera chispa. Diésel usa calentadores." },
+  { id: "M-03-05", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "CORREA", pregunta: "Si chirría la correa de accesorios, ¿qué indica?", opciones: ["Desgaste o destensado", "Falta de gasoil", "Freno gastado"], correcta: 0, explicacion: "Chirrido = correa patina, revisar tensión y estado." },
+  { id: "M-03-06", panel_id: "M-03", ruta_panel: "M-03_ELECTRICO_ARRANQUE.jpg", categoria: "MECANICA", pictograma: "CHASIS", pregunta: "¿Qué es el bastidor o chasis?", opciones: ["Estructura que soporta todo el vehículo", "Un filtro", "Un fusible"], correcta: 0, explicacion: "Base rígida donde se fija motor, carrocería y demás." },
+
+  // ===== M-04_TRANSMISION.jpg =====
+  { id: "M-04-01", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "EMBRAGUE", pregunta: "¿Para qué sirve el embrague?", opciones: ["Separar motor de caja para cambiar marcha", "Frenar", "Enfriar"], correcta: 0, explicacion: "Desacopla motor y transmisión para cambiar sin forzar." },
+  { id: "M-04-02", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "CAJA_CAMBIOS", pregunta: "¿Qué permite la caja de cambios?", opciones: ["Adaptar par y velocidad a la marcha", "Cargar batería", "Filtrar aceite"], correcta: 0, explicacion: "Multiplica fuerza en marchas cortas y velocidad en largas." },
+  { id: "M-04-03", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "PALIER", pregunta: "¿Qué es el palier?", opciones: ["Eje que lleva giro de diferencial a la rueda", "Filtro de aire", "Bomba de agua"], correcta: 0, explicacion: "Transmite tracción final a cada rueda motriz." },
+  { id: "M-04-04", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "DIFERENCIAL", pregunta: "¿Qué permite el diferencial en curva?", opciones: ["Que ruedas del mismo eje giren a distinta velocidad", "Que frenen igual", "Que se pare el motor"], correcta: 0, explicacion: "Rueda exterior recorre más distancia, necesita girar más rápido." },
+  { id: "M-04-05", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "GRUPO_CONICO", pregunta: "¿Qué hace el grupo cónico?", opciones: ["Cambiar giro 90 grados hacia ruedas", "Filtrar gasoil", "Cargar batería"], correcta: 0, explicacion: "En tracción trasera cambia dirección de giro del cardán." },
+  { id: "M-04-06", panel_id: "M-04", ruta_panel: "M-04_TRANSMISION.jpg", categoria: "MECANICA", pictograma: "CARDAN", pregunta: "¿Qué une el árbol cardán?", opciones: ["Caja de cambios con diferencial trasero", "Batería con alternador", "Radiador con motor"], correcta: 0, explicacion: "Transmite giro a larga distancia en propulsión trasera." },
+
+  // ===== M-05_REFRIGERACION.jpg =====
+  { id: "M-05-01", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "BOMBA_AGUA", pregunta: "¿Qué mueve la bomba de agua?", opciones: ["Hace circular refrigerante por el circuito", "Bombea aceite", "Bombea gasoil"], correcta: 0, explicacion: "Circula líquido por motor y radiador." },
+  { id: "M-05-02", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "RADIADOR", pregunta: "¿Qué hace el radiador?", opciones: ["Disipar calor del refrigerante al aire", "Filtrar aire", "Cargar batería"], correcta: 0, explicacion: "Intercambiador aire-líquido que enfría." },
+  { id: "M-05-03", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "VENTILADOR", pregunta: "¿Cuándo actúa el electroventilador?", opciones: ["Cuando el aire natural no basta, sobre todo en parado", "Siempre a tope", "Solo en autopista"], correcta: 0, explicacion: "Se activa por temperatura para forzar aire por radiador." },
+  { id: "M-05-04", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "DEPOSITO_EXPANSION", pregunta: "¿Para qué es el depósito de expansión?", opciones: ["Recoger expansión del líquido y mantener nivel", "Guardar aceite", "Guardar gasoil"], correcta: 0, explicacion: "Compensa dilatación y permite rellenar circuito." },
+  { id: "M-05-05", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "MANGUITO", pregunta: "Si un manguito pierde líquido, ¿qué ocurre?", opciones: ["Baja nivel y riesgo de sobrecalentamiento", "Mejora frenada", "Aumenta carga batería"], correcta: 0, explicacion: "Fuga = pérdida refrigeración = peligro gripado." },
+  { id: "M-05-06", panel_id: "M-05", ruta_panel: "M-05_REFRIGERACION.jpg", categoria: "MECANICA", pictograma: "ANTICONGELANTE", pregunta: "¿Qué ventaja tiene el anticongelante?", opciones: ["No se congela en invierno y no hierve tan fácil en verano", "Solo da color", "Aumenta consumo"], correcta: 0, explicacion: "Mezcla agua + glicol protege -30ºC a +120ºC y anticorrosión." },
+
+  // ===== M-06_FILTROS_TURBO.jpg =====
+  { id: "M-06-01", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "VARILLA_ACEITE", pregunta: "¿Cómo se mide el nivel de aceite correctamente?", opciones: ["Motor frío, llano, sacar varilla, limpiar y medir", "Con motor arrancado", "En pendiente"], correcta: 0, explicacion: "Medición fiable en frío y horizontal entre min y max." },
+  { id: "M-06-02", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "FILTRO_ACEITE", pregunta: "¿Qué retiene el filtro de aceite?", opciones: ["Impurezas metálicas y suciedad", "Agua del radiador", "Aire"], correcta: 0, explicacion: "Protege motor de partículas abrasivas." },
+  { id: "M-06-03", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "FILTRO_AIRE", pregunta: "¿Qué pasa si el filtro de aire está muy sucio?", opciones: ["Más consumo y menos potencia", "Frena mejor", "Carga más batería"], correcta: 0, explicacion: "Menos aire = combustión incompleta." },
+  { id: "M-06-04", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "FILTRO_GASOIL", pregunta: "¿Qué filtra el filtro de gasoil?", opciones: ["Agua e impurezas del diésel", "Aceite del motor", "Líquido de frenos"], correcta: 0, explicacion: "Evita que agua/impurezas dañen bomba e inyectores." },
+  { id: "M-06-05", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "TURBO", pregunta: "¿Qué hace el turbo?", opciones: ["Aprovecha gases escape para meter más aire al motor", "Enfría radiador", "Filtra aceite"], correcta: 0, explicacion: "Más aire = más potencia sin aumentar cilindrada." },
+  { id: "M-06-06", panel_id: "M-06", ruta_panel: "M-06_FILTROS_TURBO.jpg", categoria: "MECANICA", pictograma: "INTERCOOLER", pregunta: "¿Qué hace el intercooler?", opciones: ["Enfría aire del turbo antes de entrar al motor", "Calienta gasoil", "Carga batería"], correcta: 0, explicacion: "Aire más frío = más denso = mejor combustión." },
+
+  // ===== M-07_HIBRIDO_TECH.jpg =====
+  { id: "M-07-01", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "MOTOR_ELECTRICO", pregunta: "¿Cómo funciona un híbrido?", opciones: ["Combina motor térmico y eléctrico para eficiencia", "Solo con gasolina", "Solo con diésel"], correcta: 0, explicacion: "Eléctrico en ciudad, térmico en carretera, ambos si hace falta." },
+  { id: "M-07-02", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "BATERIA_LITIO", pregunta: "¿Dónde está la batería de alto voltaje en híbrido?", opciones: ["Normalmente bajo asiento trasero o maletero, aislada", "En el radiador", "En el escape"], correcta: 0, explicacion: "Batería HV de 200-400V, no confundir con 12V." },
+  { id: "M-07-03", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "FRENO_REGENERATIVO", pregunta: "¿Qué es el freno regenerativo?", opciones: ["Recupera energía al frenar para recargar batería", "Frena con aire", "Solo freno de mano"], correcta: 0, explicacion: "Motor eléctrico actúa como generador al decelerar." },
+  { id: "M-07-04", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "ESP", pregunta: "¿Qué hace el ESP?", opciones: ["Corrige trayectoria si detecta derrape", "Aumenta velocidad", "Filtra gasoil"], correcta: 0, explicacion: "Frena rueda individual y corta potencia para estabilizar." },
+  { id: "M-07-05", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "EBS", pregunta: "¿Qué es EBS en camión?", opciones: ["Frenado electrónico que gestiona todos los frenos", "Un filtro", "Un tipo de aceite"], correcta: 0, explicacion: "Electronic Braking System, frenada más rápida y estable en pesados." },
+  { id: "M-07-06", panel_id: "M-07", ruta_panel: "M-07_HIBRIDO_TECH.jpg", categoria: "MECANICA", pictograma: "BAS", pregunta: "¿Qué hace el BAS?", opciones: ["Detecta frenada de emergencia y aplica máxima fuerza", "Carga batería", "Enfría motor"], correcta: 0, explicacion: "Brake Assist System ayuda si conductor no pisa suficientemente fuerte." },
+
+  // ===== M-08_AVERIAS_HUMOS.jpg =====
+  { id: "M-08-01", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "HUMO_BLANCO", pregunta: "¿Qué indica humo blanco espeso continuo?", opciones: ["Posible junta culata, entra refrigerante al cilindro", "Normal en diésel frío unos segundos", "Falta aceite"], correcta: 0, explicacion: "Blanco denso = agua/refrigerante quemado. Revisar urgente." },
+  { id: "M-08-02", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "HUMO_NEGRO", pregunta: "¿Qué indica humo negro en diésel?", opciones: ["Exceso gasoil, combustión incompleta, filtro aire sucio", "Falta agua", "Batería baja"], correcta: 0, explicacion: "Mezcla rica o filtro aire obstruido." },
+  { id: "M-08-03", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "HUMO_AZUL", pregunta: "¿Qué indica humo azul?", opciones: ["Motor quema aceite", "Motor quema agua", "Normal"], correcta: 0, explicacion: "Azul = aceite en combustión por desgaste segmentos o retenes." },
+  { id: "M-08-04", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "SOBRECALENTAMIENTO", pregunta: "¿Qué hacer si se enciende testigo de sobrecalentamiento?", opciones: ["Parar, apagar, esperar y no abrir radiador en caliente", "Abrir radiador enseguida", "Seguir a 120"], correcta: 0, explicacion: "Abrir en caliente quema por vapor a presión." },
+  { id: "M-08-05", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "CHIRRIDO_CORREA", pregunta: "¿Qué indica chirrido al arrancar en frío?", opciones: ["Correa destensada o desgastada", "Freno de mano puesto", "Falta gasoil"], correcta: 0, explicacion: "Correa patina hasta que coge temperatura." },
+  { id: "M-08-06", panel_id: "M-08", ruta_panel: "M-08_AVERIAS_HUMOS.jpg", categoria: "MECANICA", pictograma: "FUGA_LIQUIDO", pregunta: "¿Mancha verde/rosa debajo del motor?", opciones: ["Posible fuga refrigerante", "Fuga de aceite motor", "Normal"], correcta: 0, explicacion: "Refrigerante suele ser verde, rosa o naranja." },
+
+  // ===== M-09_CAMION_INDUSTRIAL.jpg =====
+  { id: "M-09-01", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "CABEZA_TRACTORA", pregunta: "¿Qué es la cabeza tractora?", opciones: ["Vehículo que arrastra semirremolque", "Un remolque sin motor", "Un filtro"], correcta: 0, explicacion: "Tractora + semirremolque = articulado." },
+  { id: "M-09-02", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "REMOLQUE", pregunta: "¿Qué diferencia remolque de semirremolque?", opciones: ["Remolque apoya todo su peso en sus ejes, semirremolque parte en tractora", "Son iguales", "Remolque no tiene ruedas"], correcta: 0, explicacion: "Semirremolque transmite peso a quinta rueda." },
+  { id: "M-09-03", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "QUINTA_RUEDA", pregunta: "¿Qué es la quinta rueda?", opciones: ["Acoplamiento entre tractora y semirremolque", "Rueda de repuesto", "Freno extra"], correcta: 0, explicacion: "Plato que engancha kingpin del semirremolque." },
+  { id: "M-09-04", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "EJE_TANDEM", pregunta: "¿Qué es eje tándem?", opciones: ["Dos ejes muy juntos que reparten peso", "Un solo eje", "Un tipo de freno"], correcta: 0, explicacion: "Mejora reparto de carga y tracción." },
+  { id: "M-09-05", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "FRENO_AIRE", pregunta: "¿Cómo frena un camión de aire comprimido?", opciones: ["Usa aire a presión, si falta aire se bloquea por seguridad", "Solo con líquido como coche", "No frena"], correcta: 0, explicacion: "Freno neumático: sin aire, muelles bloquean ruedas = seguridad." },
+  { id: "M-09-06", panel_id: "M-09", ruta_panel: "M-09_CAMION_INDUSTRIAL.jpg", categoria: "MECANICA", pictograma: "RETARDER", pregunta: "¿Para qué sirve el retarder?", opciones: ["Freno auxiliar que evita sobrecalentar frenos en bajadas", "Acelerar", "Filtrar gasoil"], correcta: 0, explicacion: "Ralentizador electromagnético o hidráulico, ahorra frenos." },
+
+  // ===== M-10_HERRAMIENTAS_V16.jpg =====
+  { id: "M-10-01", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "GATO", pregunta: "¿Dónde se coloca el gato para cambiar rueda?", opciones: ["En puntos reforzados del chasis indicados en manual", "En cualquier chapa", "En el paragolpes de plástico"], correcta: 0, explicacion: "Puntos específicos para no deformar carrocería." },
+  { id: "M-10-02", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "LLAVE_RUEDAS", pregunta: "¿Cómo aflojar tornillos de rueda?", opciones: ["En cruz, antes de levantar coche", "Después de levantar", "Da igual"], correcta: 0, explicacion: "Aflojar en suelo en cruz, luego levantar y quitar." },
+  { id: "M-10-03", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "V16", pregunta: "¿Qué es la baliza V16?", opciones: ["Luz amarilla intermitente que sustituye triángulos desde 2026", "Un extintor", "Un gato"], correcta: 0, explicacion: "Se coloca en techo, visible 360º, con conectividad DGT 3.0." },
+  { id: "M-10-04", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "CHALECO", pregunta: "¿Cuándo ponerse chaleco reflectante?", opciones: ["Antes de salir del vehículo en vía interurbana", "Dentro del coche", "Solo de noche"], correcta: 0, explicacion: "Obligatorio salir con chaleco puesto en calzada." },
+  { id: "M-10-05", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "TRIANGULO", pregunta: "¿Siguen obligatorios los triángulos con V16?", opciones: ["No, desde 2026 solo V16 obligatoria", "Sí, dos triángulos siempre", "Solo uno"], correcta: 0, explicacion: "Norma actual: V16 sustituye triángulos." },
+  { id: "M-10-06", panel_id: "M-10", ruta_panel: "M-10_HERRAMIENTAS_V16.jpg", categoria: "MECANICA", pictograma: "EXTINTOR", pregunta: "¿Qué extintor debe llevar camión?", opciones: ["Extintor polvo ABC revisado y accesible", "No necesita", "De agua solo"], correcta: 0, explicacion: "Obligatorio en pesados, revisado y con presión correcta." },
+
+  // ===== M-11_RESTO_TEMARIO.jpg - 8% que faltaba - 6 preguntes =====
+  { id: "M-11-01", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "BASTIDOR", pregunta: "¿Qué es el bastidor independiente?", opciones: ["Chasis separado de carrocería típico en camiones y todoterrenos", "Carrocería autoportante", "Un filtro"], correcta: 0, explicacion: "Más robusto, permite torsión en campo." },
+  { id: "M-11-02", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "CARROCERIA_DEFORMACION", pregunta: "¿Qué es deformación programada?", opciones: ["Carrocería diseñada para absorber impacto deformándose", "Carrocería que no se deforma", "Un tipo de pintura"], correcta: 0, explicacion: "Zona delantera/trasera se deforma para proteger habitáculo." },
+  { id: "M-11-03", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "AIRBAG", pregunta: "¿El airbag sustituye al cinturón?", opciones: ["No, es complemento del cinturón", "Sí, ya no hace falta cinturón", "Solo en ciudad"], correcta: 0, explicacion: "Airbag sin cinturón puede ser letal. Siempre con cinturón." },
+  { id: "M-11-04", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "CATALIZADOR", pregunta: "¿Qué hace el catalizador?", opciones: ["Reduce gases contaminantes transformándolos", "Aumenta potencia", "Filtra aceite"], correcta: 0, explicacion: "Convierte CO, HC y NOx en gases menos nocivos." },
+  { id: "M-11-05", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "SONDA_LAMBDA", pregunta: "¿Qué mide la sonda lambda?", opciones: ["Oxígeno en escape para ajustar mezcla", "Temperatura del aceite", "Presión de ruedas"], correcta: 0, explicacion: "Informa a centralita si mezcla es rica o pobre." },
+  { id: "M-11-06", panel_id: "M-11", ruta_panel: "M-11_RESTO_TEMARIO.jpg", categoria: "MECANICA", pictograma: "INYECCION_ECO", pregunta: "¿Qué es conducción económica relacionada con inyección?", opciones: ["Conducir suave, marchas largas, anticipación para gastar menos", "Acelerar mucho", "Frenar fuerte"], correcta: 0, explicacion: "Inyección electrónica + conducción eficiente = menos consumo y contaminación." }
+],  
+
+ auxilis: [
     {id:292,q:"Què fas primer davant un accident?",a:["Trucar al 112","Moure el ferit","Donar aigua"],ok:0},
     {id:293,q:"En una hemorràgia arterial, què fas?",a:["Comprimir directe","Elevar extremitat","Donar aspirina"],ok:0},
     {id:294,q:"Posició lateral de seguretat serveix per:",a:["Evitar asfíxia","Accelerar recuperació","Reduir dolor"],ok:0},
