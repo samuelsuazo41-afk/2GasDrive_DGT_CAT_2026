@@ -50,7 +50,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "S-24", "ruta": "S-220_A_S-222_PRESENAL2.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 2", "senales_incluidas": ["S-220","S-220a","S-222"] },
   { "panel_id": "S-25", "ruta": "S-222A_A_S-230_PRESENAL3.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 3", "senales_incluidas": ["S-222a","S-225","S-230"] },
   { "panel_id": "S-26", "ruta": "S-321_A_S-342_DIRECCION.jpg", "categoria": "INDICACION", "nombre": "SENALES DE DIRECCION", "senales_incluidas": ["S-321","S-322","S-341","S-342"] },
-],
+
 
   // ===== MECANICA - 11 PANELES - 100% MANUAL VIII - V2.2 NUEVO =====
   { "panel_id": "M-01", "ruta": "M-01_MOTOR_BASIC.jpg", "categoria": "MECANICA", "nombre": "MOTOR BASIC", "senales_incluidas": ["MOTOR","PISTON","ACEITE","REFRIGERACION","TERMOSTATO","FILTRO_ACEITE"] },
