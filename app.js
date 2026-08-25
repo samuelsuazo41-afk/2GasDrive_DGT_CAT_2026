@@ -1199,20 +1199,19 @@ const EMOJI_BOTIGA = [
 ];
 
 
-
-// ===== GASDRIVE DGT CAT V9.8.5 HOTFIX - EXAMEN 0/30 FIX + IMAGENES DGT REALES + P-01B 52 PREGUNTAS =====
+// ===== GASDRIVE DGT CAT V9.8.6 HÍBRID - EXAMEN 0/30 FIX + IMAGENES DGT REALES + NORMES EMOJI COMBO 2-3 + FOQUITO =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
 let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 
-// ===== V9.8.5 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL =====
+// ===== V9.8.5 BANCO DE SVGS ELIMINADO - AHORA USAMOS RUTA_PANEL + EMOJI COMBO =====
 const SENALES_SVG = {}; // YA NO SE USA
 
 // TU BANCO VA AQUI: const PREGUNTES = [...] // <- TU YA LO TIENES, NO LO BORRES. Añade PREGUNTES.trampes aqui tambien
 
-// ===== V9.8.5 HOTFIX: PINTAR PANEL DGT REAL - FIX ROOT + assets/paneles + EXAMEN =====
+// ===== V9.8.6 HOTFIX HÍBRID: PINTA PANEL DGT REAL + EMOJI COMBO NORMES + EXAMEN =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   const imgDiv = document.getElementById(`test-${cat}-imagen`) || document.getElementById(`examen-imagen`);
   const emojisDiv = document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
@@ -1220,7 +1219,7 @@ function pintarImatgeSiExisteix(cat, pregunta) {
 
   if (!imgDiv) return;
 
-  // FIX V9.8.5: Ahora EXAMEN también pinta paneles + soporte doble ruta
+  // ===== CAS 1: SENYALS / TRAMPES / EXAMEN amb ruta_panel DGT REAL (el teu format) =====
   if ((cat === 'senyals' || cat === 'trampes' || cat === 'examen') && pregunta.ruta_panel) {
     const ruta1 = `./${pregunta.ruta_panel}`;
     const ruta2 = `./assets/paneles/${pregunta.ruta_panel}`;
@@ -1242,22 +1241,53 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     `;
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
-  } else {
-    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px;">Sense pictograma</div>`;
-    imgDiv.style.border = '2px dashed rgba(0, 217, 255, 0.3)';
-    imgDiv.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.1)';
-    imgDiv.style.borderRadius = '12px';
+    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
+    if(tipDiv){ tipDiv.innerHTML=''; tipDiv.style.display='none'; }
+    return;
   }
 
-  if(emojisDiv) {
-    emojisDiv.innerHTML = '';
-    emojisDiv.style.display = 'none';
+  // ===== CAS 2: NOU FORMAT NORMES amb COMBO EMOJIS 2-3 + FORMA + FOQUITO =====
+  if (pregunta.emoji) {
+    // Suport Intl.Segmenter per emojis complexos 👨‍👩‍👧‍👦 1️⃣8️⃣ 💡
+    let htmlEmojis = '';
+    try {
+      const segmenter = new Intl.Segmenter('ca', { granularity: 'grapheme' });
+      const segs = [...segmenter.segment(pregunta.emoji)].map(s => s.segment);
+      const size = segs.length > 2? '26px' : segs.length === 2? '32px' : '42px';
+      htmlEmojis = segs.map(s => `<span style="font-size:${size}; line-height:1;">${s}</span>`).join('');
+    } catch(e) {
+      // Fallback si navegador vell
+      const parts = [...pregunta.emoji];
+      const size = parts.length > 2? '26px' : '32px';
+      htmlEmojis = parts.map(s => `<span style="font-size:${size}">${s}</span>`).join('');
+    }
+
+    const forma = pregunta.forma || 'circulo-rojo';
+    let extraStyle = '';
+    if(forma === 'circulo-rojo') extraStyle = 'border:6px solid #e53935; border-radius:50%; background:white;';
+    if(forma === 'cuadrado-azul') extraStyle = 'border:6px solid #1e88e5; border-radius:16px; background:white;';
+    if(forma === 'triangulo-amarillo') extraStyle = 'border:6px solid #fdd835; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background:white; width:130px; height:115px;';
+
+    imgDiv.innerHTML = `
+      <div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(0,217,255,0.15); ${extraStyle}">
+        <div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center; ${forma==='triangulo-amarillo'?'margin-top:18px':''}">
+          ${htmlEmojis}
+        </div>
+      </div>
+    `;
+    imgDiv.style.border = 'none';
+    imgDiv.style.boxShadow = 'none';
+    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
+    if(tipDiv){ tipDiv.innerHTML=''; tipDiv.style.display='none'; }
+    return;
   }
 
-  if(tipDiv) {
-    tipDiv.innerHTML = '';
-    tipDiv.style.display = 'none';
-  }
+  // ===== CAS 3: RES - PLACEHOLDER =====
+  imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma</div>`;
+  imgDiv.style.border = 'none';
+  imgDiv.style.boxShadow = 'none';
+  if(emojisDiv) { emojisDiv.innerHTML = ''; emojisDiv.style.display = 'none'; }
+  if(tipDiv) { tipDiv.innerHTML = ''; tipDiv.style.display = 'none'; }
 }
 
 // FIX V9.8.5: Total dinámico anti-crash si PREGUNTES no existe aún
@@ -1328,7 +1358,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.5 HOTFIX carregat - P-01B FIX");
+  console.log("GasDrive V9.8.6 HÍBRID carregat - NORMES emoji combo + SENYALS panel");
   autoMapearTotesPreguntes();
   comprovarNouDia();
   iniciarComptadorTemari();
@@ -1401,15 +1431,17 @@ function calcularPreparacioDGT_V94() {
   const fa7Dies = new Date(avui.getTime() - 7 * 24 * 60 * 60 * 1000);
   let totalPreg = 0, domina = 0, aprenent = 0;
   let historial = estat.stats.historialPregunta || {};
-  for(let cat in PREGUNTES) {
-    PREGUNTES[cat].forEach(p => {
-      totalPreg++;
-      const h = historial[p.id];
-      if(!h) return;
-      const diesDesdeUltim = (avui - new Date(h.ultima)) / (1000*60*60*24);
-      if(h.consecutius >= 3 && diesDesdeUltim < 3) domina++;
-      else if((h.consecutius >= 1 && diesDesdeUltim < 7) || diesDesdeUltim < 3) aprenent++;
-    });
+  if(typeof PREGUNTES!== 'undefined'){
+    for(let cat in PREGUNTES) {
+      PREGUNTES[cat].forEach(p => {
+        totalPreg++;
+        const h = historial[p.id];
+        if(!h) return;
+        const diesDesdeUltim = (avui - new Date(h.ultima)) / (1000*60*60*24);
+        if(h.consecutius >= 3 && diesDesdeUltim < 3) domina++;
+        else if((h.consecutius >= 1 && diesDesdeUltim < 7) || diesDesdeUltim < 3) aprenent++;
+      });
+    }
   }
   let retencioRaw = totalPreg > 0? ((domina * 1.0) + (aprenent * 0.5)) / totalPreg * 100 : 0;
   const retencioAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].retencio || 0 : 0;
@@ -1428,11 +1460,13 @@ function calcularPreparacioDGT_V94() {
   let constancia = Math.round((diesValids / 20) * 100);
   if(constancia > 100) constancia = 100;
   let unicas7Dies = new Set();
-  for(let cat in PREGUNTES) {
-    PREGUNTES[cat].forEach(p => {
-      const h = historial[p.id];
-      if(h && new Date(h.ultima) >= fa7Dies) unicas7Dies.add(p.id);
-    });
+  if(typeof PREGUNTES!== 'undefined'){
+    for(let cat in PREGUNTES) {
+      PREGUNTES[cat].forEach(p => {
+        const h = historial[p.id];
+        if(h && new Date(h.ultima) >= fa7Dies) unicas7Dies.add(p.id);
+      });
+    }
   }
   let coberturaRaw = Math.round((unicas7Dies.size / getTotalBanco()) * 100);
   const coberturaAyer = estat.stats.historialEvolucio.length > 0? estat.stats.historialEvolucio[estat.stats.historialEvolucio.length-1].cobertura || 0 : 0;
@@ -1452,9 +1486,7 @@ function iniciarComptadorTemari() {
   comprovarNouDia();
   actualitzarPaseUI();
   contadorTemari = setInterval(() => {
-    const vistaTemariActiva = document.getElementById('tab-temari')?.classList.contains('active') ||
-                              document.querySelector('.tab-btn.active.emoji')?.textContent.includes('📖') ||
-                              document.body.innerText.includes('.pdf');
+    const vistaTemariActiva = document.getElementById('tab-temari')?.classList.contains('active');
     if (vistaTemariActiva) {
       if (tempsIniciTemari === null) {
         tempsIniciTemari = Date.now();
@@ -1534,7 +1566,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANCO MAPEADO V9.8.5. Total:', getTotalBanco());
+  console.log('✅ BANCO MAPEADO V9.8.6. Total:', getTotalBanco());
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1574,18 +1606,18 @@ function actualitzarEstadistiques_V94() {
   const tab = document.getElementById('tab-estadistiques');
   if(!tab ||!tab.classList.contains('active')) return;
   const stats = calcularPreparacioDGT_V94();
-  document.getElementById('stats-global-percent').textContent = stats.preparacio + '%';
-  document.getElementById('stats-global-bar').style.width = stats.preparacio + '%';
-  document.getElementById('stats-domini-percent').textContent = stats.retencio + '%';
-  document.getElementById('stats-domini-bar').style.width = stats.retencio + '%';
-  document.getElementById('stats-constancia-percent').textContent = stats.constancia + '%';
-  document.getElementById('stats-constancia-bar').style.width = stats.constancia + '%';
-  document.getElementById('stats-constancia-label').textContent = `CONSTÀNCIA: ${stats.diesValids}/20 dies vàlids`;
-  document.getElementById('stats-temari-percent').textContent = stats.cobertura + '%';
-  document.getElementById('stats-temari-bar').style.width = stats.cobertura + '%';
-  document.getElementById('stats-simulacres-percent').textContent = stats.estabilitat + '%';
-  document.getElementById('stats-simulacres-bar').style.width = stats.estabilitat + '%';
-  document.getElementById('stats-examen-aprobados').textContent = `Millor ratxa: ${stats.maxRatxa}/6 aprovats seguits`;
+  const el1 = document.getElementById('stats-global-percent'); if(el1) el1.textContent = stats.preparacio + '%';
+  const el2 = document.getElementById('stats-global-bar'); if(el2) el2.style.width = stats.preparacio + '%';
+  const el3 = document.getElementById('stats-domini-percent'); if(el3) el3.textContent = stats.retencio + '%';
+  const el4 = document.getElementById('stats-domini-bar'); if(el4) el4.style.width = stats.retencio + '%';
+  const el5 = document.getElementById('stats-constancia-percent'); if(el5) el5.textContent = stats.constancia + '%';
+  const el6 = document.getElementById('stats-constancia-bar'); if(el6) el6.style.width = stats.constancia + '%';
+  const el7 = document.getElementById('stats-constancia-label'); if(el7) el7.textContent = `CONSTÀNCIA: ${stats.diesValids}/20 dies vàlids`;
+  const el8 = document.getElementById('stats-temari-percent'); if(el8) el8.textContent = stats.cobertura + '%';
+  const el9 = document.getElementById('stats-temari-bar'); if(el9) el9.style.width = stats.cobertura + '%';
+  const el10 = document.getElementById('stats-simulacres-percent'); if(el10) el10.textContent = stats.estabilitat + '%';
+  const el11 = document.getElementById('stats-simulacres-bar'); if(el11) el11.style.width = stats.estabilitat + '%';
+  const el12 = document.getElementById('stats-examen-aprobados'); if(el12) el12.textContent = `Millor ratxa: ${stats.maxRatxa}/6 aprovats seguits`;
   dibujarGraficaEvolucion();
   dibuixarPuntsDebils_V94();
   const btnDGT = document.getElementById('btn-dgt-oficial');
@@ -1612,22 +1644,23 @@ function carregarPregunta(cat) {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: preguntaTxt, id: pOriginal.id || (cat + '_' + s.idx)};
   s.current = p;
   pintarImatgeSiExisteix(cat, p);
-  document.getElementById(`test-${cat}-pregunta`).textContent = p.q;
-  const contPregunta = document.getElementById(`test-${cat}-pregunta`);
-  if(audioTxt && (cat === 'senyals' || cat === 'trampes')){
-    contPregunta.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')">🔊</button>`;
+  const preguntaEl = document.getElementById(`test-${cat}-pregunta`);
+  if(preguntaEl){
+    preguntaEl.textContent = p.q;
+    if(audioTxt && (cat === 'senyals' || cat === 'trampes' || cat === 'normes')){
+      preguntaEl.innerHTML = `${p.q} <button class="btn-audio" onclick="parlar('${audioTxt.replace(/'/g, "\\'")}')" style="background:#00D9FF; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer;">🔊</button>`;
+    }
   }
-  document.getElementById(`test-${cat}-aciertos`).textContent = s.encerts;
-  document.getElementById(`test-${cat}-racha`).textContent = s.ratxa;
-  document.getElementById(`test-${cat}-score`).textContent = s.puntuacio;
-  document.getElementById(`test-${cat}-progress`).style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
+  const acEl = document.getElementById(`test-${cat}-aciertos`); if(acEl) acEl.textContent = s.encerts;
+  const rachaEl = document.getElementById(`test-${cat}-racha`); if(rachaEl) rachaEl.textContent = s.ratxa;
+  const scoreEl = document.getElementById(`test-${cat}-score`); if(scoreEl) scoreEl.textContent = s.puntuacio;
+  const progEl = document.getElementById(`test-${cat}-progress`); if(progEl) progEl.style.width = `${((s.idx % preguntes.length)/preguntes.length)*100}%`;
   const cont = document.getElementById(`test-${cat}-opciones`);
+  if(!cont) return;
   cont.innerHTML = '';
-  document.getElementById(`test-${cat}-feedback`).textContent = '';
+  const fb = document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
   const btnSig = document.getElementById(`btn-sig-test-${cat}`);
-  btnSig.disabled = true;
-  btnSig.style.opacity = '0.4';
-  btnSig.style.cursor = 'not-allowed';
+  if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
@@ -1662,14 +1695,14 @@ function respondreTest_V94(cat, idx, el) {
     s.ratxa++;
     s.puntuacio += 10 + (s.ratxa * 2);
     estat.coins += 5;
-    document.getElementById(`test-${cat}-feedback`).className = 'feedback acierto';
-    document.getElementById(`test-${cat}-feedback`).textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`;
+    const fb = document.getElementById(`test-${cat}-feedback`);
+    if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; }
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
     cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
-    document.getElementById(`test-${cat}-feedback`).className = 'feedback fallo';
-    document.getElementById(`test-${cat}-feedback`).textContent = '❌ FALLO';
+    const fb = document.getElementById(`test-${cat}-feedback`);
+    if(fb){ fb.className = 'feedback fallo'; fb.textContent = '❌ FALLO'; }
     mostrarEmoji(false, el);
     s.ratxa = 0;
     registrarFallada(cat, p.subtema, p.pag);
@@ -1677,16 +1710,19 @@ function respondreTest_V94(cat, idx, el) {
   actualizarMetricasTest(cat, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
   const btnSig = document.getElementById(`btn-sig-test-${cat}`);
-  btnSig.disabled = false;
-  btnSig.style.opacity = '1';
-  btnSig.style.cursor = 'pointer';
+  if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   actualitzarCoins();
   guardar();
   const tipDiv = document.getElementById(`test-${cat}-tip`);
-  if(tipDiv && (cat === 'senyals' || cat === 'trampes') && p.tip){
+  if(tipDiv && p.tip){
     tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
     tipDiv.style.display = 'block';
     tipDiv.style.border = '2px solid #00D9FF';
+    tipDiv.style.background = '#fff9c4';
+    tipDiv.style.color = '#000';
+    tipDiv.style.padding = '10px';
+    tipDiv.style.borderRadius = '8px';
+    tipDiv.style.marginTop = '10px';
   }
 }
 
@@ -1708,17 +1744,16 @@ function carregarSituacio(cat) {
   const nouIndexCorrecte = opcionsBarrejades.indexOf(textCorrecte);
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte};
   s.current = p;
-  document.getElementById(`sit-${cat}-pregunta`).textContent = p.q;
-  document.getElementById(`sit-${cat}-aciertos`).textContent = s.encerts;
-  document.getElementById(`sit-${cat}-score`).textContent = s.puntuacio;
-  document.getElementById(`sit-${cat}-progress`).style.width = `${((s.idx % casos.length)/casos.length)*100}%`;
+  const preEl = document.getElementById(`sit-${cat}-pregunta`); if(preEl) preEl.textContent = p.q;
+  const acEl = document.getElementById(`sit-${cat}-aciertos`); if(acEl) acEl.textContent = s.encerts;
+  const scEl = document.getElementById(`sit-${cat}-score`); if(scEl) scEl.textContent = s.puntuacio;
+  const prEl = document.getElementById(`sit-${cat}-progress`); if(prEl) prEl.style.width = `${((s.idx % casos.length)/casos.length)*100}%`;
   const cont = document.getElementById(`sit-${cat}-opciones`);
+  if(!cont) return;
   cont.innerHTML = '';
-  document.getElementById(`sit-${cat}-feedback`).textContent = '';
+  const fb = document.getElementById(`sit-${cat}-feedback`); if(fb) fb.textContent = '';
   const btnSig = document.getElementById(`btn-sig-sit-${cat}`);
-  btnSig.disabled = true;
-  btnSig.style.opacity = '0.4';
-  btnSig.style.cursor = 'not-allowed';
+  if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
@@ -1742,23 +1777,19 @@ function respondreSituacio_V94(cat, idx, el) {
     s.encerts++;
     s.puntuacio += 15;
     estat.coins += 10;
-    document.getElementById(`sit-${cat}-feedback`).className = 'feedback acierto';
-    document.getElementById(`sit-${cat}-feedback`).textContent = `✅ CORRECTE! +15 pts`;
+    const fb = document.getElementById(`sit-${cat}-feedback`); if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +15 pts`; }
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
     cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
-    document.getElementById(`sit-${cat}-feedback`).className = 'feedback fallo';
-    document.getElementById(`sit-${cat}-feedback`).textContent = '❌ FALLO';
+    const fb = document.getElementById(`sit-${cat}-feedback`); if(fb){ fb.className = 'feedback fallo'; fb.textContent = '❌ FALLO'; }
     mostrarEmoji(false, el);
     registrarFallada('examen', p.subtema, p.pag);
   }
   actualizarMetricasCaso(cat, preguntaId, correcte);
   registrarHistorialPregunta(preguntaId, correcte);
   const btnSig = document.getElementById(`btn-sig-sit-${cat}`);
-  btnSig.disabled = false;
-  btnSig.style.opacity = '1';
-  btnSig.style.cursor = 'pointer';
+  if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   actualitzarCoins();
   guardar();
 }
@@ -1769,7 +1800,7 @@ function seguentSituacio(e, cat) {
   carregarSituacio(cat);
 }
 
-// ===== V9.8.5 HOTFIX DEFINITIU EXAMEN 0/30 - AGARRA TOTES LES CATEGORIES =====
+// ===== V9.8.6 EXAMEN HÍBRID - AGARRA SENYALS + NORMES + SITUACIONS =====
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
   let totes = [];
@@ -1781,16 +1812,16 @@ function iniciarExamen(e) {
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) {
     totes = totes.concat(SITUACIONS.clima.slice(0,5));
   }
-  console.log("V9.8.5 HOTFIX EXAMEN - Total banc:", totes.length);
-  if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim. Revisa si PREGUNTES.senyals carrega bé (ha de tenir 52).`); return; }
+  console.log("V9.8.6 HÍBRID EXAMEN - Total banc:", totes.length);
+  if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
   estat.examen.index = 0;
   estat.examen.encerts = 0;
   estat.examen.fallos = 0;
   estat.examen.categoria = 'general';
-  document.getElementById('btn-iniciar-examen').style.display = 'none';
-  document.getElementById('btn-sig-examen').style.display = 'block';
+  const btnIni = document.getElementById('btn-iniciar-examen'); if(btnIni) btnIni.style.display = 'none';
+  const btnSig = document.getElementById('btn-sig-examen'); if(btnSig) btnSig.style.display = 'block';
   iniciarTimerExamen();
   carregarPreguntaExamen();
 }
@@ -1802,7 +1833,7 @@ function iniciarTimerExamen() {
     estat.examen.temps--;
     const min = Math.floor(estat.examen.temps / 60);
     const seg = estat.examen.temps % 60;
-    document.getElementById('examen-timer').textContent = `${min.toString().padStart(2,'0')}:${seg.toString().padStart(2,'0')}`;
+    const timerEl = document.getElementById('examen-timer'); if(timerEl) timerEl.textContent = `${min.toString().padStart(2,'0')}:${seg.toString().padStart(2,'0')}`;
     if(estat.examen.temps <= 0) finalitzarExamen();
   }, 1000);
 }
@@ -1818,16 +1849,15 @@ function carregarPreguntaExamen() {
   const p = {...pOriginal, a: opcionsBarrejades, ok: nouIndexCorrecte, q: pOriginal.q || pOriginal.pregunta, id: pOriginal.id || ('examen_' + estat.examen.index)};
   estat.examen.preguntes[estat.examen.index] = p;
   pintarImatgeSiExisteix('examen', p);
-  document.getElementById('examen-num').textContent = estat.examen.index + 1;
-  document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
-  document.getElementById('examen-progress').style.width = `${(estat.examen.index/30)*100}%`;
-  document.getElementById('examen-pregunta').textContent = p.q;
+  const numEl = document.getElementById('examen-num'); if(numEl) numEl.textContent = estat.examen.index + 1;
+  const acEl = document.getElementById('examen-aciertos'); if(acEl) acEl.textContent = estat.examen.encerts;
+  const progEl = document.getElementById('examen-progress'); if(progEl) progEl.style.width = `${(estat.examen.index/30)*100}%`;
+  const preEl = document.getElementById('examen-pregunta'); if(preEl) preEl.textContent = p.q;
   const cont = document.getElementById('examen-opciones');
+  if(!cont) return;
   cont.innerHTML = '';
   const btnSig = document.getElementById('btn-sig-examen');
-  btnSig.disabled = true;
-  btnSig.style.opacity = '0.4';
-  btnSig.style.cursor = 'not-allowed';
+  if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
     const div = document.createElement('div');
     div.className = 'opcio';
@@ -1856,14 +1886,21 @@ function respondreExamen(idx, el) {
     registrarFallada('examen', p.subtema, p.pag);
   }
   const btnSig = document.getElementById('btn-sig-examen');
-  btnSig.disabled = false;
-  btnSig.style.opacity = '1';
-  btnSig.style.cursor = 'pointer';
-  document.getElementById('examen-aciertos').textContent = estat.examen.encerts;
+  if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
+  const acEl = document.getElementById('examen-aciertos'); if(acEl) acEl.textContent = estat.examen.encerts;
   actualitzarCoins();
   guardar();
   const tipDiv = document.getElementById('examen-tip');
-  if(tipDiv && p.tip){ tipDiv.innerHTML = `💡 TIP: ${p.tip}`; tipDiv.style.display = 'block'; tipDiv.style.border = '2px solid #00D9FF'; }
+  if(tipDiv && p.tip){
+    tipDiv.innerHTML = `💡 TIP: ${p.tip}`;
+    tipDiv.style.display = 'block';
+    tipDiv.style.border = '2px solid #00D9FF';
+    tipDiv.style.background = '#fff9c4';
+    tipDiv.style.color = '#000';
+    tipDiv.style.padding = '10px';
+    tipDiv.style.borderRadius = '8px';
+    tipDiv.style.marginTop = '10px';
+  }
 }
 
 function seguentPreguntaExamen(e) {
@@ -1883,6 +1920,7 @@ function finalitzarExamen() {
   PROGRESO.examen.historial.push({data: estat.stats.diaActual, nota});
   guardar();
   const res = document.getElementById('examen-resultat');
+  if(!res) return;
   res.style.display = 'block';
   if(aprovat) {
     res.innerHTML = `<h2 style="color:#2ecc71">✅ APROVAT!</h2><p style="font-size:24px">${nota}/30</p><p>Encerts: ${nota} | Fallos: ${estat.examen.fallos}</p><p>Has guanyat +${nota*20} coins</p><button class="btn" onclick="reiniciarExamen()">Fer un altre examen</button>`;
@@ -1896,26 +1934,30 @@ function finalitzarExamen() {
 }
 
 function reiniciarExamen() {
-  document.getElementById('examen-resultat').style.display = 'none';
-  document.getElementById('btn-iniciar-examen').style.display = 'block';
-  document.getElementById('btn-sig-examen').style.display = 'none';
-  document.getElementById('examen-pregunta').textContent = "Prem Inicia l'Examen";
-  document.getElementById('examen-opciones').innerHTML = '';
-  document.getElementById('examen-num').textContent = '0';
-  document.getElementById('examen-aciertos').textContent = '0';
-  document.getElementById('examen-progress').style.width = '0%';
-  document.getElementById('examen-timer').textContent = '30:00';
+  const resEl = document.getElementById('examen-resultat'); if(resEl) resEl.style.display = 'none';
+  const btnIni = document.getElementById('btn-iniciar-examen'); if(btnIni) btnIni.style.display = 'block';
+  const btnSig = document.getElementById('btn-sig-examen'); if(btnSig) btnSig.style.display = 'none';
+  const preEl = document.getElementById('examen-pregunta'); if(preEl) preEl.textContent = "Prem Inicia l'Examen";
+  const opEl = document.getElementById('examen-opciones'); if(opEl) opEl.innerHTML = '';
+  const numEl = document.getElementById('examen-num'); if(numEl) numEl.textContent = '0';
+  const acEl = document.getElementById('examen-aciertos'); if(acEl) acEl.textContent = '0';
+  const progEl = document.getElementById('examen-progress'); if(progEl) progEl.style.width = '0%';
+  const timerEl = document.getElementById('examen-timer'); if(timerEl) timerEl.textContent = '30:00';
+  const imgEl = document.getElementById('examen-imagen'); if(imgEl) imgEl.innerHTML = '';
+  const tipEl = document.getElementById('examen-tip'); if(tipEl){ tipEl.innerHTML=''; tipEl.style.display='none'; }
 }
 
+//... RESTO FUNCIONES GARATGE / BOTIGA / TIPS / TEMARI / GRAFICA igual que V9.8.5...
 function carregarGaratge() {
-  const cont = document.getElementById('garage-lista');
+  const cont = document.getElementById('garage-lista'); if(!cont) return;
   cont.innerHTML = '';
   let hpTotal = 90;
   estat.accessoris.forEach(id => {
-    const acc = ACCESSORIS.find(a => a.id === id);
+    const acc = (typeof ACCESSORIS!== 'undefined')? ACCESSORIS.find(a => a.id === id) : null;
     if(acc) hpTotal += acc.hp;
   });
-  document.getElementById('garage-score').textContent = `🏎️ ${hpTotal} CV`;
+  const scoreEl = document.getElementById('garage-score'); if(scoreEl) scoreEl.textContent = `🏎️ ${hpTotal} CV`;
+  if(typeof COTXES === 'undefined') return;
   COTXES.forEach(cotxe => {
     const desbloquejat = estat.cotxes.includes(cotxe.id);
     const div = document.createElement('div');
@@ -1924,66 +1966,54 @@ function carregarGaratge() {
     cont.appendChild(div);
   });
 }
-
 function comprarCotxe(id) {
   const cotxe = COTXES.find(c => c.id === id);
   if(!cotxe) return;
   if(estat.coins < cotxe.preu) { alert('No tens prous coins'); return; }
   estat.coins -= cotxe.preu;
   estat.cotxes.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarGaratge();
+  guardar(); actualitzarCoins(); carregarGaratge();
 }
-
 function carregarBotiga() {
-  const cont = document.getElementById('emoji-tienda');
+  const cont = document.getElementById('emoji-tienda'); if(!cont) return;
   cont.innerHTML = '';
-  ACCESSORIS.forEach(acc => {
-    const comprat = estat.accessoris.includes(acc.id);
-    const div = document.createElement('div');
-    div.className = 'emoji-item' + (comprat? ' locked' : '');
-    div.innerHTML = `<div style="font-size:40px">${acc.emoji}</div><div>${acc.nom}</div><div style="color:#667eea">+${acc.hp} CV</div>${!comprat? `<button class="btn-buy" onclick="comprarAccessoris('${acc.id}')">Comprar ${acc.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`;
-    cont.appendChild(div);
-  });
-  EMOJI_BOTIGA.forEach(emoji => {
-    const comprat = estat.emojis.includes(emoji.id);
-    const div = document.createElement('div');
-    div.className = 'emoji-item' + (comprat? ' locked' : '');
-    div.innerHTML = `<div style="font-size:40px">${emoji.emoji}</div><div>${emoji.nom}</div><div style="color:#667eea">Cosmètic</div>${!comprat? `<button class="btn-buy" onclick="comprarEmoji('${emoji.id}')">Comprar ${emoji.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`;
-    cont.appendChild(div);
-  });
+  if(typeof ACCESSORIS!== 'undefined'){
+    ACCESSORIS.forEach(acc => {
+      const comprat = estat.accessoris.includes(acc.id);
+      const div = document.createElement('div');
+      div.className = 'emoji-item' + (comprat? ' locked' : '');
+      div.innerHTML = `<div style="font-size:40px">${acc.emoji}</div><div>${acc.nom}</div><div style="color:#667eea">+${acc.hp} CV</div>${!comprat? `<button class="btn-buy" onclick="comprarAccessoris('${acc.id}')">Comprar ${acc.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`;
+      cont.appendChild(div);
+    });
+  }
+  if(typeof EMOJI_BOTIGA!== 'undefined'){
+    EMOJI_BOTIGA.forEach(emoji => {
+      const comprat = estat.emojis.includes(emoji.id);
+      const div = document.createElement('div');
+      div.className = 'emoji-item' + (comprat? ' locked' : '');
+      div.innerHTML = `<div style="font-size:40px">${emoji.emoji}</div><div>${emoji.nom}</div><div style="color:#667eea">Cosmètic</div>${!comprat? `<button class="btn-buy" onclick="comprarEmoji('${emoji.id}')">Comprar ${emoji.preu}💰</button>` : '<div style="color:#2ecc71">✓ Comprat</div>'}`;
+      cont.appendChild(div);
+    });
+  }
 }
-
 function comprarAccessoris(id) {
   const acc = ACCESSORIS.find(a => a.id === id);
   if(!acc) return;
   if(estat.coins < acc.preu) { alert('No tens prous coins'); return; }
-  estat.coins -= acc.preu;
-  estat.accessoris.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarBotiga();
+  estat.coins -= acc.preu; estat.accessoris.push(id); guardar(); actualitzarCoins(); carregarBotiga();
 }
-
 function comprarEmoji(id) {
   const emoji = EMOJI_BOTIGA.find(e => e.id === id);
   if(!emoji) return;
   if(estat.coins < emoji.preu) { alert('No tens prous coins'); return; }
-  estat.coins -= emoji.preu;
-  estat.emojis.push(id);
-  guardar();
-  actualitzarCoins();
-  carregarBotiga();
+  estat.coins -= emoji.preu; estat.emojis.push(id); guardar(); actualitzarCoins(); carregarBotiga();
 }
-
-function carregarTips() { tipsData = TIPS; currentTip = 0; mostrarTip(); }
-function mostrarTip() { if (tipsData.length === 0) return; const tip = tipsData[currentTip]; document.getElementById('tip-content').innerHTML = `<div class="tip-emoji">${tip.emoji}</div><div class="tip-text">${tip.txt}</div>`; document.getElementById('tip-counter').textContent = `${currentTip + 1} / ${tipsData.length}`; }
-function nextTip(e) { currentTip = (currentTip + 1) % tipsData.length; mostrarTip(); }
-function prevTip(e) { currentTip = (currentTip - 1 + tipsData.length) % tipsData.length; mostrarTip(); }
-
+function carregarTips() { if(typeof TIPS === 'undefined') return; tipsData = TIPS; currentTip = 0; mostrarTip(); }
+function mostrarTip() { if (tipsData.length === 0) return; const tip = tipsData[currentTip]; const contentEl = document.getElementById('tip-content'); if(contentEl) contentEl.innerHTML = `<div class="tip-emoji">${tip.emoji}</div><div class="tip-text">${tip.txt}</div>`; const counterEl = document.getElementById('tip-counter'); if(counterEl) counterEl.textContent = `${currentTip + 1} / ${tipsData.length}`; }
+function nextTip(e) { if(e) e.preventDefault(); currentTip = (currentTip + 1) % tipsData.length; mostrarTip(); }
+function prevTip(e) { if(e) e.preventDefault(); currentTip = (currentTip - 1 + tipsData.length) % tipsData.length; mostrarTip(); }
 function carregarTemari() {
-  const container = document.getElementById('temari-lista');
+  const container = document.getElementById('temari-lista'); if(!container) return;
   container.innerHTML = `
     <div class="temari-item" onclick="obrirPDF('./01_Senyals_Tomo_I_RD_465_2025.pdf')"><div style="font-size:40px">🚦</div><div>Senyals</div></div>
     <div class="temari-item" onclick="obrirPDF('./02_Normes_Circulacio_Tomo_II_Edicio_2024.pdf')"><div style="font-size:40px">📋</div><div>Normes</div></div>
@@ -1992,7 +2022,6 @@ function carregarTemari() {
     <div class="temari-item" onclick="obrirPDF('./05_Medi_Ambient_Distintius_DGT_2025.pdf')"><div style="font-size:40px">♻️</div><div>Medi Ambient</div></div>
   `;
 }
-
 function obrirPDF(ruta) {
   const modal = document.createElement('div');
   modal.id = 'pdf-modal';
@@ -2000,99 +2029,65 @@ function obrirPDF(ruta) {
   modal.innerHTML = `<div style="background:#1a1a1a;padding:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #333"><button onclick="tancarPDF()" style="background:none;border:none;color:#00D9FF;font-size:16px;font-weight:700">← Tornar</button><div style="color:#fff;font-size:15px;font-weight:700">Temari DGT</div><div style="width:60px"></div></div><iframe src="${ruta}" style="flex:1;border:none;width:100%"></iframe>`;
   document.body.appendChild(modal);
 }
-
 function tancarPDF() { const modal = document.getElementById('pdf-modal'); if(modal) modal.remove(); }
-
 function dibujarGraficaEvolucion() {
-  const canvas = document.getElementById('grafica-evolucion');
-  if(!canvas) return;
+  const canvas = document.getElementById('grafica-evolucion'); if(!canvas) return;
   const ctx = canvas.getContext('2d');
   const dades = getDadesEvolucio();
-  if(canvas.width === 0) canvas.width = canvas.offsetWidth;
+  if(canvas.width === 0) canvas.width = canvas.offsetWidth || 300;
   if(canvas.height === 0) canvas.height = 200;
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(dades.length === 0){
-    ctx.fillStyle = '#666'; ctx.font = '14px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Fes tests 2 dies per veure l\'evolució', canvas.width/2, canvas.height/2); return;
-  }
+  if(dades.length === 0){ ctx.fillStyle = '#666'; ctx.font = '14px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Fes tests 2 dies per veure evolució', canvas.width/2, canvas.height/2); return; }
   ctx.strokeStyle = '#333'; ctx.lineWidth = 1;
-  for(let i = 0; i <= 4; i++) {
-    const y = 30 + (i * (canvas.height-60)/4);
-    ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(canvas.width-30, y); ctx.stroke();
-    ctx.fillStyle = '#666'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
-    ctx.fillText((100 - i*25) + '%', 5, y+3);
-  }
+  for(let i = 0; i <= 4; i++) { const y = 30 + (i * (canvas.height-60)/4); ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(canvas.width-30, y); ctx.stroke(); ctx.fillStyle = '#666'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left'; ctx.fillText((100 - i*25) + '%', 5, y+3); }
   ctx.strokeStyle = '#00D9FF'; ctx.lineWidth = 3; ctx.beginPath();
-  dades.forEach((d,i)=>{
-    const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1));
-    const y = canvas.height - 30 - (d.global/100 * (canvas.height-60));
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
+  dades.forEach((d,i)=>{ const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1)); const y = canvas.height - 30 - (d.global/100 * (canvas.height-60)); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
   ctx.stroke();
-  dades.forEach((d,i)=>{
-    const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1));
-    const y = canvas.height - 30 - (d.global/100 * (canvas.height-60));
-    ctx.fillStyle = '#00D9FF'; ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(d.dia, x, canvas.height-10); ctx.fillText(d.global+'%', x, y-10);
-  });
+  dades.forEach((d,i)=>{ const x = 30 + (i * (canvas.width-60)/Math.max(1, dades.length-1)); const y = canvas.height - 30 - (d.global/100 * (canvas.height-60)); ctx.fillStyle = '#00D9FF'; ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(d.dia, x, canvas.height-10); ctx.fillText(d.global+'%', x, y-10); });
 }
-
+function mostrarIntro(){}
 function actualitzarMissatgeMotivacional() { const missatges = ["Vas per bon camí 💪","Cada fallo et fa més fort 🔥","L'examen DGT és teu 🚗","No paris ara 💎","Concentra't i aprovaràs 👑"]; const msg = missatges[Math.floor(Math.random() * missatges.length)]; const el = document.getElementById('motivacio'); if(el) el.textContent = msg; }
-
 function canviarTab_V94(e, tab) {
   const tabTemari = document.getElementById('tab-temari');
   if(tabTemari && tabTemari.classList.contains('active') && tempsIniciTemari!== null) {
     const minutsPassats = (Date.now() - tempsIniciTemari) / 1000 / 60;
-    estat.stats.tempsEstudiatAvui += minutsPassats;
-    tempsIniciTemari = null;
-    guardar();
+    estat.stats.tempsEstudiatAvui += minutsPassats; tempsIniciTemari = null; guardar();
   }
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  if(e) e.target.closest('.tab-btn').classList.add('active');
+  const targetTab = document.getElementById('tab-' + tab); if(targetTab) targetTab.classList.add('active');
+  if(e && e.target) { const btn = e.target.closest('.tab-btn'); if(btn) btn.classList.add('active'); }
   if(tab === 'garage') carregarGaratge();
   if(tab === 'tienda') carregarBotiga();
   if(tab === 'tips') carregarTips();
-  if(tab === 'temari') {
-    carregarTemari();
-    iniciarComptadorTemari();
-  }
+  if(tab === 'temari') { carregarTemari(); iniciarComptadorTemari(); }
   if(tab === 'test') carregarPregunta('general');
   if(tab === 'situaciones') carregarSituacio(sitCategoriaActiva);
-  if(tab === 'estadistiques') {
-    actualitzarEstadistiques_V94();
-    actualitzarPaseUI();
-  }
+  if(tab === 'estadistiques') { actualitzarEstadistiques_V94(); actualitzarPaseUI(); }
   if(['test', 'situaciones', 'examen'].includes(tab) &&!potFerTests()) { mostrarPopupPase(); }
 }
-
 function canviarSubTab(e, tab, subtab) {
   const tabId = tab === 'sit'? 'situaciones' : tab === 'stats'? 'estadistiques' : tab;
-  const contenidor = document.getElementById('tab-' + tabId);
+  const contenidor = document.getElementById('tab-' + tabId); if(!contenidor) return;
   contenidor.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   contenidor.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-  e.target.classList.add('active');
-  document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`).classList.add('active');
+  if(e && e.target) e.target.classList.add('active');
+  const subEl = document.getElementById(`${tab === 'test'? 'test' : tab === 'stats'? 'stats' : 'sit'}-${subtab}`); if(subEl) subEl.classList.add('active');
   if(tab === 'test') carregarPregunta(subtab);
   if(tab === 'sit') carregarSituacio(subtab);
   if(tab === 'stats') actualitzarEstadistiques_V94();
-  if(tab === 'test' &&!potFerTests()) { setTimeout(() => { document.querySelectorAll('.opcio').forEach(o => o.style.pointerEvents = 'none'); }, 100); }
 }
-
 function mostrarEmoji(encert, element) {
+  if(typeof EMOJIS_ENCERT === 'undefined' || typeof EMOJIS_FALLO === 'undefined') return;
   const llista = encert? EMOJIS_ENCERT : EMOJIS_FALLO;
   const emoji = llista[Math.floor(Math.random() * llista.length)];
   const span = document.createElement('span');
   span.textContent = emoji;
   span.style.cssText = 'position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:32px;animation:bounceIn 0.4s;pointer-events:none;z-index:999;';
-  element.style.position = 'relative';
-  element.appendChild(span);
+  element.style.position = 'relative'; element.appendChild(span);
   setTimeout(() => span.remove(), 600);
   if(navigator.vibrate) navigator.vibrate(encert? [30,20,30] : 100);
 }
-
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
