@@ -1222,8 +1222,7 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-
-// ===== GASDRIVE DGT CAT V9.8.9 HÍBRID - MECANICA + SENYALS DGT REAL + NORMES + EXAMEN =====
+// ===== GASDRIVE DGT CAT V10.0 HÍBRID - MECANICA + AUXILIS + MEDIO AMBIENTE + SENYALS + NORMES + EXAMEN 100% =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -1231,7 +1230,7 @@ let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 const SENALES_SVG = {};
 
-// ===== V9.8.9 PINTA IMATGE HÍBRID - ACCEPTA RUTA_PANEL DE SENYALS I M- MECANICA =====
+// ===== V10.0 PINTA IMATGE HÍBRID - ACCEPTA M- A- E- P- R- S- + EMOJI NORMES =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   if (!pregunta) return;
   const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -1240,26 +1239,32 @@ function pintarImatgeSiExisteix(cat, pregunta) {
             || document.getElementById(`test-${cat}-imagen`)
             || document.getElementById(`test-mecanica-imagen`)
             || document.getElementById(`test-mecànica-imagen`)
+            || document.getElementById(`test-mediambient-imagen`)
+            || document.getElementById(`test-medioambiente-imagen`)
+            || document.getElementById(`test-medio_ambiente-imagen`)
+            || document.getElementById(`test-auxilis-imagen`)
+            || document.getElementById(`test-auxilios-imagen`)
+            || document.getElementById(`test-normes-imagen`)
             || document.getElementById(`examen-imagen`);
 
   const emojisDiv = document.getElementById(`test-${catNet}-emojis`) || document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
-  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`examen-tip`);
 
   if (!imgDiv) return;
 
   const ruta = (pregunta.ruta_panel || pregunta.ruta || "").trim();
-  const esMecanica = ruta.startsWith('M-') || pregunta.categoria === 'MECANICA' || catNet === 'mecanica';
-  const esSenyal = ruta.startsWith('P-') || ruta.startsWith('R-') || ruta.startsWith('S-');
-  const esPanelReal = ruta && (esMecanica || esSenyal || ['senyals','trampes','mecanica','examen','general'].includes(catNet));
+  const esPanel = ruta && /^(P-|R-|S-|M-|A-|E-)/.test(ruta);
+  const esPanelReal = ruta && (esPanel || ['senyals','trampes','mecanica','mecànica','auxilis','auxilios','mediambient','medioambiente','medio_ambiente','normes','normas','examen','general'].includes(catNet));
 
   if (esPanelReal) {
     const ruta1 = `./${ruta}`;
     const ruta2 = `./assets/paneles/${ruta}`;
     const ruta3 = `./assets/mecanica/${ruta}`;
     const ruta4 = `./paneles/${ruta}`;
+    const ruta5 = `./assets/medioambiente/${ruta}`;
+    const ruta6 = `./assets/auxilios/${ruta}`;
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
-        <img src="${ruta1}" alt="Panel ${pregunta.panel_id || ''}" style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;" onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'; this.onerror=function(){this.onerror=null; this.src='${ruta4}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}"/>
+        <img src="${ruta1}" alt="Panel ${pregunta.panel_id || ''}" style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;" onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'; this.onerror=function(){this.onerror=null; this.src='${ruta4}'; this.onerror=function(){this.onerror=null; this.src='${ruta5}'; this.onerror=function(){this.onerror=null; this.src='${ruta6}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}}}}"/>
         <div style="display:none; color:#ff6b6b; text-align:center; padding:15px;">❌ No s'ha trobat: ${ruta}<br><small>Posa'l a l'arrel al costat d'index.html</small></div>
         <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">Panel: ${pregunta.panel_id || 'N/A'} - ${ruta}</div>
       </div>
@@ -1295,11 +1300,7 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     return;
   }
 
-  if(esMecanica){
-    imgDiv.innerHTML = `<div style="color:#ff6b6b; text-align:center; padding:15px; border:1px dashed #ff6b6b; border-radius:8px;">⚙️ MECÀNICA: ruta_panel buit<br>ID: ${pregunta.id}<br>Revisa PREGUNTES.mecanica</div>`;
-  } else {
-    imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma</div>`;
-  }
+  imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma<br><small>${pregunta.id||''}</small></div>`;
   imgDiv.style.border = 'none';
   imgDiv.style.boxShadow = 'none';
   if(emojisDiv) { emojisDiv.innerHTML = ''; emojisDiv.style.display = 'none'; }
@@ -1351,7 +1352,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V9.8.9 HÍBRID MECANICA+SENYALS carregat");
+  console.log("GasDrive V10.0 HÍBRID carregat - M- A- E- + EMOJI");
   if(typeof PREGUNTES!== 'undefined'){
     if((!PREGUNTES.mecanica || PREGUNTES.mecanica.length===0) && typeof BANCO_MECANICA_66!== 'undefined'){
       PREGUNTES.mecanica = BANCO_MECANICA_66;
@@ -1528,7 +1529,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANC MAPEJAT V9.8.9. Total:', getTotalBanco(), 'Senyals:', PREGUNTES.senyals?.length, 'Mecanica:', PREGUNTES.mecanica?.length);
+  console.log('✅ BANC MAPEJAT V10.0. Total:', getTotalBanco(), 'Senyals:', PREGUNTES.senyals?.length, 'Mecanica:', PREGUNTES.mecanica?.length, 'Auxilis:', PREGUNTES.auxilis?.length, 'Medi Ambient:', PREGUNTES.mediambient?.length, 'Normes:', PREGUNTES.normes?.length);
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1591,7 +1592,7 @@ function carregarPregunta(cat) {
   const s = estat.test[catNet];
   if(!s) return;
   if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[catNet] || PREGUNTES[catNet].length===0){
-    console.warn(`[V9.8.9] PREGUNTES.${catNet} buit o no existeix. Revisa app.js`);
+    console.warn(`[V10.0] PREGUNTES.${catNet} buit o no existeix. Revisa app.js`);
     return;
   }
   const preguntes = barrejarArray(PREGUNTES[catNet]);
@@ -1621,7 +1622,7 @@ function carregarPregunta(cat) {
   if(!cont) return;
   cont.innerHTML = '';
   const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
-  const tipReset = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
+  const tipReset = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`test-mediambient-tip`) || document.getElementById(`test-auxilis-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
   const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
   if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
@@ -1677,18 +1678,19 @@ function respondreTest_V94(cat, idx, el) {
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   actualitzarCoins();
   guardar();
-  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`);
+  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`test-mediambient-tip`) || document.getElementById(`test-auxilis-tip`) || document.getElementById(`test-normes-tip`);
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
-      tipDiv.innerHTML = `💡 TIP: ${txt}`;
+      tipDiv.innerHTML = `💡 ${txt}`;
       tipDiv.style.display = 'block';
       tipDiv.style.border = '2px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
       tipDiv.style.color = '#000';
-      tipDiv.style.padding = '10px';
+      tipDiv.style.padding = '12px';
       tipDiv.style.borderRadius = '8px';
-      tipDiv.style.marginTop = '10px';
+      tipDiv.style.marginTop = '12px';
+      tipDiv.style.fontWeight = '600';
     }
   }
 }
@@ -1772,10 +1774,15 @@ function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
   let totes = [];
   if(typeof PREGUNTES!== 'undefined') {
-    for(let key in PREGUNTES) { if(Array.isArray(PREGUNTES[key])) totes = totes.concat(PREGUNTES[key]); }
+    for(let key in PREGUNTES) {
+      if(Array.isArray(PREGUNTES[key])) {
+        console.log(`[EXAMEN] ${key}: ${PREGUNTES[key].length}`);
+        totes = totes.concat(PREGUNTES[key]);
+      }
+    }
   }
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) { totes = totes.concat(SITUACIONS.clima.slice(0,5)); }
-  console.log("V9.8.9 EXAMEN Total:", totes.length, "Senyals:", PREGUNTES.senyals?.length, "Mecanica:", PREGUNTES.mecanica?.length);
+  console.log("V10.0 EXAMEN Total barrejat:", totes.length, "- Senyals:", PREGUNTES.senyals?.length, "Normes:", PREGUNTES.normes?.length, "Mecanica:", PREGUNTES.mecanica?.length, "Auxilis:", PREGUNTES.auxilis?.length, "Medi Ambient:", PREGUNTES.mediambient?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true;
@@ -1848,14 +1855,15 @@ function respondreExamen(idx, el) {
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
-      tipDiv.innerHTML = `💡 TIP: ${txt}`;
+      tipDiv.innerHTML = `💡 ${txt}`;
       tipDiv.style.display = 'block';
       tipDiv.style.border = '2px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
       tipDiv.style.color = '#000';
-      tipDiv.style.padding = '10px';
+      tipDiv.style.padding = '12px';
       tipDiv.style.borderRadius = '8px';
-      tipDiv.style.marginTop = '10px';
+      tipDiv.style.marginTop = '12px';
+      tipDiv.style.fontWeight = '600';
     }
   }
 }
@@ -2052,4 +2060,5 @@ if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => console.log('SW registrat')).catch(err => console.log('SW error:', err));
   });
-} 
+}
+ 
