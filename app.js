@@ -1222,7 +1222,7 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V10.0 HÍBRID - MECANICA + AUXILIS + MEDIO AMBIENTE + SENYALS + NORMES + EXAMEN 100% =====
+// ===== GASDRIVE DGT CAT V10.1 HÍBRID FINAL - EXAMEN TOT + TIP SEMPRE =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -1230,7 +1230,7 @@ let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 const SENALES_SVG = {};
 
-// ===== V10.0 PINTA IMATGE HÍBRID - ACCEPTA M- A- E- P- R- S- + EMOJI NORMES =====
+// ===== V10.1 PINTA IMATGE HÍBRID - FIX EXAMEN TOTES IMATGES JPG + EMOJI =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   if (!pregunta) return;
   const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -1245,34 +1245,41 @@ function pintarImatgeSiExisteix(cat, pregunta) {
             || document.getElementById(`test-auxilis-imagen`)
             || document.getElementById(`test-auxilios-imagen`)
             || document.getElementById(`test-normes-imagen`)
+            || document.getElementById(`test-normas-imagen`)
+            || document.getElementById(`test-senyals-imagen`)
+            || document.getElementById(`test-general-imagen`)
+            || document.getElementById(`test-trampes-imagen`)
             || document.getElementById(`examen-imagen`);
-
-  const emojisDiv = document.getElementById(`test-${catNet}-emojis`) || document.getElementById(`test-${cat}-emojis`) || document.getElementById(`examen-emojis`);
 
   if (!imgDiv) return;
 
   const ruta = (pregunta.ruta_panel || pregunta.ruta || "").trim();
+  const panelId = pregunta.panel_id || '';
   const esPanel = ruta && /^(P-|R-|S-|M-|A-|E-)/.test(ruta);
-  const esPanelReal = ruta && (esPanel || ['senyals','trampes','mecanica','mecànica','auxilis','auxilios','mediambient','medioambiente','medio_ambiente','normes','normas','examen','general'].includes(catNet));
+  const rutaConPrefix = panelId? `${panelId} - ${ruta}` : ruta;
+  const rutaConPrefix2 = panelId? `${panelId} - ${panelId}_${ruta.split('_').slice(1).join('_')}` : ruta;
 
-  if (esPanelReal) {
-    const ruta1 = `./${ruta}`;
-    const ruta2 = `./assets/paneles/${ruta}`;
-    const ruta3 = `./assets/mecanica/${ruta}`;
-    const ruta4 = `./paneles/${ruta}`;
-    const ruta5 = `./assets/medioambiente/${ruta}`;
-    const ruta6 = `./assets/auxilios/${ruta}`;
+  if (ruta && esPanel) {
+    const r1 = `./${ruta}`;
+    const r2 = `./${rutaConPrefix}`;
+    const r3 = `./assets/paneles/${ruta}`;
+    const r4 = `./assets/paneles/${rutaConPrefix}`;
+    const r5 = `./paneles/${ruta}`;
+    const r6 = `./paneles/${rutaConPrefix}`;
+    const r7 = `./assets/mecanica/${ruta}`;
+    const r8 = `./assets/medioambiente/${ruta}`;
+    const r9 = `./assets/auxilios/${ruta}`;
+
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
-        <img src="${ruta1}" alt="Panel ${pregunta.panel_id || ''}" style="width:100%; height:auto; max-height:320px; object-fit:contain; border-radius:12px; display:block;" onerror="this.onerror=null; this.src='${ruta2}'; this.onerror=function(){this.onerror=null; this.src='${ruta3}'; this.onerror=function(){this.onerror=null; this.src='${ruta4}'; this.onerror=function(){this.onerror=null; this.src='${ruta5}'; this.onerror=function(){this.onerror=null; this.src='${ruta6}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}}}}"/>
-        <div style="display:none; color:#ff6b6b; text-align:center; padding:15px;">❌ No s'ha trobat: ${ruta}<br><small>Posa'l a l'arrel al costat d'index.html</small></div>
-        <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">Panel: ${pregunta.panel_id || 'N/A'} - ${ruta}</div>
-      </div>
-    `;
+        <img src="${r1}" alt="${panelId}" style="width:100%; height:auto; max-height:340px; object-fit:contain; border-radius:12px; display:block;"
+          onerror="this.onerror=null; this.src='${r2}'; this.onerror=function(){this.onerror=null; this.src='${r3}'; this.onerror=function(){this.onerror=null; this.src='${r4}'; this.onerror=function(){this.onerror=null; this.src='${r5}'; this.onerror=function(){this.onerror=null; this.src='${r6}'; this.onerror=function(){this.onerror=null; this.src='${r7}'; this.onerror=function(){this.onerror=null; this.src='${r8}'; this.onerror=function(){this.onerror=null; this.src='${r9}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}}}}}}}"/>
+        <div style="display:none; color:#ff6b6b; text-align:center; padding:15px;">❌ No trobat: ${ruta}<br><small>${rutaConPrefix}</small></div>
+        <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">Panel: ${panelId||'N/A'} - ${ruta}</div>
+      </div>`;
     imgDiv.style.display = 'block';
     imgDiv.style.border = 'none';
     imgDiv.style.boxShadow = 'none';
-    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
     return;
   }
 
@@ -1284,26 +1291,17 @@ function pintarImatgeSiExisteix(cat, pregunta) {
       const size = segs.length > 2? '26px' : segs.length === 2? '32px' : '42px';
       htmlEmojis = segs.map(s => `<span style="font-size:${size}; line-height:1;">${s}</span>`).join('');
     } catch(e) {
-      const parts = [...pregunta.emoji];
-      const size = parts.length > 2? '26px' : '32px';
-      htmlEmojis = parts.map(s => `<span style="font-size:${size}">${s}</span>`).join('');
+      htmlEmojis = [...pregunta.emoji].map(s=>`<span style="font-size:32px">${s}</span>`).join('');
     }
-    const forma = pregunta.forma || 'circulo-rojo';
-    let extraStyle = '';
-    if(forma === 'circulo-rojo') extraStyle = 'border:6px solid #e53935; border-radius:50%; background:white;';
-    if(forma === 'cuadrado-azul') extraStyle = 'border:6px solid #1e88e5; border-radius:16px; background:white;';
-    if(forma === 'triangulo-amarillo') extraStyle = 'border:6px solid #fdd835; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background:white; width:130px; height:115px;';
+    const forma = pregunta.forma || 'cuadrado-azul';
+    let extraStyle = forma==='circulo-rojo'? 'border:6px solid #e53935; border-radius:50%; background:white;' : forma==='triangulo-amarillo'? 'border:6px solid #fdd835; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); background:white; width:130px; height:115px;' : 'border:6px solid #1e88e5; border-radius:16px; background:white;';
     imgDiv.innerHTML = `<div style="width:120px; height:120px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(0,217,255,0.15); ${extraStyle}"><div style="display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center; ${forma==='triangulo-amarillo'?'margin-top:18px':''}">${htmlEmojis}</div></div>`;
-    imgDiv.style.border = 'none';
-    imgDiv.style.boxShadow = 'none';
-    if(emojisDiv){ emojisDiv.innerHTML=''; emojisDiv.style.display='none'; }
+    imgDiv.style.display='block';
+    imgDiv.style.border='none';
+    imgDiv.style.boxShadow='none';
     return;
   }
-
-  imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:40px; font-size:16px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma<br><small>${pregunta.id||''}</small></div>`;
-  imgDiv.style.border = 'none';
-  imgDiv.style.boxShadow = 'none';
-  if(emojisDiv) { emojisDiv.innerHTML = ''; emojisDiv.style.display = 'none'; }
+  imgDiv.innerHTML = `<div class="placeholder" style="color:#00aaff; text-align:center; padding:20px; border:2px dashed rgba(0,217,255,0.3); border-radius:12px;">Sense pictograma<br><small>${pregunta.id||''}</small></div>`;
 }
 
 function getTotalBanco() {
@@ -1352,7 +1350,7 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V10.0 HÍBRID carregat - M- A- E- + EMOJI");
+  console.log("GasDrive V10.1 HÍBRID FINAL carregat");
   if(typeof PREGUNTES!== 'undefined'){
     if((!PREGUNTES.mecanica || PREGUNTES.mecanica.length===0) && typeof BANCO_MECANICA_66!== 'undefined'){
       PREGUNTES.mecanica = BANCO_MECANICA_66;
@@ -1529,7 +1527,7 @@ function autoMapearTotesPreguntes() {
       return {...p, id: p.id || idCounter++, subtema, pag};
     });
   }
-  console.log('✅ BANC MAPEJAT V10.0. Total:', getTotalBanco(), 'Senyals:', PREGUNTES.senyals?.length, 'Mecanica:', PREGUNTES.mecanica?.length, 'Auxilis:', PREGUNTES.auxilis?.length, 'Medi Ambient:', PREGUNTES.mediambient?.length, 'Normes:', PREGUNTES.normes?.length);
+  console.log('✅ BANC MAPEJAT V10.1. Total:', getTotalBanco(), 'Senyals:', PREGUNTES.senyals?.length, 'Normes:', PREGUNTES.normes?.length, 'Mecanica:', PREGUNTES.mecanica?.length, 'Auxilis:', PREGUNTES.auxilis?.length, 'Medi Ambient:', PREGUNTES.mediambient?.length);
 }
 
 function registrarFallada(categoria, subtema, pagina) {
@@ -1592,7 +1590,7 @@ function carregarPregunta(cat) {
   const s = estat.test[catNet];
   if(!s) return;
   if(typeof PREGUNTES === 'undefined' ||!PREGUNTES[catNet] || PREGUNTES[catNet].length===0){
-    console.warn(`[V10.0] PREGUNTES.${catNet} buit o no existeix. Revisa app.js`);
+    console.warn(`[V10.1] PREGUNTES.${catNet} buit`);
     return;
   }
   const preguntes = barrejarArray(PREGUNTES[catNet]);
@@ -1622,7 +1620,9 @@ function carregarPregunta(cat) {
   if(!cont) return;
   cont.innerHTML = '';
   const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
-  const tipReset = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`test-mediambient-tip`) || document.getElementById(`test-auxilis-tip`); if(tipReset){ tipReset.innerHTML=''; tipReset.style.display='none'; }
+  // RESET TIP SEMPRE
+  const tipIds = [`test-${catNet}-tip`, `test-${cat}-tip`, `test-mecanica-tip`, `test-mecànica-tip`, `test-mediambient-tip`, `test-medioambiente-tip`, `test-auxilis-tip`, `test-normes-tip`, `test-senyals-tip`];
+  tipIds.forEach(id=>{ const t=document.getElementById(id); if(t){ t.innerHTML=''; t.style.display='none'; }});
   const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
   if(btnSig){ btnSig.disabled = true; btnSig.style.opacity = '0.4'; btnSig.style.cursor = 'not-allowed'; }
   p.a.forEach((txt, i) => {
@@ -1644,55 +1644,71 @@ function parlar(text) {
   }
 }
 
+// ===== FIX TIP SEMPRE DESPRÉS DE CONTESTAR - TOTES LES CATEGORIES =====
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
   const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const s = estat.test[catNet];
   const p = s.current;
   const cont = document.getElementById(`test-${catNet}-opciones`) || document.getElementById(`test-${cat}-opciones`) || document.getElementById(`test-mecànica-opciones`);
-  if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
+  if(!cont || cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
-  const preguntaId = p.id;
   if(correcte) {
     el.classList.add('correcta');
-    s.encerts++;
-    s.ratxa++;
-    s.puntuacio += 10 + (s.ratxa * 2);
-    estat.coins += 5;
+    s.encerts++; s.ratxa++; s.puntuacio += 10 + (s.ratxa * 2); estat.coins += 5;
     const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`);
     if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +${10+(s.ratxa*2)} pts`; }
     mostrarEmoji(true, el);
   } else {
     el.classList.add('incorrecta');
-    cont.querySelectorAll('.opcio')[p.ok].classList.add('correcta');
+    const ops = cont.querySelectorAll('.opcio');
+    if(ops[p.ok]) ops[p.ok].classList.add('correcta');
     const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`);
     if(fb){ fb.className = 'feedback fallo'; fb.textContent = '❌ FALLO'; }
     mostrarEmoji(false, el);
     s.ratxa = 0;
     registrarFallada(catNet, p.subtema, p.pag);
   }
-  actualizarMetricasTest(catNet, preguntaId, correcte);
-  registrarHistorialPregunta(preguntaId, correcte);
-  const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
-  if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
-  actualitzarCoins();
-  guardar();
-  const tipDiv = document.getElementById(`test-${catNet}-tip`) || document.getElementById(`test-mecanica-tip`) || document.getElementById(`test-mecànica-tip`) || document.getElementById(`test-mediambient-tip`) || document.getElementById(`test-auxilis-tip`) || document.getElementById(`test-normes-tip`);
+  actualizarMetricasTest(catNet, p.id, correcte);
+  registrarHistorialPregunta(p.id, correcte);
+  actualitzarCoins(); guardar();
+
+  // >>> TIP SEMPRE - BUSCA A TOTES LES CATEGORIES <<<
+  const tipDiv = document.getElementById(`test-${catNet}-tip`)
+              || document.getElementById(`test-${cat}-tip`)
+              || document.getElementById(`test-mecanica-tip`)
+              || document.getElementById(`test-mecànica-tip`)
+              || document.getElementById(`test-mediambient-tip`)
+              || document.getElementById(`test-medioambiente-tip`)
+              || document.getElementById(`test-medio_ambiente-tip`)
+              || document.getElementById(`test-auxilis-tip`)
+              || document.getElementById(`test-auxilios-tip`)
+              || document.getElementById(`test-normes-tip`)
+              || document.getElementById(`test-normas-tip`)
+              || document.getElementById(`test-senyals-tip`)
+              || document.getElementById(`test-general-tip`)
+              || document.getElementById(`test-trampes-tip`);
+
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
       tipDiv.innerHTML = `💡 ${txt}`;
       tipDiv.style.display = 'block';
-      tipDiv.style.border = '2px solid #00D9FF';
+      tipDiv.style.border = '3px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
       tipDiv.style.color = '#000';
-      tipDiv.style.padding = '12px';
-      tipDiv.style.borderRadius = '8px';
+      tipDiv.style.padding = '14px';
+      tipDiv.style.borderRadius = '12px';
       tipDiv.style.marginTop = '12px';
-      tipDiv.style.fontWeight = '600';
+      tipDiv.style.fontWeight = '700';
+      tipDiv.style.fontSize = '14px';
+      tipDiv.style.lineHeight = '1.4';
+      tipDiv.style.boxShadow = '0 0 15px rgba(0,217,255,0.3)';
     }
   }
+  const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
+  if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
 }
 
 function seguentTest(e, cat) {
@@ -1741,12 +1757,9 @@ function respondreSituacio_V94(cat, idx, el) {
   if(cont.querySelector('.correcta') || cont.querySelector('.incorrecta')) return;
   cont.querySelectorAll('.opcio').forEach(o => o.classList.add('bloquejada'));
   const correcte = idx === p.ok;
-  const preguntaId = p.id;
   if(correcte) {
     el.classList.add('correcta');
-    s.encerts++;
-    s.puntuacio += 15;
-    estat.coins += 10;
+    s.encerts++; s.puntuacio += 15; estat.coins += 10;
     const fb = document.getElementById(`sit-${cat}-feedback`); if(fb){ fb.className = 'feedback acierto'; fb.textContent = `✅ CORRECTE! +15 pts`; }
     mostrarEmoji(true, el);
   } else {
@@ -1756,19 +1769,14 @@ function respondreSituacio_V94(cat, idx, el) {
     mostrarEmoji(false, el);
     registrarFallada('examen', p.subtema, p.pag);
   }
-  actualizarMetricasCaso(cat, preguntaId, correcte);
-  registrarHistorialPregunta(preguntaId, correcte);
+  actualizarMetricasCaso(cat, p.id, correcte);
+  registrarHistorialPregunta(p.id, correcte);
   const btnSig = document.getElementById(`btn-sig-sit-${cat}`);
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
-  actualitzarCoins();
-  guardar();
+  actualitzarCoins(); guardar();
 }
 
-function seguentSituacio(e, cat) {
-  e.preventDefault();
-  estat.sit[cat].idx++;
-  carregarSituacio(cat);
-}
+function seguentSituacio(e, cat) { e.preventDefault(); estat.sit[cat].idx++; carregarSituacio(cat); }
 
 function iniciarExamen(e) {
   if(!potFerTests()) return mostrarPopupPase();
@@ -1782,14 +1790,10 @@ function iniciarExamen(e) {
     }
   }
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) { totes = totes.concat(SITUACIONS.clima.slice(0,5)); }
-  console.log("V10.0 EXAMEN Total barrejat:", totes.length, "- Senyals:", PREGUNTES.senyals?.length, "Normes:", PREGUNTES.normes?.length, "Mecanica:", PREGUNTES.mecanica?.length, "Auxilis:", PREGUNTES.auxilis?.length, "Medi Ambient:", PREGUNTES.mediambient?.length);
+  console.log("V10.1 EXAMEN TOTAL HÍBRID:", totes.length, "Senyals:", PREGUNTES.senyals?.length, "Normes:", PREGUNTES.normes?.length, "Mecanica:", PREGUNTES.mecanica?.length, "Auxilis:", PREGUNTES.auxilis?.length, "Medi Ambient:", PREGUNTES.mediambient?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
-  estat.examen.activa = true;
-  estat.examen.index = 0;
-  estat.examen.encerts = 0;
-  estat.examen.fallos = 0;
-  estat.examen.categoria = 'general';
+  estat.examen.activa = true; estat.examen.index = 0; estat.examen.encerts = 0; estat.examen.fallos = 0;
   const btnIni = document.getElementById('btn-iniciar-examen'); if(btnIni) btnIni.style.display = 'none';
   const btnSig = document.getElementById('btn-sig-examen'); if(btnSig) btnSig.style.display = 'block';
   iniciarTimerExamen();
@@ -1849,21 +1853,20 @@ function respondreExamen(idx, el) {
   const btnSig = document.getElementById('btn-sig-examen');
   if(btnSig){ btnSig.disabled = false; btnSig.style.opacity = '1'; btnSig.style.cursor = 'pointer'; }
   const acEl = document.getElementById('examen-aciertos'); if(acEl) acEl.textContent = estat.examen.encerts;
-  actualitzarCoins();
-  guardar();
+  actualitzarCoins(); guardar();
   const tipDiv = document.getElementById('examen-tip');
   if(tipDiv){
     const txt = p.tip || p.explicacion || p.explicacio || "";
     if(txt){
       tipDiv.innerHTML = `💡 ${txt}`;
       tipDiv.style.display = 'block';
-      tipDiv.style.border = '2px solid #00D9FF';
+      tipDiv.style.border = '3px solid #00D9FF';
       tipDiv.style.background = '#fff9c4';
       tipDiv.style.color = '#000';
-      tipDiv.style.padding = '12px';
-      tipDiv.style.borderRadius = '8px';
+      tipDiv.style.padding = '14px';
+      tipDiv.style.borderRadius = '12px';
       tipDiv.style.marginTop = '12px';
-      tipDiv.style.fontWeight = '600';
+      tipDiv.style.fontWeight = '700';
     }
   }
 }
@@ -1893,9 +1896,7 @@ function finalitzarExamen() {
   } else {
     res.innerHTML = `<h2 style="color:#e74c3c">❌ SUSPÈS</h2><p style="font-size:24px">${nota}/30</p><p>Encerts: ${nota} | Fallos: ${estat.examen.fallos}</p><p>Necessites 27 encerts mínim</p><button class="btn" onclick="reiniciarExamen()">Tornar a provar</button>`;
   }
-  actualitzarCoins();
-  guardar();
-  actualitzarEstadistiques_V94();
+  actualitzarCoins(); guardar(); actualitzarEstadistiques_V94();
 }
 
 function reiniciarExamen() {
@@ -1934,8 +1935,7 @@ function comprarCotxe(id) {
   const cotxe = COTXES.find(c => c.id === id);
   if(!cotxe) return;
   if(estat.coins < cotxe.preu) { alert('No tens prous coins'); return; }
-  estat.coins -= cotxe.preu;
-  estat.cotxes.push(id);
+  estat.coins -= cotxe.preu; estat.cotxes.push(id);
   guardar(); actualitzarCoins(); carregarGaratge();
 }
 function carregarBotiga() {
