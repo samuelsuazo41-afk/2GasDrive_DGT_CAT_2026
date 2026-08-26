@@ -9,7 +9,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "P-06", "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg", "categoria": "PELIGRO", "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES", "senales_incluidas": ["P-21a","P-21b","P-22a","P-22b","P-23","P-24","P-24a"] },
   { "panel_id": "P-07", "ruta": "P-07_OTROS_PELIGROS.jpg", "categoria": "PELIGRO", "nombre": "OTROS PELIGROS", "senales_incluidas": ["P-32","P-33","P-34","P-35","P-50"] },
 
-  // ===== REGLAMENTARIA - 13 PANELES REALES CORREGIDOS =====
+  // ===== REGLAMENTARIA - 12 PANELES REALES =====
   { "panel_id": "R-01", "ruta": "R-01_PRIORIDAD.jpg", "categoria": "REGLAMENTARIA", "nombre": "PRIORIDAD Y PREFERENCIA", "senales_incluidas": ["R-1","R-2","R-3","R-4","R-5"] },
   { "panel_id": "R-02", "ruta": "R-02_PROHIBICION_VEHICULOS.jpg", "categoria": "REGLAMENTARIA", "nombre": "PROHIBICION DE VEHICULOS", "senales_incluidas": ["R-106","R-107","R-108","R-109"] },
   { "panel_id": "R-03", "ruta": "R-03_PROHIBICION_OTROS.jpg", "categoria": "REGLAMENTARIA", "nombre": "PROHIBICION OTROS", "senales_incluidas": ["R-110","R-111","R-112","R-113","R-114","R-115"] },
@@ -51,8 +51,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "S-25", "ruta": "S-222A_A_S-230_PRESENAL3.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 3", "senales_incluidas": ["S-222a","S-225","S-230"] },
   { "panel_id": "S-26", "ruta": "S-321_A_S-342_DIRECCION.jpg", "categoria": "INDICACION", "nombre": "SENALES DE DIRECCION", "senales_incluidas": ["S-321","S-322","S-341","S-342"] },
 
-
-  // ===== MECANICA - 11 PANELES - 100% MANUAL VIII - V2.2 NUEVO =====
+  // ===== MECANICA - 11 PANELES - 100% MANUAL VIII - V2.2 =====
   { "panel_id": "M-01", "ruta": "M-01_MOTOR_BASIC.jpg", "categoria": "MECANICA", "nombre": "MOTOR BASIC", "senales_incluidas": ["MOTOR","PISTON","ACEITE","REFRIGERACION","TERMOSTATO","FILTRO_ACEITE"] },
   { "panel_id": "M-02", "ruta": "M-02_FRENOS_RUEDAS.jpg", "categoria": "MECANICA", "nombre": "FRENOS Y RUEDAS", "senales_incluidas": ["FRENO","PASTILLAS","ABS","NEUMATICO","SUSPENSION","DIRECCION"] },
   { "panel_id": "M-03", "ruta": "M-03_ELECTRICO_ARRANQUE.jpg", "categoria": "MECANICA", "nombre": "ELECTRICO ARRANQUE", "senales_incluidas": ["BATERIA","ALTERNADOR","ARRANQUE","BUJIA","CORREA","CHASIS"] },
@@ -63,5 +62,16 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "M-08", "ruta": "M-08_AVERIAS_HUMOS.jpg", "categoria": "MECANICA", "nombre": "AVERIAS HUMOS", "senales_incluidas": ["HUMO_BLANCO","HUMO_NEGRO","HUMO_AZUL","SOBRECALENTAMIENTO","CHIRRIDO_CORREA","FUGA_LIQUIDO"] },
   { "panel_id": "M-09", "ruta": "M-09_CAMION_INDUSTRIAL.jpg", "categoria": "MECANICA", "nombre": "CAMION INDUSTRIAL", "senales_incluidas": ["CABEZA_TRACTORA","REMOLQUE","QUINTA_RUEDA","EJE_TANDEM","FRENO_AIRE","RETARDER"] },
   { "panel_id": "M-10", "ruta": "M-10_HERRAMIENTAS_V16.jpg", "categoria": "MECANICA", "nombre": "HERRAMIENTAS V16", "senales_incluidas": ["GATO","LLAVE_RUEDAS","V16","CHALECO","TRIANGULO","EXTINTOR"] },
-  { "panel_id": "M-11", "ruta": "M-11_RESTO_TEMARIO.jpg", "categoria": "MECANICA", "nombre": "RESTO TEMARIO", "senales_incluidas": ["BASTIDOR","CARROCERIA_DEFORMACION","AIRBAG","CATALIZADOR","SONDA_LAMBDA","INYECCION_ECO"] }
+  { "panel_id": "M-11", "ruta": "M-11_RESTO_TEMARIO.jpg", "categoria": "MECANICA", "nombre": "RESTO TEMARIO", "senales_incluidas": ["BASTIDOR","CARROCERIA_DEFORMACION","AIRBAG","CATALIZADOR","SONDA_LAMBDA","INYECCION_ECO"] },
+
+  // ===== AUXILIOS - 9 PANELES - 100% MANUAL IX - V3.0 NUEVO =====
+  { "panel_id": "A-01", "ruta": "A-01_PAS_PROTEGER_AVISAR_SOCORRER.jpg", "categoria": "AUXILIOS", "nombre": "PAS PROTEGER AVISAR SOCORRER", "senales_incluidas": ["PAS","PROTEGER","AVISAR_112","SOCORRER","V16_TRIANGLE","CADENA_ASISTENCIAL"] },
+  { "panel_id": "A-02", "ruta": "A-02_RCP_BASICA.jpg", "categoria": "AUXILIOS", "nombre": "RCP BASICA", "senales_incluidas": ["RCP","MASAJE_CARDIACO","BOCA_A_BOCA","DESFIBRILADOR","INCONSCIENTE","FRENTE_MENTON"] },
+  { "panel_id": "A-03", "ruta": "A-03_HEMORRAGIES_FERIDES.jpg", "categoria": "AUXILIOS", "nombre": "HEMORRAGIAS HERIDAS", "senales_incluidas": ["HEMORRAGIA_EXTERNA","COMPRESION","TORNIQUETE","FERIDA_OBERTA","AMPUTACION","OBJECTE_CLAVAT"] },
+  { "panel_id": "A-04", "ruta": "A-04_TRAUMAS_FRACTURES_CREMADES.jpg", "categoria": "AUXILIOS", "nombre": "TRAUMAS FRACTURAS QUEMADURAS", "senales_incluidas": ["FRACTURA_TANCADA","FRACTURA_OBERTA","CREMADA","NO_AMPOLLA","AIGUA_FREDA","COLUMNA"] },
+  { "panel_id": "A-05", "ruta": "A-05_POSICIONES_TRASLADO.jpg", "categoria": "AUXILIOS", "nombre": "POSICIONES Y TRASLADO", "senales_incluidas": ["PLS","DECUBITO_SUPINO","ANTIXOC","NO_MOURE","EXTRACCION_BLOQUE","TRANSPORTE_AMBULANCIA"] },
+  { "panel_id": "A-06", "ruta": "A-06_MOTORISTA_CASC.jpg", "categoria": "AUXILIOS", "nombre": "MOTORISTA CASC", "senales_incluidas": ["CASC_NO_TREURE","CASC_SI_TREURE","MOTORISTA","COLUMNA_CERVICAL","VIANANT","AUTOPROTECCIO"] },
+  { "panel_id": "A-07", "ruta": "A-07_BOTIQUIN_MATERIAL.jpg", "categoria": "AUXILIOS", "nombre": "BOTIQUIN MATERIAL", "senales_incluidas": ["BOTIQUIN","GUANTS","MANTA_TERMICA","VENDA","TISORES","NO_AIGUA_MEDICAMENT"] },
+  { "panel_id": "A-08", "ruta": "A-08_SHOCK_TCE_OCULAR.jpg", "categoria": "AUXILIOS", "nombre": "SHOCK TCE OCULAR", "senales_incluidas": ["SHOCK_HIPOVOLEMICO","TCE","SANG_OIDA_NAS","NO_TAPONAR","LESION_OCULAR","TAPAR_LLEUGER"] },
+  { "panel_id": "A-09", "ruta": "A-09_HEMORRAGIA_INTERNA_APOYO.jpg", "categoria": "AUXILIOS", "nombre": "HEMORRAGIA INTERNA APOYO", "senales_incluidas": ["HEMORRAGIA_INTERNA","NO_DONAR_AIGUA","AFLOJAR_ROBA","ANTIXOC_30_40","APOYO_EMOCIONAL","NEN_ATROPELLAT"] }
 ];
