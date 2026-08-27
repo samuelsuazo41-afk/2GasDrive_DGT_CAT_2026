@@ -1,4 +1,4 @@
-const BANCO_PANELES_OFICIAL_V2 = [
+const BANCO_PANELES_OFICIAL_V3 = [
 // ===== PELIGRO - 8 PANELES - V2.1 ACTUALIZADO CON P-01B =====
   { "panel_id": "P-01", "ruta": "P-01_INTERSECCIONES.jpg", "categoria": "PELIGRO", "nombre": "INTERSECCIONES", "senales_incluidas": ["P-1","P-1a","P-1b","P-1c","P-1d","P-1e","P-2"] },
   { "panel_id": "P-01B", "ruta": "P-01B_SEMAFOROS_GLORIETA_PUENTE_MOVIL_TRANVIA_P3-P6.jpg", "categoria": "PELIGRO", "nombre": "SEMAFOROS GLORIETA PUENTE MOVIL TRANVIA", "senales_incluidas": ["P-3","P-4","P-5","P-6"] },
@@ -9,7 +9,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "P-06", "ruta": "P-06_ESCUELA_ANCIANOS_CICLISTAS_ANIMALES.jpg", "categoria": "PELIGRO", "nombre": "ESCUELA ANCIANOS CICLISTAS ANIMALES", "senales_incluidas": ["P-21a","P-21b","P-22a","P-22b","P-23","P-24","P-24a"] },
   { "panel_id": "P-07", "ruta": "P-07_OTROS_PELIGROS.jpg", "categoria": "PELIGRO", "nombre": "OTROS PELIGROS", "senales_incluidas": ["P-32","P-33","P-34","P-35","P-50"] },
 
-  // ===== REGLAMENTARIA - 12 PANELES REALES =====
+  // ===== REGLAMENTARIA - 12 PANELES =====
   { "panel_id": "R-01", "ruta": "R-01_PRIORIDAD.jpg", "categoria": "REGLAMENTARIA", "nombre": "PRIORIDAD Y PREFERENCIA", "senales_incluidas": ["R-1","R-2","R-3","R-4","R-5"] },
   { "panel_id": "R-02", "ruta": "R-02_PROHIBICION_VEHICULOS.jpg", "categoria": "REGLAMENTARIA", "nombre": "PROHIBICION DE VEHICULOS", "senales_incluidas": ["R-106","R-107","R-108","R-109"] },
   { "panel_id": "R-03", "ruta": "R-03_PROHIBICION_OTROS.jpg", "categoria": "REGLAMENTARIA", "nombre": "PROHIBICION OTROS", "senales_incluidas": ["R-110","R-111","R-112","R-113","R-114","R-115"] },
@@ -23,7 +23,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "R-11", "ruta": "R-11_FIN_OBLIGACION_VEHICULOS.jpg", "categoria": "REGLAMENTARIA", "nombre": "FIN DE OBLIGACION PARA VEHICULOS", "senales_incluidas": ["R-507","R-508","R-509","R-510","R-511"] },
   { "panel_id": "R-12", "ruta": "R-12_FIN_OBLIGACION_PEATONES_ESPECIALES.jpg", "categoria": "REGLAMENTARIA", "nombre": "FIN DE OBLIGACION PEATONES Y ESPECIALES", "senales_incluidas": ["R-512","R-513","R-514","R-515","R-516"] },
 
-  // ===== INDICACION - 26 PANELES REALES 100% CUADRADOS =====
+  // ===== INDICACION - 26 PANELES =====
   { "panel_id": "S-01", "ruta": "S-01_TIPOS_DE_VIA.jpg", "categoria": "INDICACION", "nombre": "TIPOS DE VIA", "senales_incluidas": ["S-1","S-1a","S-1b","S-1c","S-2"] },
   { "panel_id": "S-02", "ruta": "S-02_TIPOS_DE_VIAS_FIN.jpg", "categoria": "INDICACION", "nombre": "FIN TIPOS DE VIA Y OTROS", "senales_incluidas": ["S-2a","S-2b","S-2c","S-3","S-4","S-5"] },
   { "panel_id": "S-03", "ruta": "S-06_A_S-11_VELOCIDAD.jpg", "categoria": "INDICACION", "nombre": "CARRIL REVERSIBLE VELOCIDAD", "senales_incluidas": ["S-06","S-7","S-8","S-9","S-10","S-11"] },
@@ -51,7 +51,24 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "S-25", "ruta": "S-222A_A_S-230_PRESENAL3.jpg", "categoria": "INDICACION", "nombre": "PRESENALIZACION 3", "senales_incluidas": ["S-222a","S-225","S-230"] },
   { "panel_id": "S-26", "ruta": "S-321_A_S-342_DIRECCION.jpg", "categoria": "INDICACION", "nombre": "SENALES DE DIRECCION", "senales_incluidas": ["S-321","S-322","S-341","S-342"] },
 
-  // ===== MECANICA - 11 PANELES - 100% MANUAL VIII - V2.2 =====
+  // ===== NORMAS - 15 PANELES - 100% NORMATIVA DGT - V1.0 NUEVO - AÑADIDO =====
+  { "panel_id": "N-01", "ruta": "N-01_ALCOHOL_TASAS.jpg", "categoria": "NORMAS", "nombre": "ALCOHOL TASAS", "senales_incluidas": ["0.25_AIRE","0.15_NOVELL","0.5_SANGRE","0.3_NOVELL_SANGRE","TASA_DROGAS","ETILOMETRO","ALCOTEST","2_ANOS_NOVELL","SANCION_ALCOHOL"] },
+  { "panel_id": "N-02", "ruta": "N-02_CINTURON_SRI_EMBARAZADA.jpg", "categoria": "NORMAS", "nombre": "CINTURON SRI EMBARAZADA", "senales_incluidas": ["CINTURON_DEL","CINTURON_TRAS","SRI_1.35M","SRI_ESPALDA","AIRBAG_NINO","EMBARAZADA_CINTURON","12_ANOS_COPILOTO","FURGONETA_CINTURON","AUTOBUS_CINTURON"] },
+  { "panel_id": "N-03", "ruta": "N-03_PERMISO_PUNTOS_EDAT.jpg", "categoria": "NORMAS", "nombre": "PERMISO PUNTOS EDAT", "senales_incluidas": ["PERMISO_B_18","L_NOVELL_1_ANO","8_PUNTOS_NOVELL","12_PUNTOS_GENERAL","15_PUNTOS_MAX","VALIDEZ_10_ANOS","VALIDEZ_5_ANOS_65","CURSO_24H_RECUPERACION","0_PUNTOS_6_MESES"] },
+  { "panel_id": "N-04", "ruta": "N-04_VELOCIDAD_CIUDAD.jpg", "categoria": "NORMAS", "nombre": "VELOCIDAD CIUDAD", "senales_incluidas": ["20_ZONA_20","30_1_CARRIL","30_ZONA_ESCOLAR","50_2_CARRILES","50_TRAVESIA","PLACA_30","PLACA_20","RADAR_CIUDAD","VEL_RECOMENDADA"] },
+  { "panel_id": "N-05", "ruta": "N-05_VELOCIDAD_CARRETERA.jpg", "categoria": "NORMAS", "nombre": "VELOCIDAD CARRETERA", "senales_incluidas": ["90_CONVENCIONAL_TURISMO","80_CONVENCIONAL_CAMION","120_AUTOPISTA_TURISMO","90_AUTOPISTA_CAMION","100_AUTOVIA_TURISMO","90_AUTOVIA_CAMION","VEL_MIN_50_PORCIENTO","FIN_VEL_MAX","FIN_VEL_MIN"] },
+  { "panel_id": "N-06", "ruta": "N-06_DISTRACCIONES_MOVIL.jpg", "categoria": "NORMAS", "nombre": "DISTRACCIONES MOVIL", "senales_incluidas": ["MOVIL_PROHIBIDO","MANOS_LIBRES","AURICULARES_PROHIBIDO","GPS_PARADO","FUMAR","MAQUILLAJE","COMER_BEBER","FATIGA_SUENO","DISTANCIA_SEGURIDAD"] },
+  { "panel_id": "N-07", "ruta": "N-07_DOCUMENTACION_ITV_SEGURO.jpg", "categoria": "NORMAS", "nombre": "DOCUMENTACION ITV SEGURO", "senales_incluidas": ["PERMISO_CIRCULACION","FICHA_TECNICA","ITV_PEGATINA","SEGURO_OBLIGATORIO","PRIMERA_ITV_4_ANOS","PERIODICA_2_ANOS_HASTA_10","ANUAL_MAS_10_ANOS","ITV_DESFAVORABLE_15_DIAS","DUPLICADO_PERMISO"] },
+  { "panel_id": "N-08", "ruta": "N-08_PENAL_DELITO_MULTAS.jpg", "categoria": "NORMAS", "nombre": "PENAL DELITO MULTAS", "senales_incluidas": ["0.60_ALCOHOL_DELITO","DROGAS_DELITO","60_CIUDAD_DELITO","80_CARRETERA_DELITO","NEGATIVA_SOPLAR_DELITO","SIN_PERMISO_DELITO","TEMERARIA_DELITO","MULTA_200_LEVE","MULTA_500_GRAVE"] },
+  { "panel_id": "N-09", "ruta": "N-09_STOP_CEDA_SEMAFORO.jpg", "categoria": "NORMAS", "nombre": "STOP CEDA SEMAFORO", "senales_incluidas": ["STOP_LINEA","STOP_DOBLE_DETENCION","CEDA_TRIANGULO","ROJO_FIJO_PARAR","AMBAR_FIJO_PARAR","VERDE_FIJO_PASAR","AMBAR_INTERMITENTE_CEDA","FLECHA_VERDE_CEDA","SEMAFORO_APAGADO_DERECHA"] },
+  { "panel_id": "N-10", "ruta": "N-10_PRIORIDAD_CARRIL_GLORIETA.jpg", "categoria": "NORMAS", "nombre": "PRIORIDAD CARRIL GLORIETA", "senales_incluidas": ["PRIORIDAD_DERECHA","PRIORIDAD_CUESTA","ESTRECHAMIENTO_CEDER","GLORIETA_ENTRADA_CEDA","GLORIETA_DENTRO_PRIORIDAD","CARRIL_ACELERACION_CEDA","CARRIL_DECELERACION","CIRCULAR_DERECHA_GLORIETA","SALIDA_INTERMITENTE"] },
+  { "panel_id": "N-11", "ruta": "N-11_PRIORITARIOS_BUS_PEATON_BICI.jpg", "categoria": "NORMAS", "nombre": "PRIORITARIOS BUS PEATON BICI", "senales_incluidas": ["AMBULANCIA_CEDA","BOMBEROS_POLICIA","BUS_CIUDAD_CEDA","PESTON_PASO_CEBRA","PEATON_SEMAFORO","BICI_CARRIL_BICI","BICI_PASO_CICLISTA","PATINETE_25KMH","VMP_PROHIBIDO_ACERA"] },
+  { "panel_id": "N-12", "ruta": "N-12_LUCES_SENALES_LUMINOSAS.jpg", "categoria": "NORMAS", "nombre": "LUCES SENALES LUMINOSAS", "senales_incluidas": ["CRUCE_NOCHE","CARRETERA_ILUMINADA","LARGA_ALCANCE","ANTINIEBLA_DELANTERA","ANTINIEBLA_TRASERA","POSICION","EMERGENCIA_WARNING","FRENO_LUZ","MARCHA_ATRAS_LUZ"] },
+  { "panel_id": "N-13", "ruta": "N-13_PARADA_ESTACIONAMIENTO_VORAL.jpg", "categoria": "NORMAS", "nombre": "PARADA ESTACIONAMIENTO VORAL", "senales_incluidas": ["PROHIBIDO_PARAR","PROHIBIDO_ESTACIONAR","DOBLE_FILA_PROHIBIDO","LADO_IMPAR","ZONA_AZUL_ORA","VADO_PERMANENTE","ARCEN_TRANSITABLE","DISTANCIA_100M_AUTOPISTA","DISTANCIA_50M_CIUDAD"] },
+  { "panel_id": "N-14", "ruta": "N-14_TUNEL_PASO_NIVEL_VAO.jpg", "categoria": "NORMAS", "nombre": "TUNEL PASO NIVEL VAO", "senales_incluidas": ["TUNEL_LUCES","TUNEL_PARAR_PROHIBIDO","TUNEL_MARCHA_ATRAS_PROHIBIDO","PASO_NIVEL_BARRERA","PASO_NIVEL_SIN_BARRERA","VAO_2_OCUPANTES","VAO_BUS_LINEA","CORREDOR_MOTO","FIN_VAO"] },
+  { "panel_id": "N-15", "ruta": "N-15_TRAMPAS_EXAMEN_DGT.jpg", "categoria": "NORMAS", "nombre": "TRAMPAS EXAMEN DGT", "senales_incluidas": ["1.35M_EXCEPCION_TAXI","NOVELL_110_NO_80","INTERMITENTE_GLORIETA_SALIDA","CEDA_NO_STOP_GLORIETA","AMBAR_FIJO_NO_PASAR","AMARILLA_FIJA_NO_AMBAR","NEUMATICO_1.6MM","CADENA_NIEVE_EJE_MOTRIZ","V16_SI_TRIANGULO_NO"] },
+
+  // ===== MECANICA - 11 PANELES =====
   { "panel_id": "M-01", "ruta": "M-01_MOTOR_BASIC.jpg", "categoria": "MECANICA", "nombre": "MOTOR BASIC", "senales_incluidas": ["MOTOR","PISTON","ACEITE","REFRIGERACION","TERMOSTATO","FILTRO_ACEITE"] },
   { "panel_id": "M-02", "ruta": "M-02_FRENOS_RUEDAS.jpg", "categoria": "MECANICA", "nombre": "FRENOS Y RUEDAS", "senales_incluidas": ["FRENO","PASTILLAS","ABS","NEUMATICO","SUSPENSION","DIRECCION"] },
   { "panel_id": "M-03", "ruta": "M-03_ELECTRICO_ARRANQUE.jpg", "categoria": "MECANICA", "nombre": "ELECTRICO ARRANQUE", "senales_incluidas": ["BATERIA","ALTERNADOR","ARRANQUE","BUJIA","CORREA","CHASIS"] },
@@ -64,7 +81,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "M-10", "ruta": "M-10_HERRAMIENTAS_V16.jpg", "categoria": "MECANICA", "nombre": "HERRAMIENTAS V16", "senales_incluidas": ["GATO","LLAVE_RUEDAS","V16","CHALECO","TRIANGULO","EXTINTOR"] },
   { "panel_id": "M-11", "ruta": "M-11_RESTO_TEMARIO.jpg", "categoria": "MECANICA", "nombre": "RESTO TEMARIO", "senales_incluidas": ["BASTIDOR","CARROCERIA_DEFORMACION","AIRBAG","CATALIZADOR","SONDA_LAMBDA","INYECCION_ECO"] },
 
-  // ===== AUXILIOS - 9 PANELES - 100% MANUAL IX - V3.0 NUEVO =====
+  // ===== AUXILIOS - 9 PANELES =====
   { "panel_id": "A-01", "ruta": "A-01_PAS_PROTEGER_AVISAR_SOCORRER.jpg", "categoria": "AUXILIOS", "nombre": "PAS PROTEGER AVISAR SOCORRER", "senales_incluidas": ["PAS","PROTEGER","AVISAR_112","SOCORRER","V16_TRIANGLE","CADENA_ASISTENCIAL"] },
   { "panel_id": "A-02", "ruta": "A-02_RCP_BASICA.jpg", "categoria": "AUXILIOS", "nombre": "RCP BASICA", "senales_incluidas": ["RCP","MASAJE_CARDIACO","BOCA_A_BOCA","DESFIBRILADOR","INCONSCIENTE","FRENTE_MENTON"] },
   { "panel_id": "A-03", "ruta": "A-03_HEMORRAGIES_FERIDES.jpg", "categoria": "AUXILIOS", "nombre": "HEMORRAGIAS HERIDAS", "senales_incluidas": ["HEMORRAGIA_EXTERNA","COMPRESION","TORNIQUETE","FERIDA_OBERTA","AMPUTACION","OBJECTE_CLAVAT"] },
@@ -75,7 +92,7 @@ const BANCO_PANELES_OFICIAL_V2 = [
   { "panel_id": "A-08", "ruta": "A-08_SHOCK_TCE_OCULAR.jpg", "categoria": "AUXILIOS", "nombre": "SHOCK TCE OCULAR", "senales_incluidas": ["SHOCK_HIPOVOLEMICO","TCE","SANG_OIDA_NAS","NO_TAPONAR","LESION_OCULAR","TAPAR_LLEUGER"] },
   { "panel_id": "A-09", "ruta": "A-09_HEMORRAGIA_INTERNA_APOYO.jpg", "categoria": "AUXILIOS", "nombre": "HEMORRAGIA INTERNA APOYO", "senales_incluidas": ["HEMORRAGIA_INTERNA","NO_DONAR_AIGUA","AFLOJAR_ROBA","ANTIXOC_30_40","APOYO_EMOCIONAL","NEN_ATROPELLAT"] },
 
-  // ===== MEDIO AMBIENTE - 6 PANELES - 100% PDF ZBE 2025 - V1.0 NUEVO =====
+  // ===== MEDIO AMBIENTE - 6 PANELES =====
   { "panel_id": "E-01", "ruta": "E-01_DISTINTIVOS_DGT_QUE_SON.jpg", "categoria": "MEDIO_AMBIENTE", "nombre": "DISTINTIVOS DGT QUE SON", "senales_incluidas": ["DISTINTIVO","EMISIONES","REGLAMENTO_VEHICULOS","LEY_7_2021","CALIDAD_AIRE","HOMOGENEO_NACIONAL"] },
   { "panel_id": "E-02", "ruta": "E-02_ETIQUETAS_0_ECO.jpg", "categoria": "MEDIO_AMBIENTE", "nombre": "ETIQUETAS 0 Y ECO", "senales_incluidas": ["ETIQUETA_0_AZUL","BEV","PHEV_40KM","FCEV","ETIQUETA_ECO","HEV_GAS"] },
   { "panel_id": "E-03", "ruta": "E-03_ETIQUETAS_C_B_SIN.jpg", "categoria": "MEDIO_AMBIENTE", "nombre": "ETIQUETAS C B Y SIN", "senales_incluidas": ["ETIQUETA_C_VERDE","GASOLINA_2006","DIESEL_2014","ETIQUETA_B_AMARILLA","GASOLINA_2000","SIN_ETIQUETA_A"] },
