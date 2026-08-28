@@ -1223,7 +1223,7 @@ const EMOJI_BOTIGA = [
   {id:'e6',emoji:'⚡',nom:'Llamp',preu:700}
 ];
 
-// ===== GASDRIVE DGT CAT V10.1 HÍBRID FINAL - EXAMEN TOT + TIP SEMPRE =====
+// ===== GASDRIVE DGT CAT V10.1 HÍBRID FINAL - EXAMEN TOT + TIP SEMPRE - ACTUALIZAT NORMES PANEL N-01 A N-15 + EXAMEN TOT IMATGES =====
 let tipsData = [];
 let currentTip = 0;
 let tempsIniciTemari = null;
@@ -1231,7 +1231,7 @@ let contadorTemari = null;
 let sitCategoriaActiva = 'clima';
 const SENALES_SVG = {};
 
-// ===== V10.1 PINTA IMATGE HÍBRID - FIX EXAMEN TOTES IMATGES JPG + EMOJI =====
+// ===== V10.1 PINTA IMATGE HÍBRID - FIX NORMES N-01 A N-15 + EXAMEN TOTES IMATGES JPG + EMOJI =====
 function pintarImatgeSiExisteix(cat, pregunta) {
   if (!pregunta) return;
   const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -1255,10 +1255,9 @@ function pintarImatgeSiExisteix(cat, pregunta) {
   if (!imgDiv) return;
 
   const ruta = (pregunta.ruta_panel || pregunta.ruta || "").trim();
-  const panelId = pregunta.panel_id || '';
-  const esPanel = ruta && /^(P-|R-|S-|M-|A-|E-)/.test(ruta);
+  const panelId = pregunta.panel_id || pregunta.codi || '';
+  const esPanel = ruta && /^(P-|R-|S-|M-|A-|E-|N-)/.test(ruta) || ruta.toLowerCase().endsWith('.jpg');
   const rutaConPrefix = panelId? `${panelId} - ${ruta}` : ruta;
-  const rutaConPrefix2 = panelId? `${panelId} - ${panelId}_${ruta.split('_').slice(1).join('_')}` : ruta;
 
   if (ruta && esPanel) {
     const r1 = `./${ruta}`;
@@ -1270,11 +1269,16 @@ function pintarImatgeSiExisteix(cat, pregunta) {
     const r7 = `./assets/mecanica/${ruta}`;
     const r8 = `./assets/medioambiente/${ruta}`;
     const r9 = `./assets/auxilios/${ruta}`;
+    const r10 = `./assets/normas/${ruta}`;
+    const r11 = `./assets/normes/${ruta}`;
+    const r12 = `./normas/${ruta}`;
+    const r13 = `./assets/senyals/${ruta}`;
+    const r14 = `./assets/${ruta}`;
 
     imgDiv.innerHTML = `
       <div style="background:#0a0a1a; padding:12px; border-radius:16px; border:3px solid #00D9FF; box-shadow:0 0 25px rgba(0,217,255,0.3);">
         <img src="${r1}" alt="${panelId}" style="width:100%; height:auto; max-height:340px; object-fit:contain; border-radius:12px; display:block;"
-          onerror="this.onerror=null; this.src='${r2}'; this.onerror=function(){this.onerror=null; this.src='${r3}'; this.onerror=function(){this.onerror=null; this.src='${r4}'; this.onerror=function(){this.onerror=null; this.src='${r5}'; this.onerror=function(){this.onerror=null; this.src='${r6}'; this.onerror=function(){this.onerror=null; this.src='${r7}'; this.onerror=function(){this.onerror=null; this.src='${r8}'; this.onerror=function(){this.onerror=null; this.src='${r9}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}}}}}}}"/>
+          onerror="this.onerror=null; this.src='${r2}'; this.onerror=function(){this.onerror=null; this.src='${r3}'; this.onerror=function(){this.onerror=null; this.src='${r4}'; this.onerror=function(){this.onerror=null; this.src='${r5}'; this.onerror=function(){this.onerror=null; this.src='${r6}'; this.onerror=function(){this.onerror=null; this.src='${r7}'; this.onerror=function(){this.onerror=null; this.src='${r8}'; this.onerror=function(){this.onerror=null; this.src='${r9}'; this.onerror=function(){this.onerror=null; this.src='${r10}'; this.onerror=function(){this.onerror=null; this.src='${r11}'; this.onerror=function(){this.onerror=null; this.src='${r12}'; this.onerror=function(){this.onerror=null; this.src='${r13}'; this.onerror=function(){this.onerror=null; this.src='${r14}'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';}}}}}}}}}}}}}}"/>
         <div style="display:none; color:#ff6b6b; text-align:center; padding:15px;">❌ No trobat: ${ruta}<br><small>${rutaConPrefix}</small></div>
         <div style="text-align:center; color:#888; font-size:11px; margin-top:8px;">Panel: ${panelId||'N/A'} - ${ruta}</div>
       </div>`;
@@ -1351,10 +1355,13 @@ let estat = {
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
 
 function init() {
-  console.log("GasDrive V10.1 HÍBRID FINAL carregat");
+  console.log("GasDrive V10.1 HÍBRID FINAL carregat - NORMES PANEL N-");
   if(typeof PREGUNTES!== 'undefined'){
     if((!PREGUNTES.mecanica || PREGUNTES.mecanica.length===0) && typeof BANCO_MECANICA_66!== 'undefined'){
       PREGUNTES.mecanica = BANCO_MECANICA_66;
+    }
+    if((!PREGUNTES.normes || PREGUNTES.normes.length===0) && typeof BANCO_PREGUNTAS_NORMAS_V1!== 'undefined'){
+      PREGUNTES.normes = BANCO_PREGUNTAS_NORMAS_V1;
     }
   }
   autoMapearTotesPreguntes();
@@ -1621,7 +1628,6 @@ function carregarPregunta(cat) {
   if(!cont) return;
   cont.innerHTML = '';
   const fb = document.getElementById(`test-${catNet}-feedback`) || document.getElementById(`test-${cat}-feedback`); if(fb) fb.textContent = '';
-  // RESET TIP SEMPRE
   const tipIds = [`test-${catNet}-tip`, `test-${cat}-tip`, `test-mecanica-tip`, `test-mecànica-tip`, `test-mediambient-tip`, `test-medioambiente-tip`, `test-auxilis-tip`, `test-normes-tip`, `test-senyals-tip`];
   tipIds.forEach(id=>{ const t=document.getElementById(id); if(t){ t.innerHTML=''; t.style.display='none'; }});
   const btnSig = document.getElementById(`btn-sig-test-${catNet}`) || document.getElementById(`btn-sig-test-${cat}`);
@@ -1645,7 +1651,6 @@ function parlar(text) {
   }
 }
 
-// ===== FIX TIP SEMPRE DESPRÉS DE CONTESTAR - TOTES LES CATEGORIES =====
 function respondreTest_V94(cat, idx, el) {
   if(!potFerTests()) return mostrarPopupPase();
   const catNet = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -1675,7 +1680,6 @@ function respondreTest_V94(cat, idx, el) {
   registrarHistorialPregunta(p.id, correcte);
   actualitzarCoins(); guardar();
 
-  // >>> TIP SEMPRE - BUSCA A TOTES LES CATEGORIES <<<
   const tipDiv = document.getElementById(`test-${catNet}-tip`)
               || document.getElementById(`test-${cat}-tip`)
               || document.getElementById(`test-mecanica-tip`)
@@ -1791,7 +1795,7 @@ function iniciarExamen(e) {
     }
   }
   if(typeof SITUACIONS!== 'undefined' && SITUACIONS.clima) { totes = totes.concat(SITUACIONS.clima.slice(0,5)); }
-  console.log("V10.1 EXAMEN TOTAL HÍBRID:", totes.length, "Senyals:", PREGUNTES.senyals?.length, "Normes:", PREGUNTES.normes?.length, "Mecanica:", PREGUNTES.mecanica?.length, "Auxilis:", PREGUNTES.auxilis?.length, "Medi Ambient:", PREGUNTES.mediambient?.length);
+  console.log("V10.1 EXAMEN TOTAL HÍBRID - NORMES PANEL:", totes.length, "Senyals:", PREGUNTES.senyals?.length, "Normes:", PREGUNTES.normes?.length, "Mecanica:", PREGUNTES.mecanica?.length, "Auxilis:", PREGUNTES.auxilis?.length, "Medi Ambient:", PREGUNTES.mediambient?.length);
   if(totes.length < 30) { alert(`Falten preguntes. Tens ${totes.length}, necessites 30 mínim.`); return; }
   estat.examen.preguntes = barrejarArray(totes).slice(0, 30);
   estat.examen.activa = true; estat.examen.index = 0; estat.examen.encerts = 0; estat.examen.fallos = 0;
