@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V10.1</title>
+<title>GasDrive DGT CAT V12</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0a0a0a">
 <style>
@@ -54,8 +54,8 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .emoji-item.locked{opacity:0.4}
 .tip{background:#1a1a1a;border-left:4px solid #00D9FF;padding:12px;margin:0;border-radius:6px;display:flex;align-items:center;flex-shrink:0}
 .tip-emoji{font-size:22px;margin-right:10px}
-.progress-bar{background:#222;height:7px;border-radius:3px;margin:0;overflow:hidden;flex-shrink:0;width:100%}
-.progress-fill{background:linear-gradient(90deg,#00D9FF,#0f5);height:100%;width:0%;transition:width 0.3s}
+.progress-bar{background:#222;height:9px;border-radius:4px;margin:0;overflow:hidden;flex-shrink:0;width:100%;border:1px solid #333}
+.progress-fill{background:linear-gradient(90deg,#00D9FF,#00ff88);height:100%;width:0%;transition:width 0.5s ease}
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer;margin:4px}
 .btn-buy{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:7px 11px;border-radius:7px;font-weight:700;font-size:12px;margin-top:7px;cursor:pointer}
 .btn-buy:active{transform:scale(0.95)}
@@ -115,6 +115,15 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   position: relative;
   z-index: 2;
 }
+/* ===== V12 ESTILS NOUS PER ESTADÍSTIQUES ===== */
+.stats-falta{ text-align:center; color:#FFD700; font-size:13px; font-weight:700; margin:8px 0 4px; line-height:1.3; background:rgba(255,215,0,0.08); padding:8px; border-radius:8px; border:1px dashed rgba(255,215,0,0.3); }
+.evolucio-mot{ text-align:center; color:#00D9FF; font-size:12px; font-weight:600; margin:12px 0 4px; padding:10px; background:#0a0a1a; border-radius:8px; border:1px solid #333; line-height:1.4; }
+.pase-consell{ color:#999; font-size:11px; margin-top:10px; line-height:1.4; background:#111; padding:10px; border-radius:8px; }
+.orientacio-bloc{ margin-bottom:12px; padding:12px; background:#1a1a1a; border-radius:8px; }
+.orientacio-bloc.verd{ border-left:4px solid #2ecc71; }
+.orientacio-bloc.groc{ border-left:4px solid #FFD700; }
+.orientacio-bloc.blau{ border-left:4px solid #00D9FF; }
+.debil-card{ margin-bottom:15px; padding:14px; background:#1a1a1a; border-left:4px solid #FFD700; border-radius:10px; }
 </style>
 </head>
 <body>
@@ -133,17 +142,57 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'stats','orientacio')">🧭 ORIENTACIÓ</button>
   </div>
   <div id="stats-resum" class="sub-content active">
-    <div class="stats-header"><div style="font-size:48px;font-weight:900;color:#00D9FF;text-align:center" id="stats-global-percent">0%</div><div class="progress-bar"><div class="progress-fill" id="stats-global-bar"></div></div><div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div></div>
-    <div class="stat-card"><div class="stat-card-header"><div><span>💪</span> <b>Retenció 50%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-domini-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div></div>
+    <div class="stats-header">
+      <div style="font-size:48px;font-weight:900;color:#00D9FF;text-align:center" id="stats-global-percent">0%</div>
+      <div class="progress-bar"><div class="progress-fill" id="stats-global-bar"></div></div>
+      <div class="stats-falta" id="stats-global-falta">0% - Calculant preparació...</div>
+      <div class="stats-falta" id="stats-resum-falta" style="display:none"></div>
+      <div style="text-align:center;color:#999;font-size:13px;margin:10px 0" id="stats-motivacio">Estudia 20min al Temari per desbloquejar</div>
+    </div>
+    <div class="stat-card"><div class="stat-card-header"><div><span>💪</span> <b>Retenció</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-domini-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div><div style="color:#666;font-size:11px;margin-top:6px">Preguntes que domines 3 dies seguits</div></div>
     <div class="stat-card"><div class="stat-card-header"><div><span>📅</span> <b id="stats-constancia-label">CONSTÀNCIA: 0/20 dies</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-constancia-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div></div>
-    <div class="stat-card"><div class="stat-card-header"><div><span>📖</span> <b>Cobertura 7 dies 15%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
-    <div class="stat-card"><div class="stat-card-header"><div><span>📋</span> <b>Estabilitat Simulacres 10%</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-simulacres-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div><div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Millor ratxa: 0/6</div></div>
+    <div class="stat-card"><div class="stat-card-header"><div><span>📖</span> <b>Cobertura 7 dies</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-temari-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
+    <div class="stat-card"><div class="stat-card-header"><div><span>📋</span> <b>Estabilitat Simulacres</b></div><div style="font-size:20px;font-weight:800;color:#00D9FF" id="stats-simulacres-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div><div style="color:#999;font-size:12px;margin-top:5px" id="stats-examen-aprobados">Millor ratxa: 0/6</div></div>
     <button class="btn-dgt" id="btn-dgt-oficial"><div style="text-align:center"><span>🚗</span> <b>PRESENTARME AL EXAMEN DGT OFICIAL</b></div><div style="text-align:center;color:#000;font-size:12px;margin-top:8px">Necessites 90% per desbloquejar</div></button>
   </div>
-  <div id="stats-evolucio" class="sub-content"><div class="card"><h2>📈 Evolució Últims 7 Dies</h2><canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px"></canvas></div></div>
-  <div id="stats-debils" class="sub-content"><div class="card"><h2>🎯 Punts Dèbils</h2><div id="stats-debils-lista">Fes més tests per detectar els teus punts dèbils</div></div></div>
-  <div id="stats-pase" class="sub-content"><div class="card pase-card"><div class="big">⏰</div><h2>PASE DIARI</h2><p>Estudia 20 minuts al TEMARI per desbloquejar els tests d'avui</p><div style="font-size:30px;font-weight:900;color:#00D9FF" id="pase-temps">0 min</div></div></div>
-  <div id="stats-orientacio" class="sub-content"><div class="card orientacio-card"><h2>🧭 Pla d'Estudi</h2><h3>1. Comença pel TEMARI</h3><p>Estudia 20 min per desbloquejar el dia</p><h3>2. Fes TESTS</h3><p>Practica fins arribar a 90%</p><h3>3. Fes l'EXAMEN</h3><p>Quan tinguis 90% global</p></div></div>
+  <div id="stats-evolucio" class="sub-content">
+    <div class="card">
+      <h2>📈 Evolució Últims 7 Dies</h2>
+      <canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px;border:1px solid #333"></canvas>
+      <div id="evolucio-motivacio" class="evolucio-mot">Fes tests 2 dies per veure evolució real</div>
+      <div id="stats-evolucio-explicacio" style="color:#666;font-size:11px;text-align:center;margin-top:8px;line-height:1.4">Cada punt és el teu % global. Si la línia puja, vas bé. Si baixa, repassa punts dèbils.</div>
+    </div>
+  </div>
+  <div id="stats-debils" class="sub-content"><div class="card"><h2>🎯 Punts Dèbils Per Família Real</h2><div id="stats-debils-lista">Fes més tests per detectar els teus punts dèbils reals<br><small style="color:#666">El sistema llegeix panel_id N-01..N-15, S-100, P-, R-, M-, A-, E-</small></div></div></div>
+  <div id="stats-pase" class="sub-content">
+    <div class="card pase-card">
+      <div class="big">⏰</div>
+      <h2>PASE DIARI 20 MIN</h2>
+      <p>Estudia 20 minuts al TEMARI per desbloquejar els tests d'avui</p>
+      <div style="font-size:30px;font-weight:900;color:#00D9FF" id="pase-temps">0 min</div>
+      <div class="pase-consell" id="pase-consell">💡 Consell V12: Fes 5 min SENYALS + 5 min NORMES + 5 min MECÀNICA + 5 min AUXILIS = 20 min. Així toques tots els temaris cada dia.</div>
+    </div>
+  </div>
+  <div id="stats-orientacio" class="sub-content">
+    <div class="card orientacio-card">
+      <h2>🧭 Pla d'Estudi Complet V12</h2>
+      <div id="stats-orientacio-lista">
+        <div style="background:#0a0a1a; padding:14px; border-radius:12px; border:2px solid #00D9FF; margin-bottom:14px;">
+          <h3 style="color:#00D9FF; margin:0 0 8px; font-size:14px;">🎯 COM ÉS L'EXAMEN DGT OFICIAL REAL</h3>
+          <div style="color:#fff; font-size:12px; line-height:1.6;">
+            <p>📋 <b>30 preguntes</b> - 3 opcions, 1 correcta</p>
+            <p>⏱️ <b>30 minuts</b> màxim</p>
+            <p>✅ <b>27 encerts mínim</b> - Màxim 3 fallos</p>
+            <p>🏫 El dia D: DNI + justificant. Aula ordinadors. Resultat al moment.</p>
+          </div>
+        </div>
+        <div class="orientacio-bloc verd"><div style="font-weight:700; color:#2ecc71; font-size:13px;">1. TEMARI - 5 minuts cada temari diari</div><div style="color:#ccc; font-size:11px; margin-top:4px;">20 min total = PASE desbloquejat +50 coins</div></div>
+        <div class="orientacio-bloc groc"><div style="font-weight:700; color:#FFD700; font-size:13px;">2. TESTS - Per millorar % preparació</div><div style="color:#ccc; font-size:11px; margin-top:4px;">30-60 tests diaris fins 90%</div></div>
+        <div class="orientacio-bloc blau"><div style="font-weight:700; color:#00D9FF; font-size:13px;">3. EXAMEN - Prova't diari</div><div style="color:#ccc; font-size:11px; margin-top:4px;">Ratxa 6 aprovats seguits = llest DGT</div></div>
+      </div>
+      <div id="orientacio-lista" style="display:none"></div>
+    </div>
+  </div>
 </div>
 
 <div id="tab-test" class="tab-content active">
@@ -155,11 +204,9 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'test','auxilis')">🚑 Auxilis</button>
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'test','mediambient')">🌱 Medi Ambient</button>
   </div>
-
   <div id="test-general" class="sub-content active">
     <div class="card"><h2>📝 TEST GENERAL</h2><div class="stats"><div>Aciertos: <span id="test-general-aciertos">0</span></div><div>Racha: <span id="test-general-racha">0</span>🔥</div><div>Score: <span id="test-general-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-general-progress"></div></div><div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-general-tip" class="tip-box"></div><div id="test-general-emojis" class="test-emojis"></div><div class="pregunta" id="test-general-pregunta">Carregant...</div><div id="test-general-opciones"></div><div class="feedback" id="test-general-feedback"></div><button class="btn-sig" id="btn-sig-test-general" onclick="seguentTest(event,'general')" disabled>SEGÜENT</button></div>
   </div>
-
   <div id="test-senyals" class="sub-content">
     <div class="card">
       <h2>🚸 TEST SENYALS</h2>
@@ -174,19 +221,15 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <button class="btn-sig" id="btn-sig-test-senyals" onclick="seguentTest(event,'senyals')" disabled>SEGÜENT</button>
     </div>
   </div>
-
   <div id="test-normes" class="sub-content">
     <div class="card"><h2>📋 TEST NORMES</h2><div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span></div><div>Racha: <span id="test-normes-racha">0</span>🔥</div><div>Score: <span id="test-normes-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div><div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-normes-tip" class="tip-box"></div><div id="test-normes-emojis" class="test-emojis"></div><div class="pregunta" id="test-normes-pregunta">Carregant...</div><div id="test-normes-opciones"></div><div class="feedback" id="test-normes-feedback"></div><button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button></div>
   </div>
-
   <div id="test-mecanica" class="sub-content">
     <div class="card"><h2>🔧 TEST MECÀNICA</h2><div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span></div><div>Racha: <span id="test-mecanica-racha">0</span>🔥</div><div>Score: <span id="test-mecanica-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div><div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-mecanica-tip" class="tip-box"></div><div id="test-mecanica-emojis" class="test-emojis"></div><div class="pregunta" id="test-mecanica-pregunta">Carregant...</div><div id="test-mecanica-opciones"></div><div class="feedback" id="test-mecanica-feedback"></div><button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button></div>
   </div>
-
   <div id="test-auxilis" class="sub-content">
     <div class="card"><h2>🚑 TEST AUXILIS</h2><div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span></div><div>Racha: <span id="test-auxilis-racha">0</span>🔥</div><div>Score: <span id="test-auxilis-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div><div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-auxilis-tip" class="tip-box"></div><div id="test-auxilis-emojis" class="test-emojis"></div><div class="pregunta" id="test-auxilis-pregunta">Carregant...</div><div id="test-auxilis-opciones"></div><div class="feedback" id="test-auxilis-feedback"></div><button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button></div>
   </div>
-
   <div id="test-mediambient" class="sub-content">
     <div class="card"><h2>🌱 TEST MEDI AMBIENT</h2><div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Racha: <span id="test-mediambient-racha">0</span>🔥</div><div>Score: <span id="test-mediambient-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div><div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-mediambient-tip" class="tip-box"></div><div id="test-mediambient-emojis" class="test-emojis"></div><div class="pregunta" id="test-mediambient-pregunta">Carregant...</div><div id="test-mediambient-opciones"></div><div class="feedback" id="test-mediambient-feedback"></div><button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button></div>
   </div>
@@ -224,7 +267,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 <div id="tab-garage" class="tab-content"><div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div></div>
 <div id="tab-tienda" class="tab-content"><div class="card"><h2>🛒 BOTIGA</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Canvia els teus punts per cotxes i accessoris</p><div class="emoji-shop" id="emoji-tienda"></div></div></div>
 <div id="tab-tips" class="tab-content"><div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div><div style="display:flex;gap:10px;margin-top:15px"><button class="btn" style="flex:1" onclick="prevTip(event)">ANTERIOR</button><span id="tip-counter" style="align-self:center">1/100</span><button class="btn" style="flex:1" onclick="nextTip(event)">SEGÜENT</button></div></div></div>
-<div id="tab-temari" class="tab-content"><div class="card"><h2>📖 TEMARIS OFICIALS</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Estudia els temaris complets DGT. 20min per desbloquejar</p><div id="temari-lista"></div></div></div>
+<div id="tab-temari" class="tab-content"><div class="card"><h2>📖 TEMARIS OFICIALS</h2><p style="margin-bottom:12px;font-size:13px;color:#999">Estudia els temaris complets DGT. 20min per desbloquejar - Consell: 5 min SENYALS + 5 min NORMES + 5 min MECÀNICA + 5 min AUXILIS</p><div id="temari-lista"></div></div></div>
 
 <div class="tabs">
   <button class="tab-btn active" onclick="canviarTab_V94(event,'estadistiques')"><span class="emoji">📊</span>ESTAD</button>
@@ -237,6 +280,6 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=9.8.9"></script>
+<script src="./app.js?v=12.0"></script>
 </body>
 </html>
