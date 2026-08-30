@@ -1,4 +1,4 @@
-const CACHE = 'gasdrive-v10.6.97'; // SUBE ESTA VERSION CADA VEZ QUE CAMBIES ALGO
+const CACHE = 'gasdrive-v10.6.98'; // SUBE ESTA VERSION CADA VEZ QUE CAMBIES ALGO
 const FILES = [
   './',
   './index.html',
