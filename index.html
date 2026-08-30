@@ -3,63 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V12.1 FIX</title>
+<title>GasDrive DGT CAT V12.2</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0a0a0a">
 <style>
-html, body { background: #0a0a0a; color: #fff; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+html,body{background:#0a0a0a;color:#fff;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 .header{background:linear-gradient(180deg,#2a2a2a 0%,#0a0a0a 100%);padding:14px 20px 18px;text-align:center;border-bottom:1px solid #333;position:sticky;top:0;z-index:50}
-h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
-.subtitle{font-size:11px;opacity:0.9;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:6px}
-.coins{display:inline-flex;align-items:center;background:#FFD700;color:#000;padding:2px 9px;border-radius:14px;font-weight:900;font-size:11px}
-.tabs{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;z-index:100;overflow-x:auto;scrollbar-width:none}
+h1{font-size:24px;font-weight:900;letter-spacing:1.5px}
+.subtitle{font-size:11px;opacity:.9;display:flex;justify-content:center;gap:6px}
+.coins{background:#FFD700;color:#000;padding:2px 9px;border-radius:14px;font-weight:900;font-size:11px}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;display:flex;z-index:100;overflow-x:auto}
 .tab-btn{flex:1;min-width:70px;padding:11px 4px;background:none;border:none;color:#666;font-size:10px;cursor:pointer}
 .tab-btn.active{color:#00D9FF;background:#1a1a1a}
-.tab-btn .emoji{font-size:19px;display:block;margin-bottom:3px}
+.tab-btn .emoji{font-size:19px;display:block}
 .tab-content{display:none;padding:12px;padding-bottom:80px;min-height:calc(100vh - 140px)}
 .tab-content.active{display:block}
-.sub-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.sub-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
 .sub-tab-btn{background:#222;border:1px solid #333;color:#999;padding:7px 14px;border-radius:18px;font-size:12px;cursor:pointer;white-space:nowrap}
 .sub-tab-btn.active{background:#00D9FF;color:#000;border-color:#00D9FF;font-weight:700}
-.sub-content{display:none}
-.sub-content.active{display:block}
-.card{ background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:16px 12px; margin:0 auto 12px; max-width:420px; display:flex; flex-direction:column; gap:12px; }
-.card h2{color:#00D9FF;font-size:17px;margin-bottom:2px;text-align:center}
-.stats{display:flex;justify-content:space-between;background:#0f0f0f;padding:9px;border-radius:7px;font-size:12px}
-.stats span{color:#00D9FF;font-weight:700}
+.sub-content{display:none}.sub-content.active{display:block}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:14px;padding:16px 12px;margin:0 auto 12px;max-width:440px;display:flex;flex-direction:column;gap:12px}
+.card h2{color:#00D9FF;font-size:17px;text-align:center}
 .progress-bar{background:#222;height:9px;border-radius:4px;overflow:hidden;width:100%;border:1px solid #333}
-.progress-fill{background:linear-gradient(90deg,#00D9FF,#00ff88);height:100%;width:0%;transition:width 0.5s}
+.progress-fill{background:linear-gradient(90deg,#00D9FF,#00ff88);height:100%;width:0%}
 .btn{background:#00D9FF;color:#000;border:none;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer}
-.btn-dgt{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:16px;border-radius:12px;font-weight:900;width:100%;margin-top:15px}
+.btn-dgt{background:linear-gradient(135deg,#00D9FF 0%,#00ff88 100%);color:#000;border:none;padding:16px;border-radius:12px;font-weight:900;width:100%}
 .quadre-pictograma{width:100%;min-height:140px;background:linear-gradient(145deg,#1a1a2e,#16213e);border:2px solid rgba(0,217,255,0.5);border-radius:16px;padding:10px}
 .quadre-pictograma .placeholder{color:rgba(0,217,255,0.4);font-size:14px;text-align:center;padding:20px}
 .tip-box{background:linear-gradient(135deg,#332a00 0%,#2a2a00 100%);border:3px solid #00D9FF;border-left:5px solid #FFD700;padding:14px;border-radius:12px;color:#FFD700;display:none}
-.pregunta{font-size:16px;line-height:1.4}
-.opcio{background:#2a2a2a;border:2px solid #333;padding:12px;border-radius:10px;cursor:pointer;font-size:14px}
+.pregunta{font-size:16px}.opcio{background:#2a2a2a;border:2px solid #333;padding:12px;border-radius:10px;font-size:14px}
 .stat-card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:14px;margin:10px 0}
-.stat-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:14px}
+.stat-card-header{display:flex;justify-content:space-between;font-size:14px}
 .stats-falta{text-align:center;color:#FFD700;font-size:13px;font-weight:700;margin:8px 0;background:rgba(255,215,0,0.08);padding:8px;border-radius:8px;border:1px dashed rgba(255,215,0,0.3)}
-.evolucio-mot{text-align:center;color:#00D9FF;font-size:12px;font-weight:600;margin:12px 0 4px;padding:10px;background:#0a0a1a;border-radius:8px;border:1px solid #333}
-.pase-consell{color:#999;font-size:11px;margin-top:10px;background:#111;padding:10px;border-radius:8px}
+.evolucio-mot{text-align:center;color:#00D9FF;font-size:12px;font-weight:600;margin:12px 0;padding:10px;background:#0a0a1a;border-radius:8px;border:1px solid #333}
+.pase-consell{color:#999;font-size:11px;background:#111;padding:10px;border-radius:8px}
 .mini-picto{width:60px;height:38px;stroke:#00D9FF;fill:none;stroke-width:2.2;display:block;margin:0 auto}
 .mc-badge{display:inline-block;background:#00D9FF;color:#000;font-size:10px;font-weight:900;padding:3px 8px;border-radius:10px;margin:6px 0}
-.orientacio-subcontent{display:none}
-.orientacio-subcontent.actiu{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.mc-text{font-size:13px;line-height:1.65;color:#ddd}
-.garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0}
-.score-big{text-align:center;font-size:44px;font-weight:900;color:#00D9FF;margin:18px 0}
-.emoji-shop{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px}
-.btn-sig{background:linear-gradient(180deg,#4a4a4a 0%,#2a2a2a 100%);color:#fff;border:none;padding:14px;width:100%;font-size:15px;font-weight:700;border-radius:10px;cursor:pointer}
-.btn-sig:disabled{background:#333;color:#666}
-.feedback{text-align:center;font-size:18px;font-weight:900;margin:0;padding:10px;border-radius:9px;min-height:10px}
+.orientacio-subcontent{display:none}.orientacio-subcontent.actiu{display:block}
+.mc-text{font-size:13px;line-height:1.7;color:#ddd}
+.btn-sig{background:linear-gradient(180deg,#4a4a4a 0%,#2a2a2a 100%);color:#fff;border:none;padding:14px;width:100%;font-weight:700;border-radius:10px}
 </style>
 </head>
 <body>
 <div class="header">
   <h1>🚘 GasDrive DGT CAT</h1>
   <div class="subtitle">800+ Preguntes DGT. Offline<span class="coins" id="coins">💰 0</span></div>
-  <div id="motivacio" style="margin-top:8px;font-size:13px;color:#FFD700">Concentra't i aprovaràs 👑</div>
+  <div style="margin-top:8px;font-size:13px;color:#FFD700">Concentra't i aprovaràs 👑</div>
 </div>
 
 <div id="tab-estadistiques" class="tab-content">
@@ -74,21 +63,16 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <div style="font-size:48px;font-weight:900;color:#00D9FF;text-align:center" id="stats-global-percent">0%</div>
     <div class="progress-bar"><div class="progress-fill" id="stats-global-bar"></div></div>
     <div class="stats-falta" id="stats-global-falta">0% - Calculant</div>
-    <div id="stats-motivacio" style="text-align:center;color:#999;font-size:13px;margin:10px 0">Estudia 20min al Temari per desbloquejar</div>
-    <div class="stat-card"><div class="stat-card-header"><div>💪 Retenció</div><div style="color:#00D9FF;font-weight:800" id="stats-domini-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div></div>
-    <div class="stat-card"><div class="stat-card-header"><div id="stats-constancia-label">📅 CONSTÀNCIA</div><div style="color:#00D9FF;font-weight:800" id="stats-constancia-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div></div>
-    <div class="stat-card"><div class="stat-card-header"><div>📖 Cobertura</div><div style="color:#00D9FF;font-weight:800" id="stats-temari-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
-    <div class="stat-card"><div class="stat-card-header"><div>📋 Simulacres</div><div style="color:#00D9FF;font-weight:800" id="stats-simulacres-percent">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div><div id="stats-examen-aprobados" style="color:#999;font-size:12px;margin-top:5px">Millor ratxa: 0/6</div></div>
-    <button class="btn-dgt" id="btn-dgt-oficial">🚗 PRESENTARME AL EXAMEN DGT OFICIAL<br><span style="font-size:12px">Necessites 90% per desbloquejar</span></button>
+    <div class="stat-card"><div class="stat-card-header"><div>💪 Retenció</div><div id="stats-domini-percent" style="color:#00D9FF;font-weight:800">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-domini-bar"></div></div></div>
+    <div class="stat-card"><div class="stat-card-header"><div id="stats-constancia-label">📅 CONSTÀNCIA</div><div id="stats-constancia-percent" style="color:#00D9FF;font-weight:800">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-constancia-bar"></div></div></div>
+    <div class="stat-card"><div class="stat-card-header"><div>📖 Cobertura</div><div id="stats-temari-percent" style="color:#00D9FF;font-weight:800">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-temari-bar"></div></div></div>
+    <div class="stat-card"><div class="stat-card-header"><div>📋 Simulacres</div><div id="stats-simulacres-percent" style="color:#00D9FF;font-weight:800">0%</div></div><div class="progress-bar"><div class="progress-fill" id="stats-simulacres-bar"></div></div></div>
+    <button class="btn-dgt" id="btn-dgt-oficial">🚗 PRESENTARME AL EXAMEN DGT</button>
   </div>
-  <div id="stats-evolucio" class="sub-content"><div class="card"><h2>📈 Evolució</h2><canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px;border:1px solid #333"></canvas><div id="evolucio-motivacio" class="evolucio-mot">Fes tests 2 dies per veure evolució</div></div></div>
-  <div id="stats-debils" class="sub-content"><div class="card"><h2>🎯 Punts Dèbils</h2><div id="stats-debils-lista">Fes més tests per detectar punts dèbils</div></div></div>
-  <div id="stats-pase" class="sub-content"><div class="card" style="text-align:center"><div style="font-size:50px">⏰</div><h2>PASE DIARI 20 MIN</h2><div style="font-size:30px;font-weight:900;color:#00D9FF" id="pase-temps">0 min</div><div class="pase-consell">5 min SENYALS + 5 NORMES + 5 MECÀNICA + 5 AUXILIS</div></div></div>
-  
-  <!-- ORIENTACION - ESTE CONTENEDOR LO VA A SOBRESCRIBIR APP.JS, LO FIXEAMOS ABAJO CON JS -->
-  <div id="stats-orientacio" class="sub-content">
-    <div class="card"><h2>🧭 Carregant orientació...</h2><p>Si veus això, el fix de sota no ha carregat</p></div>
-  </div>
+  <div id="stats-evolucio" class="sub-content"><div class="card"><h2>📈 Evolució</h2><canvas id="grafica-evolucion" width="380" height="200" style="width:100%;background:#0a0a0a;border-radius:10px;border:1px solid #333"></canvas></div></div>
+  <div id="stats-debils" class="sub-content"><div class="card"><h2>🎯 Punts Dèbils</h2><div id="stats-debils-lista"></div></div></div>
+  <div id="stats-pase" class="sub-content"><div class="card" style="text-align:center"><div style="font-size:50px">⏰</div><h2>PASE DIARI 20 MIN</h2><div id="pase-temps" style="font-size:30px;color:#00D9FF;font-weight:900">0 min</div></div></div>
+  <div id="stats-orientacio" class="sub-content"><div class="card"><h2>Cargando...</h2></div></div>
 </div>
 
 <div id="tab-test" class="tab-content active">
@@ -100,27 +84,27 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'test','auxilis')">🚑 Auxilis</button>
     <button class="sub-tab-btn" onclick="canviarSubTab(event,'test','mediambient')">🌱 Medi Ambient</button>
   </div>
-  <div id="test-general" class="sub-content active"><div class="card"><h2>📝 TEST GENERAL</h2><div class="stats"><div>Aciertos: <span id="test-general-aciertos">0</span></div><div>Racha: <span id="test-general-racha">0</span>🔥</div><div>Score: <span id="test-general-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-general-progress"></div></div><div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-general-tip" class="tip-box"></div><div class="pregunta" id="test-general-pregunta">Carregant...</div><div id="test-general-opciones"></div><div class="feedback" id="test-general-feedback"></div><button class="btn-sig" id="btn-sig-test-general" onclick="seguentTest(event,'general')" disabled>SEGÜENT</button></div></div>
-  <div id="test-senyals" class="sub-content"><div class="card"><h2>🚸 TEST SENYALS</h2><div class="stats"><div>Aciertos: <span id="test-senyals-aciertos">0</span></div><div>Score: <span id="test-senyals-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-senyals-progress"></div></div><div id="test-senyals-imagen" class="quadre-pictograma"><div class="placeholder">Carregant...</div></div><div id="test-senyals-tip" class="tip-box"></div><div class="pregunta" id="test-senyals-pregunta">Carregant...</div><div id="test-senyals-opciones"></div><div class="feedback" id="test-senyals-feedback"></div><button class="btn-sig" id="btn-sig-test-senyals" onclick="seguentTest(event,'senyals')" disabled>SEGÜENT</button></div></div>
-  <div id="test-normes" class="sub-content"><div class="card"><h2>📋 TEST NORMES</h2><div class="stats"><div>Aciertos: <span id="test-normes-aciertos">0</span></div><div>Score: <span id="test-normes-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-normes-progress"></div></div><div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-normes-tip" class="tip-box"></div><div class="pregunta" id="test-normes-pregunta">Carregant...</div><div id="test-normes-opciones"></div><div class="feedback" id="test-normes-feedback"></div><button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button></div></div>
-  <div id="test-mecanica" class="sub-content"><div class="card"><h2>🔧 TEST MECÀNICA</h2><div class="stats"><div>Aciertos: <span id="test-mecanica-aciertos">0</span></div><div>Score: <span id="test-mecanica-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mecanica-progress"></div></div><div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-mecanica-tip" class="tip-box"></div><div class="pregunta" id="test-mecanica-pregunta">Carregant...</div><div id="test-mecanica-opciones"></div><div class="feedback" id="test-mecanica-feedback"></div><button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button></div></div>
-  <div id="test-auxilis" class="sub-content"><div class="card"><h2>🚑 TEST AUXILIS</h2><div class="stats"><div>Aciertos: <span id="test-auxilis-aciertos">0</span></div><div>Score: <span id="test-auxilis-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-auxilis-progress"></div></div><div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-auxilis-tip" class="tip-box"></div><div class="pregunta" id="test-auxilis-pregunta">Carregant...</div><div id="test-auxilis-opciones"></div><div class="feedback" id="test-auxilis-feedback"></div><button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button></div></div>
-  <div id="test-mediambient" class="sub-content"><div class="card"><h2>🌱 MEDI AMBIENT</h2><div class="stats"><div>Aciertos: <span id="test-mediambient-aciertos">0</span></div><div>Score: <span id="test-mediambient-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="test-mediambient-progress"></div></div><div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-mediambient-tip" class="tip-box"></div><div class="pregunta" id="test-mediambient-pregunta">Carregant...</div><div id="test-mediambient-opciones"></div><div class="feedback" id="test-mediambient-feedback"></div><button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button></div></div>
+  <div id="test-general" class="sub-content active"><div class="card"><h2>📝 TEST GENERAL</h2><div id="test-general-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="test-general-tip" class="tip-box"></div><div class="pregunta" id="test-general-pregunta">Carregant...</div><div id="test-general-opciones"></div><div class="feedback" id="test-general-feedback"></div><button class="btn-sig" id="btn-sig-test-general" onclick="seguentTest(event,'general')" disabled>SEGÜENT</button></div></div>
+  <div id="test-senyals" class="sub-content"><div class="card"><h2>🚸 TEST SENYALS</h2><div id="test-senyals-imagen" class="quadre-pictograma"><div class="placeholder">Carregant...</div></div><div id="test-senyals-tip" class="tip-box"></div><div id="test-senyals-pregunta" class="pregunta">Carregant...</div><div id="test-senyals-opciones"></div><div id="test-senyals-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-test-senyals" onclick="seguentTest(event,'senyals')" disabled>SEGÜENT</button></div></div>
+  <div id="test-normes" class="sub-content"><div class="card"><h2>📋 TEST NORMES</h2><div id="test-normes-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-normes-tip" class="tip-box"></div><div id="test-normes-pregunta" class="pregunta">Carregant...</div><div id="test-normes-opciones"></div><div id="test-normes-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-test-normes" onclick="seguentTest(event,'normes')" disabled>SEGÜENT</button></div></div>
+  <div id="test-mecanica" class="sub-content"><div class="card"><h2>🔧 MECÀNICA</h2><div id="test-mecanica-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-mecanica-tip" class="tip-box"></div><div id="test-mecanica-pregunta" class="pregunta">Carregant...</div><div id="test-mecanica-opciones"></div><div id="test-mecanica-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-test-mecanica" onclick="seguentTest(event,'mecanica')" disabled>SEGÜENT</button></div></div>
+  <div id="test-auxilis" class="sub-content"><div class="card"><h2>🚑 AUXILIS</h2><div id="test-auxilis-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-auxilis-tip" class="tip-box"></div><div id="test-auxilis-pregunta" class="pregunta">Carregant...</div><div id="test-auxilis-opciones"></div><div id="test-auxilis-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-test-auxilis" onclick="seguentTest(event,'auxilis')" disabled>SEGÜENT</button></div></div>
+  <div id="test-mediambient" class="sub-content"><div class="card"><h2>🌱 MEDI AMBIENT</h2><div id="test-mediambient-imagen" class="quadre-pictograma"><div class="placeholder">Sense</div></div><div id="test-mediambient-tip" class="tip-box"></div><div id="test-mediambient-pregunta" class="pregunta">Carregant...</div><div id="test-mediambient-opciones"></div><div id="test-mediambient-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-test-mediambient" onclick="seguentTest(event,'mediambient')" disabled>SEGÜENT</button></div></div>
 </div>
 
-<div id="tab-situaciones" class="tab-content"><div class="sub-tabs"><button class="sub-tab-btn active" onclick="canviarSubTab(event,'sit','clima')">🌧️ Clima</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','urbà')">🏙️ Urbà</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button></div>
-<div id="sit-clima" class="sub-content active"><div class="card"><h2>🌧️ CLIMA</h2><div class="stats"><div>Aciertos: <span id="sit-clima-aciertos">0</span></div><div>Score: <span id="sit-clima-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-clima-progress"></div></div><div id="sit-clima-imagen" class="quadre-pictograma" style="display:none"></div><div id="sit-clima-tip" class="tip-box"></div><div class="pregunta" id="sit-clima-pregunta">Carregant...</div><div id="sit-clima-opciones"></div><div class="feedback" id="sit-clima-feedback"></div><button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button></div></div>
-<div id="sit-urbà" class="sub-content"><div class="card"><h2>🏙️ URBÀ</h2><div class="stats"><div>Aciertos: <span id="sit-urbà-aciertos">0</span></div><div>Score: <span id="sit-urbà-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-urbà-progress"></div></div><div id="sit-urbà-imagen" class="quadre-pictograma" style="display:none"></div><div id="sit-urbà-tip" class="tip-box"></div><div class="pregunta" id="sit-urbà-pregunta">Carregant...</div><div id="sit-urbà-opciones"></div><div class="feedback" id="sit-urbà-feedback"></div><button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button></div></div>
-<div id="sit-carretera" class="sub-content"><div class="card"><h2>🛣️ CARRETERA</h2><div class="stats"><div>Aciertos: <span id="sit-carretera-aciertos">0</span></div><div>Score: <span id="sit-carretera-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-carretera-progress"></div></div><div id="sit-carretera-imagen" class="quadre-pictograma" style="display:none"></div><div id="sit-carretera-tip" class="tip-box"></div><div class="pregunta" id="sit-carretera-pregunta">Carregant...</div><div id="sit-carretera-opciones"></div><div class="feedback" id="sit-carretera-feedback"></div><button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button></div></div>
-<div id="sit-emergència" class="sub-content"><div class="card"><h2>🚨 EMERGÈNCIA</h2><div class="stats"><div>Aciertos: <span id="sit-emergència-aciertos">0</span></div><div>Score: <span id="sit-emergència-score">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="sit-emergència-progress"></div></div><div id="sit-emergència-imagen" class="quadre-pictograma" style="display:none"></div><div id="sit-emergència-tip" class="tip-box"></div><div class="pregunta" id="sit-emergència-pregunta">Carregant...</div><div id="sit-emergència-opciones"></div><div class="feedback" id="sit-emergència-feedback"></div><button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button></div></div>
+<div id="tab-situaciones" class="tab-content">
+  <div class="sub-tabs"><button class="sub-tab-btn active" onclick="canviarSubTab(event,'sit','clima')">🌧️ Clima</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','urbà')">🏙️ Urbà</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','carretera')">🛣️ Carretera</button><button class="sub-tab-btn" onclick="canviarSubTab(event,'sit','emergència')">🚨 Emergència</button></div>
+  <div id="sit-clima" class="sub-content active"><div class="card"><h2>🌧️ CLIMA</h2><div id="sit-clima-imagen" class="quadre-pictograma" style="display:none"></div><div id="sit-clima-tip" class="tip-box"></div><div id="sit-clima-pregunta" class="pregunta">Carregant...</div><div id="sit-clima-opciones"></div><div id="sit-clima-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-sit-clima" onclick="seguentSituacio(event,'clima')" disabled>SEGÜENT</button></div></div>
+  <div id="sit-urbà" class="sub-content"><div class="card"><h2>🏙️ URBÀ</h2><div id="sit-urbà-pregunta" class="pregunta">Carregant...</div><div id="sit-urbà-opciones"></div><div id="sit-urbà-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-sit-urbà" onclick="seguentSituacio(event,'urbà')" disabled>SEGÜENT</button></div></div>
+  <div id="sit-carretera" class="sub-content"><div class="card"><h2>🛣️ CARRETERA</h2><div id="sit-carretera-pregunta" class="pregunta">Carregant...</div><div id="sit-carretera-opciones"></div><div id="sit-carretera-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-sit-carretera" onclick="seguentSituacio(event,'carretera')" disabled>SEGÜENT</button></div></div>
+  <div id="sit-emergència" class="sub-content"><div class="card"><h2>🚨 EMERGÈNCIA</h2><div id="sit-emergència-pregunta" class="pregunta">Carregant...</div><div id="sit-emergència-opciones"></div><div id="sit-emergència-feedback" class="feedback"></div><button class="btn-sig" id="btn-sig-sit-emergència" onclick="seguentSituacio(event,'emergència')" disabled>SEGÜENT</button></div></div>
 </div>
 
-<div id="tab-examen" class="tab-content"><div class="card"><h2>📋 EXAMEN OFICIAL DGT</h2><div class="stats"><div>Pregunta: <span id="examen-num">0</span>/30</div><div>Temps: <span id="examen-timer">30:00</span></div><div>Encerts: <span id="examen-aciertos">0</span></div></div><div class="progress-bar"><div class="progress-fill" id="examen-progress"></div></div><div id="examen-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="examen-tip" class="tip-box"></div><div class="pregunta" id="examen-pregunta">Prem Inicia l'Examen</div><div id="examen-opciones"></div><div id="examen-resultat" style="display:none"></div><button class="btn-sig" id="btn-iniciar-examen" onclick="iniciarExamen(event)">INICIAR EXAMEN</button><button class="btn-sig" id="btn-sig-examen" onclick="seguentPreguntaExamen(event)" disabled style="display:none">SEGÜENT</button></div></div>
-
-<div id="tab-garage" class="tab-content"><div class="card"><h2>🏁 EL TEU GARATGE</h2><div class="score-big" id="garage-score">🏎️ 90 CV</div><div id="garage-lista"></div></div></div>
+<div id="tab-examen" class="tab-content"><div class="card"><h2>📋 EXAMEN OFICIAL DGT</h2><div id="examen-imagen" class="quadre-pictograma"><div class="placeholder">Sense pictograma</div></div><div id="examen-tip" class="tip-box"></div><div id="examen-pregunta" class="pregunta">Prem Inicia l'Examen</div><div id="examen-opciones"></div><div id="examen-resultat" style="display:none"></div><button class="btn-sig" id="btn-iniciar-examen" onclick="iniciarExamen(event)">INICIAR EXAMEN</button><button class="btn-sig" id="btn-sig-examen" onclick="seguentPreguntaExamen(event)" disabled style="display:none">SEGÜENT</button></div></div>
+<div id="tab-garage" class="tab-content"><div class="card"><h2>🏁 GARATGE</h2><div id="garage-lista"></div></div></div>
 <div id="tab-tienda" class="tab-content"><div class="card"><h2>🛒 BOTIGA</h2><div id="emoji-tienda"></div></div></div>
-<div id="tab-tips" class="tab-content"><div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div><div style="display:flex;gap:10px;margin-top:15px"><button class="btn" style="flex:1" onclick="prevTip(event)">ANTERIOR</button><span id="tip-counter" style="align-self:center">1/100</span><button class="btn" style="flex:1" onclick="nextTip(event)">SEGÜENT</button></div></div></div>
-<div id="tab-temari" class="tab-content"><div class="card"><h2>📖 TEMARIS OFICIALS</h2><div id="temari-lista"></div></div></div>
+<div id="tab-tips" class="tab-content"><div class="card"><h2>💡 CONSELL DGT</h2><div id="tip-content"></div></div></div>
+<div id="tab-temari" class="tab-content"><div class="card"><h2>📖 TEMARIS</h2><div id="temari-lista"></div></div></div>
 
 <div class="tabs">
   <button class="tab-btn active" onclick="canviarTab_V94(event,'estadistiques')"><span class="emoji">📊</span>ESTAD</button>
@@ -133,112 +117,155 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=12.1"></script>
+<script src="./app.js?v=12.2"></script>
 
-<!-- FIX DEFINITIVO ORIENTACION 8 SUB-TABS - SE EJECUTA DESPUES DE APP.JS -->
 <script>
-function canviarOrientacio(evt, id){
+// V12.2 FIX DEFINITIVO + KID FRIENDLY + PANTALLA ROJA RECUPERADA
+function canviarOrientacio(evt,id){
   document.querySelectorAll('#stats-orientacio .sub-tab-btn').forEach(b=>b.classList.remove('active'));
-  if(evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+  if(evt&&evt.currentTarget) evt.currentTarget.classList.add('active');
   document.querySelectorAll('.orientacio-subcontent').forEach(c=>{c.classList.remove('actiu');c.style.display='none';});
   const t=document.getElementById('orientacio-'+id);
   if(t){t.style.display='block';t.classList.add('actiu');}
 }
 
 function inyectarOrientacionFix(){
-  const cont = document.getElementById('stats-orientacio');
+  const cont=document.getElementById('stats-orientacio');
   if(!cont) return;
-  cont.innerHTML = `
-    <div class="card" style="max-width:440px;border:2px solid #00D9FF">
-      <h2>🧭 ORIENTACIÓ - 8 MINICURSOS V12.1 FIX</h2>
-      <div style="background:#0a0a1a;padding:8px;border-radius:8px;border:1px solid #00D9FF;margin-bottom:10px;font-size:11px;text-align:center;color:#00D9FF">📋 30 preguntes • 30 min • 27 encerts mín • 3 fallos màx</div>
-      
-      <div class="sub-tabs" style="display:flex;flex-wrap:wrap">
-        <button class="sub-tab-btn active" onclick="canviarOrientacio(event,'am')">🛵 AM</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'a1')">A1</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'a2')">A2</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'b')">🚗 B</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'be')">B+E</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'c')">🚚 C</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'masas')">⚖️ MMA</button>
-        <button class="sub-tab-btn" onclick="canviarOrientacio(event,'via')">🛣️ VIA</button>
-      </div>
+  cont.innerHTML=`
+<div class="card" style="max-width:440px;border:2px solid #00D9FF">
+  <h2 style="font-size:18px">🎯 COM FUNCIONA L'EXAMEN DGT OFICIAL REAL</h2>
+  <div style="font-size:13px;line-height:1.6;color:#ddd">
+    <p>📋 <b>30 preguntes</b> tipus test - 3 opcions, 1 correcta sempre</p>
+    <p>⏱️ <b>30 minuts màxim</b> - Amb pràctica fas 10 min</p>
+    <p>✅ <b>27 encerts mínim per aprovar</b> - Màxim 3 fallos permesos</p>
+    <p>👮 <b>El dia de l'examen:</b> Porta DNI + Justificant cita. Arriba 15 min abans. Aula amb ordinadors. Resultat al moment en pantalla. Si suspens, pots repetir en 7-15 dies.</p>
+    <p>💡 <b>Truc DGT que ningú explica:</b> Sempre la resposta més segura i conservadora és la correcta. Paraules absolutes com "sempre, mai, en tot cas" són trampa.</p>
+  </div>
+</div>
 
-      <div id="orientacio-am" class="orientacio-subcontent actiu" style="display:block">
-        <div style="text-align:center"><svg class="mini-picto" viewBox="0 0 100 50"><path d="M12 35 C12 18 18 30 22 L60 8 C70 6 78 14 82 28 L84 38 L20 40 Z M16 38 A8 8 0 1 0 31 38 M66 38 A8 8 0 1 0 81 38"/></svg></div>
-        <span class="mc-badge">1/8 • AM 15 ANYS • 49cc 45km/h • L1e L6e</span>
-        <div class="mc-text">
-          <b style="color:#00D9FF">Oficial Art.4:</b> Ciclomotor ≤45km/h ≤50cc o ≤4kW. L6e <350kg buit. L7e 400kg ja B1. Tara ~70kg MMA ~160kg.<br><br>
-          <b>SI:</b> 1 passatger si fitxa 2 places. Arcén dret. Càrrega petita baca.<br>
-          <b>NO:</b> Autopista/autovia Art.38, remolc, auriculars, <12a (7-12 només pare/mare).<br><br>
-          <b>Requisits:</b> 15a, psicotècnic 3 mesos, 20 preg 2 fallos, pista zigzag.<br>
-          <b>A-06:</b> Casc ECE 22.05/06 200€. <b>N-01:</b> 0,5/0,25 novel segueix 0,5 en AM. <b>R-101:</b> prohibit ciclomotors. <b>M-11:</b> Pressió 2 set, fre 70% davant.<br><br>
-          <b style="color:#FFD700">Truc: Trucar a 70 = sense carnet sense assegurança.</b>
-        </div>
-      </div>
+<div class="card" style="max-width:440px;border-left:4px solid #FFD700">
+  <h2 style="color:#FFD700;font-size:15px">📚 MÈTODE GASDRIVE - 3 PASSOS QUE JA TENS AL PASE</h2>
+  <div style="font-size:13px;line-height:1.6;color:#ddd">
+    <p><b style="color:#2ecc71">1. TEMARI - 5 min cada temari diari:</b> 20 min total = PASE desbloquejat +50 coins</p>
+    <p><b style="color:#FFD700">2. TESTS - Per millorar %:</b> 30-60 tests diaris fins 90%</p>
+    <p><b style="color:#00D9FF">3. EXAMEN - Prova't diari:</b> Ratxa 6 aprovats seguits = llest DGT</p>
+  </div>
+</div>
 
-      <div id="orientacio-a1" class="orientacio-subcontent">
-        <span class="mc-badge">2/8 • A1 16 ANYS • 125cc 11kW 0,1kW/kg</span>
-        <div class="mc-text"><b>Oficial:</b> ≤125cc ≤11kW 0,1kW/kg Tricicle ≤15kW Inclou AM. B+3a=A1 Espanya només. Moto 100kg 11kW=0,11 NO vàlida.<br><b>Examen:</b> Teòric A + pista + circulació 30min. Pot autovia 120. Passatger si 2 places +16a. Novel 0,3/0,15. Pneumàtic 1,6mm mín Cadena 2-3cm.</div>
-      </div>
+<div class="card" style="max-width:440px;border:2px solid #00D9FF">
+  <h2>🧭 ORIENTACIÓ - 8 MINICURSOS EXPLICATS PER UN NEN DE 15 ANYS</h2>
+  <div class="sub-tabs" style="flex-wrap:wrap">
+    <button class="sub-tab-btn active" onclick="canviarOrientacio(event,'am')">🛵 AM</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'a1')">A1</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'a2')">A2</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'b')">🚗 B</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'be')">B+E</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'c')">🚚 C</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'masas')">⚖️ MMA</button>
+    <button class="sub-tab-btn" onclick="canviarOrientacio(event,'via')">🛣️ VIA</button>
+  </div>
 
-      <div id="orientacio-a2" class="orientacio-subcontent">
-        <span class="mc-badge">3/8 • A2 18 ANYS • 35kW 47CV</span>
-        <div class="mc-text"><b>Oficial:</b> ≤35kW ≤0,2kW/kg no derivada >70kW origen. MT-07 55kW limitada 35kW SÍ. Ducati 90kW limitada NO. Inclou AM A1.<br><b>A il·limitat:</b> 20a+2a A2+ curs 9h sense examen.</div>
-      </div>
-
-      <div id="orientacio-b" class="orientacio-subcontent">
-        <div style="text-align:center"><svg class="mini-picto" viewBox="0 0 100 40"><path d="M10 26 L20 12 L75 12 L90 20 L88 32 L10 32 Z M20 32 A7 7 0 1 0 34 32 M66 32 A7 7 0 1 0 80 32"/></svg></div>
-        <span class="mc-badge" style="background:#FFD700;color:#000">4/8 • B ACTIU • 3500kg • 4250kg CONJUNT</span>
-        <div class="mc-text">
-          <b style="color:#FFD700">Art.5 B:</b> ≤3500kg MMA 8+1 places Remolc ≤750kg Conjunt B màx 4250kg. Ex 2000+1000=3000 SÍ B 3500+1000=4500 NO cal B+E.<br><br>
-          <b>E-01:</b> Tara buit ple sense conductor MOM Tara+75kg MMA màx fabricant Útil MMA-Tara. Ex Tara 1800 MMA 3000 útil 1200.<br>
-          <b>Eixos:</b> Simple motor 11,5t no motor 10t tàndem 11,5-18t tridem 21-27t.<br><br>
-          <b>N-01:</b> 0,5/0,25 general 0,3/0,15 novel/pro <b>N-05:</b> Ciutat 50/30/20 travessia 50 convencional 90 autovia 120 <b>N-10:</b> Glorieta dins prioritat.<br><br>
-          <b style="color:#FFD700">Errors: glorieta interior sense intermitent, Stop no 2 seg, MMA 4250 no 3500.</b>
-        </div>
-      </div>
-
-      <div id="orientacio-be" class="orientacio-subcontent">
-        <span class="mc-badge">5/8 • B+E • 7000kg</span>
-        <div class="mc-text"><b>Oficial:</b> Cotxe B+remolc >750 fins 7000kg MMA 18a+B.<br><b>Velocitat amb remolc:</b> Autovia 90 convencional 80 ciutat 50 mai 120.<br><b>>750:</b> ITV pròpia matrícula vermella+blanca asseg pròpia.</div>
-      </div>
-
-      <div id="orientacio-c" class="orientacio-subcontent">
-        <span class="mc-badge" style="background:#666">6/8 • C/C1 • CAMIÓ</span>
-        <div class="mc-text"><b>C1:</b> 3500-7500kg 18a <b>C:</b> >3500 21a (18 CAP). Tacògraf 4h30+45 diària 9h ampliable 10h 2 cops setmanal 56h quinzenal 90h.<br><b>Masses:</b> 2 eixos 18t 3 eixos 25t 4 eixos 31t tren 40t 44t contenidor.</div>
-      </div>
-
-      <div id="orientacio-masas" class="orientacio-subcontent">
-        <span class="mc-badge" style="background:#FFD700;color:#000">7/8 • E-01 • TARA/MMA/MOM • 4 PREG EXAMEN</span>
-        <div class="mc-text"><b>Tara:</b> Buit ple sense conductor <b>MOM:</b> Tara+75 <b>MMA:</b> Màx fabricant <b>Real:</b> Moment <b>Útil:</b> MMA-Tara<br><b>Dimensions:</b> Turisme 12m bus 15m articulat 18,75m tren 16,5m conjunt 18,75m ample 2,55m alt 4m<br><b>Truc:</b> Tara NO inclou conductor MOM SÍ.</div>
-      </div>
-
-      <div id="orientacio-via" class="orientacio-subcontent">
-        <span class="mc-badge" style="background:#FFD700;color:#000">8/8 • VIA + V-...</span>
-        <div class="mc-text"><b>Via:</b> Plataforma calçada+vorals calçada vehicles carril franja voral contigu no circular vorera vianants mitjana separa mai trepitjar.<br><b>Tipus:</b> Autopista 2 calçades sense creus 120 autovia similar via automòbils 1 calçada 100 convencional 90.<br><b>V-1:</b> Prioritari blau <b>V-2:</b> Obra taronja <b>V-16:</b> Llum taronja 2026 triangles <b>V-13:</b> Novel L verda 1 any <b>V-20:</b> Càrrega sobresurt.</div>
-      </div>
+  <div id="orientacio-am" class="orientacio-subcontent actiu" style="display:block">
+    <div style="text-align:center"><svg class="mini-picto" viewBox="0 0 100 50"><path d="M12 35 L60 8 L82 28 L84 38 L20 40 Z M16 38 A8 8 0 1 0 31 38 M66 38 A8 8 0 1 0 81 38"/></svg></div>
+    <span class="mc-badge">1/8 • AM 15 ANYS • LA MOTO PETITA</span>
+    <div class="mc-text">
+      <b>Imagina això:</b> Tens 15 anys i vols anar a l'insti sense que et portin els pares. La AM és el teu primer vehicle. És una moto petita que no pot córrer més de 45 km/h, com anar amb bici elèctrica ràpida. Si el motor és de gasolina, no pot ser més gran que 50cc, o sigui, un got d'aigua de motor. Si és elèctrica, màxim 4kW, com 4 microones junts.<br><br>
+      <b>El cotxet sense carnet?</b> Això és un quadricicle lleuger, com un cotxe de joguina gran que pesa menys de 350kg buit, sense comptar bateries. Va a 45 màxim també. Necessites AM igual. El L7e que pesa 400kg ja no és AM, és com un cotxe normal petit i necessites B1.<br><br>
+      <b>Què pots fer amb AM?</b> Pots portar un amic darrere, però només si a la fitxa del teu ciclomotor posa que hi caben 2 persones. Mira la targeta ITV, on diu "places". Si posa 1, si portes algú et multen 200€. Pots anar per ciutat i per carreteres normals per l'arcén de la dreta, si l'arcén es pot usar.<br><br>
+      <b>Què NO pots fer MAI?</b> No pots entrar a autopista ni autovia, és com si intentessis entrar a una autopista amb patinet, et maten. Article 38 ho prohibeix. No pots remolcar res, ni que et remolquin. No pots anar amb cascos de música posats, ni un. I no pots portar nens menors de 12 anys. Només de 7 a 12 si tu ets el seu pare/mare/tutor i el nen porta casc de nen i arriba als reposapeus.<br><br>
+      <b>Com treure't el carnet?</b> Has de tenir 15 anys complerts, no 14 i mig. Vas al metge psicotècnic, et miren ulls i reflexes, dura 3 mesos. Després examen teòric: 20 preguntes, pots fallar màxim 2. Et pregunten senyals, alcohol, glorietes i mecànica bàsica. Després pràctic en pista tancada: zigzag entre cons, frenada d'emergència i fer un cercle. Si toques un con, suspens.<br><br>
+      <b>Truc d'or:</b> Si trucas la moto perquè corri a 70km/h, ja no és ciclomotor, és una moto sense papers, sense assegurança i sense carnet. Si tens accident, l'assegurança no paga i et cau multa grossa.
     </div>
+  </div>
+
+  <div id="orientacio-a1" class="orientacio-subcontent">
+    <span class="mc-badge">2/8 • A1 16 ANYS • 125cc - LA MOTO DE VERITAT PETITA</span>
+    <div class="mc-text">
+      <b>Imagina:</b> Ja tens 16 anys, la AM se't queda petita. La A1 és la teva primera moto de veritat, però limitada. És com un gos que encara és cadell: pot ser fins a 125cc de motor, 11kW de potència que són uns 15 cavalls. I no pot ser molt lleugera i potent a la vegada: la relació pes/potència no pot passar de 0,1 kW per cada kg. Això vol dir que si la moto pesa 100kg i té 11kW, fa 0,11 i no val, s'excedeix. Necessita pesar almenys 110kg.<br><br>
+      <b>Truc que tothom vol saber:</b> Si tens el carnet de cotxe B des de fa més de 3 anys, a Espanya pots portar una 125cc sense treure't A1. Però només a Espanya, si vas a França et multen. Si tens B des de fa 1 any, no pots.<br><br>
+      <b>Examen:</b> Has de fer teòric específic de motos, després pista amb la 125cc i després circulació 30 minuts per ciutat i carretera. Pots anar per autovia a 120km/h, sí. Pots portar passatger si la moto està homologada per 2 i tu tens 16 anys. I ets novel 2 anys, així que alcohol 0,3 en sang i 0,15 en aire, no 0,5. Molts suspenen per això.<br><br>
+      <b>Mecànica per nens:</b> Dibuix del pneumàtic mínim 1,6mm, com la profunditat d'una moneda de 1€. Cadena amb joc de 2-3cm, com dos dits. Oli 4 temps, no barreja com AM.
+    </div>
+  </div>
+
+  <div id="orientacio-a2" class="orientacio-subcontent">
+    <span class="mc-badge">3/8 • A2 18 ANYS • 47CV - LA MOTO MITJANA</span>
+    <div class="mc-text">
+      <b>Imagina:</b> Tens 18 anys, ja ets major d'edat. La A2 és com la moto adolescent: més potent que A1 però no la bestia final. Pot tenir fins a 35kW que són 47 cavalls. I no pot ser molt lleugera i potent: 0,2kW per kg màxim.<br><br>
+      <b>El truc de limitar motos grosses:</b> Pots comprar una moto grossa i limitar-la a 35kW, però amb una condició: la moto d'origen no pot tenir més del doble de potència, és a dir, màxim 70kW d'origen. Exemple fàcil: Yamaha MT-07 té 55kW d'origen, com 75 cavalls. Com que 55 és menys que 70, SÍ la pots limitar a 35kW. Una Ducati de 90kW, com 122 cavalls, NO la pots limitar perquè 90 és més que 70. DGT pregunta això sempre.<br><br>
+      <b>Com arribar a la moto grossa A sense límit?</b> Quan tinguis 20 anys i portis 2 anys amb A2, fas un curs de 9 hores, 3 de teoria i 6 de pràctica, i ja tens la A il·limitada, sense examen. Si tens 21 anys però no tens A2, no pots tenir A directe, has d'esperar als 24 anys.
+    </div>
+  </div>
+
+  <div id="orientacio-b" class="orientacio-subcontent">
+    <div style="text-align:center"><svg class="mini-picto" viewBox="0 0 100 40"><path d="M10 26 L20 12 L75 12 L90 20 L88 32 L10 32 Z M20 32 A7 7 0 1 0 34 32 M66 32 A7 7 0 1 0 80 32"/></svg></div>
+    <span class="mc-badge" style="background:#FFD700;color:#000">4/8 • B ACTIU • EL COTXE NORMAL • EL TEU CURS</span>
+    <div class="mc-text">
+      <b>Imagina que el teu cotxe és una motxilla:</b> El carnet B et deixa portar una motxilla que no pesi més de 3500kg plena, que són 3,5 tones, com 2 cotxes petits. I a dins hi poden anar màxim 8 amics més tu, 9 en total. I darrere pots arrossegar una motxilleta petita, un remolc, que no pesi més de 750kg ple.<br><br>
+      <b>El truc del conjunt que suspèn a tothom:</b> Si el teu cotxe pesa 2000kg de MMA i el remolc pesa 1000kg de MMA, el conjunt pesa 3000kg. Com que 3000 és menys que 4250, pots anar amb carnet B normal. Però si el teu cotxe pesa 3500kg i el remolc 1000kg, el conjunt pesa 4500kg, i 4500 és més que 4250, així que necessites B+E. Aquesta pregunta cau 100% a l'examen.<br><br>
+      <b>Tara, MMA, MOM explicat a nen de 15 anys:</b><br>
+            - <b>Tara:</b> És el que pesa el cotxe buit, sense ningú dins i sense càrrega, però amb el dipòsit ple i les eines. Com pesar-te al matí sense roba però amb el mòbil a la butxaca.<br>
+            - <b>MOM:</b> Tara + 75kg d'un conductor imaginari. Com si pugés un adult mitjà.<br>
+            - <b>MMA:</b> És el màxim que diu el fabricant que pot pesar el cotxe ple. Si el passes, trenques el cotxe i et multen.<br>
+            - <b>Útil:</b> MMA menys Tara, és el que pots carregar de veritat.<br><br>
+      <b>Velocitats que has de saber:</b> Ciutat 50km/h, però si només hi ha un carril per sentit o és plataforma única, 30km/h. Si és zona de vianants amb nens, 20km/h. Travessia 50, carretera normal 90, autovia 120. Glorieta: sempre té prioritat el que ja és dins, com una rotonda del cole, no et colis.
+    </div>
+  </div>
+
+  <div id="orientacio-be" class="orientacio-subcontent">
+    <span class="mc-badge">5/8 • B+E • COTXE AMB REMOLC GROS</span>
+    <div class="mc-text">
+      <b>Imagina que vols portar una caravana:</b> Amb B normal només pots portar remolc fins a 4250kg de conjunt. Si vols una caravana més grossa, necessites B+E. Amb B+E pots portar fins a 7000kg de conjunt, que és cotxe 3500kg + remolc 3500kg. És com portar una casa darrere.<br><br>
+      <b>Normes de nen:</b> Amb remolc no pots anar a 120 mai, màxim 90 a autopista, 80 a carretera normal i 50 a ciutat. Si el remolc pesa més de 750kg, necessita la seva pròpia ITV cada 2 anys, la seva matrícula blanca i una vermella duplicada del cotxe, i la seva assegurança. Si pesa menys de 750kg, no cal.<br><br>
+      <b>Conducció:</b> Amb remolc frenes 40% més llarg, com si portessis motxilla de 20kg corrent. I el vent lateral t'empeny molt, com una vela.
+    </div>
+  </div>
+
+  <div id="orientacio-c" class="orientacio-subcontent">
+    <span class="mc-badge" style="background:#666">6/8 • C/C1 • CAMIÓ</span>
+    <div class="mc-text">
+      <b>Imagina:</b> C1 és el camió petit, de 3500kg a 7500kg, com una furgoneta grossa de mudances. El pots portar amb 18 anys. El C és el camió de veritat, més de 3500kg sense límit, com el de la Coca-Cola. Necessites 21 anys o 18 si tens CAP que és un curs de camioner de 140 hores.<br><br>
+      <b>Tacògraf explicat simple:</b> És com un rellotge que controla el camioner perquè no s'adormi. Pot conduir 4 hores i mitja seguides i ha de parar 45 minuts, que pot partir en 15+30. Al dia màxim 9 hores, però 2 cops a la setmana pot fer 10. A la setmana màxim 56 hores. Ha de dormir 11 hores al dia, 3 cops pot dormir 9. Si no, multa grossa.
+    </div>
+  </div>
+
+  <div id="orientacio-masas" class="orientacio-subcontent">
+    <span class="mc-badge" style="background:#FFD700;color:#000">7/8 • E-01 • TARA/MMA - LA PREGUNTA QUE MÉS CAU</span>
+    <div class="mc-text">
+      <b>Exemple de la vida real per entendre-ho:</b><br>
+      Tens una furgoneta que buida pesa 2000kg això és Tara. Si hi puja un conductor de 75kg, pesa 2075kg això és MOM, massa en ordre de marxa. El fabricant diu que com a màxim pot pesar 3500kg això és MMA. Així que pots carregar 1500kg, això és útil. Si carregues 1600kg, et passes 100kg i et multen.<br><br>
+      <b>Dimensions que has d'imaginar:</b> Un cotxe normal fa 12m de llarg com 2 habitacions. Un bus 15m. Un bus articulat amb acordió 18,75m com 3 habitacions. Amplada 2,55m com una porta gran. Altura 4m com un pis.<br><br>
+      <b>Truc per no fallar mai:</b> Tara NO inclou conductor, és buit del tot. MOM SÍ inclou conductor de 75kg. MMA és la que surt a la fitxa ITV, la veritat oficial.
+    </div>
+  </div>
+
+  <div id="orientacio-via" class="orientacio-subcontent">
+    <span class="mc-badge" style="background:#FFD700;color:#000">8/8 • PARTS DE LA VIA + COTXES RAROS</span>
+    <div class="mc-text">
+      <b>Parts de la via explicat com un carrer:</b><br>
+            - <b>Calçada:</b> On van els cotxes, l'asfalt negre.<br>
+            - <b>Carril:</b> Cada línia de la calçada, com cada fila al cole.<br>
+            - <b>Voral:</b> El lateral de la carretera, com la vorera de terra. Si és transitable, pots parar. Si no, no.<br>
+            - <b>Vorera:</b> On van els vianants, elevada.<br>
+            - <b>Mitjana:</b> El que separa les dues direccions, com una illa al mig. Mai la trepitgis ni hi aparquis.<br>
+            - <b>Cuneta:</b> El desguàs d'aigua al lateral.<br><br>
+      <b>Cotxes raros amb lletres V:</b><br>
+            - <b>V-1 blau amb sirena:</b> Policia, bombers, ambulància. Té prioritat sobre tot, com el director del cole.<br>
+            - <b>V-2 taronja:</b> Cotxe d'obres, va lent.<br>
+            - <b>V-16 llum taronja:</b> Des de 2026 obligatòria, substitueix els triangles. És una llum que poses al sostre si t'avaries.<br>
+            - <b>V-13 L verda:</b> Conductor novel, 1 any. Com dir "soc nou".<br>
+            - <b>V-20 panell ratlles:</b> La càrrega sobresurt darrere.
+    </div>
+  </div>
+</div>
   `;
-
-  // Asegurar primera visible
-  const first = document.getElementById('orientacio-am');
-  if(first){ first.style.display='block'; first.classList.add('actiu'); }
+  const first=document.getElementById('orientacio-am');
+  if(first){first.style.display='block';first.classList.add('actiu');}
 }
-
-// Ejecutar después de que app.js haya hecho su render
-window.addEventListener('load', ()=>{
-  setTimeout(inyectarOrientacionFix, 600);
-  setTimeout(inyectarOrientacionFix, 1500);
-});
-
-// También cuando toques ORIENTACIO
-const obs = new MutationObserver(()=>{ 
-  if(document.getElementById('stats-orientacio') && !document.getElementById('orientacio-am')){
-    inyectarOrientacionFix();
-  }
-});
-obs.observe(document.body, {childList:true, subtree:true});
+window.addEventListener('load',()=>{setTimeout(inyectarOrientacionFix,500);setTimeout(inyectarOrientacionFix,1500);});
+const obs=new MutationObserver(()=>{if(document.getElementById('stats-orientacio')&&!document.getElementById('orientacio-am')){inyectarOrientacionFix();}});
+obs.observe(document.body,{childList:true,subtree:true});
 </script>
 
 </body>
