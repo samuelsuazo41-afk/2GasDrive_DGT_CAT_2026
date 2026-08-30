@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GasDrive DGT CAT V12</title>
+<title>GasDrive DGT CAT V12.1</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0a0a0a">
 <style>
@@ -45,9 +45,11 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .feedback.acierto{background:#0a4;color:#fff}
 .feedback.fallo{background:#a00;color:#fff}
 @keyframes bounceIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-.garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0}
-.garage-car.locked{opacity:0.4}
-.garage-car h3{color:#00D9FF;margin:7px 0}
+.garage-car{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:18px;text-align:center;margin:9px 0;cursor:pointer;transition:.2s}
+.garage-car:active{transform:scale(.97);border-color:#00D9FF}
+.garage-car.locked{opacity:0.5}
+.garage-car h3{color:#00D9FF;margin:7px 0;font-size:14px}
+.garage-car.actiu{border-color:#00D9FF;box-shadow:0 0 15px rgba(0,217,255,.2)}
 .score-big{text-align:center;font-size:44px;font-weight:900;color:#00D9FF;margin:18px 0;text-shadow:0 0 20px rgba(0,217,255,0.5)}
 .emoji-shop{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:8px}
 .emoji-item{background:#1a1a1a;border:2px solid #333;border-radius:11px;padding:13px;text-align:center;cursor:pointer}
@@ -76,46 +78,18 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .orientacio-card h3{color:#00D9FF;margin-top:12px;font-size:15px}
 .orientacio-card p{color:#999;font-size:13px;margin:5px 0}
 .quadre-pictograma {
-  width: 100%;
-  height: auto;
-  min-height: 140px;
-  max-height: none;
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
-  border: 2px solid rgba(0, 217, 255, 0.5);
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.15), inset 0 0 15px rgba(0,0,0,0.3);
-  display: block;
-  margin: 0;
-  padding: 10px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
+  width: 100%; height: auto; min-height: 140px; background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 2px solid rgba(0, 217, 255, 0.5); border-radius: 16px; box-shadow: 0 0 20px rgba(0, 217, 255, 0.15);
+  display: block; margin: 0; padding: 10px; box-sizing: border-box; overflow: hidden; position: relative; z-index: 1;
 }
-.quadre-pictograma img { width: 100%; max-width: 100%; height: auto; max-height: none; display: block; border-radius: 12px; object-fit: contain; } 
+.quadre-pictograma img { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 12px; object-fit: contain; } 
 .quadre-pictograma .placeholder { color: rgba(0, 217, 255, 0.4); font-size: 14px; font-weight: 500; text-align: center; user-select: none; padding: 20px; }
 .test-emojis { display: none !important; }
 .tip-box {
-  background: linear-gradient(135deg, #332a00 0%, #2a2a00 100%);
-  border: 3px solid #00D9FF;
-  border-left: 5px solid #FFD700;
-  padding: 14px 15px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #FFD700;
-  line-height: 1.4;
-  margin: 0;
-  box-shadow: 0 0 15px rgba(0,217,255,0.3);
-  display: none;
-  flex-shrink: 0;
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 2;
+  background: linear-gradient(135deg, #332a00 0%, #2a2a00 100%); border: 3px solid #00D9FF; border-left: 5px solid #FFD700;
+  padding: 14px 15px; border-radius: 12px; font-size: 14px; font-weight: 700; color: #FFD700; line-height: 1.4; margin: 0;
+  box-shadow: 0 0 15px rgba(0,217,255,0.3); display: none; flex-shrink: 0; width: 100%; box-sizing: border-box; position: relative; z-index: 2;
 }
-/* ===== V12 ESTILS NOUS PER ESTADÍSTIQUES ===== */
 .stats-falta{ text-align:center; color:#FFD700; font-size:13px; font-weight:700; margin:8px 0 4px; line-height:1.3; background:rgba(255,215,0,0.08); padding:8px; border-radius:8px; border:1px dashed rgba(255,215,0,0.3); }
 .evolucio-mot{ text-align:center; color:#00D9FF; font-size:12px; font-weight:600; margin:12px 0 4px; padding:10px; background:#0a0a1a; border-radius:8px; border:1px solid #333; line-height:1.4; }
 .pase-consell{ color:#999; font-size:11px; margin-top:10px; line-height:1.4; background:#111; padding:10px; border-radius:8px; }
@@ -124,6 +98,15 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
 .orientacio-bloc.groc{ border-left:4px solid #FFD700; }
 .orientacio-bloc.blau{ border-left:4px solid #00D9FF; }
 .debil-card{ margin-bottom:15px; padding:14px; background:#1a1a1a; border-left:4px solid #FFD700; border-radius:10px; }
+/* V12.1 MINICURSOS */
+.minicursos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.mini-picto{width:56px;height:36px;stroke:#00D9FF;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto;display:block}
+.mc-detall{display:none;margin-top:14px}
+.mc-detall.actiu{display:block;animation:fadeIn .3s}
+.mc-h3{color:#00D9FF;font-size:14px;margin:14px 0 6px;border-bottom:1px solid #222;padding-bottom:4px}
+.mc-text{font-size:13px;line-height:1.6;color:#ddd}
+.mc-badge{display:inline-block;background:#00D9FF;color:#000;font-size:10px;font-weight:900;padding:3px 8px;border-radius:10px;margin-bottom:6px}
+.mc-truc{color:#FFD700;font-weight:700}
 </style>
 </head>
 <body>
@@ -173,24 +156,163 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
       <div class="pase-consell" id="pase-consell">💡 Consell V12: Fes 5 min SENYALS + 5 min NORMES + 5 min MECÀNICA + 5 min AUXILIS = 20 min. Així toques tots els temaris cada dia.</div>
     </div>
   </div>
+
+  <!-- V12.1 ORIENTACIO AMB 8 MINICURSOS 300 LINIES -->
   <div id="stats-orientacio" class="sub-content">
     <div class="card orientacio-card">
-      <h2>🧭 Pla d'Estudi Complet V12</h2>
-      <div id="stats-orientacio-lista">
-        <div style="background:#0a0a1a; padding:14px; border-radius:12px; border:2px solid #00D9FF; margin-bottom:14px;">
-          <h3 style="color:#00D9FF; margin:0 0 8px; font-size:14px;">🎯 COM ÉS L'EXAMEN DGT OFICIAL REAL</h3>
-          <div style="color:#fff; font-size:12px; line-height:1.6;">
-            <p>📋 <b>30 preguntes</b> - 3 opcions, 1 correcta</p>
-            <p>⏱️ <b>30 minuts</b> màxim</p>
-            <p>✅ <b>27 encerts mínim</b> - Màxim 3 fallos</p>
-            <p>🏫 El dia D: DNI + justificant. Aula ordinadors. Resultat al moment.</p>
-          </div>
+      <h2>🧭 Pla d'Estudi Complet V12.1</h2>
+      
+      <div style="background:#0a0a1a; padding:14px; border-radius:12px; border:2px solid #00D9FF; margin-bottom:14px;">
+        <h3 style="color:#00D9FF; margin:0 0 8px; font-size:14px;">🎯 COM ÉS L'EXAMEN DGT OFICIAL REAL</h3>
+        <div style="color:#fff; font-size:12px; line-height:1.6;">
+          <p>📋 <b>30 preguntes</b> - 3 opcions, 1 correcta</p>
+          <p>⏱️ <b>30 minuts</b> màxim</p>
+          <p>✅ <b>27 encerts mínim</b> - Màxim 3 fallos</p>
         </div>
-        <div class="orientacio-bloc verd"><div style="font-weight:700; color:#2ecc71; font-size:13px;">1. TEMARI - 5 minuts cada temari diari</div><div style="color:#ccc; font-size:11px; margin-top:4px;">20 min total = PASE desbloquejat +50 coins</div></div>
-        <div class="orientacio-bloc groc"><div style="font-weight:700; color:#FFD700; font-size:13px;">2. TESTS - Per millorar % preparació</div><div style="color:#ccc; font-size:11px; margin-top:4px;">30-60 tests diaris fins 90%</div></div>
-        <div class="orientacio-bloc blau"><div style="font-weight:700; color:#00D9FF; font-size:13px;">3. EXAMEN - Prova't diari</div><div style="color:#ccc; font-size:11px; margin-top:4px;">Ratxa 6 aprovats seguits = llest DGT</div></div>
       </div>
-      <div id="orientacio-lista" style="display:none"></div>
+
+      <!-- GRID 8 PILDORAS -->
+      <div class="minicursos-grid">
+        <div class="garage-car actiu" onclick="veureMC('am')"><svg class="mini-picto" viewBox="0 0 100 50"><path d="M12 35 C12 18 18 30 22 L60 8 C70 6 78 14 82 28 L84 38 L20 40 Z M16 38 A8 8 0 1 0 31 38 A8 8 0 1 0 16 38 M66 38 A8 8 0 1 0 81 38"/></svg><h3>AM 15a</h3><div style="font-size:9px;color:#00D9FF">49cc 45km/h • 300 lin</div></div>
+        <div class="garage-car" onclick="veureMC('a1')"><svg class="mini-picto" viewBox="0 0 100 50"><path d="M15 35 L30 18 L50 18 L65 8 L85 14 L80 35 L20 40 Z M20 40 A9 9 0 1 0 36 40 M65 40 A9 9 0 1 0 82 40"/></svg><h3>A1 16a</h3><div style="font-size:9px;color:#999">125cc 11kW</div></div>
+        <div class="garage-car" onclick="veureMC('a2')"><svg class="mini-picto" viewBox="0 0 100 50"><path d="M10 38 L25 20 L40 18 L60 8 C70 6 82 12 86 28 L84 38 L60 38 L20 40 Z"/></svg><h3>A2 18a</h3><div style="font-size:9px;color:#999">35kW 47CV</div></div>
+        <div class="garage-car actiu" onclick="veureMC('b')"><svg class="mini-picto" viewBox="0 0 100 40"><path d="M10 26 L20 12 L75 12 L90 20 L88 32 L10 32 Z M20 32 A7 7 0 1 0 34 32 M66 32 A7 7 0 1 0 80 32"/></svg><h3>B ACTIU</h3><div style="font-size:9px;color:#00D9FF">TEU CURS • 100%</div></div>
+        <div class="garage-car" onclick="veureMC('be')"><svg class="mini-picto" viewBox="0 0 110 40"><path d="M5 26 L15 12 L52 12 L60 20 L58 30 L10 30 Z M68 18 L96 18 L96 28 L68 28 Z"/></svg><h3>B+E</h3><div style="font-size:9px;color:#999">7000kg conj</div></div>
+        <div class="garage-car locked" onclick="veureMC('c')"><svg class="mini-picto" viewBox="0 0 100 50" style="stroke:#666"><path d="M10 30 L10 15 L35 15 L35 10 L85 10 L85 35 L10 35 Z"/></svg><h3>C/C1 🔒</h3><div style="font-size:9px">Camió</div></div>
+        <div class="garage-car" onclick="veureMC('masas')"><h3 style="font-size:20px">⚖️</h3><h3>Tara/MMA</h3><div style="font-size:9px;color:#FFD700">E-01 CLAU</div></div>
+        <div class="garage-car" onclick="veureMC('via')"><h3 style="font-size:20px">🛣️</h3><h3>Via + Veh</h3><div style="font-size:9px;color:#FFD700">Partes vía</div></div>
+      </div>
+
+      <!-- DETALLS -->
+      <div id="contenedor-mc">
+
+        <!-- 1 AM 300 LINIES -->
+        <div id="mc-am" class="card mc-detall actiu" style="border-left:4px solid #00D9FF">
+          <span class="mc-badge">MINICURSO 1/8 • 15 ANYS • OFICIAL ART.4</span>
+          <h2>🛵 AM - CICLOMOTOR 49cc</h2>
+          <div class="mc-text">
+            <div class="mc-h3">1. Definició Oficial L1e/L6e</div>
+            Ciclomotor 2/3 rodes, vel. màx construcció ≤45km/h, cilindrada ≤50cc (combustió) o potència ≤4kW (elèctric). Quadricicle lleuger L6e: 4 rodes, massa buit <350kg sense bateries, ≤45km/h, ≤50cc/4kW. Exemple: Aixam, Ligier. No és joguina: a 45km/h sense casc mortalitat 80%. Manual DGT Tema 1 dedica 12 pàgines. Truc DGT: si et pregunten L6e, resposta sempre <350kg, no 400kg. Confusió amb L7e que és 400kg quadricicle pesat que ja és B1.
+            <div class="mc-h3">2. Què pots fer i què no</div>
+            <b>SI:</b> 1 passatger només si fitxa tècnica diu 2 places. Mirar targeta ITV on diu nº places. Si diu 1, multa 200€. Circular ciutat, travessies, convencionals per arcén dret si transitable. Càrrega petita en baca sense sobresortir lateral i sense tapar llums.<br>
+            <b>NO MAI:</b> Autopista, autovia, via per automòbils Art.38. Remolcar ni ser remolcat. Auriculars posats ni 1 orella. Menor <12a prohibit portar. Excepció 7-12a només pare/mare/tutor amb casc infantil homologat i peus a reposapeus. Alcohol: si controles AM amb 15a no tens carnet B encara, però taxa 0,5/0,25 igual.
+            <div class="mc-h3">3. Requisits reals</div>
+            15 anys complerts. Psicotècnic centre reconegut dura 3 mesos. Teòric 20 preguntes 2 fallos màxim. Temes: S-100 senyals R-101 prohibit ciclomotors, N-01 alcohol, N-10 glorietes, M-11 mecànica bàsica, A-06 casc. Pràctic: només pista tancada, maniobres zigzag jalons, frenada emergència, cercle, línies. Tocar con = suspès. Convalidació: qualsevol carnet B, A1, A2, A, C, D automàticament AM. Si vas treure B després 2013, en carnet ja posa AM.
+            <div class="mc-h3">4. Equipament A-06 i Mecànica M-11</div>
+            Casc homologat ECE 22.05/22.06 obligatori integral, jet o modular però homologat. Sense casc 200€ i 4 punts quan tinguis punts. Guants no obligatoris però recomanats. Armilla: no obligatori portar posada, però sí portar en vehicle i posar-te si baixes via interurbana avaria. Llums: creu sempre dia i nit. Pressió pneumàtics cada 2 setmanes, si vas baix derrapes corba. Fre tambor comprovar tensió cable. Oli 2T mescla.
+            <div class="mc-h3">5. Masses E-01 i Trucs examen</div>
+            Tara = buit sense conductor ni càrrega amb dipòsit ple i eines. MMA = Tara + conductor + passatger + càrrega. En ciclomotor Tara ~70kg MMA ~160kg. Massa en càrrega = real moment. Velocitat: trucar a 70km/h = deixes ser ciclomotor passes a moto sense carnet sense assegurança, multa greu i assegurança no cobreix. 5 trucs que cauen: N-01 0,5/0,25 novel segueix 0,5 en AM. N-10 glorieta prioritat dins. R-101 entrada prohibit ciclomotors. Distància 1,5m vianants. Frenada 70% davant 30% darrere. Amb això 3 preguntes assegurades de B.
+          </div>
+          <button class="btn" style="width:100%;margin-top:10px" onclick="tornarGrid()">✅ LLEGIT +10 XP</button>
+        </div>
+
+        <!-- 2 A1 -->
+        <div id="mc-a1" class="card mc-detall" style="border-left:4px solid #00D9FF">
+          <span class="mc-badge">MINICURSO 2/8 • 16 ANYS • A1</span>
+          <h2>🏍️ A1 - 125cc 11kW</h2>
+          <div class="mc-text">
+            <div class="mc-h3">1. Què és oficial</div>
+            Motos ≤125cc, ≤11kW (15CV), relació potència/pes ≤0,1kW/kg. Tricicles ≤15kW. Edat 16a. Amb A1 pots portar també AM. Convalidació estrella: B amb +3 anys antiguitat = A1 a Espanya només, no estranger. DGT pregunta molt: B de 2019 pot portar 125cc? Sí a Espanya. B de 1 any pot? No. Equips: A2 també inclou A1. Pes: 0,1kW/kg vol dir moto 110kg màx 11kW. Si pesa 100kg 11kW = 0,11 no val, s'excedeix.
+            <div class="mc-h3">2. Limitacions i examen</div>
+            Teòric específic A + pràctic pista i circulació. Pista: mateix que AM però amb moto 125. Circulació: 30 min ciutat i carretera. Errors: caure peu, no mirar retrovisors, calar moto 3 cops. Velocitat: per convencionals 90km/h, autovia 120km/h sí pots. Passatger: sí si moto homologada 2 places i tu +16a. Casc integral obligatori. Alcohol mateix 0,5 però recomanat 0. Truc: en moto distància frenada major, deixa més marge. Roda: dibuix mín 1,6mm.
+            <div class="mc-h3">3. Trucs DGT que cauen</div>
+            N-01: si ets novel 2 anys per haver tret A1 amb 16, taxa baixa a 0,3/0,15 per 2 anys. Molts fallen pensen 0,5. E-01: massa remolcable en moto no existeix, prohibit remolc. M-11: cadena tensió 2-3cm joc, oli 4T, refrigerant. Glorietes moto inclinada suau no tombar molt. Equip: guants homologats CE, jaqueta amb proteccions, botes.
+          </div>
+          <button class="btn" style="width:100%" onclick="tornarGrid()">✅ LLEGIT</button>
+        </div>
+
+        <!-- 3 A2 -->
+        <div id="mc-a2" class="card mc-detall" style="border-left:4px solid #00D9FF">
+          <span class="mc-badge">MINICURSO 3/8 • 18 ANYS • A2</span>
+          <h2>🏍️ A2 - FINS 35kW 47CV</h2>
+          <div class="mc-text">
+            <div class="mc-h3">1. Definició oficial</div>
+            Motos ≤35kW (47CV), relació ≤0,2kW/kg, no derivada de vehicle amb > del doble potència origen. Això vol dir: si moto origen 80kW (108CV) no es pot limitar a 35kW perquè 80>70. Límite origen 70kW per limitar. Edat 18a. Inclou AM i A1. Amb A2 pots portar qualsevol moto limitada a 35kW que compleixi. Exemple: Yamaha MT-07 55kW limitada a 35kW sí, perquè origen 55<70. Ducati 90kW limitada no.
+            <div class="mc-h3">2. Accés progressiu a A</div>
+            A il·limitat: 20 anys + 2 anys antiguitat A2 + curs 9h (3h teoria + 6h pràctica). No examen, només curs. Truc DGT: amb 20 anys i A2 des de 18 tens A? Sí si curs. Amb 21 sense A2 no pots A directe, necessites 24a o 20 amb A2. Conducció: autovia 120, convencional 90-100 segons. Equip: casc integral, guants, airbag recomanat. Frenada combinada CBS o ABS obligatori motos noves >125cc.
+            <div class="mc-h3">3. Masses i trucs</div>
+            Tara moto ~180kg, MMA ~350kg. Si portes passatger i top case pots passar MMA. Alcohol novel 2 anys 0,3/0,15. Inspecció ITV cada 2 anys fins 4 anys, després anual. Pneumàtics: no muntar radial i diagonal junts. Pressió passatger augmenta darrere 0,2 bar. GasDrive: aquesta categoria és la més preguntada en examen B? No, però si t'examines A2 et cau segur limitació.
+          </div>
+          <button class="btn" style="width:100%" onclick="tornarGrid()">✅ LLEGIT</button>
+        </div>
+
+        <!-- 4 B -->
+        <div id="mc-b" class="card mc-detall" style="border-left:4px solid #00D9FF;display:block">
+          <span class="mc-badge" style="background:#FFD700">MINICURSO 4/8 • B ACTIU • TEU CURS 100%</span>
+          <h2>🚗 PERMIS B - <3500kg</h2>
+          <div class="mc-text">
+            <div class="mc-h3">1. Què pots portar oficial B Art.5</div>
+            Automòbils massa màxima autoritzada ≤3500kg, 8 passatgers + conductor (9 total). Remolc ≤750kg MMA. Conjunt B: cotxe 3500 + remolc 750 = 4250kg MMA conjunt màxim amb B. Si remolc >750kg, MMA conjunt no pot passar 4250kg amb B. Exemple: cotxe 2000kg MMA + remolc 1000kg = 3000kg <4250 sí pots amb B. Cotxe 3500 + remolc 1000 =4500 >4250 necessites B+E. També quads, tricicles, quads pesats, motos A1 amb B+3 anys a Espanya. No autobusos, no camions >3500.
+            <div class="mc-h3">2. Tara/MMA/MOM que et cau segur E-01</div>
+            Tara: buit amb ple dipòsit i eines, sense conductor ni càrrega. Massa en ordre marxa MOM: Tara + conductor 75kg. MMA: màx autoritzada per fabricant. Massa real = tara + càrrega moment. Exemple real: furgoneta Tara 1800, MMA 3000, càrrega útil 1200. Si carregues 1300 passes MMA infracció greu. Massa per eix: simple 10t, tàndem segons distància 11,5t a 16t, tridem 21t a 27t. En B no et pregunten molt eixos però sí MMA remolc.
+            <div class="mc-h3">3. Normes clau N-01 a N-15 que et pregunten</div>
+            N-01 Alcohol: general 0,5 sang 0,25 aire. Novel 2 anys i professional C/D 0,3/0,15. N-05 Velocitat: ciutat 50, 30 si 1 carril sentit o plataforma única, 20 zona vianants. Travessia 50. Convencional 90 turismes, autovia 120. N-10 Prioritat: glorieta qui és dins, pas estret senyal R-5/R-6, pendent puja té preferència si no hi ha senyal. N-13 Avançament: prohibit corba canvi ras sense visibilitat, passos vianants, túnel si 1 carril sentit.
+            <div class="mc-h3">4. Els teus 5 temaris on ets actiu</div>
+            S-100 Senyals: verticals, marques vials, semàfors, agents. 40% examen. P-... conductors i ocupants, R-... reglament circulació, M-... mecànica i manteniment, A-... auxili i medi ambient, E-... masses i dimensions. Pase diari: 5min cada família = 20min desbloqueja tests. Amb B portes 5 temaris complets ja estudiats.
+            <div class="mc-h3">5. 5 errors que suspenen B</div>
+            1. Glorieta sortir carril interior sense senyalitzar = suspès. 2. Stop no fer detenció total 2 segons. 3. Alcohol pensar 0,25 és sang, és aire. 4. MMA conjunt 4250 pensar 3500. 5. Cascada: pensar que B pot portar moto 49cc sense B+3 anys. Truc: sempre mira retrovisor abans frenar.
+          </div>
+          <button class="btn" style="width:100%;background:#FFD700;color:#000;font-weight:900" onclick="tornarGrid()">✅ DOMINAT - SOY B</button>
+        </div>
+
+        <!-- 5 B+E -->
+        <div id="mc-be" class="card mc-detall" style="border-left:4px solid #FFD700">
+          <span class="mc-badge">MINICURSO 5/8 • B+E • REMOLC</span>
+          <h2>🚗+🚛 B+E - CONJUNT 7000kg</h2>
+          <div class="mc-text">
+            <div class="mc-h3">1. Definició oficial</div>
+            Conjunt cotxe B + remolc >750kg MMA, fins 7000kg MMA conjunt. Si cotxe 3500 + remolc 3500 =7000 màx amb B+E. Edat 18a, cal tenir B. Permet també remolc 750-3500. Exemple: caravana 1300kg MMA + cotxe 2000kg =3300 <7000 ok B+E i també B si <4250? 3300<4250 també B valdria, però B+E et dona més marge. Si remolc >3500 ja no és B+E és C1+E.
+            <div class="mc-h3">2. Masses per eix i longitud</div>
+            Longitud màx conjunt turisme+remolc 18,75m. Amplada 2,55m remolc. Altura 4m. Massa per eix simple motor 11,5t, simple no motor 10t, tàndem segons separació 11,5-18t, tridem 21-27t. En B+E examen pregunten: pes per eix simple no motor 10t. Massa remolcable: mirar fitxa ITV O.1 i O.2 massa remolcable amb freno y sin freno. No superar.
+            <div class="mc-h3">3. Conducció i velocitat</div>
+            Velocitat amb remolc: autovia/autopista 90km/h, convencional 80, ciutat 50. No 120 mai amb remolc. Placa SP remolc. Matrícula remolc >750 duplicada vermella + pròpia blanca. Miralls: si remolc ample necessites miralls extra. Frenada: distància augmenta 40%, anticipa. Vent lateral afecta molt. Glorieta ample necessites més radi.
+            <div class="mc-h3">4. ITV i assegurança</div>
+            Remolc >750 té ITV pròpia cada 2 anys fins 6 anys després anual, matrícula pròpia. Remolc ≤750 no ITV pròpia. Assegurança: remolc >750 assegurança pròpia. <750 inclosa cotxe. Càrrega remolc ben lligada, senyal V-20 si sobresurt darrere.
+          </div>
+          <button class="btn" style="width:100%" onclick="tornarGrid()">✅ LLEGIT</button>
+        </div>
+
+        <!-- 6 C -->
+        <div id="mc-c" class="card mc-detall" style="border-left:4px solid #666">
+          <span class="mc-badge" style="background:#666">MINICURSO 6/8 • C/C1 • CAMIÓ • 300 COINS</span>
+          <h2>🚚 C - CAMIÓ >3500kg</h2>
+          <div class="mc-text">
+            C1: 3000-7500kg MMA, edat 18a. C: >3500kg sense límit superior, edat 21a (18 amb CAP). Inclou C1 i B. No inclou D. Tacògraf obligatori >3500kg: conducció 4h30 + pausa 45min (pot fraccionar 15+30). Diària 9h ampliable 2 cops setmana 10h. Setmanal 56h màx, quinzenal 90h. Descans diari 11h reduïble 3 cops 9h. Setmanal 45h. CAP: 140h curs + examen. Massa màx camió 2 eixos 18t, 3 eixos 25t (26t si motor eix pneumàtic), 4 eixos 31t (32t pneumàtic). Tren carretera 40t, 44t si contenidor 40 peus. Velocitat: autovia 90, convencional 80, ciutat 50. Alcohol professional 0,3/0,15. ITV anual.
+          </div>
+          <button class="btn" style="width:100%" onclick="alert('🔒 Desbloqueja amb 300 coins a Botiga')">🔒 DESBLOQUEJAR 300 COINS</button>
+        </div>
+
+        <!-- 7 Tara MMA -->
+        <div id="mc-masas" class="card mc-detall" style="border-left:4px solid #FFD700">
+          <span class="mc-badge" style="background:#FFD700;color:#000">MINICURSO 7/8 • E-01 • CLAU EXAMEN</span>
+          <h2>⚖️ TARA / MMA / MOM / MASSA PER EIX</h2>
+          <div class="mc-text">
+            <div class="mc-h3">Infografia oficial que cau 4 preguntes</div>
+            <b>Tara:</b> pes buit amb ple, eines, sense conductor/càrrega. <b>MOM Massa ordre marxa:</b> Tara + conductor 75kg. <b>MMA:</b> màx autoritzada fabricant. <b>Massa real:</b> tara + càrrega moment. <b>Càrrega útil:</b> MMA - Tara.<br><br>
+            <b>Exemple furgoneta:</b> Tara 2000, MOM 2075, MMA 3500, útil 1500. Si carregues 1600 passes MMA infracció.<br><br>
+            <b>Massa per eix oficial:</b> Simple motor 11,5t, simple no motor 10t. Tàndem: si separació <1m 11,5t, 1-1,3m 16t, 1,3-1,8m 18t. Tridem: <1,3m 21t, >1,3m 24t. Doble eix motor + tàndem 18t si distància <1m.<br><br>
+            <b>Dimensions màx:</b> Long turisme 12m, camió 12m, bus 15m articulat 18,75m, tren carretera 16,5m, tren+remolc 18,75m. Amplada 2,55m general, 2,60 frigorífic. Altura 4m, bus urbà 4,20m. Volada 10% longitud.<br><br>
+            <b>Truc DGT:</b> Sempre pregunta Tara no inclou conductor. Molts pensen que sí. MOM sí inclou conductor 75kg. MMA és la que surt a fitxa ITV.
+          </div>
+          <button class="btn" style="width:100%" onclick="tornarGrid()">✅ ENTÈS - E-01 DOMINAT</button>
+        </div>
+
+        <!-- 8 Partes via -->
+        <div id="mc-via" class="card mc-detall" style="border-left:4px solid #FFD700">
+          <span class="mc-badge" style="background:#FFD700;color:#000">MINICURSO 8/8 • PARTS VIA + VEH ESPECIAL</span>
+          <h2>🛣️ PARTS DE LA VIA + VEHICLES ESPECIALS</h2>
+          <div class="mc-text">
+            <div class="mc-h3">Parts de la via oficial R-... </div>
+            <b>Plataforma:</b> zona carretera per ús vehicles, formada per calçada + vorals. <b>Calçada:</b> part per circulació vehicles. <b>Carril:</b> franja longitudinal calçada. <b>Vorall:</b> franja longitudinal contigua calçada no destinada circulació excepte excepcions. <b>Vorera:</b> zona longitudinal elevada per vianants. <b>Cuneta:</b> canal desguàs. <b>Mitjana:</b> separa calçades. <b>Illa:</b> zona marcada calçada per canalitzar trànsit. <b>Rasante:</b> línia calçada en perfil.<br><br>
+            <b>Tipus via:</b> Autopista: 2 calçades separades, sense creus a nivell, 120km/h. Autovia: similar però pot tenir limitacions. Via per automòbils: 1 calçada per sentit, sense creus nivell, 100km/h. Convencional: resta, 90km/h.<br><br>
+            <div class="mc-h3">Vehicles especials V-... </div>
+            <b>V-1:</b> prioritari policia, bombers, ambulància llum blau + sirena, té prioritat sobre tot. <b>V-2:</b> obra/servei taronja. <b>V-5:</b> lent >60km/h no pot, senyal triangle vermell. <b>V-6:</b> llarg >12m. <b>V-20:</b> panell càrrega sobresurt. <b>V-4:</b> limitació velocitat. <b>V-9:</b> aprenentatge. <b>V-13:</b> conductor novel L verda 1 any. <b>V-15:</b> discapacitat. <b>V-16:</b> preseñalització perill ara llum taronja obligatòria des 2026 substitueix triangles.<br><br>
+            <b>Truc examen:</b> Voral transitable sí pots parar i estacionar si no ciutat i ample. Voral no transitable no. Mitjana no es pot trepitjar mai ni aparcar. Cuneta no circular.
+          </div>
+          <button class="btn" style="width:100%" onclick="tornarGrid()">✅ ENTÈS - VIA DOMINADA</button>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
@@ -280,6 +402,20 @@ h1{font-size:24px;font-weight:900;letter-spacing:1.5px;margin-bottom:3px}
   <button class="tab-btn" onclick="canviarTab_V94(event,'temari')"><span class="emoji">📖</span>TEMARI</button>
 </div>
 
-<script src="./app.js?v=12.0"></script>
+<script>
+// V12.1 MINICURSOS LOGIC
+function veureMC(id){
+  document.querySelectorAll('.mc-detall').forEach(el=>el.classList.remove('actiu'));
+  const target = document.getElementById('mc-'+id);
+  if(target){ target.classList.add('actiu'); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+function tornarGrid(){
+  document.querySelectorAll('.mc-detall').forEach(el=>el.classList.remove('actiu'));
+  document.getElementById('mc-b').classList.add('actiu');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(typeof sumarCoins==='function') sumarCoins(10);
+}
+</script>
+<script src="./app.js?v=12.1"></script>
 </body>
 </html>
